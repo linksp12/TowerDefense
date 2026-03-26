@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e8d0979b4298d94082ad19524e54c1b
+guid: 01ad63ca7d85a154d91ffaeb2e88dea9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8472892989243993158
-    second: Tile_Group02_02_TopMiddle_0
+      213: 4354822249232911192
+    second: Item_01_Coin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tile_Group02_02_TopMiddle_0
+      name: Item_01_Coin_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
+        x: 3
+        y: 3
+        width: 131
+        height: 131
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 64c29cb4843c59570800000000000000
-      internalID: 8472892989243993158
+      spriteID: 85bce7943cf6f6c30800000000000000
+      internalID: 4354822249232911192
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tile_Group02_02_TopMiddle_0: 8472892989243993158
+      Item_01_Coin_0: 4354822249232911192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

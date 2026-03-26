@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 34c9e273d533d244a88d011c135fdf6a
+guid: a1906f60f075d874b80f608059e37efe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2437417392283212872
-    second: Tile_Group02_11_BottomMiddle_0
+      213: -913568952897202542
+    second: Tile_Group02_06_CenterMiddle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tile_Group02_11_BottomMiddle_0
+      name: Tile_Group02_06_CenterMiddle_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
+        y: 0
         width: 128
-        height: 126
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8b3a993bbcd8c2ed0800000000000000
-      internalID: -2437417392283212872
+      spriteID: 2969cbca0e95253f0800000000000000
+      internalID: -913568952897202542
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tile_Group02_11_BottomMiddle_0: -2437417392283212872
+      Tile_Group02_06_CenterMiddle_0: -913568952897202542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
