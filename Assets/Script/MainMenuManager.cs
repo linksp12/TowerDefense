@@ -8,6 +8,13 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene"); // GameScene 이름과 정확히 일치해야 함
     }
+    
+    // 이어하기 버튼에 연결
+    public void OnContinueButtonClicked()
+    {
+        Debug.Log("이어하기 버튼 클릭됨");
+        // 나중에 저장된 게임 불러오기 기능으로 교체
+    }
 
     // 설정 버튼에 연결
     public void OnSettingsButtonClicked()
