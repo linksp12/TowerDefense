@@ -39,6 +39,10 @@ public class MonsterMove : MonoBehaviour
         else
         {
             Debug.Log("몬스터 도착");
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.TakePlayerDamage(1);
+            }
             Destroy(gameObject);
         }
     }
