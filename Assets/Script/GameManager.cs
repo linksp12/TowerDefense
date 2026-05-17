@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int maxPlayerHp = 20;
     private int currentPlayerHp;
+
+    public Slider playerHpSlider;
 
     void Awake()
     {
@@ -17,12 +20,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentPlayerHp = maxPlayerHp;
+
+        if (playerHpSlider != null)
+        {
+            playerHpSlider.maxValue = maxPlayerHp;
+            playerHpSlider.value = currentPlayerHp;
+        }
     }
 
     public void TakePlayerDamage(int damage)
     {
         currentPlayerHp -= damage;
-        Debug.Log("플레이어 피격! 남은 라이프: " + currentPlayerHp);
+        if (playerHpSlider != null)
+        {
+            playerHpSlider.value = currentPlayerHp;
+        }
 
         if (currentPlayerHp <= 0)
         {
