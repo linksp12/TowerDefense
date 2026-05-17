@@ -1435,6 +1435,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f2e954ebfeda8740ba238350d783426, type: 2}
   - {fileID: 11400000, guid: cb4df13475ae98543bfa0c1e9e063e0e, type: 2}
   - {fileID: 11400000, guid: 18257a589bbd4cd4cb3d89d8944ac2d8, type: 2}
+  - {fileID: 11400000, guid: d4fbb7069436e194398e4e12ccfa2027, type: 2}
+  - {fileID: 11400000, guid: d6e2e24e31167ca469e7e030732d9910, type: 2}
+  - {fileID: 11400000, guid: cd9a10d19e206dc4cbd0d4a87d9588a4, type: 2}
+  - {fileID: 11400000, guid: ba8423a9ca2dbbd40a5c0fcf2a2288eb, type: 2}
   spawner: {fileID: 858498215}
   timeBetweenWaves: 5
   onWaveStart:
