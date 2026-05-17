@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("게임 오버! 결과 씬으로 이동합니다.");
-        SceneManager.LoadScene("DefeatScene"); 
+        Time.timeScale = 0f;
+        SceneManager.LoadScene("ResultScene"); 
     }
 
     void Update()

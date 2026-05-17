@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a264afc2d0a43409d014854bd2d998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  maxPlayerHp: 20
+  maxPlayerHp: 3
   playerHpSlider: {fileID: 1807900170}
 --- !u!4 &186153357
 Transform:

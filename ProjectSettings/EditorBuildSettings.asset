@@ -10,6 +10,12 @@ EditorBuildSettings:
     guid: ddc7d36a4dad866478656bad770406d0
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
-    guid: eeee086b9f6d7604f86d1deb17bdac2e
+    guid: 563f60b7bb3f8fb439b6cf8a620eddbc
+  - enabled: 1
+    path: Assets/Scenes/MonsterPlayerHpTestScene.unity
+    guid: 1bceb81010e676448b53f758e43c42c5
+  - enabled: 1
+    path: Assets/Scenes/ResultScene.unity
+    guid: 58c8a28ed86bfbf4bbb5656aa9e6a8fd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
