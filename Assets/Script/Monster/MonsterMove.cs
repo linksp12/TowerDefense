@@ -69,3 +69,8 @@ public class MonsterMove : MonoBehaviour
 
     void OnAnimationEvent() { }
 }
+
+
+
+
+

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = testTimeScale;
+        
         currentMoney = startingMoney;
         UpdateMoneyUI();
 
@@ -39,7 +41,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 돈 추가
     public void AddMoney(int amount)
     {
         currentMoney += amount;
@@ -47,7 +48,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"돈 획득: +{amount} / 현재 잔액: {currentMoney}");
     }
 
-    // 돈 사용
     public bool SpendMoney(int amount)
     {
         if (currentMoney < amount)
@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    // 돈 충분한지 확인
     public bool CanAfford(int amount)
     {
         return currentMoney >= amount;
@@ -79,10 +78,12 @@ public class GameManager : MonoBehaviour
             moneyText.text = $"{currentMoney}G";
     }
 
-    // 플레이어 체력 감소
     public void TakePlayerDamage(int damage)
     {
         currentPlayerHp -= damage;
+
+        if (currentPlayerHp < 0)
+            currentPlayerHp = 0;
 
         if (playerHpSlider != null)
             playerHpSlider.value = currentPlayerHp;
@@ -93,7 +94,12 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
+
+        ResultSceneManager.isVictory = false;
         SceneManager.LoadScene("ResultScene");
     }
+
+    [Header("Test Speed")]
+    public float testTimeScale = 1f;
 }

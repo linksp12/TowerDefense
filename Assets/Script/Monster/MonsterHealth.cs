@@ -9,6 +9,7 @@ public class MonsterHealth : MonoBehaviour
     public int goldReward = 20;
 
     private int currentHp;
+    private bool isDead = false;
 
     public Slider monsterHpSlider;
 
@@ -25,8 +26,9 @@ public class MonsterHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHp -= damage;
+        if (isDead) return;
 
+        currentHp -= damage;
         Debug.Log("몬스터 피격! 남은 HP: " + currentHp);
 
         if (monsterHpSlider != null)
@@ -42,7 +44,16 @@ public class MonsterHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log("몬스터 사망");
+
+        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+        if (waveManager != null)
+        {
+            waveManager.OnMonsterKilled();
+        }
 
         if (GameManager.Instance != null)
         {
@@ -52,4 +63,3 @@ public class MonsterHealth : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
