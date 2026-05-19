@@ -6071,6 +6071,9 @@ MonoBehaviour:
   basicTowerPrefab: {fileID: 392977616497477778, guid: 66359338a5ad1614f92ed7bb63c0a14b, type: 3}
   cannonTowerPrefab: {fileID: 759459309904499257, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
   magicTowerPrefab: {fileID: 2236469722719090783, guid: 7a910a9fe43a58344ad640512f287932, type: 3}
+  basicTowerCost: 50
+  cannonTowerCost: 100
+  magicTowerCost: 150
 --- !u!4 &1116442334
 Transform:
   m_ObjectHideFlags: 0

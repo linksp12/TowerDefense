@@ -4,6 +4,10 @@ using UnityEngine.UI;
 public class MonsterHealth : MonoBehaviour
 {
     public int maxHp = 100;
+
+    [Header("Reward")]
+    public int goldReward = 20;
+
     private int currentHp;
 
     public Slider monsterHpSlider;
@@ -23,6 +27,8 @@ public class MonsterHealth : MonoBehaviour
     {
         currentHp -= damage;
 
+        Debug.Log("몬스터 피격! 남은 HP: " + currentHp);
+
         if (monsterHpSlider != null)
         {
             monsterHpSlider.value = currentHp;
@@ -30,7 +36,20 @@ public class MonsterHealth : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
     }
+
+    private void Die()
+    {
+        Debug.Log("몬스터 사망");
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddMoney(goldReward);
+        }
+
+        Destroy(gameObject);
+    }
 }
+

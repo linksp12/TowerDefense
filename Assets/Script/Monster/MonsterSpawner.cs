@@ -1,32 +1,38 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public GameObject monsterPrefab;     // 생성할 몬스터 프리팹
-    public Transform[] waypoints;        // 몬스터가 따라갈 경로
-    public int spawnCount = 5;           // 생성할 몬스터 수
-    public float spawnInterval = 1f;     // 생성 간격
+    public GameObject monsterPrefab;
+    public Transform[] waypoints;
+    public int spawnCount = 5;
+    public float spawnInterval = 1f;
 
-    void Start()
+    // ↑ Start() 와 SpawnMonsters() 삭제함
+    // WaveManager가 대신 스폰을 제어하기 때문
+
+    public IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
     {
-        StartCoroutine(SpawnMonsters());
+        foreach (var info in wave.spawnInfos)
+        {
+            for (int i = 0; i < info.count; i++)
+            {
+                GameObject monster = SpawnOneMonster(info.monsterPrefab);
+                onSpawned?.Invoke(monster);
+                yield return new WaitForSeconds(info.interval);
+            }
+        }
     }
 
-    IEnumerator SpawnMonsters()
+    GameObject SpawnOneMonster(GameObject prefab)
     {
-        for (int i = 0; i < spawnCount; i++)
+        GameObject monster = Instantiate(prefab);
+        MonsterMove monsterMove = monster.GetComponent<MonsterMove>();
+        if (monsterMove != null)
         {
-            GameObject monster = Instantiate(monsterPrefab);
-
-            MonsterMove monsterMove = monster.GetComponent<MonsterMove>();
-
-            if (monsterMove != null)
-            {
-                monsterMove.waypoints = waypoints;
-            }
-
-            yield return new WaitForSeconds(spawnInterval);
+            monsterMove.waypoints = waypoints;
         }
+        return monster;
     }
 }
