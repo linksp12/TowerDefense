@@ -3,7 +3,7 @@ using UnityEngine;
 public class MonsterMove : MonoBehaviour
 {
     public Transform[] waypoints;
-    public float moveSpeed = 1.5f;        // 속도 줄임
+    public float moveSpeed = 1.5f;
     private int currentWaypointIndex = 0;
 
     void Start()
@@ -23,14 +23,12 @@ public class MonsterMove : MonoBehaviour
         {
             Transform target = waypoints[currentWaypointIndex];
 
-            // Vector3으로 변경 → 더 부드럽게
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 target.position,
                 moveSpeed * Time.deltaTime
             );
 
-            // 거리 체크 정밀하게 + 위치 정확히 맞추기
             if (Vector3.Distance(transform.position, target.position) < 0.01f)
             {
                 transform.position = target.position;
@@ -39,14 +37,33 @@ public class MonsterMove : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<WaveManager>()?.OnMonsterPassed();
+            Debug.Log("몬스터 도착");
+
+            // 몬스터가 끝까지 도착하면 플레이어 체력 감소
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.TakePlayerDamage(1);
+            }
+
+            // 웨이브 시스템에 몬스터가 통과했다고 알림
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+            {
+                waveManager.OnMonsterPassed();
+            }
+
             Destroy(gameObject);
         }
     }
 
     public void Die()
     {
-        FindObjectOfType<WaveManager>()?.OnMonsterKilled();
+        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+        if (waveManager != null)
+        {
+            waveManager.OnMonsterKilled();
+        }
+
         Destroy(gameObject);
     }
 
