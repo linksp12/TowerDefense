@@ -73,4 +73,19 @@ public class TowerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+    public void ApplyUpgradeStats(int newDamage, float newCooldown, float newRange, GameObject newArrowPrefab)
+    {
+    damage = newDamage;
+    attackCooldown = newCooldown;
+    attackRange = newRange;
+
+    if (newArrowPrefab != null)
+    {
+        arrowPrefab = newArrowPrefab;
+    }
+
+    Debug.Log("타워 능력치 변경 완료 / 공격력: " + damage 
+              + " / 쿨타임: " + attackCooldown 
+              + " / 사거리: " + attackRange);
+    }
 }
