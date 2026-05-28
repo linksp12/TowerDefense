@@ -1,10 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class MonsterMove : MonoBehaviour
 {
     public Transform[] waypoints;
     public float moveSpeed = 1.5f;
     private int currentWaypointIndex = 0;
+
+    // ✅ 추가
+    private bool isFrozen = false;
 
     void Start()
     {
@@ -17,6 +21,9 @@ public class MonsterMove : MonoBehaviour
 
     void Update()
     {
+        // ✅ 추가 - 빙결 중이면 이동 정지
+        if (isFrozen) return;
+
         if (waypoints == null || waypoints.Length == 0) return;
 
         if (currentWaypointIndex < waypoints.Length)
@@ -39,38 +46,38 @@ public class MonsterMove : MonoBehaviour
         {
             Debug.Log("몬스터 도착");
 
-            // 몬스터가 끝까지 도착하면 플레이어 체력 감소
             if (GameManager.Instance != null)
-            {
                 GameManager.Instance.TakePlayerDamage(1);
-            }
 
-            // 웨이브 시스템에 몬스터가 통과했다고 알림
-            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            WaveManager waveManager = FindAnyObjectByType<WaveManager>();
             if (waveManager != null)
-            {
                 waveManager.OnMonsterPassed();
-            }
 
             Destroy(gameObject);
         }
     }
 
+    // ✅ 추가 - 빙결 함수
+    public void Freeze(float duration)
+    {
+        StartCoroutine(FreezeCoroutine(duration));
+    }
+
+    private IEnumerator FreezeCoroutine(float duration)
+    {
+        isFrozen = true;
+        yield return new WaitForSeconds(duration);
+        isFrozen = false;
+    }
+
     public void Die()
     {
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+        WaveManager waveManager = FindAnyObjectByType<WaveManager>();
         if (waveManager != null)
-        {
             waveManager.OnMonsterKilled();
-        }
 
         Destroy(gameObject);
     }
 
     void OnAnimationEvent() { }
 }
-
-
-
-
-
