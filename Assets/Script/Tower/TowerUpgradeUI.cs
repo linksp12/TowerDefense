@@ -15,8 +15,8 @@ public class TowerUpgradeUI : MonoBehaviour
     public TextMeshProUGUI costText;
 
     [Header("Buttons")]
-    public Button rapidPathButton;
-    public Button piercePathButton;
+    public Button pathAButton;
+    public Button pathBButton;
     public Button upgradeButton;
     public Button closeButton;
 
@@ -32,11 +32,11 @@ public class TowerUpgradeUI : MonoBehaviour
 
     void Start()
     {
-        if (rapidPathButton != null)
-            rapidPathButton.onClick.AddListener(OnClickRapidPath);
+        if (pathAButton != null)
+            pathAButton.onClick.AddListener(OnClickPathA);
 
-        if (piercePathButton != null)
-            piercePathButton.onClick.AddListener(OnClickPiercePath);
+        if (pathBButton != null)
+            pathBButton.onClick.AddListener(OnClickPathB);
 
         if (upgradeButton != null)
             upgradeButton.onClick.AddListener(OnClickUpgrade);
@@ -75,29 +75,43 @@ public class TowerUpgradeUI : MonoBehaviour
 
         bool needPathSelect = selectedTower.path == TowerUpgrade.UpgradePath.None;
 
-        if (rapidPathButton != null)
-            rapidPathButton.gameObject.SetActive(needPathSelect);
+        if (pathAButton != null)
+        {
+            pathAButton.gameObject.SetActive(needPathSelect);
 
-        if (piercePathButton != null)
-            piercePathButton.gameObject.SetActive(needPathSelect);
+            TextMeshProUGUI buttonText = pathAButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+                buttonText.text = selectedTower.GetPathAName();
+        }
+
+        if (pathBButton != null)
+        {
+            pathBButton.gameObject.SetActive(needPathSelect);
+
+            TextMeshProUGUI buttonText = pathBButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+                buttonText.text = selectedTower.GetPathBName();
+        }
 
         if (upgradeButton != null)
+        {
             upgradeButton.gameObject.SetActive(!needPathSelect && selectedTower.CanUpgrade());
+        }
     }
 
-    void OnClickRapidPath()
+    void OnClickPathA()
     {
         if (selectedTower == null) return;
 
-        selectedTower.SelectRapidPath();
+        selectedTower.SelectPathA();
         Refresh();
     }
 
-    void OnClickPiercePath()
+    void OnClickPathB()
     {
         if (selectedTower == null) return;
 
-        selectedTower.SelectPiercePath();
+        selectedTower.SelectPathB();
         Refresh();
     }
 

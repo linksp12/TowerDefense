@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4357505012710789290}
   - component: {fileID: 1075372615540248332}
   - component: {fileID: 7747170803467462667}
+  - component: {fileID: -1101487246671468892}
+  - component: {fileID: 5671456848655801379}
+  - component: {fileID: 8409347517411906099}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -28,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.44, y: -12.09, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6874363203842704408}
@@ -83,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4164857684776503533, guid: c3c1327e83f8a4545a9c8cf540b4d76d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f0b8ad7ef85a7f47b548e3278a8bde6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,6 +113,104 @@ MonoBehaviour:
   damage: 50
   arrowPrefab: {fileID: 7817520689033560513, guid: b1fa7695a2af1dc4d81d121a77f6e613, type: 3}
   firePoint: {fileID: 6874363203842704408}
+--- !u!114 &-1101487246671468892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759459309904499257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bdb72e2b275d464980a31ff0e895563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUpgrade
+  towerType: 1
+  level: 1
+  maxLevel: 3
+  path: 0
+  basicTowerSprite: {fileID: 21300000, guid: 2f0b8ad7ef85a7f47b548e3278a8bde6, type: 3}
+  pathALv2TowerSprite: {fileID: 21300000, guid: 4a2eae5691f11f646a8f134139db7b10, type: 3}
+  pathALv3TowerSprite: {fileID: 21300000, guid: 61ceca2000fef0f418d17f471f5dd2c0, type: 3}
+  pathBLv2TowerSprite: {fileID: 21300000, guid: 0a753a80ed5043845995a02e42f6d719, type: 3}
+  pathBLv3TowerSprite: {fileID: 21300000, guid: 005d70d694d06934d9d7618ef5d60a84, type: 3}
+  basicProjectilePrefab: {fileID: 7817520689033560513, guid: b1fa7695a2af1dc4d81d121a77f6e613, type: 3}
+  pathALv2ProjectilePrefab: {fileID: 7817520689033560513, guid: 08d4b57c7c1f4cb49a96f3d5378e82c3, type: 3}
+  pathALv3ProjectilePrefab: {fileID: 7817520689033560513, guid: 02a40868b11933444a4d0b780a0fea29, type: 3}
+  pathBLv2ProjectilePrefab: {fileID: 7817520689033560513, guid: c5727c58a04edfd41bffa3c73ba984b9, type: 3}
+  pathBLv3ProjectilePrefab: {fileID: 7817520689033560513, guid: 1009e12cc1c5d8246816caf3e795c373, type: 3}
+  level2Cost: 200
+  level3Cost: 400
+  pathALv2Damage: 45
+  pathALv2Cooldown: 1.8
+  pathALv2Range: 4.5
+  pathALv3Damage: 65
+  pathALv3Cooldown: 2
+  pathALv3Range: 5
+  pathBLv2Damage: 90
+  pathBLv2Cooldown: 2.8
+  pathBLv2Range: 5.5
+  pathBLv3Damage: 150
+  pathBLv3Cooldown: 3.5
+  pathBLv3Range: 6.5
+--- !u!114 &5671456848655801379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759459309904499257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabe44a4c6ee9cd4aa992830cf7d2480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerClick
+--- !u!61 &8409347517411906099
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759459309904499257}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.7866666, y: 2.7866666}
+    newSize: {x: 0.18, y: 0.3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &4020850364930161701
 GameObject:
   m_ObjectHideFlags: 0

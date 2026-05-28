@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: -4207646481965875172}
   - component: {fileID: -5432581987418936079}
   - component: {fileID: -2152015614315731691}
+  - component: {fileID: 5280863807809186273}
   m_Layer: 0
   m_Name: AngerSlimeMonster
   m_TagString: Monster
@@ -338,6 +339,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.625, y: 0.4375}
   m_EdgeRadius: 0
+--- !u!114 &5280863807809186273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638662418386846195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0939d7447b513224b9ce35a711f09cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterStatus
 --- !u!1 &3310381082404697970
 GameObject:
   m_ObjectHideFlags: 0

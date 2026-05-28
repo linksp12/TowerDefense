@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class TowerUpgrade : MonoBehaviour
 {
+    public enum TowerType
+    {
+        Archer,
+        Cannon,
+        Magic
+    }
+
     public enum UpgradePath
     {
         None,
-        Rapid,
-        Pierce
+        PathA,
+        PathB
     }
+
+    [Header("타워 종류")]
+    public TowerType towerType = TowerType.Archer;
 
     [Header("현재 상태")]
     public int level = 1;
@@ -16,21 +26,41 @@ public class TowerUpgrade : MonoBehaviour
 
     [Header("타워 이미지")]
     public Sprite basicTowerSprite;
-    public Sprite rapidLv2TowerSprite;
-    public Sprite rapidLv3TowerSprite;
-    public Sprite pierceLv2TowerSprite;
-    public Sprite pierceLv3TowerSprite;
+    public Sprite pathALv2TowerSprite;
+    public Sprite pathALv3TowerSprite;
+    public Sprite pathBLv2TowerSprite;
+    public Sprite pathBLv3TowerSprite;
 
-    [Header("화살 프리팹")]
-    public GameObject basicArrowPrefab;
-    public GameObject rapidLv2ArrowPrefab;
-    public GameObject rapidLv3ArrowPrefab;
-    public GameObject pierceLv2ArrowPrefab;
-    public GameObject pierceLv3ArrowPrefab;
+    [Header("발사체 프리팹")]
+    public GameObject basicProjectilePrefab;
+    public GameObject pathALv2ProjectilePrefab;
+    public GameObject pathALv3ProjectilePrefab;
+    public GameObject pathBLv2ProjectilePrefab;
+    public GameObject pathBLv3ProjectilePrefab;
 
     [Header("업그레이드 비용")]
     public int level2Cost = 150;
     public int level3Cost = 300;
+
+    [Header("Path A Lv.2 능력치")]
+    public int pathALv2Damage = 15;
+    public float pathALv2Cooldown = 0.7f;
+    public float pathALv2Range = 4.2f;
+
+    [Header("Path A Lv.3 능력치")]
+    public int pathALv3Damage = 20;
+    public float pathALv3Cooldown = 0.45f;
+    public float pathALv3Range = 4.5f;
+
+    [Header("Path B Lv.2 능력치")]
+    public int pathBLv2Damage = 25;
+    public float pathBLv2Cooldown = 1.2f;
+    public float pathBLv2Range = 4.8f;
+
+    [Header("Path B Lv.3 능력치")]
+    public int pathBLv3Damage = 40;
+    public float pathBLv3Cooldown = 1.5f;
+    public float pathBLv3Range = 5.5f;
 
     private SpriteRenderer spriteRenderer;
     private TowerAttack towerAttack;
@@ -39,6 +69,24 @@ public class TowerUpgrade : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         towerAttack = GetComponent<TowerAttack>();
+    }
+
+    void Start()
+    {
+        ApplyBasicSetting();
+    }
+
+    void ApplyBasicSetting()
+    {
+        if (spriteRenderer != null && basicTowerSprite != null)
+        {
+            spriteRenderer.sprite = basicTowerSprite;
+        }
+
+        if (towerAttack != null && basicProjectilePrefab != null)
+        {
+            towerAttack.arrowPrefab = basicProjectilePrefab;
+        }
     }
 
     public bool CanUpgrade()
@@ -53,7 +101,7 @@ public class TowerUpgrade : MonoBehaviour
         return 0;
     }
 
-    public void SelectRapidPath()
+    public void SelectPathA()
     {
         if (level != 1)
         {
@@ -61,11 +109,11 @@ public class TowerUpgrade : MonoBehaviour
             return;
         }
 
-        path = UpgradePath.Rapid;
+        path = UpgradePath.PathA;
         Upgrade();
     }
 
-    public void SelectPiercePath()
+    public void SelectPathB()
     {
         if (level != 1)
         {
@@ -73,7 +121,7 @@ public class TowerUpgrade : MonoBehaviour
             return;
         }
 
-        path = UpgradePath.Pierce;
+        path = UpgradePath.PathB;
         Upgrade();
     }
 
@@ -111,31 +159,55 @@ public class TowerUpgrade : MonoBehaviour
 
     void ApplyUpgrade()
     {
-        if (path == UpgradePath.Rapid)
+        if (path == UpgradePath.PathA)
         {
             if (level == 2)
             {
-                ChangeTower(rapidLv2TowerSprite, 15, 0.7f, 4.2f, rapidLv2ArrowPrefab);
+                ChangeTower(
+                    pathALv2TowerSprite,
+                    pathALv2Damage,
+                    pathALv2Cooldown,
+                    pathALv2Range,
+                    pathALv2ProjectilePrefab
+                );
             }
             else if (level == 3)
             {
-                ChangeTower(rapidLv3TowerSprite, 20, 0.45f, 4.5f, rapidLv3ArrowPrefab);
+                ChangeTower(
+                    pathALv3TowerSprite,
+                    pathALv3Damage,
+                    pathALv3Cooldown,
+                    pathALv3Range,
+                    pathALv3ProjectilePrefab
+                );
             }
         }
-        else if (path == UpgradePath.Pierce)
+        else if (path == UpgradePath.PathB)
         {
             if (level == 2)
             {
-                ChangeTower(pierceLv2TowerSprite, 25, 1.2f, 4.8f, pierceLv2ArrowPrefab);
+                ChangeTower(
+                    pathBLv2TowerSprite,
+                    pathBLv2Damage,
+                    pathBLv2Cooldown,
+                    pathBLv2Range,
+                    pathBLv2ProjectilePrefab
+                );
             }
             else if (level == 3)
             {
-                ChangeTower(pierceLv3TowerSprite, 40, 1.5f, 5.5f, pierceLv3ArrowPrefab);
+                ChangeTower(
+                    pathBLv3TowerSprite,
+                    pathBLv3Damage,
+                    pathBLv3Cooldown,
+                    pathBLv3Range,
+                    pathBLv3ProjectilePrefab
+                );
             }
         }
     }
 
-    void ChangeTower(Sprite newSprite, int newDamage, float newCooldown, float newRange, GameObject newArrowPrefab)
+    void ChangeTower(Sprite newSprite, int newDamage, float newCooldown, float newRange, GameObject newProjectilePrefab)
     {
         if (spriteRenderer != null && newSprite != null)
         {
@@ -144,7 +216,7 @@ public class TowerUpgrade : MonoBehaviour
 
         if (towerAttack != null)
         {
-            towerAttack.ApplyUpgradeStats(newDamage, newCooldown, newRange, newArrowPrefab);
+            towerAttack.ApplyUpgradeStats(newDamage, newCooldown, newRange, newProjectilePrefab);
         }
 
         Debug.Log(GetTowerName() + " 업그레이드 완료");
@@ -152,23 +224,93 @@ public class TowerUpgrade : MonoBehaviour
 
     public string GetTowerName()
     {
-        if (path == UpgradePath.None)
-        {
-            return "기본 화살 타워";
-        }
+        if (towerType == TowerType.Archer)
+            return GetArcherTowerName();
 
-        if (path == UpgradePath.Rapid)
+        if (towerType == TowerType.Cannon)
+            return GetCannonTowerName();
+
+        if (towerType == TowerType.Magic)
+            return GetMagicTowerName();
+
+        return "타워";
+    }
+
+    string GetArcherTowerName()
+    {
+        if (path == UpgradePath.None)
+            return "기본 화살 타워";
+
+        if (path == UpgradePath.PathA)
         {
             if (level == 2) return "연사 화살 타워";
             if (level == 3) return "폭풍 화살 타워";
         }
 
-        if (path == UpgradePath.Pierce)
+        if (path == UpgradePath.PathB)
         {
             if (level == 2) return "강화 화살 타워";
             if (level == 3) return "관통 화살 타워";
         }
 
         return "기본 화살 타워";
+    }
+
+    string GetCannonTowerName()
+    {
+        if (path == UpgradePath.None)
+            return "기본 캐논 타워";
+
+        if (path == UpgradePath.PathA)
+        {
+            if (level == 2) return "폭발 캐논";
+            if (level == 3) return "대폭발 캐논";
+        }
+
+        if (path == UpgradePath.PathB)
+        {
+            if (level == 2) return "중포 타워";
+            if (level == 3) return "공성포 타워";
+        }
+
+        return "기본 캐논 타워";
+    }
+
+    string GetMagicTowerName()
+    {
+        if (path == UpgradePath.None)
+            return "기본 마법 타워";
+
+        if (path == UpgradePath.PathA)
+        {
+            if (level == 2) return "강화 마법화살 타워";
+            if (level == 3) return "연속 마법화살 타워";
+        }
+
+        if (path == UpgradePath.PathB)
+        {
+            if (level == 2) return "화염 마법 타워";
+            if (level == 3) return "지옥불 마법 타워";
+        }
+
+        return "기본 마법 타워";
+    }
+
+    public string GetPathAName()
+    {
+        if (towerType == TowerType.Archer) return "연사 루트";
+        if (towerType == TowerType.Cannon) return "폭발 루트";
+        if (towerType == TowerType.Magic) return "마법화살 루트";
+
+        return "루트 A";
+    }
+
+    public string GetPathBName()
+    {
+        if (towerType == TowerType.Archer) return "관통 루트";
+        if (towerType == TowerType.Cannon) return "공성 루트";
+        if (towerType == TowerType.Magic) return "화염 루트";
+
+        return "루트 B";
     }
 }

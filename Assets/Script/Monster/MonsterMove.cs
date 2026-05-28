@@ -1,13 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class MonsterMove : MonoBehaviour
 {
     public Transform[] waypoints;
     public float moveSpeed = 1.5f;
+
+    private float originalMoveSpeed;
+    private Coroutine slowCoroutine;
+
     private int currentWaypointIndex = 0;
 
     void Start()
     {
+        originalMoveSpeed = moveSpeed;
+
         if (waypoints != null && waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -39,13 +46,11 @@ public class MonsterMove : MonoBehaviour
         {
             Debug.Log("몬스터 도착");
 
-            // 몬스터가 끝까지 도착하면 플레이어 체력 감소
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.TakePlayerDamage(1);
             }
 
-            // 웨이브 시스템에 몬스터가 통과했다고 알림
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
             if (waveManager != null)
             {
@@ -54,6 +59,31 @@ public class MonsterMove : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void ApplySlow(float slowRate, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+            moveSpeed = originalMoveSpeed;
+        }
+
+        slowCoroutine = StartCoroutine(SlowRoutine(slowRate, duration));
+    }
+
+    IEnumerator SlowRoutine(float slowRate, float duration)
+    {
+        moveSpeed = originalMoveSpeed * slowRate;
+
+        Debug.Log("슬로우 적용 / 현재 속도: " + moveSpeed);
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalMoveSpeed;
+        slowCoroutine = null;
+
+        Debug.Log("슬로우 해제 / 현재 속도: " + moveSpeed);
     }
 
     public void Die()

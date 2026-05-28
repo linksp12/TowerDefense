@@ -2596,8 +2596,8 @@ MonoBehaviour:
   towerNameText: {fileID: 6043825}
   levelText: {fileID: 1936848721}
   costText: {fileID: 2055695462}
-  rapidPathButton: {fileID: 1491385100}
-  piercePathButton: {fileID: 872692132}
+  pathAButton: {fileID: 1491385100}
+  pathBButton: {fileID: 872692132}
   upgradeButton: {fileID: 692824861}
   closeButton: {fileID: 2141264988}
 --- !u!1 &567882476
