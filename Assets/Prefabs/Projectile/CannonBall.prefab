@@ -106,3 +106,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArrowProjectile
   speed: 3
   damage: 10
+  canPierce: 0
+  maxHitCount: 1
