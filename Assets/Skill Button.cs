@@ -10,12 +10,12 @@ public class SkillButton : MonoBehaviour
     [Header("UI 컴포넌트")]
     public Button button;
     public Image iconImage;
-    public Image cooldownOverlay;   // 쿨타임 어두운 오버레이 (fillAmount 사용)
-    public TextMeshProUGUI cooldownText;  // 남은 시간 텍스트
+    public Image cooldownOverlay;
+    public TextMeshProUGUI cooldownText;
 
     void Start()
     {
-        // 버튼 클릭 이벤트 등록
+        // interactable 건드리지 않음
         button.onClick.AddListener(OnSkillButtonClick);
         cooldownOverlay.fillAmount = 0f;
     }
@@ -27,6 +27,8 @@ public class SkillButton : MonoBehaviour
 
     void OnSkillButtonClick()
     {
+        // 쿨타임 체크는 SkillManager에서 처리
+        // 버튼은 항상 클릭 가능하게
         SkillManager.Instance.UseSkill(skillName);
     }
 
@@ -36,15 +38,11 @@ public class SkillButton : MonoBehaviour
         float remaining = SkillManager.Instance.GetCooldownRemaining(skillName);
         float normalized = SkillManager.Instance.GetCooldownNormalized(skillName);
 
-        // 오버레이 fillAmount 업데이트 (시계 방향으로 줄어듦)
         cooldownOverlay.fillAmount = normalized;
 
-        // 버튼 활성화/비활성화
-        button.interactable = !onCooldown;
-
-        // 남은 시간 텍스트
         if (onCooldown)
         {
+            // 버튼 비활성화 제거 - UI만 업데이트
             cooldownText.text = remaining > 1f
                 ? Mathf.CeilToInt(remaining).ToString()
                 : remaining.ToString("F1");
@@ -52,6 +50,7 @@ public class SkillButton : MonoBehaviour
         }
         else
         {
+            cooldownOverlay.fillAmount = 0f;
             cooldownText.gameObject.SetActive(false);
         }
     }

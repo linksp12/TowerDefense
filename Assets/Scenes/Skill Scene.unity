@@ -531,17 +531,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
   skills:
   - skillName: Fireball
-    cooldown: 10
+    cooldown: 3
     duration: 0
     icon: {fileID: 21300000, guid: 3f4ed634430fc504fa19c6b408cd40c1, type: 3}
     description: 
   - skillName: Ice Attack
-    cooldown: 15
+    cooldown: 5
     duration: 0
     icon: {fileID: 21300000, guid: 17951649342328b44a00606416d2b440, type: 3}
     description: 
   - skillName: Lightning
-    cooldown: 17
+    cooldown: 5
     duration: 0
     icon: {fileID: 21300000, guid: acb43d362f712fa4ea5fc825e270b1e4, type: 3}
     description: 
@@ -2924,7 +2924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7484,7 +7484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -13349,7 +13349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
