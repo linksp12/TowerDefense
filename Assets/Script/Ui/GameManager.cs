@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     private int currentPlayerHp;
     public Slider playerHpSlider;
 
+    [Header("Test Speed")]
+    public float testTimeScale = 1f;
+
+    // 게임 종료 중복 실행 방지용
+    private bool isGameEnded = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -28,7 +34,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = testTimeScale;
-        
+
         currentMoney = startingMoney;
         UpdateMoneyUI();
 
@@ -43,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     public void AddMoney(int amount)
     {
+        if (isGameEnded) return;
+
         currentMoney += amount;
         UpdateMoneyUI();
         Debug.Log($"돈 획득: +{amount} / 현재 잔액: {currentMoney}");
@@ -50,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     public bool SpendMoney(int amount)
     {
+        if (isGameEnded) return false;
+
         if (currentMoney < amount)
         {
             Debug.Log($"돈 부족! 필요: {amount} / 보유: {currentMoney}");
@@ -80,6 +90,8 @@ public class GameManager : MonoBehaviour
 
     public void TakePlayerDamage(int damage)
     {
+        if (isGameEnded) return;
+
         currentPlayerHp -= damage;
 
         if (currentPlayerHp < 0)
@@ -94,12 +106,34 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        if (isGameEnded) return;
+
+        isGameEnded = true;
+
+        Debug.Log("게임 오버 - ResultScene 이동");
+
         Time.timeScale = 1f;
 
         ResultSceneManager.isVictory = false;
         SceneManager.LoadScene("ResultScene");
     }
 
-    [Header("Test Speed")]
-    public float testTimeScale = 1f;
+    public void GameClear()
+    {
+        if (isGameEnded) return;
+
+        isGameEnded = true;
+
+        Debug.Log("게임 클리어 - ResultScene 이동");
+
+        Time.timeScale = 1f;
+
+        ResultSceneManager.isVictory = true;
+        SceneManager.LoadScene("ResultScene");
+    }
+
+    public bool IsGameEnded()
+    {
+        return isGameEnded;
+    }
 }
