@@ -13,9 +13,19 @@ public class SkillButton : MonoBehaviour
     public Image cooldownOverlay;
     public TextMeshProUGUI cooldownText;
 
+    [Header("사운드")]
+    public AudioClip skillSound;        // 스킬별 사운드 클립
+    private AudioSource audioSource;
+
     void Start()
     {
-        // interactable 건드리지 않음
+        // AudioSource 자동으로 가져오기 (없으면 추가)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;  // 시작하자마자 재생 방지
+
         button.onClick.AddListener(OnSkillButtonClick);
         cooldownOverlay.fillAmount = 0f;
     }
@@ -27,8 +37,10 @@ public class SkillButton : MonoBehaviour
 
     void OnSkillButtonClick()
     {
-        // 쿨타임 체크는 SkillManager에서 처리
-        // 버튼은 항상 클릭 가능하게
+        // 사운드 재생
+        if (skillSound != null)
+            audioSource.PlayOneShot(skillSound);
+
         SkillManager.Instance.UseSkill(skillName);
     }
 
@@ -42,7 +54,6 @@ public class SkillButton : MonoBehaviour
 
         if (onCooldown)
         {
-            // 버튼 비활성화 제거 - UI만 업데이트
             cooldownText.text = remaining > 1f
                 ? Mathf.CeilToInt(remaining).ToString()
                 : remaining.ToString("F1");
