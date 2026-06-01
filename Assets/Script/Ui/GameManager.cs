@@ -49,8 +49,10 @@ public class GameManager : MonoBehaviour
     public void AddMoney(int amount)
     {
         if (isGameEnded) return;
+
         currentMoney += amount;
         UpdateMoneyUI();
+
         Debug.Log($"돈 획득: +{amount} / 현재 잔액: {currentMoney}");
     }
 
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
 
         currentMoney -= amount;
         UpdateMoneyUI();
+
         Debug.Log($"돈 사용: -{amount} / 현재 잔액: {currentMoney}");
         return true;
     }
@@ -105,27 +108,29 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         if (isGameEnded) return;
+
         isGameEnded = true;
 
         Debug.Log("게임 오버");
+
         Time.timeScale = 1f;
 
-        // ResultPanel로 변경
-        if (ResultManager.Instance != null)
-            ResultManager.Instance.ShowDefeat();
+        ResultSceneManager.isVictory = false;
+        SceneManager.LoadScene("ResultScene");
     }
 
     public void GameClear()
     {
         if (isGameEnded) return;
+
         isGameEnded = true;
 
         Debug.Log("게임 클리어");
+
         Time.timeScale = 1f;
 
-        // ResultPanel로 변경
-        if (ResultManager.Instance != null)
-            ResultManager.Instance.ShowVictory();
+        ResultSceneManager.isVictory = true;
+        SceneManager.LoadScene("ResultScene");
     }
 
     public bool IsGameEnded()

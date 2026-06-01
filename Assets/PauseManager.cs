@@ -14,20 +14,15 @@ public class PauseManager : MonoBehaviour
 
     void Awake()
     {
-        // 씬 이동 시 이전 PauseManager 제거
-        if (FindObjectsOfType<PauseManager>().Length > 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        pausePanel.SetActive(false);
 
-        if (pausePanel != null)
-            pausePanel.SetActive(false);
+        resumeButton.onClick.AddListener(ResumeGame);
+        restartButton.onClick.AddListener(RestartGame);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
     void Update()
     {
-        // pausePanel이 없으면 실행 안 함
         if (pausePanel == null) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -39,7 +34,6 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (pausePanel == null) return;
         isPaused = true;
         Time.timeScale = 0f;
         pausePanel.SetActive(true);
@@ -47,7 +41,6 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (pausePanel == null) return;
         isPaused = false;
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
@@ -65,6 +58,15 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
+    }
+
+    // 창 없이 게임만 멈추기/재개 (II 버튼용)
+    public void ToggleTimeScale()
+    {
+        if (Time.timeScale == 0f)
+            Time.timeScale = 1f;
+        else
+            Time.timeScale = 0f;
     }
 
     public bool IsPaused => isPaused;
