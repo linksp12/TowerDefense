@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         if (currentMoney < amount)
         {
             Debug.Log($"돈 부족! 필요: {amount} / 보유: {currentMoney}");
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.ShowMoneyWarning();
+            }
             return false;
         }
 
