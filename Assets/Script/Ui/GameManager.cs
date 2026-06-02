@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
     public int maxPlayerHp = 20;
     private int currentPlayerHp;
     public Slider playerHpSlider;
+    public Image damageImage;
+    public AudioSource audioSource;
+    public AudioClip damageSound;
 
     [Header("Test Speed")]
     public float testTimeScale = 1f;
@@ -103,6 +107,17 @@ public class GameManager : MonoBehaviour
 
         if (playerHpSlider != null)
             playerHpSlider.value = currentPlayerHp;
+
+        if (damageImage != null)
+        {
+            damageImage.DOKill();            
+            damageImage.color = new Color(0.7f, 0f, 0f, 0.3f);            
+            damageImage.DOFade(0f, 0.8f).SetEase(Ease.OutCubic);
+        }
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
 
         if (currentPlayerHp <= 0)
             GameOver();
