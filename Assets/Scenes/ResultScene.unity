@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 338010308}
   - component: {fileID: 338010307}
   - component: {fileID: 338010310}
+  - component: {fileID: 338010311}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -540,6 +541,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   clickSound: {fileID: 8300000, guid: d9fe388b8e4961f4782658fa6cc67dd0, type: 3}
+--- !u!114 &338010311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338010305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae19cdd52799404c8cf8361cfcc9850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  hoverScale: 1.1
 --- !u!1 &538755813
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +671,7 @@ GameObject:
   - component: {fileID: 773734148}
   - component: {fileID: 773734147}
   - component: {fileID: 773734150}
+  - component: {fileID: 773734151}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -791,6 +806,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   clickSound: {fileID: 8300000, guid: d9fe388b8e4961f4782658fa6cc67dd0, type: 3}
+--- !u!114 &773734151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773734145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae19cdd52799404c8cf8361cfcc9850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  hoverScale: 1.1
 --- !u!1 &1156251645
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +832,7 @@ GameObject:
   - component: {fileID: 1156251648}
   - component: {fileID: 1156251647}
   - component: {fileID: 1156251650}
+  - component: {fileID: 1156251651}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -938,6 +967,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   clickSound: {fileID: 8300000, guid: d9fe388b8e4961f4782658fa6cc67dd0, type: 3}
+--- !u!114 &1156251651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156251645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae19cdd52799404c8cf8361cfcc9850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  hoverScale: 1.1
 --- !u!1 &1390959507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1319,7 @@ GameObject:
   - component: {fileID: 1514728515}
   - component: {fileID: 1514728514}
   - component: {fileID: 1514728517}
+  - component: {fileID: 1514728518}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -1411,6 +1454,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   clickSound: {fileID: 8300000, guid: d9fe388b8e4961f4782658fa6cc67dd0, type: 3}
+--- !u!114 &1514728518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514728512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae19cdd52799404c8cf8361cfcc9850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  hoverScale: 1.1
 --- !u!1 &1641265978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1683,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781000372}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

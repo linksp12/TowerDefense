@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class ResultSceneManager : MonoBehaviour
@@ -24,7 +25,6 @@ public class ResultSceneManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        // 결과에 따라 사운드 재생
         if (isVictory && victorySound != null)
             audioSource.PlayOneShot(victorySound);
         else if (!isVictory && defeatSound != null)
