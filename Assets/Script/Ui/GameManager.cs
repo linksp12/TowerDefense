@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Player HP")]
     public int maxPlayerHp = 20;
     private int currentPlayerHp;
-    public Slider playerHpSlider;
+    public TextMeshProUGUI hpText;
     public Image damageImage;
     public AudioSource audioSource;
     public AudioClip damageSound;
@@ -44,11 +44,7 @@ public class GameManager : MonoBehaviour
 
         currentPlayerHp = maxPlayerHp;
 
-        if (playerHpSlider != null)
-        {
-            playerHpSlider.maxValue = maxPlayerHp;
-            playerHpSlider.value = currentPlayerHp;
-        }
+        UpdateHpText();
     }
 
     public void AddMoney(int amount)
@@ -105,8 +101,14 @@ public class GameManager : MonoBehaviour
         if (currentPlayerHp < 0)
             currentPlayerHp = 0;
 
-        if (playerHpSlider != null)
-            playerHpSlider.value = currentPlayerHp;
+        UpdateHpText();
+
+        if (hpText != null)
+        {
+            hpText.DOKill();
+            hpText.color = Color.red;
+            hpText.DOColor(Color.white, 0.8f).SetEase(Ease.OutQuad);
+        }
 
         if (damageImage != null)
         {
@@ -121,6 +123,13 @@ public class GameManager : MonoBehaviour
 
         if (currentPlayerHp <= 0)
             GameOver();
+    }
+    private void UpdateHpText()
+    {
+        if (hpText != null)
+        {
+            hpText.text = $" {currentPlayerHp} / {maxPlayerHp}";
+        }
     }
 
     private void GameOver()
