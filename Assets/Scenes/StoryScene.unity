@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 1006478753}
   - component: {fileID: 1006478752}
   - component: {fileID: 1006478751}
+  - component: {fileID: 1006478755}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -432,6 +433,28 @@ RectTransform:
   m_AnchoredPosition: {x: -362, y: -180}
   m_SizeDelta: {x: 280, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1006478755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006478750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef28a30ba0d7c3d49bd22130d62db62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonEffect
+  clickScaleUp: 1.15
+  clickScaleDown: 0.95
+  scaleUpDuration: 0.08
+  scaleDownDuration: 0.06
+  returnDuration: 0.1
+  useHoverEffect: 1
+  hoverScale: 1.05
+  hoverDuration: 0.1
+  playClickSound: 1
+  customClickSound: {fileID: 0}
 --- !u!1 &1107778596
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +752,7 @@ GameObject:
   - component: {fileID: 1350108578}
   - component: {fileID: 1350108577}
   - component: {fileID: 1350108576}
+  - component: {fileID: 1350108579}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
@@ -849,6 +873,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350108574}
   m_CullTransparentMesh: 1
+--- !u!114 &1350108579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350108574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef28a30ba0d7c3d49bd22130d62db62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonEffect
+  clickScaleUp: 1.15
+  clickScaleDown: 0.95
+  scaleUpDuration: 0.08
+  scaleDownDuration: 0.06
+  returnDuration: 0.1
+  useHoverEffect: 1
+  hoverScale: 1.05
+  hoverDuration: 0.1
+  playClickSound: 1
+  customClickSound: {fileID: 0}
 --- !u!1 &1434366902
 GameObject:
   m_ObjectHideFlags: 0
