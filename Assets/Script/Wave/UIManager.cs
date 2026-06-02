@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     // 웨이브 시작
     public void OnWaveStart(int waveNumber)
     {
-        waveText.text = $"Wave {waveNumber} / {waveManager.TotalWaves}";
+        waveText.text = $" {waveNumber} / {waveManager.TotalWaves}";
         StartCoroutine(ShowAlert($"Wave {waveNumber} 시작!"));
     }
 

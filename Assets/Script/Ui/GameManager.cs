@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
     private void UpdateMoneyUI()
     {
         if (moneyText != null)
-            moneyText.text = $"{currentMoney}G";
+            moneyText.text = $" {currentMoney}";
     }
 
     public void TakePlayerDamage(int damage)
