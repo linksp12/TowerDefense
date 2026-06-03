@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class GameManager : MonoBehaviour
     [Header("Player HP")]
     public int maxPlayerHp = 20;
     private int currentPlayerHp;
-    public Slider playerHpSlider;
+    public TextMeshProUGUI hpText;
+    public Image damageImage;
+    public AudioSource audioSource;
+    public AudioClip damageSound;
 
     [Header("Test Speed")]
     public float testTimeScale = 1f;
@@ -40,11 +44,7 @@ public class GameManager : MonoBehaviour
 
         currentPlayerHp = maxPlayerHp;
 
-        if (playerHpSlider != null)
-        {
-            playerHpSlider.maxValue = maxPlayerHp;
-            playerHpSlider.value = currentPlayerHp;
-        }
+        UpdateHpText();
     }
 
     public void AddMoney(int amount)
@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         if (currentMoney < amount)
         {
             Debug.Log($"돈 부족! 필요: {amount} / 보유: {currentMoney}");
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.ShowMoneyWarning();
+            }
             return false;
         }
 
@@ -85,7 +89,7 @@ public class GameManager : MonoBehaviour
     private void UpdateMoneyUI()
     {
         if (moneyText != null)
-            moneyText.text = $"{currentMoney}G";
+            moneyText.text = $" {currentMoney}";
     }
 
     public void TakePlayerDamage(int damage)
@@ -97,11 +101,35 @@ public class GameManager : MonoBehaviour
         if (currentPlayerHp < 0)
             currentPlayerHp = 0;
 
-        if (playerHpSlider != null)
-            playerHpSlider.value = currentPlayerHp;
+        UpdateHpText();
+
+        if (hpText != null)
+        {
+            hpText.DOKill();
+            hpText.color = Color.red;
+            hpText.DOColor(Color.white, 0.8f).SetEase(Ease.OutQuad);
+        }
+
+        if (damageImage != null)
+        {
+            damageImage.DOKill();            
+            damageImage.color = new Color(0.7f, 0f, 0f, 0.3f);            
+            damageImage.DOFade(0f, 0.8f).SetEase(Ease.OutCubic);
+        }
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
 
         if (currentPlayerHp <= 0)
             GameOver();
+    }
+    private void UpdateHpText()
+    {
+        if (hpText != null)
+        {
+            hpText.text = $" {currentPlayerHp} / {maxPlayerHp}";
+        }
     }
 
     private void GameOver()
