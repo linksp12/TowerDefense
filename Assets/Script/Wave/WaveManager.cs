@@ -47,6 +47,12 @@ public class WaveManager : MonoBehaviour
             onWaveStart?.Invoke(CurrentWave);
             Debug.Log($"Wave {CurrentWave} / {TotalWaves} 시작!");
 
+            if (spawner == null)
+            {
+                Debug.LogError("WaveManager: MonsterSpawner가 연결되지 않았습니다.");
+                yield break;
+            }
+
             yield return StartCoroutine(spawner.SpawnWave(wave, OnMonsterSpawned));
 
             isSpawningDone = true;
@@ -69,21 +75,35 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        TryGameClear();
+    }
+
+    private void TryGameClear()
+    {
         if (IsGameEnded())
-            yield break;
+            return;
 
         if (isAllWavesFinished)
-            yield break;
+            return;
 
         isAllWavesFinished = true;
 
-        onAllWavesCleared?.Invoke();
         Debug.Log("모든 웨이브 클리어!");
+
+        Time.timeScale = 1f;
 
         if (GameManager.Instance != null)
         {
             GameManager.Instance.GameClear();
         }
+        else
+        {
+            Debug.LogError("WaveManager: GameManager.Instance가 없습니다.");
+        }
+
+        // 결과씬으로 이동한 뒤에는 사실상 필요 없지만,
+        // 만약 UI 알림 같은 걸 쓰고 싶으면 여기서 호출
+        onAllWavesCleared?.Invoke();
     }
 
     void OnMonsterSpawned(GameObject monster)
