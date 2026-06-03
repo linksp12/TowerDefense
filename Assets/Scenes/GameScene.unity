@@ -14728,7 +14728,7 @@ MonoBehaviour:
   damageImage: {fileID: 1039176196}
   audioSource: {fileID: 1522208315}
   damageSound: {fileID: 8300000, guid: 12de193dc20783748a3cac3de82c95bc, type: 3}
-  testTimeScale: 5
+  testTimeScale: 1
 --- !u!4 &1522208314
 Transform:
   m_ObjectHideFlags: 0
