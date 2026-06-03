@@ -1,31 +1,61 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 메인 화면 매니저 (업데이트 버전)
+/// - 시작, 이어하기(임시: 게임 시작), 설정, 종료
+/// - ESC로 설정창 열기 (SettingsPopup에서 처리)
+/// - 씬 진입 시 메인 BGM 자동 재생
+/// </summary>
 public class MainMenuManager : MonoBehaviour
 {
-    // START 버튼에 연결
+    private void Start()
+    {
+        // 메인 BGM 재생
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBGMForScene("MainScene");
+        }
+    }
+
+    // ──────── 시작 버튼 ────────
     public void OnStartButtonClicked()
     {
-        SceneManager.LoadScene("StoryScene"); // 스토리씬으로 먼저 이동
+        SceneManager.LoadScene("StoryScene");
     }
 
-    // 이어하기 버튼에 연결
+    // ──────── 이어하기 버튼 (임시: 게임 바로 시작) ────────
     public void OnContinueButtonClicked()
     {
-        Debug.Log("이어하기 버튼 클릭됨");
-        // 나중에 저장된 게임 불러오기 기능으로 교체
+        Debug.Log("이어하기 (임시) - GameScene으로 이동");
+        SceneManager.LoadScene("GameScene");
     }
 
-    // 설정 버튼에 연결
+    // ──────── 설정 버튼 ────────
     public void OnSettingsButtonClicked()
     {
-        Debug.Log("설정 버튼 클릭됨");
+        if (SettingsPopup.Instance != null)
+        {
+            if (SettingsPopup.Instance.IsOpen)
+                SettingsPopup.Instance.Close();
+            else
+                SettingsPopup.Instance.Open();
+        }
+        else
+        {
+            Debug.LogWarning("SettingsPopup이 씬에 없습니다.");
+        }
     }
 
-    // 종료 버튼에 연결
+    // ──────── 종료 버튼 ────────
     public void OnQuitButtonClicked()
     {
         Debug.Log("게임 종료");
-        Application.Quit();
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

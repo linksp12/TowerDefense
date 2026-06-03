@@ -4,15 +4,21 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
+/// <summary>
+/// 스토리 씬 매니저 (업데이트 버전)
+/// - 스토리 BGM 자동 재생
+/// - 버튼 클릭 사운드는 ButtonEffect 컴포넌트가 처리
+///   (Next, Skip 버튼에 ButtonEffect 컴포넌트를 추가하면 됨)
+/// </summary>
 public class StorySceneManager : MonoBehaviour
 {
     [Header("배경 이미지 (Story 1, 2, 3 순서)")]
     public Image backgroundImage;
-    public Sprite[] backgroundSprites; // 인스펙터에서 순서대로 할당
+    public Sprite[] backgroundSprites;
 
     [Header("스토리 UI 패널 이미지 (Story 01, 02, 03 프레임)")]
     public Image storyFrameImage;
-    public Sprite[] storyFrameSprites; // 인스펙터에서 순서대로 할당
+    public Sprite[] storyFrameSprites;
 
     [Header("자막 텍스트")]
     public TextMeshProUGUI storyText;
@@ -22,7 +28,7 @@ public class StorySceneManager : MonoBehaviour
     public Button skipButton;
 
     [Header("설정")]
-    public float autoAdvanceTime = 7f; // 자동 넘김 시간 (초)
+    public float autoAdvanceTime = 7f;
 
     // ───────── 스토리 텍스트 ─────────
     private readonly string[] stories = new string[]
@@ -47,6 +53,12 @@ public class StorySceneManager : MonoBehaviour
     // ───────── 초기화 ─────────
     private void Start()
     {
+        // 스토리 BGM 재생
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBGMForScene("StoryScene");
+        }
+
         // 버튼 이벤트 연결
         nextButton.onClick.AddListener(OnNextButtonClicked);
         skipButton.onClick.AddListener(OnSkipButtonClicked);
@@ -59,44 +71,36 @@ public class StorySceneManager : MonoBehaviour
     {
         currentIndex = index;
 
-        // 배경 이미지 교체
         if (backgroundSprites != null && index < backgroundSprites.Length)
             backgroundImage.sprite = backgroundSprites[index];
 
-        // 스토리 프레임 교체 (STORY 01 / 02 / 03)
         if (storyFrameSprites != null && index < storyFrameSprites.Length)
             storyFrameImage.sprite = storyFrameSprites[index];
 
-        // 자막 교체
         if (storyText != null)
             storyText.text = stories[index];
 
-        // 기존 타이머 취소 후 새로 시작
         if (autoAdvanceCoroutine != null)
             StopCoroutine(autoAdvanceCoroutine);
         autoAdvanceCoroutine = StartCoroutine(AutoAdvance());
     }
 
-    // ───────── 자동 넘김 (7초) ─────────
+    // ───────── 자동 넘김 ─────────
     private IEnumerator AutoAdvance()
     {
         yield return new WaitForSeconds(autoAdvanceTime);
         AdvanceStory();
     }
 
-    // ───────── 다음 스토리로 이동 ─────────
+    // ───────── 다음 스토리 ─────────
     private void AdvanceStory()
     {
         int nextIndex = currentIndex + 1;
 
         if (nextIndex < stories.Length)
-        {
             ShowStory(nextIndex);
-        }
         else
-        {
             LoadGameScene();
-        }
     }
 
     // ───────── 버튼 콜백 ─────────
