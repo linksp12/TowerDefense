@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildPoint : MonoBehaviour
 {
@@ -39,8 +40,15 @@ public class BuildPoint : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
+        // UI 위에 마우스가 있으면 빌드포인트 미리보기 표시 안 함
+        if (IsPointerOverUI())
+        {
+            HidePreview();
+            return;
+        }
+
         ShowPreview();
     }
 
@@ -51,6 +59,12 @@ public class BuildPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // UI 버튼/패널 위를 클릭한 경우 빌드포인트 클릭 무시
+        if (IsPointerOverUI())
+        {
+            return;
+        }
+
         if (hasTower)
         {
             Debug.Log("이미 타워가 설치된 위치입니다.");
@@ -63,7 +77,10 @@ public class BuildPoint : MonoBehaviour
             return;
         }
 
-        TowerBuildManager.Instance.OpenBuildPanel(this);
+        if (TowerBuildManager.Instance != null)
+        {
+            TowerBuildManager.Instance.OpenBuildPanel(this);
+        }
     }
 
     public void BuildTower(GameObject towerPrefab)
@@ -74,7 +91,20 @@ public class BuildPoint : MonoBehaviour
             return;
         }
 
-        Instantiate(towerPrefab, transform.position, Quaternion.identity);
+        GameObject tower = Instantiate(towerPrefab, transform.position, Quaternion.identity);
+
+        TowerUpgrade towerUpgrade = tower.GetComponent<TowerUpgrade>();
+        if (towerUpgrade != null)
+        {
+            towerUpgrade.SetOwnerBuildPoint(this);
+        }
+
+        TowerEffectAnimator effectAnimator = tower.GetComponent<TowerEffectAnimator>();
+        if (effectAnimator != null)
+        {
+            effectAnimator.PlayInstallEffect();
+        }
+
         hasTower = true;
 
         HidePreview();
@@ -84,6 +114,19 @@ public class BuildPoint : MonoBehaviour
         {
             spriteRenderer.enabled = false;
         }
+    }
+
+    public void ClearTower()
+    {
+        hasTower = false;
+
+        // 판매 후 다시 설치 위치 표시 이미지 보이게 하기
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        HidePreview();
     }
 
     private void ShowPreview()
@@ -120,5 +163,10 @@ public class BuildPoint : MonoBehaviour
             return true;
 
         return GameManager.Instance.CanAfford(minimumBuildCost);
+    }
+
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 }

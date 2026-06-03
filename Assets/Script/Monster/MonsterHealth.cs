@@ -9,17 +9,44 @@ public class MonsterHealth : MonoBehaviour
     [Header("Reward")]
     public int goldReward = 20;
 
+    [Header("HP UI")]
+    public Slider monsterHpSlider;
+
     [Header("Hit Effect")]
-    public float hitFlashTime = 0.1f;
+    public GameObject hitEffectPrefab;
+    public float hitEffectDestroyTime = 0.6f;
+
+    [Header("Hit Flash")]
+    public bool useHitFlash = true;
+    public Color hitColor = Color.red;
+    public float flashTime = 0.08f;
+
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
 
     private int currentHp;
     private bool isDead = false;
 
-    public Slider monsterHpSlider;
-
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
-    private Coroutine hitFlashCoroutine;
+    private Coroutine flashCoroutine;
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
 
     void Start()
     {
@@ -30,18 +57,6 @@ public class MonsterHealth : MonoBehaviour
             monsterHpSlider.maxValue = maxHp;
             monsterHpSlider.value = currentHp;
         }
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
-
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
-        }
     }
 
     public void TakeDamage(int damage)
@@ -50,10 +65,9 @@ public class MonsterHealth : MonoBehaviour
 
         currentHp -= damage;
 
-        FlashHit();
-
-        // 로그가 너무 많이 찍히면 Unity가 느려질 수 있어서 필요 없으면 주석 처리해도 됨
         Debug.Log("몬스터 피격! 남은 HP: " + currentHp);
+
+        PlayHitFeedback();
 
         if (monsterHpSlider != null)
         {
@@ -66,30 +80,57 @@ public class MonsterHealth : MonoBehaviour
         }
     }
 
-    void FlashHit()
+    private void PlayHitFeedback()
     {
-        if (spriteRenderer == null) return;
-
-        if (hitFlashCoroutine != null)
-        {
-            StopCoroutine(hitFlashCoroutine);
-        }
-
-        hitFlashCoroutine = StartCoroutine(HitFlashRoutine());
+        PlayHitSound();
+        SpawnHitEffect();
+        PlayHitFlash();
     }
 
-    IEnumerator HitFlashRoutine()
+    private void PlayHitSound()
     {
-        spriteRenderer.color = Color.red;
-
-        yield return new WaitForSeconds(hitFlashTime);
-
-        if (spriteRenderer != null)
+        if (audioSource != null && hitSound != null)
         {
-            spriteRenderer.color = originalColor;
+            audioSource.PlayOneShot(hitSound);
         }
+    }
 
-        hitFlashCoroutine = null;
+    private void SpawnHitEffect()
+    {
+        if (hitEffectPrefab == null)
+            return;
+
+        GameObject effect = Instantiate(
+            hitEffectPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        Destroy(effect, hitEffectDestroyTime);
+    }
+
+    private void PlayHitFlash()
+    {
+        if (!useHitFlash)
+            return;
+
+        if (spriteRenderer == null)
+            return;
+
+        if (flashCoroutine != null)
+            StopCoroutine(flashCoroutine);
+
+        flashCoroutine = StartCoroutine(HitFlashRoutine());
+    }
+
+    private IEnumerator HitFlashRoutine()
+    {
+        spriteRenderer.color = hitColor;
+
+        yield return new WaitForSeconds(flashTime);
+
+        spriteRenderer.color = originalColor;
+        flashCoroutine = null;
     }
 
     private void Die()
@@ -98,6 +139,11 @@ public class MonsterHealth : MonoBehaviour
         isDead = true;
 
         Debug.Log("몬스터 사망");
+
+        if (deathSound != null)
+        {
+            AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.8f);
+        }
 
         WaveManager waveManager = FindFirstObjectByType<WaveManager>();
         if (waveManager != null)

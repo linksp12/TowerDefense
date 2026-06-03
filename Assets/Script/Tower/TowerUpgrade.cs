@@ -42,6 +42,10 @@ public class TowerUpgrade : MonoBehaviour
     public int level2Cost = 150;
     public int level3Cost = 300;
 
+    [Header("판매 설정")]
+    [Range(0f, 1f)]
+    public float sellRate = 0.7f;
+
     [Header("Path A Lv.2 능력치")]
     public int pathALv2Damage = 15;
     public float pathALv2Cooldown = 0.7f;
@@ -64,6 +68,8 @@ public class TowerUpgrade : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private TowerAttack towerAttack;
+
+    private BuildPoint ownerBuildPoint;
 
     void Awake()
     {
@@ -89,6 +95,16 @@ public class TowerUpgrade : MonoBehaviour
         }
     }
 
+    public void SetOwnerBuildPoint(BuildPoint buildPoint)
+    {
+        ownerBuildPoint = buildPoint;
+    }
+
+    public BuildPoint GetOwnerBuildPoint()
+    {
+        return ownerBuildPoint;
+    }
+
     public bool CanUpgrade()
     {
         return level < maxLevel;
@@ -101,28 +117,89 @@ public class TowerUpgrade : MonoBehaviour
         return 0;
     }
 
-    public void SelectPathA()
+    public int GetBaseCost()
     {
-        if (level != 1)
+        if (towerType == TowerType.Archer) return 50;
+        if (towerType == TowerType.Cannon) return 100;
+        if (towerType == TowerType.Magic) return 150;
+
+        return 50;
+    }
+
+    public int GetTotalUsedCost()
+    {
+        int totalCost = GetBaseCost();
+
+        if (level >= 2)
+            totalCost += level2Cost;
+
+        if (level >= 3)
+            totalCost += level3Cost;
+
+        return totalCost;
+    }
+
+    public int GetSellPrice()
+    {
+        return Mathf.RoundToInt(GetTotalUsedCost() * sellRate);
+    }
+
+    public string GetStatText()
+    {
+        if (towerAttack == null)
         {
-            Debug.Log("이미 업그레이드 루트가 선택되었습니다.");
-            return;
+            return "능력치 정보를 불러올 수 없습니다.";
         }
 
-        path = UpgradePath.PathA;
-        Upgrade();
+        return
+            "공격력: " + towerAttack.damage + "\n" +
+            "공격속도: " + towerAttack.attackCooldown + "초\n" +
+            "사거리: " + towerAttack.attackRange + "\n" +
+            "판매가: " + GetSellPrice() + "G";
+    }
+
+    public void SelectPathA()
+    {
+        SelectPathAndUpgrade(UpgradePath.PathA);
     }
 
     public void SelectPathB()
     {
+        SelectPathAndUpgrade(UpgradePath.PathB);
+    }
+
+    void SelectPathAndUpgrade(UpgradePath selectedPath)
+    {
         if (level != 1)
         {
             Debug.Log("이미 업그레이드 루트가 선택되었습니다.");
             return;
         }
 
-        path = UpgradePath.PathB;
-        Upgrade();
+        if (!CanUpgrade())
+        {
+            Debug.Log("이미 최대 레벨입니다.");
+            return;
+        }
+
+        int cost = GetUpgradeCost();
+
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("GameManager가 없습니다.");
+            return;
+        }
+
+        if (!GameManager.Instance.SpendMoney(cost))
+        {
+            Debug.Log("골드가 부족합니다.");
+            return;
+        }
+
+        path = selectedPath;
+        level++;
+
+        ApplyUpgrade();
     }
 
     public void Upgrade()
@@ -219,6 +296,12 @@ public class TowerUpgrade : MonoBehaviour
             towerAttack.ApplyUpgradeStats(newDamage, newCooldown, newRange, newProjectilePrefab);
         }
 
+        TowerEffectAnimator effectAnimator = GetComponent<TowerEffectAnimator>();
+        if (effectAnimator != null)
+        {
+            effectAnimator.PlayUpgradeEffect();
+        }
+
         Debug.Log(GetTowerName() + " 업그레이드 완료");
     }
 
@@ -312,5 +395,45 @@ public class TowerUpgrade : MonoBehaviour
         if (towerType == TowerType.Magic) return "화염 루트";
 
         return "루트 B";
+    }
+
+    public string GetFinalUpgradeName()
+    {
+        if (path == UpgradePath.PathA)
+        {
+            if (towerType == TowerType.Archer) return "폭풍 화살 타워";
+            if (towerType == TowerType.Cannon) return "대폭발 캐논";
+            if (towerType == TowerType.Magic) return "연속 마법화살 타워";
+        }
+
+        if (path == UpgradePath.PathB)
+        {
+            if (towerType == TowerType.Archer) return "관통 화살 타워";
+            if (towerType == TowerType.Cannon) return "공성포 타워";
+            if (towerType == TowerType.Magic) return "지옥불 마법 타워";
+        }
+
+        return "최종 업그레이드";
+    }
+
+    public Sprite GetFinalUpgradeSprite()
+    {
+        if (path == UpgradePath.PathA)
+            return pathALv3TowerSprite;
+
+        if (path == UpgradePath.PathB)
+            return pathBLv3TowerSprite;
+
+        return null;
+    }
+
+    public Sprite GetPathASprite()
+    {
+        return pathALv2TowerSprite;
+    }
+
+    public Sprite GetPathBSprite()
+    {
+        return pathBLv2TowerSprite;
     }
 }

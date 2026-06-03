@@ -13,6 +13,9 @@ public class TowerBuildManager : MonoBehaviour
     public Canvas canvas;
     public Vector2 panelOffset = new Vector2(0f, 120f);
 
+    [Header("Effects")]
+    public PanelShake towerBuildPanelShake;
+
     [Header("Tower Prefabs")]
     public GameObject basicTowerPrefab;
     public GameObject cannonTowerPrefab;
@@ -28,26 +31,22 @@ public class TowerBuildManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        if (towerBuildPanelAnimator == null && towerBuildPanel != null)
+            towerBuildPanelAnimator = towerBuildPanel.GetComponent<PanelAnimator>();
+
+        if (towerBuildPanelRect == null && towerBuildPanel != null)
+            towerBuildPanelRect = towerBuildPanel.GetComponent<RectTransform>();
+
+        if (towerBuildPanelShake == null && towerBuildPanel != null)
+            towerBuildPanelShake = towerBuildPanel.GetComponent<PanelShake>();
+
+        if (canvas == null)
+            canvas = FindFirstObjectByType<Canvas>();
     }
 
     private void Start()
     {
-        // 자동 연결
-        if (towerBuildPanelAnimator == null && towerBuildPanel != null)
-        {
-            towerBuildPanelAnimator = towerBuildPanel.GetComponent<PanelAnimator>();
-        }
-
-        if (towerBuildPanelRect == null && towerBuildPanel != null)
-        {
-            towerBuildPanelRect = towerBuildPanel.GetComponent<RectTransform>();
-        }
-
-        if (canvas == null)
-        {
-            canvas = FindFirstObjectByType<Canvas>();
-        }
-
         if (towerBuildPanelAnimator != null)
         {
             towerBuildPanelAnimator.HideInstant();
@@ -60,9 +59,15 @@ public class TowerBuildManager : MonoBehaviour
 
     public void OpenBuildPanel(BuildPoint buildPoint)
     {
+        if (buildPoint == null)
+            return;
+
         selectedBuildPoint = buildPoint;
 
         MovePanelToBuildPoint(buildPoint.transform.position);
+
+        if (UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayOpenPanel();
 
         if (towerBuildPanelAnimator != null)
         {
@@ -78,7 +83,7 @@ public class TowerBuildManager : MonoBehaviour
     {
         if (towerBuildPanelRect == null || canvas == null || Camera.main == null)
         {
-            Debug.LogWarning("패널 위치 이동에 필요한 값이 연결되지 않았습니다.");
+            Debug.LogWarning("설치 패널 위치 이동에 필요한 값이 연결되지 않았습니다.");
             return;
         }
 
@@ -96,7 +101,6 @@ public class TowerBuildManager : MonoBehaviour
 
         Vector2 targetPosition = uiPosition + panelOffset;
 
-        // 패널이 화면 밖으로 나가지 않게 제한
         float panelHalfWidth = towerBuildPanelRect.rect.width * 0.5f;
         float panelHalfHeight = towerBuildPanelRect.rect.height * 0.5f;
 
@@ -138,28 +142,42 @@ public class TowerBuildManager : MonoBehaviour
         if (selectedBuildPoint == null)
         {
             Debug.Log("선택된 설치 위치가 없습니다.");
+            PlayFailFeedback();
             return;
         }
 
         if (towerPrefab == null)
         {
             Debug.LogWarning("타워 프리팹이 연결되지 않았습니다.");
+            PlayFailFeedback();
             return;
         }
 
         if (GameManager.Instance != null && !GameManager.Instance.SpendMoney(cost))
         {
             Debug.Log($"돈이 부족합니다! 필요: {cost}G");
+            PlayFailFeedback();
             return;
         }
 
         selectedBuildPoint.BuildTower(towerPrefab);
 
-        CloseBuildPanel();
+        if (UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayBuildSuccess();
+
+        CloseBuildPanel(false);
     }
 
     public void CloseBuildPanel()
     {
+        CloseBuildPanel(true);
+    }
+
+    private void CloseBuildPanel(bool playSound)
+    {
+        if (playSound && UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayClosePanel();
+
         if (towerBuildPanelAnimator != null)
         {
             towerBuildPanelAnimator.Hide();
@@ -170,6 +188,15 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         selectedBuildPoint = null;
+    }
+
+    private void PlayFailFeedback()
+    {
+        if (UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayFail();
+
+        if (towerBuildPanelShake != null)
+            towerBuildPanelShake.PlayShake();
     }
 
     public int GetCheapestTowerCost()
