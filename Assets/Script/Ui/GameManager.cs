@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     [Header("Test Speed")]
     public float testTimeScale = 1f;
 
-    // 게임 종료 중복 실행 방지용
     private bool isGameEnded = false;
 
     private void Awake()
@@ -53,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         currentMoney += amount;
         UpdateMoneyUI();
+
         Debug.Log($"돈 획득: +{amount} / 현재 잔액: {currentMoney}");
     }
 
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
         currentMoney -= amount;
         UpdateMoneyUI();
+
         Debug.Log($"돈 사용: -{amount} / 현재 잔액: {currentMoney}");
         return true;
     }
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
 
         isGameEnded = true;
 
-        Debug.Log("게임 오버 - ResultScene 이동");
+        Debug.Log("게임 오버");
 
         Time.timeScale = 1f;
 
@@ -152,7 +153,7 @@ public class GameManager : MonoBehaviour
 
         isGameEnded = true;
 
-        Debug.Log("게임 클리어 - ResultScene 이동");
+        Debug.Log("게임 클리어");
 
         Time.timeScale = 1f;
 
