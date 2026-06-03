@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -1101487246671468892}
   - component: {fileID: 5671456848655801379}
   - component: {fileID: 8409347517411906099}
+  - component: {fileID: -7997483579721428832}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -141,6 +142,7 @@ MonoBehaviour:
   pathBLv3ProjectilePrefab: {fileID: 7817520689033560513, guid: 1009e12cc1c5d8246816caf3e795c373, type: 3}
   level2Cost: 200
   level3Cost: 400
+  sellRate: 0.7
   pathALv2Damage: 45
   pathALv2Cooldown: 1.8
   pathALv2Range: 4.5
@@ -211,6 +213,24 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &-7997483579721428832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759459309904499257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067afea0e351a2440bb7ea52c165c1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerEffectAnimator
+  animationTime: 0.18
+  startScale: {x: 0.75, y: 0.75, z: 1}
+  punchScale: {x: 1.18, y: 1.18, z: 1}
+  endScale: {x: 1, y: 1, z: 1}
+  installEffectPrefab: {fileID: 0}
+  upgradeEffectPrefab: {fileID: 0}
 --- !u!1 &4020850364930161701
 GameObject:
   m_ObjectHideFlags: 0

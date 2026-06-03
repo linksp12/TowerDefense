@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6655255251374041850}
   - component: {fileID: -5727476445743022551}
   - component: {fileID: -4068456634633416672}
+  - component: {fileID: -416308257495680087}
   m_Layer: 0
   m_Name: IceWizardTower
   m_TagString: Untagged
@@ -141,6 +142,7 @@ MonoBehaviour:
   pathBLv3ProjectilePrefab: {fileID: 5262469820854004901, guid: 843c93a429b522a47a64826788af2115, type: 3}
   level2Cost: 180
   level3Cost: 360
+  sellRate: 0.7
   pathALv2Damage: 25
   pathALv2Cooldown: 0.9
   pathALv2Range: 4.5
@@ -211,6 +213,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabe44a4c6ee9cd4aa992830cf7d2480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerClick
+--- !u!114 &-416308257495680087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236469722719090783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067afea0e351a2440bb7ea52c165c1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerEffectAnimator
+  animationTime: 0.18
+  startScale: {x: 0.75, y: 0.75, z: 1}
+  punchScale: {x: 1.18, y: 1.18, z: 1}
+  endScale: {x: 1, y: 1, z: 1}
+  installEffectPrefab: {fileID: 0}
+  upgradeEffectPrefab: {fileID: 0}
 --- !u!1 &4297034357084891805
 GameObject:
   m_ObjectHideFlags: 0

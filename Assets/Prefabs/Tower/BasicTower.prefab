@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4521883427289537455}
   - component: {fileID: 7657479176763447362}
   - component: {fileID: 231568973029201813}
+  - component: {fileID: 1894595833662373224}
   m_Layer: 0
   m_Name: BasicTower
   m_TagString: Untagged
@@ -141,6 +142,7 @@ MonoBehaviour:
   pathBLv3ProjectilePrefab: {fileID: 6252503050366267477, guid: 578e166a2b5efcc4e8eed2a0e63c1bfc, type: 3}
   level2Cost: 150
   level3Cost: 300
+  sellRate: 0.7
   pathALv2Damage: 15
   pathALv2Cooldown: 0.7
   pathALv2Range: 4.2
@@ -211,6 +213,24 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.7866666, y: 2.7866666}
   m_EdgeRadius: 0
+--- !u!114 &1894595833662373224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392977616497477778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067afea0e351a2440bb7ea52c165c1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerEffectAnimator
+  animationTime: 0.18
+  startScale: {x: 0.75, y: 0.75, z: 1}
+  punchScale: {x: 1.18, y: 1.18, z: 1}
+  endScale: {x: 1, y: 1, z: 1}
+  installEffectPrefab: {fileID: 0}
+  upgradeEffectPrefab: {fileID: 0}
 --- !u!1 &2542190511906645516
 GameObject:
   m_ObjectHideFlags: 0
