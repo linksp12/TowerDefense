@@ -57,13 +57,13 @@ public class TowerUpgrade : MonoBehaviour
     public float pathALv3Range = 4.5f;
 
     [Header("Path B Lv.2 능력치")]
-    public int pathBLv2Damage = 28;
-    public float pathBLv2Cooldown = 1.0f;
+    public int pathBLv2Damage => 28;
+    public float pathBLv2Cooldown => 1.0f;
     public float pathBLv2Range = 4.8f;
 
     [Header("Path B Lv.3 능력치")]
-    public int pathBLv3Damage = 55;
-    public float pathBLv3Cooldown = 1.3f;
+    public int pathBLv3Damage => 55;
+    public float pathBLv3Cooldown => 1.3f;
     public float pathBLv3Range = 5.5f;
 
     private SpriteRenderer spriteRenderer;

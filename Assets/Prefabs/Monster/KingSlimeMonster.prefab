@@ -392,7 +392,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 1
 --- !u!95 &-3875340255861216548
 Animator:
   serializedVersion: 7
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e7a523ca380e14b811b885d20875b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
-  maxHp: 300
+  maxHp: 1000
   goldReward: 50
   monsterHpSlider: {fileID: 1472521771271607883}
   hitEffectPrefab: {fileID: 0}

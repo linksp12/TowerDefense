@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private int currentMoney;
 
     [Header("Player HP")]
-    public int maxPlayerHp = 30;
+    public int maxPlayerHp => 5;
     private int currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;
