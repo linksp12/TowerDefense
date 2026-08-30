@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
   maxHp: 360
-  goldReward: 18
+  goldReward: 13
   monsterHpSlider: {fileID: 6327119867833483347}
   hitEffectPrefab: {fileID: 0}
   hitEffectDestroyTime: 0.6
