@@ -27,8 +27,6 @@ public class MonsterStatus : MonoBehaviour
         while (elapsed < duration)
         {
             monsterHealth.TakeDamage(damagePerTick);
-            Debug.Log("화염 지속 피해: " + damagePerTick);
-
             yield return new WaitForSeconds(interval);
             elapsed += interval;
         }

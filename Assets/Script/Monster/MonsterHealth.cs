@@ -100,12 +100,6 @@ public class MonsterHealth : MonoBehaviour
 
         currentHp -= damage;
 
-        Debug.Log(
-            gameObject.name +
-            " 몬스터 피격! 남은 HP: " +
-            currentHp
-        );
-
         // 피격 효과
         PlayHitFeedback();
 

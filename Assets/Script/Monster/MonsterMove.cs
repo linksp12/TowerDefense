@@ -12,6 +12,7 @@ public class MonsterMove : MonoBehaviour
     private Coroutine freezeCoroutine;
 
     private int currentWaypointIndex = 0;
+    private bool hasReachedShield = false;
 
     // 스킬용 빙결 상태
     private bool isFrozen = false;
@@ -52,22 +53,38 @@ public class MonsterMove : MonoBehaviour
         }
         else
         {
-            Debug.Log("몬스터 도착");
-
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.TakePlayerDamage(1);
-            }
-
-            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-            if (waveManager != null)
-            {
-                waveManager.OnMonsterPassed();
-            }
-
-            Destroy(gameObject);
+            ReachShield();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Shield"))
+        {
+            ReachShield();
+        }
+    }
+
+    private void ReachShield()
+    {
+        if (hasReachedShield)
+            return;
+
+        hasReachedShield = true;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TakePlayerDamage(1);
+        }
+
+        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+
+        if (waveManager != null)
+        {
+            waveManager.OnMonsterPassed();
+        }
+
+        Destroy(gameObject);
     }
 
     // 마법화살 루트용 슬로우 기능
@@ -86,14 +103,11 @@ public class MonsterMove : MonoBehaviour
     {
         moveSpeed = originalMoveSpeed * slowRate;
 
-        Debug.Log("슬로우 적용 / 현재 속도: " + moveSpeed);
-
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originalMoveSpeed;
         slowCoroutine = null;
 
-        Debug.Log("슬로우 해제 / 현재 속도: " + moveSpeed);
     }
 
     // 스킬용 빙결 기능
@@ -111,14 +125,11 @@ public class MonsterMove : MonoBehaviour
     {
         isFrozen = true;
 
-        Debug.Log("몬스터 빙결");
-
         yield return new WaitForSeconds(duration);
 
         isFrozen = false;
         freezeCoroutine = null;
 
-        Debug.Log("몬스터 빙결 해제");
     }
 
     public void Die()

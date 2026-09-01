@@ -92,6 +92,9 @@ public class WaveManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
+        // GameScene의 이벤트는 씬 전환 전에 모두 실행한다.
+        onAllWavesCleared?.Invoke();
+
         if (GameManager.Instance != null)
         {
             GameManager.Instance.GameClear();
@@ -100,10 +103,6 @@ public class WaveManager : MonoBehaviour
         {
             Debug.LogError("WaveManager: GameManager.Instance가 없습니다.");
         }
-
-        // 결과씬으로 이동한 뒤에는 사실상 필요 없지만,
-        // 만약 UI 알림 같은 걸 쓰고 싶으면 여기서 호출
-        onAllWavesCleared?.Invoke();
     }
 
     void OnMonsterSpawned(GameObject monster)
@@ -111,7 +110,6 @@ public class WaveManager : MonoBehaviour
         if (IsGameEnded()) return;
 
         aliveMonsterCount++;
-        Debug.Log($"몬스터 스폰! 현재 카운트: {aliveMonsterCount}");
     }
 
     public void OnMonsterKilled()
@@ -122,8 +120,6 @@ public class WaveManager : MonoBehaviour
 
         if (aliveMonsterCount < 0)
             aliveMonsterCount = 0;
-
-        Debug.Log($"몬스터 처치! 남은 카운트: {aliveMonsterCount}");
     }
 
     public void OnMonsterPassed()
@@ -134,8 +130,6 @@ public class WaveManager : MonoBehaviour
 
         if (aliveMonsterCount < 0)
             aliveMonsterCount = 0;
-
-        Debug.Log($"몬스터 통과! 남은 카운트: {aliveMonsterCount}");
     }
 
     private bool IsGameEnded()
