@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UpgradeTooltipUI : MonoBehaviour
@@ -9,7 +10,21 @@ public class UpgradeTooltipUI : MonoBehaviour
 
     private void Awake()
     {
+        DisableRaycastTargets();
         Hide();
+    }
+
+    private void DisableRaycastTargets()
+    {
+        if (panel == null)
+            return;
+
+        Graphic[] graphics = panel.GetComponentsInChildren<Graphic>(true);
+
+        foreach (Graphic graphic in graphics)
+        {
+            graphic.raycastTarget = false;
+        }
     }
 
     public void Show(string title, string desc)
