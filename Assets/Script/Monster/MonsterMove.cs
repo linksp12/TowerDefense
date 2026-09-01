@@ -1,0 +1,148 @@
+using System.Collections;
+using UnityEngine;
+
+public class MonsterMove : MonoBehaviour
+{
+    public Transform[] waypoints;
+    public float moveSpeed = 1.5f;
+
+    private float originalMoveSpeed;
+    private Coroutine slowCoroutine;
+    
+    private Coroutine freezeCoroutine;
+
+    private int currentWaypointIndex = 0;
+    private bool hasReachedShield = false;
+
+    // 스킬용 빙결 상태
+    private bool isFrozen = false;
+
+    void Start()
+    {
+        originalMoveSpeed = moveSpeed;
+
+        if (waypoints != null && waypoints.Length > 0)
+        {
+            transform.position = waypoints[0].position;
+            currentWaypointIndex = 1;
+        }
+    }
+
+    void Update()
+    {
+        // 빙결 중이면 이동 정지
+        if (isFrozen) return;
+
+        if (waypoints == null || waypoints.Length == 0) return;
+
+        if (currentWaypointIndex < waypoints.Length)
+        {
+            Transform target = waypoints[currentWaypointIndex];
+
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target.position,
+                moveSpeed * Time.deltaTime
+            );
+
+            if (Vector3.Distance(transform.position, target.position) < 0.01f)
+            {
+                transform.position = target.position;
+                currentWaypointIndex++;
+            }
+        }
+        else
+        {
+            ReachShield();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Shield"))
+        {
+            ReachShield();
+        }
+    }
+
+    private void ReachShield()
+    {
+        if (hasReachedShield)
+            return;
+
+        hasReachedShield = true;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TakePlayerDamage(1);
+        }
+
+        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+
+        if (waveManager != null)
+        {
+            waveManager.OnMonsterPassed();
+        }
+
+        Destroy(gameObject);
+    }
+
+    // 마법화살 루트용 슬로우 기능
+    public void ApplySlow(float slowRate, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+            moveSpeed = originalMoveSpeed;
+        }
+
+        slowCoroutine = StartCoroutine(SlowRoutine(slowRate, duration));
+    }
+
+    IEnumerator SlowRoutine(float slowRate, float duration)
+    {
+        moveSpeed = originalMoveSpeed * slowRate;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalMoveSpeed;
+        slowCoroutine = null;
+
+    }
+
+    // 스킬용 빙결 기능
+    public void Freeze(float duration)
+    {
+        if (freezeCoroutine != null)
+        {
+            StopCoroutine(freezeCoroutine);
+        }
+
+        freezeCoroutine = StartCoroutine(FreezeRoutine(duration));
+    }
+
+    IEnumerator FreezeRoutine(float duration)
+    {
+        isFrozen = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isFrozen = false;
+        freezeCoroutine = null;
+
+    }
+
+    public void Die()
+    {
+        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+
+        if (waveManager != null)
+        {
+            waveManager.OnMonsterKilled();
+        }
+
+        Destroy(gameObject);
+    }
+
+    void OnAnimationEvent() { }
+}

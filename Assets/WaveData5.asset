@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
+  m_Name: WaveData5
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  spawnInfos:
+  - monsterPrefab: {fileID: 1180854866472190489, guid: 5681e84cc819bb0479f3d045513f6be7, type: 3}
+    count: 6
+    interval: 1
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
+    count: 6
+    interval: 1
+  waveStartDelay: 3
