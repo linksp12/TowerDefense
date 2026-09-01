@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
   waypoints: []
-  moveSpeed: 2.5
+  moveSpeed: 4
 --- !u!95 &4170827302832247609
 Animator:
   serializedVersion: 7
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e7a523ca380e14b811b885d20875b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
-  maxHp: 110
-  goldReward: 40
+  maxHp: 220
+  goldReward: 31
   monsterHpSlider: {fileID: 2548741801484140464}
   hitEffectPrefab: {fileID: 0}
   hitEffectDestroyTime: 0.6

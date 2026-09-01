@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ArrowProjectile : MonoBehaviour
 {
-    public float speed = 6f;
+    public float speed => 8f;
     public int damage = 10;
 
     [Header("Rotation Settings")]
