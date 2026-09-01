@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Sprite shieldCritical;
 
     private bool isGameEnded = false;
+    private bool isSceneTransitioning = false;
 
     private void Awake()
     {
@@ -164,30 +166,63 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        if (isGameEnded) return;
-
-        isGameEnded = true;
-
-        Debug.Log("게임 오버");
-
-        Time.timeScale = 1f;
-
-        ResultSceneManager.isVictory = false;
-        SceneManager.LoadScene("ResultScene");
+        BeginResultTransition(false);
     }
 
     public void GameClear()
     {
-        if (isGameEnded) return;
+        BeginResultTransition(true);
+    }
+
+    private void BeginResultTransition(bool victory)
+    {
+        if (isGameEnded || isSceneTransitioning)
+            return;
 
         isGameEnded = true;
+        isSceneTransitioning = true;
 
-        Debug.Log("게임 클리어");
+        Debug.Log(victory ? "게임 클리어" : "게임 오버");
 
         Time.timeScale = 1f;
+        StopGameUiTweens();
 
-        ResultSceneManager.isVictory = true;
-        SceneManager.LoadScene("ResultScene");
+        ResultSceneManager.isVictory = victory;
+        StartCoroutine(LoadResultScene());
+    }
+
+    private IEnumerator LoadResultScene()
+    {
+        // 물리 충돌 및 웨이브 콜백이 끝난 다음 프레임에 씬을 전환한다.
+        yield return null;
+
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("ResultScene");
+
+        if (loadOperation == null)
+        {
+            isSceneTransitioning = false;
+            Debug.LogError("ResultScene을 불러오지 못했습니다.");
+            yield break;
+        }
+
+        yield return loadOperation;
+    }
+
+    private void StopGameUiTweens()
+    {
+        if (hpText != null)
+            hpText.DOKill();
+
+        if (damageImage != null)
+            damageImage.DOKill();
+    }
+
+    private void OnDestroy()
+    {
+        StopGameUiTweens();
+
+        if (Instance == this)
+            Instance = null;
     }
 
     public bool IsGameEnded()

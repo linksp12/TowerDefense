@@ -93,8 +93,6 @@ public class ArrowProjectile : MonoBehaviour
             monsterHealth.TakeDamage(damage);
             hitMonsters.Add(monster);
             currentHitCount++;
-
-            Debug.Log("발사체 피격: " + monster.name + " / 피격 수: " + currentHitCount);
         }
 
         ApplySpecialEffect(monster);
@@ -124,7 +122,6 @@ public class ArrowProjectile : MonoBehaviour
             if (monsterMove != null)
             {
                 monsterMove.ApplySlow(slowRate, slowDuration);
-                Debug.Log("슬로우 적용: " + monster.name);
             }
         }
 
@@ -135,7 +132,6 @@ public class ArrowProjectile : MonoBehaviour
             if (monsterStatus != null)
             {
                 monsterStatus.ApplyDot(dotDamage, dotDuration, dotInterval);
-                Debug.Log("지속 피해 적용: " + monster.name);
             }
         }
     }
@@ -159,15 +155,11 @@ public class ArrowProjectile : MonoBehaviour
                 {
                     int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
                     monsterHealth.TakeDamage(splashDamage);
-
-                    Debug.Log("폭발 피해: " + monster.name + " / 데미지: " + splashDamage);
                 }
 
                 ApplySpecialEffect(monster);
             }
         }
-
-        Debug.Log("폭발 발생 / 반경: " + explosionRadius);
     }
 
     void FindNextTarget()

@@ -64,7 +64,6 @@ public class TowerAttack : MonoBehaviour
         if (projectile != null)
         {
             projectile.SetTarget(target.transform, damage);
-            Debug.Log("화살 발사: " + target.name);
         }
     }
 

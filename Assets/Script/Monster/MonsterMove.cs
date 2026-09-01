@@ -72,8 +72,6 @@ public class MonsterMove : MonoBehaviour
 
         hasReachedShield = true;
 
-        Debug.Log("몬스터가 방패에 도착");
-
         if (GameManager.Instance != null)
         {
             GameManager.Instance.TakePlayerDamage(1);
@@ -105,14 +103,11 @@ public class MonsterMove : MonoBehaviour
     {
         moveSpeed = originalMoveSpeed * slowRate;
 
-        Debug.Log("슬로우 적용 / 현재 속도: " + moveSpeed);
-
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originalMoveSpeed;
         slowCoroutine = null;
 
-        Debug.Log("슬로우 해제 / 현재 속도: " + moveSpeed);
     }
 
     // 스킬용 빙결 기능
@@ -130,14 +125,11 @@ public class MonsterMove : MonoBehaviour
     {
         isFrozen = true;
 
-        Debug.Log("몬스터 빙결");
-
         yield return new WaitForSeconds(duration);
 
         isFrozen = false;
         freezeCoroutine = null;
 
-        Debug.Log("몬스터 빙결 해제");
     }
 
     public void Die()

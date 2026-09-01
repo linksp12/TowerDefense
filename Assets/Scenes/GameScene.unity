@@ -3592,8 +3592,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 559871950}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnWaveCleared
-        m_Mode: 3
+        m_MethodName: OnAllWavesCleared
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
