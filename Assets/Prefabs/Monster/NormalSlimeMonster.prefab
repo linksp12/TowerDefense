@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 5280863807809186273}
   - component: {fileID: -371957552417401328}
   m_Layer: 0
-  m_Name: AngerSlimeMonster
+  m_Name: NormalSlimeMonster
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,6 +302,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 137abfdd63c4cb54b98d0b64971bfe22, type: 3}
   deathSound: {fileID: 8300000, guid: d1e1920180d988d4cbe86a6460cebf93, type: 3}
+  deathAnimationTime: 1.5
+  deathStateName: death_NormalSlime
 --- !u!61 &-2152015614315731691
 BoxCollider2D:
   m_ObjectHideFlags: 0
