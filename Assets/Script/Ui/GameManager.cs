@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     [Header("Test Speed")]
     public float testTimeScale = 1f;
 
+    [Header("Shield UI")]
+    public SpriteRenderer shieldRenderer;
+    public Sprite shieldHealthy;
+    public Sprite shieldDamaged;
+    public Sprite shieldCritical;
+
     private bool isGameEnded = false;
 
     private void Awake()
@@ -44,6 +50,7 @@ public class GameManager : MonoBehaviour
         currentPlayerHp = maxPlayerHp;
 
         UpdateHpText();
+        UpdateShieldVisual();
     }
 
     public void AddMoney(int amount)
@@ -103,6 +110,7 @@ public class GameManager : MonoBehaviour
             currentPlayerHp = 0;
 
         UpdateHpText();
+        UpdateShieldVisual();
 
         if (hpText != null)
         {
@@ -130,6 +138,27 @@ public class GameManager : MonoBehaviour
         if (hpText != null)
         {
             hpText.text = $" {currentPlayerHp} / {maxPlayerHp}";
+        }
+    }
+
+    private void UpdateShieldVisual()
+    {
+        if (shieldRenderer == null || maxPlayerHp <= 0)
+            return;
+
+        float hpRatio = (float)currentPlayerHp / maxPlayerHp;
+
+        if (hpRatio > 0.6f)
+        {
+            shieldRenderer.sprite = shieldHealthy;
+        }
+        else if (hpRatio > 0.2f)
+        {
+            shieldRenderer.sprite = shieldDamaged;
+        }
+        else
+        {
+            shieldRenderer.sprite = shieldCritical;
         }
     }
 
