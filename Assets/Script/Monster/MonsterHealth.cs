@@ -27,13 +27,11 @@ public class MonsterHealth : MonoBehaviour
     public AudioClip deathSound;
 
     [Header("Death Animation")]
+    [Tooltip("죽음 애니메이션이 재생되는 시간")]
     public float deathAnimationTime = 0.6f;
 
     [Header("Animator")]
-    [Tooltip("게임 시작 시 재생할 일반 애니메이션 State 이름")]
-    public string normalStateName = "normal_slime";
-
-    [Tooltip("몬스터가 죽을 때 재생할 Animator State 이름")]
+    [Tooltip("실제 Animator Controller 안의 죽음 State 이름")]
     public string deathStateName = "death_NormalSlime";
 
     private int currentHp;
@@ -86,13 +84,8 @@ public class MonsterHealth : MonoBehaviour
             monsterHpSlider.value = currentHp;
         }
 
-        // ==============================
-        // 게임 시작 시 정상 애니메이션 실행
-        // ==============================
-        if (animator != null && !string.IsNullOrEmpty(normalStateName))
-        {
-            animator.Play(normalStateName, 0, 0f);
-        }
+        // 정상 애니메이션은 Animator의 기본(Default) State가 재생하도록 둡니다.
+        // 몬스터마다 normal State 이름이 달라도 문제없습니다.
     }
 
 
@@ -107,7 +100,11 @@ public class MonsterHealth : MonoBehaviour
 
         currentHp -= damage;
 
-        Debug.Log("몬스터 피격! 남은 HP: " + currentHp);
+        Debug.Log(
+            gameObject.name +
+            " 몬스터 피격! 남은 HP: " +
+            currentHp
+        );
 
         // 피격 효과
         PlayHitFeedback();
@@ -115,7 +112,7 @@ public class MonsterHealth : MonoBehaviour
         // HP UI 갱신
         if (monsterHpSlider != null)
         {
-            monsterHpSlider.value = currentHp;
+            monsterHpSlider.value = Mathf.Max(currentHp, 0);
         }
 
         // HP가 0 이하가 되면 사망
@@ -178,7 +175,7 @@ public class MonsterHealth : MonoBehaviour
         if (spriteRenderer == null)
             return;
 
-        // 이전 Flash 코루틴이 실행 중이면 중지
+        // 이전 Flash가 실행 중이면 중지
         if (flashCoroutine != null)
         {
             StopCoroutine(flashCoroutine);
@@ -211,13 +208,12 @@ public class MonsterHealth : MonoBehaviour
     // ==============================
     private void Die()
     {
-        // 이미 죽었으면 실행하지 않음
         if (isDead)
             return;
 
         isDead = true;
 
-        Debug.Log("몬스터 사망");
+        Debug.Log(gameObject.name + " 몬스터 사망");
 
 
         // ==============================
@@ -283,20 +279,60 @@ public class MonsterHealth : MonoBehaviour
         // ==============================
         // 죽음 애니메이션 실행
         // ==============================
-        // Animator의 Transition을 사용하지 않고
-        // death_NormalSlime State를 직접 실행합니다.
 
-        if (animator != null && !string.IsNullOrEmpty(deathStateName))
-        {
-            animator.Play(deathStateName, 0, 0f);
-        }
+        PlayDeathAnimation();
 
 
         // ==============================
-        // 죽음 애니메이션이 끝난 후 삭제
+        // 죽음 애니메이션 후 삭제
         // ==============================
 
         StartCoroutine(DeathCoroutine());
+    }
+
+
+    // ==============================
+    // 죽음 애니메이션 실행
+    // ==============================
+    private void PlayDeathAnimation()
+    {
+        if (animator == null)
+        {
+            Debug.LogWarning(
+                gameObject.name +
+                " : Animator가 없습니다."
+            );
+
+            return;
+        }
+
+        if (string.IsNullOrEmpty(deathStateName))
+        {
+            Debug.LogWarning(
+                gameObject.name +
+                " : deathStateName이 비어 있습니다."
+            );
+
+            return;
+        }
+
+        // 해당 State가 실제로 존재하는지 확인
+       string statePath = "Base Layer." + deathStateName;
+int stateHash = Animator.StringToHash(statePath);
+
+if (animator.HasState(0, stateHash))
+{
+    animator.Play(statePath, 0, 0f);
+}
+else
+{
+    Debug.LogError(
+        gameObject.name +
+        " : Animator에서 Death State를 찾을 수 없습니다. " +
+        "입력한 이름 = " +
+        statePath
+    );
+}
     }
 
 

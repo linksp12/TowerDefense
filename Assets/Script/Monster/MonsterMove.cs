@@ -8,6 +8,7 @@ public class MonsterMove : MonoBehaviour
 
     private float originalMoveSpeed;
     private Coroutine slowCoroutine;
+    
     private Coroutine freezeCoroutine;
 
     private int currentWaypointIndex = 0;
