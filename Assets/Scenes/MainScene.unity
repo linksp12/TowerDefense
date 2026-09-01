@@ -3430,6 +3430,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 1400811172}
   panelCanvasGroup: {fileID: 1400811174}
   fadeDuration: 0.3
+  optionFont: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   frameRateDropdown: {fileID: 41770348}
   brightnessSlider: {fileID: 519139086}
   popupAlphaSlider: {fileID: 207309911}
