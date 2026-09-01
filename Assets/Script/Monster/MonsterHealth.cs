@@ -94,6 +94,11 @@ public class MonsterHealth : MonoBehaviour
     // ==============================
     public void TakeDamage(int damage)
     {
+        TakeDamage(damage, true);
+    }
+
+    public void TakeDamage(int damage, bool playHitSound)
+    {
         // 이미 죽었으면 추가 데미지 무시
         if (isDead)
             return;
@@ -101,7 +106,7 @@ public class MonsterHealth : MonoBehaviour
         currentHp -= damage;
 
         // 피격 효과
-        PlayHitFeedback();
+        PlayHitFeedback(playHitSound);
 
         // HP UI 갱신
         if (monsterHpSlider != null)
@@ -120,9 +125,11 @@ public class MonsterHealth : MonoBehaviour
     // ==============================
     // 피격 효과 전체
     // ==============================
-    private void PlayHitFeedback()
+    private void PlayHitFeedback(bool playHitSound)
     {
-        PlayHitSound();
+        if (playHitSound)
+            PlayHitSound();
+
         SpawnHitEffect();
         PlayHitFlash();
     }

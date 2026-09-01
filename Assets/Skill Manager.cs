@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class SkillManager : MonoBehaviour
@@ -12,6 +13,16 @@ public class SkillManager : MonoBehaviour
     public GameObject fireEffectPrefab;
     public GameObject iceEffectPrefab;
     public GameObject lightningEffectPrefab;
+
+    [Header("불 스킬 밸런스")]
+    public int fireInitialDamage = 20;
+    public int fireDotDamage = 5;
+    public float fireDotDuration = 3f;
+    public float fireDotInterval = 0.5f;
+
+    [Header("번개 스킬 밸런스")]
+    public int lightningDamage = 100;
+    public int lightningMaxTargets = 5;
 
     // 스킬별 쿨타임 종료 시간 저장
     private Dictionary<string, float> cooldownEndTime =
@@ -43,7 +54,7 @@ public class SkillManager : MonoBehaviour
     }
 
     // 스킬 사용
-    public void UseSkill(string skillName)
+    public bool UseSkill(string skillName)
     {
         Debug.Log("버튼 눌림 : " + skillName);
 
@@ -51,7 +62,7 @@ public class SkillManager : MonoBehaviour
         if (!CanUseSkill(skillName))
         {
             Debug.Log(skillName + " 쿨타임 중!");
-            return;
+            return false;
         }
 
         // 스킬 데이터 찾기
@@ -60,7 +71,7 @@ public class SkillManager : MonoBehaviour
         if (skill == null)
         {
             Debug.LogError("스킬 데이터를 찾을 수 없음 : " + skillName);
-            return;
+            return false;
         }
 
         // 쿨타임 시작
@@ -70,6 +81,7 @@ public class SkillManager : MonoBehaviour
         ExecuteSkill(skillName);
 
         Debug.Log(skillName + " 사용!");
+        return true;
     }
 
     // 스킬 실행
@@ -136,16 +148,40 @@ public class SkillManager : MonoBehaviour
 
         foreach (var enemy in enemies)
         {
-            enemy.TakeDamage(50);
+            // 스킬 사운드는 버튼에서 한 번만 재생한다. 몬스터마다 피격음을
+            // 동시에 재생하지 않아 음량이 겹치지 않게 한다.
+            enemy.TakeDamage(fireInitialDamage, false);
+
+            if (fireDotDamage > 0 && fireDotDuration > 0f)
+            {
+                StartCoroutine(ApplyFireDot(enemy));
+            }
 
             CreateEffect(
                 fireEffectPrefab,
                 enemy.transform.position,
-                2f
+                fireDotDuration
             );
         }
 
         Debug.Log("불 스킬 발동!");
+    }
+
+    private IEnumerator ApplyFireDot(MonsterHealth enemy)
+    {
+        float interval = Mathf.Max(0.05f, fireDotInterval);
+        float elapsed = 0f;
+
+        while (elapsed < fireDotDuration)
+        {
+            yield return new WaitForSeconds(interval);
+
+            if (enemy == null)
+                yield break;
+
+            enemy.TakeDamage(fireDotDamage, false);
+            elapsed += interval;
+        }
     }
 
     // =========================
@@ -196,11 +232,12 @@ public class SkillManager : MonoBehaviour
                     b.transform.position)));
 
         int hitCount =
-            Mathf.Min(5, sortedEnemies.Count);
+            Mathf.Min(lightningMaxTargets, sortedEnemies.Count);
 
         for (int i = 0; i < hitCount; i++)
         {
-            sortedEnemies[i].TakeDamage(80);
+            // 여러 몬스터의 피격음이 한꺼번에 중첩되지 않게 한다.
+            sortedEnemies[i].TakeDamage(lightningDamage, false);
 
             CreateEffect(
                 lightningEffectPrefab,

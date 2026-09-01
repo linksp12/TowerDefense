@@ -5,6 +5,7 @@ public class BuildPoint : MonoBehaviour
 {
     private bool hasTower = false;
     private SpriteRenderer spriteRenderer;
+    private Collider2D clickCollider;
 
     [Header("Preview")]
     public GameObject previewObject;
@@ -20,6 +21,7 @@ public class BuildPoint : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        clickCollider = GetComponent<Collider2D>();
 
         if (previewObject == null)
         {
@@ -107,6 +109,12 @@ public class BuildPoint : MonoBehaviour
 
         hasTower = true;
 
+        // 설치된 타워와 빌드 포인트의 콜라이더가 겹쳐 클릭을 가로채지 않게 한다.
+        if (clickCollider != null)
+        {
+            clickCollider.enabled = false;
+        }
+
         HidePreview();
 
         // 타워 설치 후 설치 위치 표시 이미지 숨기기
@@ -119,6 +127,11 @@ public class BuildPoint : MonoBehaviour
     public void ClearTower()
     {
         hasTower = false;
+
+        if (clickCollider != null)
+        {
+            clickCollider.enabled = true;
+        }
 
         // 판매 후 다시 설치 위치 표시 이미지 보이게 하기
         if (spriteRenderer != null)

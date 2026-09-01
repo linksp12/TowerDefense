@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -967,6 +967,12 @@ MonoBehaviour:
   fireEffectPrefab: {fileID: 2109468626797053951, guid: cce3002ffbffaa34f841b4b6d2f4cebc, type: 3}
   iceEffectPrefab: {fileID: 6729605767296420598, guid: e5c91f91caf79c843950e55d9b6305f1, type: 3}
   lightningEffectPrefab: {fileID: 6359459513069145987, guid: 740b4575774d8494e968f36c963d0399, type: 3}
+  fireInitialDamage: 20
+  fireDotDamage: 5
+  fireDotDuration: 3
+  fireDotInterval: 0.5
+  lightningDamage: 100
+  lightningMaxTargets: 5
 --- !u!4 &148692669
 Transform:
   m_ObjectHideFlags: 0
@@ -1306,7 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2064,7 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3445,7 +3451,9 @@ MonoBehaviour:
   iconImage: {fileID: 237221294}
   cooldownOverlay: {fileID: 1519422824}
   cooldownText: {fileID: 691664921}
+  cooldownMessageFont: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   skillSound: {fileID: 8300000, guid: 17fd9b3583fa3054f84838cda3f5abd9, type: 3}
+  skillSoundVolume: 0.35
   punchScale: 1.2
   punchDuration: 0.1
 --- !u!114 &420274399
@@ -6306,7 +6314,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691664921
 MonoBehaviour:
@@ -6322,7 +6330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8626,7 +8634,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 420, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836378143
 MonoBehaviour:
@@ -8642,7 +8650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8692,7 +8700,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -8779,7 +8787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -12092,7 +12100,9 @@ MonoBehaviour:
   iconImage: {fileID: 2034611278}
   cooldownOverlay: {fileID: 965302894}
   cooldownText: {fileID: 1728133508}
+  cooldownMessageFont: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   skillSound: {fileID: 8300000, guid: d689eafb4bbbc694e91486167f8a4e53, type: 3}
+  skillSoundVolume: 0.35
   punchScale: 1.2
   punchDuration: 0.1
 --- !u!114 &1192891491
@@ -13006,7 +13016,9 @@ MonoBehaviour:
   iconImage: {fileID: 841698509}
   cooldownOverlay: {fileID: 565580678}
   cooldownText: {fileID: 2140359343}
+  cooldownMessageFont: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   skillSound: {fileID: 8300000, guid: faeaa59adbf954b48af7bb01d858b212, type: 3}
+  skillSoundVolume: 0.35
   punchScale: 1.2
   punchDuration: 0.1
 --- !u!114 &1289713777
@@ -16578,7 +16590,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 43.5865}
+  m_SizeDelta: {x: 90, y: 43.5865}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728133508
 MonoBehaviour:
@@ -16594,7 +16606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -20381,7 +20393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -21415,7 +21427,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2140359343
 MonoBehaviour:
@@ -21431,7 +21443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
