@@ -162,6 +162,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 137abfdd63c4cb54b98d0b64971bfe22, type: 3}
   deathSound: {fileID: 8300000, guid: d1e1920180d988d4cbe86a6460cebf93, type: 3}
+  deathAnimationTime: 0.6
+  normalStateName: normal_slime
+  deathStateName: death_SlimeMonster
 --- !u!61 &1124386433039373869
 BoxCollider2D:
   m_ObjectHideFlags: 0

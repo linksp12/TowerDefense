@@ -59,6 +59,7 @@ public class MonsterMove : MonoBehaviour
             }
 
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+
             if (waveManager != null)
             {
                 waveManager.OnMonsterPassed();
@@ -108,6 +109,7 @@ public class MonsterMove : MonoBehaviour
     IEnumerator FreezeRoutine(float duration)
     {
         isFrozen = true;
+
         Debug.Log("몬스터 빙결");
 
         yield return new WaitForSeconds(duration);
@@ -121,6 +123,7 @@ public class MonsterMove : MonoBehaviour
     public void Die()
     {
         WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+
         if (waveManager != null)
         {
             waveManager.OnMonsterKilled();
