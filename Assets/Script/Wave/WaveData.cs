@@ -12,5 +12,5 @@ public class WaveData : ScriptableObject
     }
 
     public SpawnInfo[] spawnInfos;        // 이번 웨이브의 몬스터 목록
-    public float waveStartDelay = 3f;     // 웨이브 시작 전 대기 시간
+    public float waveStartDelay => 4f;     // 웨이브 시작 전 대기 시간
 }

@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Money")]
-    public int startingMoney = 500;
+    public int startingMoney = 300;
     public TextMeshProUGUI moneyText;
     private int currentMoney;
 
     [Header("Player HP")]
-    public int maxPlayerHp = 20;
+    public int maxPlayerHp => 5;
     private int currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;

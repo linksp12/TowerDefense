@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MonsterHealth : MonoBehaviour
 {
-    public int maxHp = 100;
+    public int maxHp = 200;
 
     [Header("Reward")]
     public int goldReward = 20;

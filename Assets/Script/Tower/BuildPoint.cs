@@ -162,7 +162,7 @@ public class BuildPoint : MonoBehaviour
         if (GameManager.Instance == null)
             return true;
 
-        return GameManager.Instance.CanAfford(minimumBuildCost);
+        return GameManager.Instance.CanAfford(TowerBuildManager.Instance.GetCheapestTowerCost());
     }
 
     private bool IsPointerOverUI()

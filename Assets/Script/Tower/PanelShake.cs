@@ -27,6 +27,9 @@ public class PanelShake : MonoBehaviour
         if (targetRect == null)
             return;
 
+        if (SettingsPopup.ScreenShakeIntensity <= 0f)
+            return;
+
         if (shakeCoroutine != null)
             StopCoroutine(shakeCoroutine);
 
@@ -43,7 +46,7 @@ public class PanelShake : MonoBehaviour
         {
             timer += Time.unscaledDeltaTime;
 
-            float x = Mathf.Sin(timer * shakeSpeed) * shakePower;
+            float x = Mathf.Sin(timer * shakeSpeed) * shakePower * SettingsPopup.ScreenShakeIntensity;
             targetRect.anchoredPosition = originalPosition + new Vector2(x, 0f);
 
             yield return null;

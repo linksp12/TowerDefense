@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8308972b1d56f3747aac772148c0ff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
-  attackRange: 6
+  attackRange: 8
   attackCooldown: 1.5
-  damage: 30
+  damage: 60
   arrowPrefab: {fileID: 7569482764291632213, guid: cf0254410cad1e649a52268da805d8ba, type: 3}
   firePoint: {fileID: 2361390071131446573}
 --- !u!114 &-6655255251374041850
@@ -149,11 +149,7 @@ MonoBehaviour:
   pathALv3Damage: 35
   pathALv3Cooldown: 0.6
   pathALv3Range: 5
-  pathBLv2Damage: 35
-  pathBLv2Cooldown: 1.5
   pathBLv2Range: 4.5
-  pathBLv3Damage: 55
-  pathBLv3Cooldown: 1.8
   pathBLv3Range: 5.5
 --- !u!61 &-5727476445743022551
 BoxCollider2D:
