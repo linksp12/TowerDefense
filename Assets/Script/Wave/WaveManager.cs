@@ -1,6 +1,6 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class WaveManager : MonoBehaviour
 {
@@ -22,14 +22,18 @@ public class WaveManager : MonoBehaviour
     public int CurrentWave => currentWaveIndex + 1;
     public int TotalWaves => waves.Length;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(RunWaves());
     }
 
-    IEnumerator RunWaves()
+    private IEnumerator RunWaves()
     {
-        for (currentWaveIndex = 0; currentWaveIndex < waves.Length; currentWaveIndex++)
+        for (
+            currentWaveIndex = 0;
+            currentWaveIndex < waves.Length;
+            currentWaveIndex++
+        )
         {
             if (IsGameEnded())
                 yield break;
@@ -39,39 +43,67 @@ public class WaveManager : MonoBehaviour
             aliveMonsterCount = 0;
             isSpawningDone = false;
 
+            // 웨이브 시작 전 대기
             yield return new WaitForSeconds(wave.waveStartDelay);
 
             if (IsGameEnded())
                 yield break;
 
+            // 웨이브 시작 이벤트
             onWaveStart?.Invoke(CurrentWave);
-            Debug.Log($"Wave {CurrentWave} / {TotalWaves} 시작!");
+
+            Debug.Log(
+                $"Wave {CurrentWave} / {TotalWaves} 시작!"
+            );
 
             if (spawner == null)
             {
-                Debug.LogError("WaveManager: MonsterSpawner가 연결되지 않았습니다.");
+                Debug.LogError(
+                    "WaveManager: MonsterSpawner가 연결되지 않았습니다."
+                );
+
                 yield break;
             }
 
-            yield return StartCoroutine(spawner.SpawnWave(wave, OnMonsterSpawned));
+            // 웨이브 몬스터 생성
+            yield return StartCoroutine(
+                spawner.SpawnWave(
+                    wave,
+                    OnMonsterSpawned
+                )
+            );
 
             isSpawningDone = true;
 
-            Debug.Log($"스폰 완료! 남은 몬스터: {aliveMonsterCount}");
+            Debug.Log(
+                $"스폰 완료! 남은 몬스터: {aliveMonsterCount}"
+            );
 
+            // 모든 몬스터가 죽거나 도착할 때까지 대기
             yield return new WaitUntil(() =>
-                IsGameEnded() || (isSpawningDone && aliveMonsterCount <= 0)
+                IsGameEnded() ||
+                (
+                    isSpawningDone &&
+                    aliveMonsterCount <= 0
+                )
             );
 
             if (IsGameEnded())
                 yield break;
 
+            // 웨이브 클리어
             onWaveCleared?.Invoke(CurrentWave);
-            Debug.Log($"Wave {CurrentWave} 클리어!");
 
+            Debug.Log(
+                $"Wave {CurrentWave} 클리어!"
+            );
+
+            // 다음 웨이브까지 대기
             if (currentWaveIndex < waves.Length - 1)
             {
-                yield return new WaitForSeconds(timeBetweenWaves);
+                yield return new WaitForSeconds(
+                    timeBetweenWaves
+                );
             }
         }
 
@@ -92,7 +124,6 @@ public class WaveManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        // GameScene의 이벤트는 씬 전환 전에 모두 실행한다.
         onAllWavesCleared?.Invoke();
 
         if (GameManager.Instance != null)
@@ -101,20 +132,27 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("WaveManager: GameManager.Instance가 없습니다.");
+            Debug.LogError(
+                "WaveManager: GameManager.Instance가 없습니다."
+            );
         }
     }
 
-    void OnMonsterSpawned(GameObject monster)
+    private void OnMonsterSpawned(GameObject monster)
     {
-        if (IsGameEnded()) return;
+        if (IsGameEnded())
+            return;
 
-        aliveMonsterCount++;
+        if (monster != null)
+        {
+            aliveMonsterCount++;
+        }
     }
 
     public void OnMonsterKilled()
     {
-        if (IsGameEnded()) return;
+        if (IsGameEnded())
+            return;
 
         aliveMonsterCount--;
 
@@ -124,7 +162,8 @@ public class WaveManager : MonoBehaviour
 
     public void OnMonsterPassed()
     {
-        if (IsGameEnded()) return;
+        if (IsGameEnded())
+            return;
 
         aliveMonsterCount--;
 
@@ -134,6 +173,7 @@ public class WaveManager : MonoBehaviour
 
     private bool IsGameEnded()
     {
-        return GameManager.Instance != null && GameManager.Instance.IsGameEnded();
+        return GameManager.Instance != null &&
+               GameManager.Instance.IsGameEnded();
     }
 }
