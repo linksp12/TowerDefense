@@ -57,8 +57,11 @@ public class TowerUpgrade : MonoBehaviour
     public float pathALv3Range = 4.5f;
 
     [Header("Path B Lv.2 능력치")]
-    public int pathBLv2Damage => 28;
-    public float pathBLv2Cooldown => 1.0f;
+    // 대포는 Stage 2 전용 프리팹에서 별도 값으로 설정한다.
+    public int cannonPathBLv2Damage = 28;
+    public float cannonPathBLv2Cooldown = 1.0f;
+    public int pathBLv2Damage => towerType == TowerType.Cannon ? cannonPathBLv2Damage : 28;
+    public float pathBLv2Cooldown => towerType == TowerType.Cannon ? cannonPathBLv2Cooldown : 1.0f;
     public float pathBLv2Range = 4.8f;
 
     [Header("Path B Lv.3 능력치")]

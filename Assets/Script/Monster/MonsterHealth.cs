@@ -105,6 +105,9 @@ public class MonsterHealth : MonoBehaviour
 
         currentHp -= damage;
 
+        // 피해 숫자는 전용 DamagePopup이 생성·애니메이션·삭제를 담당한다.
+        DamagePopup.Show(transform.position, damage);
+
         // 피격 효과
         PlayHitFeedback(playHitSound);
 

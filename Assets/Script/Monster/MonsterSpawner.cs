@@ -12,7 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     // ↑ Start() 와 SpawnMonsters() 삭제함
     // WaveManager가 대신 스폰을 제어하기 때문
 
-    public IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
+    public virtual IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
     {
         foreach (var info in wave.spawnInfos)
         {
