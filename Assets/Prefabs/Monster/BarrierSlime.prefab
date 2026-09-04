@@ -293,9 +293,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
   maxHp: 360
+<<<<<<< HEAD
   maxShield: 5
   shieldFXObject: {fileID: 3892249278335165356}
   goldReward: 15
+=======
+  maxShield: 10
+  shieldFXObject: {fileID: 3892249278335165356}
+  goldReward: 13
+>>>>>>> origin/feature/stage1
   monsterHpSlider: {fileID: 6327119867833483347}
   hitEffectPrefab: {fileID: 0}
   hitEffectDestroyTime: 0.6

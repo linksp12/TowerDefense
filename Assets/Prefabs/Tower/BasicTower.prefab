@@ -110,8 +110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   attackRange: 5
+<<<<<<< HEAD
   attackCooldown: 0.7
   damage: 24
+=======
+  attackCooldown: 1
+  damage: 35
+>>>>>>> origin/feature/stage1
   arrowPrefab: {fileID: 6252503050366267477, guid: d7beeec48eab4c9448436151e5027a66, type: 3}
   firePoint: {fileID: 7386630729994581623}
 --- !u!114 &4521883427289537455
