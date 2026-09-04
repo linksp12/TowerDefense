@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8308972b1d56f3747aac772148c0ff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
-  attackRange: 3
+  attackRange: 5
   attackCooldown: 1
   damage: 35
   arrowPrefab: {fileID: 6252503050366267477, guid: d7beeec48eab4c9448436151e5027a66, type: 3}
@@ -149,11 +149,7 @@ MonoBehaviour:
   pathALv3Damage: 20
   pathALv3Cooldown: 0.45
   pathALv3Range: 4.5
-  pathBLv2Damage: 25
-  pathBLv2Cooldown: 1.2
   pathBLv2Range: 4.8
-  pathBLv3Damage: 40
-  pathBLv3Cooldown: 1.5
   pathBLv3Range: 5.5
 --- !u!114 &7657479176763447362
 MonoBehaviour:
