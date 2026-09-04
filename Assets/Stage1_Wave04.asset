@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
-  m_Name: Stage1Wave3
+  m_Name: Stage1_Wave04
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnInfos:
   - monsterPrefab: {fileID: 6164203917051182554, guid: 5655ba9693f685345964e5ceebd5f62c, type: 3}
-    count: 5
-    interval: 1.2
+    count: 10
+    interval: 2
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
+    count: 10
+    interval: 1.5
