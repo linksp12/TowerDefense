@@ -37,6 +37,8 @@ public class MonsterHealth : MonoBehaviour
     private int currentHp;
     private bool isDead = false;
 
+    public bool IsDead => isDead;
+
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine flashCoroutine;

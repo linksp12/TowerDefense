@@ -31,13 +31,18 @@ public class ArrowProjectile : MonoBehaviour
 
     private Transform target;
     private int currentHitCount = 0;
+    private bool canHitStealth = false;
 
     private HashSet<GameObject> hitMonsters = new HashSet<GameObject>();
 
-    public void SetTarget(Transform newTarget, int newDamage)
+    public void SetTarget(
+        Transform newTarget,
+        int newDamage,
+        bool newCanHitStealth)
     {
         target = newTarget;
         damage = newDamage;
+        canHitStealth = newCanHitStealth;
     }
 
     void Update()
@@ -80,6 +85,12 @@ public class ArrowProjectile : MonoBehaviour
 
     void HitTarget(GameObject monster)
     {
+        if (!CanHitMonster(monster))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (hitMonsters.Contains(monster))
         {
             FindNextTarget();
@@ -90,6 +101,13 @@ public class ArrowProjectile : MonoBehaviour
 
         if (monsterHealth != null)
         {
+            StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+
+            if (stealthMonster != null && canHitStealth)
+            {
+                stealthMonster.Reveal();
+            }
+
             monsterHealth.TakeDamage(damage);
             hitMonsters.Add(monster);
             currentHitCount++;
@@ -144,6 +162,7 @@ public class ArrowProjectile : MonoBehaviour
         {
             if (monster == null) continue;
             if (monster == mainTarget) continue;
+            if (!CanHitMonster(monster)) continue;
 
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 
@@ -153,6 +172,12 @@ public class ArrowProjectile : MonoBehaviour
 
                 if (monsterHealth != null)
                 {
+                    if (canHitStealth)
+                    {
+                        StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+                        stealthMonster?.Reveal();
+                    }
+
                     int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
                     monsterHealth.TakeDamage(splashDamage);
                 }
@@ -173,6 +198,7 @@ public class ArrowProjectile : MonoBehaviour
         {
             if (monster == null) continue;
             if (hitMonsters.Contains(monster)) continue;
+            if (!CanHitMonster(monster)) continue;
 
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 
@@ -191,5 +217,18 @@ public class ArrowProjectile : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    bool CanHitMonster(GameObject monster)
+    {
+        if (monster == null)
+            return false;
+
+        StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+
+        if (stealthMonster == null || !stealthMonster.IsStealthed)
+            return true;
+
+        return canHitStealth;
     }
 }

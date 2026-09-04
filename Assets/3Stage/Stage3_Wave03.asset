@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Stage3_Wave03
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnInfos:
-  - monsterPrefab: {fileID: 1180854866472190489, guid: 5681e84cc819bb0479f3d045513f6be7, type: 3}
-    count: 6
+  - monsterPrefab: {fileID: 6164203917051182554, guid: 5655ba9693f685345964e5ceebd5f62c, type: 3}
+    count: 5
+    interval: 0.8
+  - monsterPrefab: {fileID: 7990183225493823835, guid: 7d6acd30bf8560b4f94f69fc0f77c9f7, type: 3}
+    count: 5
     interval: 1
-  waveStartDelay: 3
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
+    count: 5
+    interval: 0.8
+  - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
+    count: 4
+    interval: 3

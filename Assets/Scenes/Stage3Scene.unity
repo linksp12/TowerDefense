@@ -4200,13 +4200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   waves:
-  - {fileID: 11400000, guid: 1f2e954ebfeda8740ba238350d783426, type: 2}
-  - {fileID: 11400000, guid: cb4df13475ae98543bfa0c1e9e063e0e, type: 2}
-  - {fileID: 11400000, guid: 18257a589bbd4cd4cb3d89d8944ac2d8, type: 2}
-  - {fileID: 11400000, guid: d4fbb7069436e194398e4e12ccfa2027, type: 2}
-  - {fileID: 11400000, guid: d6e2e24e31167ca469e7e030732d9910, type: 2}
-  - {fileID: 11400000, guid: cd9a10d19e206dc4cbd0d4a87d9588a4, type: 2}
-  - {fileID: 11400000, guid: ba8423a9ca2dbbd40a5c0fcf2a2288eb, type: 2}
+  - {fileID: 11400000, guid: a84107fc954a4174fa633eafdc3368ef, type: 2}
+  - {fileID: 11400000, guid: f163dec52a14dc448a05b6b0bffb4bb2, type: 2}
+  - {fileID: 11400000, guid: 72dba1556dbff3d409d6211d68f3921c, type: 2}
   spawner: {fileID: 858498215}
   timeBetweenWaves: 5
   onWaveStart:
@@ -12125,8 +12121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
   towerName: "\uB9C8\uBC95 \uD0C0\uC6CC"
-  description: "\uD2B9\uC218 \uD6A8\uACFC\uB97C \uAC00\uC9C4 \uB9C8\uBC95 \uACF5\uACA9
-    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C
+  description: "\uC740\uC2E0 \uBAAC\uC2A4\uD130\uB97C \uAC10\uC9C0\uD558\uACE0 \uACF5\uACA9\uD558\uB294
+    \uB9C8\uBC95 \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C
     \uD558\uAC70\uB098 \uC9C0\uC18D \uD53C\uD574\uB97C \uC904 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   statInfo: "\uBE44\uC6A9: 150G\n\uACF5\uACA9\uB825: 30\n\uACF5\uACA9\uC18D\uB3C4:
     \uBCF4\uD1B5\n\uC0AC\uAC70\uB9AC: \uB113\uC74C\n\uC5C5\uADF8\uB808\uC774\uB4DC:

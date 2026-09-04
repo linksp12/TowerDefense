@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnInfos:
   - monsterPrefab: {fileID: 1180854866472190489, guid: 5681e84cc819bb0479f3d045513f6be7, type: 3}
-    count: 6
-    interval: 1
-  waveStartDelay: 3
+    count: 10
+    interval: 0.8
+  - monsterPrefab: {fileID: 6164203917051182554, guid: 5655ba9693f685345964e5ceebd5f62c, type: 3}
+    count: 10
+    interval: 0.8
