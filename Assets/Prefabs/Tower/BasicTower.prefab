@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7657479176763447362}
   - component: {fileID: 231568973029201813}
   - component: {fileID: 1894595833662373224}
+  - component: {fileID: -4274503661184772229}
   m_Layer: 0
   m_Name: BasicTower
   m_TagString: Untagged
@@ -149,11 +150,7 @@ MonoBehaviour:
   pathALv3Damage: 20
   pathALv3Cooldown: 0.45
   pathALv3Range: 4.5
-  pathBLv2Damage: 25
-  pathBLv2Cooldown: 1.2
   pathBLv2Range: 4.8
-  pathBLv3Damage: 40
-  pathBLv3Cooldown: 1.5
   pathBLv3Range: 5.5
 --- !u!114 &7657479176763447362
 MonoBehaviour:
@@ -231,6 +228,19 @@ MonoBehaviour:
   endScale: {x: 1, y: 1, z: 1}
   installEffectPrefab: {fileID: 0}
   upgradeEffectPrefab: {fileID: 0}
+--- !u!114 &-4274503661184772229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392977616497477778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9e53f1fe8e6f64e8b9d9318a174fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerFreeze
+  vineEffectPrefab: {fileID: 1883879299924706061, guid: 293f9975be56cd14dabc23f2a2135674, type: 3}
 --- !u!1 &2542190511906645516
 GameObject:
   m_ObjectHideFlags: 0

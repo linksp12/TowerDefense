@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5671456848655801379}
   - component: {fileID: 8409347517411906099}
   - component: {fileID: -7997483579721428832}
+  - component: {fileID: 3064246170496700146}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -227,6 +228,19 @@ MonoBehaviour:
   endScale: {x: 1, y: 1, z: 1}
   installEffectPrefab: {fileID: 0}
   upgradeEffectPrefab: {fileID: 0}
+--- !u!114 &3064246170496700146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759459309904499257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9e53f1fe8e6f64e8b9d9318a174fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerFreeze
+  vineEffectPrefab: {fileID: 1883879299924706061, guid: 293f9975be56cd14dabc23f2a2135674, type: 3}
 --- !u!1 &4020850364930161701
 GameObject:
   m_ObjectHideFlags: 0
