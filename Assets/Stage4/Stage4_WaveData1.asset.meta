@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Stage4/Stage4_WaveData1.asset.meta
 guid: 6a8f0703ac929234ba3e75bf240e585e
-========
-guid: f163dec52a14dc448a05b6b0bffb4bb2
->>>>>>>> develop:Assets/3Stage/Stage3_Wave02.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
