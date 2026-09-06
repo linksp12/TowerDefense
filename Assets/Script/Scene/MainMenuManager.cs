@@ -27,8 +27,8 @@ public class MainMenuManager : MonoBehaviour
     // ──────── 이어하기 버튼 (임시: 게임 바로 시작) ────────
     public void OnContinueButtonClicked()
     {
-        Debug.Log("이어하기 (임시) - GameScene으로 이동");
-        SceneManager.LoadScene("GameScene");
+        Debug.Log("이어하기 (임시) - Stage1Scene으로 이동");
+        SceneManager.LoadScene("Stage1Scene");
     }
 
     // ──────── 설정 버튼 ────────

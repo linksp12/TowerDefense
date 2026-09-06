@@ -129,7 +129,10 @@ public class AudioManager : MonoBehaviour
                 PlayBGM(storyBGM);
                 break;
 
-            case "GameScene":
+            case "Stage1Scene":
+            case "Stage2Scene":
+            case "Stage3Scene":
+            case "Stage4Scene":
                 PlayBGM(gameBGM);
                 break;
 

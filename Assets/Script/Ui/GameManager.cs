@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private int currentMoney;
 
     [Header("Player HP")]
-    public int maxPlayerHp => 5;
+    public int maxPlayerHp => 100;
     private int currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;
@@ -188,6 +188,7 @@ public class GameManager : MonoBehaviour
         StopGameUiTweens();
 
         ResultSceneManager.isVictory = victory;
+        ResultSceneManager.restartSceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(LoadResultScene());
     }
 

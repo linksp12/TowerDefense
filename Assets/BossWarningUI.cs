@@ -19,6 +19,7 @@ public class BossWarningUI : MonoBehaviour
     private float fadeTime = 0.5f;
 
     private Coroutine warningCoroutine;
+    private bool hasShownWarning = false;
 
 
     private void Awake()
@@ -40,8 +41,10 @@ public class BossWarningUI : MonoBehaviour
 
     public void ShowBossWarning(string message)
     {
-        if (warningText == null)
+        if (warningText == null || hasShownWarning)
             return;
+
+        hasShownWarning = true;
 
         if (warningCoroutine != null)
         {

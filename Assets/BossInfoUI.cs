@@ -106,13 +106,197 @@ public class BossInfoUI : MonoBehaviour
             bossInfoPanel.SetActive(false);
         }
 
-        // ---------------------------------------------------------
-        // 상단 HP바 숨기기
-        // ---------------------------------------------------------
+        if (topBossHPPanel == null)
+        {
+            CreateRuntimeTopBossHPBar();
+        }
+
         if (topBossHPPanel != null)
         {
             topBossHPPanel.SetActive(false);
         }
+    }
+
+    private void CreateRuntimeTopBossHPBar()
+    {
+        Canvas canvas = GetComponentInParent<Canvas>();
+
+        if (canvas == null && bossInfoPanel != null)
+        {
+            canvas = bossInfoPanel.GetComponentInParent<Canvas>();
+        }
+
+        if (canvas == null)
+        {
+            Debug.LogWarning(
+                "BossInfoUI: 상단 보스 HP바를 생성할 Canvas가 없습니다."
+            );
+
+            return;
+        }
+
+        int uiLayer = canvas.gameObject.layer;
+
+        topBossHPPanel = new GameObject(
+            "RuntimeTopBossHPPanel",
+            typeof(RectTransform),
+            typeof(Image)
+        );
+
+        topBossHPPanel.layer = uiLayer;
+        topBossHPPanel.transform.SetParent(canvas.transform, false);
+
+        RectTransform panelRect =
+            topBossHPPanel.GetComponent<RectTransform>();
+
+        panelRect.anchorMin = new Vector2(0.5f, 1f);
+        panelRect.anchorMax = new Vector2(0.5f, 1f);
+        panelRect.pivot = new Vector2(0.5f, 1f);
+        panelRect.anchoredPosition = new Vector2(0f, -18f);
+        panelRect.sizeDelta = new Vector2(560f, 86f);
+
+        Image panelImage = topBossHPPanel.GetComponent<Image>();
+        panelImage.color = new Color(0.04f, 0.05f, 0.07f, 0.92f);
+        panelImage.raycastTarget = false;
+
+        GameObject portraitObject = new GameObject(
+            "BossPortrait",
+            typeof(RectTransform),
+            typeof(Image)
+        );
+
+        portraitObject.layer = uiLayer;
+        portraitObject.transform.SetParent(
+            topBossHPPanel.transform,
+            false
+        );
+
+        RectTransform portraitRect =
+            portraitObject.GetComponent<RectTransform>();
+
+        portraitRect.anchorMin = new Vector2(0f, 0.5f);
+        portraitRect.anchorMax = new Vector2(0f, 0.5f);
+        portraitRect.pivot = new Vector2(0f, 0.5f);
+        portraitRect.anchoredPosition = new Vector2(12f, 0f);
+        portraitRect.sizeDelta = new Vector2(64f, 64f);
+
+        topPortraitImage = portraitObject.GetComponent<Image>();
+        topPortraitImage.preserveAspect = true;
+        topPortraitImage.raycastTarget = false;
+
+        GameObject nameObject = new GameObject(
+            "BossName",
+            typeof(RectTransform),
+            typeof(TextMeshProUGUI)
+        );
+
+        nameObject.layer = uiLayer;
+        nameObject.transform.SetParent(topBossHPPanel.transform, false);
+
+        RectTransform nameRect =
+            nameObject.GetComponent<RectTransform>();
+
+        nameRect.anchorMin = new Vector2(0f, 1f);
+        nameRect.anchorMax = new Vector2(1f, 1f);
+        nameRect.pivot = new Vector2(0.5f, 1f);
+        nameRect.offsetMin = new Vector2(86f, -39f);
+        nameRect.offsetMax = new Vector2(-14f, -7f);
+
+        topBossNameText = nameObject.GetComponent<TextMeshProUGUI>();
+        topBossNameText.fontSize = 21f;
+        topBossNameText.fontStyle = FontStyles.Bold;
+        topBossNameText.color = Color.white;
+        topBossNameText.alignment = TextAlignmentOptions.Center;
+        topBossNameText.raycastTarget = false;
+
+        GameObject sliderObject = new GameObject(
+            "BossHPSlider",
+            typeof(RectTransform),
+            typeof(Slider)
+        );
+
+        sliderObject.layer = uiLayer;
+        sliderObject.transform.SetParent(topBossHPPanel.transform, false);
+
+        RectTransform sliderRect =
+            sliderObject.GetComponent<RectTransform>();
+
+        sliderRect.anchorMin = new Vector2(0f, 0f);
+        sliderRect.anchorMax = new Vector2(1f, 0f);
+        sliderRect.pivot = new Vector2(0.5f, 0f);
+        sliderRect.offsetMin = new Vector2(86f, 12f);
+        sliderRect.offsetMax = new Vector2(-14f, 36f);
+
+        GameObject backgroundObject = new GameObject(
+            "Background",
+            typeof(RectTransform),
+            typeof(Image)
+        );
+
+        backgroundObject.layer = uiLayer;
+        backgroundObject.transform.SetParent(sliderObject.transform, false);
+
+        RectTransform backgroundRect =
+            backgroundObject.GetComponent<RectTransform>();
+
+        backgroundRect.anchorMin = Vector2.zero;
+        backgroundRect.anchorMax = Vector2.one;
+        backgroundRect.offsetMin = Vector2.zero;
+        backgroundRect.offsetMax = Vector2.zero;
+
+        Image backgroundImage = backgroundObject.GetComponent<Image>();
+        backgroundImage.color = new Color(0.16f, 0.16f, 0.18f, 1f);
+        backgroundImage.raycastTarget = false;
+
+        GameObject fillObject = new GameObject(
+            "Fill",
+            typeof(RectTransform),
+            typeof(Image)
+        );
+
+        fillObject.layer = uiLayer;
+        fillObject.transform.SetParent(sliderObject.transform, false);
+
+        RectTransform fillRect = fillObject.GetComponent<RectTransform>();
+        fillRect.anchorMin = Vector2.zero;
+        fillRect.anchorMax = Vector2.one;
+        fillRect.offsetMin = new Vector2(2f, 2f);
+        fillRect.offsetMax = new Vector2(-2f, -2f);
+
+        Image fillImage = fillObject.GetComponent<Image>();
+        fillImage.color = new Color(0.78f, 0.08f, 0.08f, 1f);
+        fillImage.raycastTarget = false;
+
+        topHpSlider = sliderObject.GetComponent<Slider>();
+        topHpSlider.transition = Selectable.Transition.None;
+        topHpSlider.interactable = false;
+        topHpSlider.fillRect = fillRect;
+        topHpSlider.targetGraphic = fillImage;
+        topHpSlider.direction = Slider.Direction.LeftToRight;
+
+        GameObject hpTextObject = new GameObject(
+            "HPText",
+            typeof(RectTransform),
+            typeof(TextMeshProUGUI)
+        );
+
+        hpTextObject.layer = uiLayer;
+        hpTextObject.transform.SetParent(sliderObject.transform, false);
+
+        RectTransform hpTextRect =
+            hpTextObject.GetComponent<RectTransform>();
+
+        hpTextRect.anchorMin = Vector2.zero;
+        hpTextRect.anchorMax = Vector2.one;
+        hpTextRect.offsetMin = Vector2.zero;
+        hpTextRect.offsetMax = Vector2.zero;
+
+        topHpText = hpTextObject.GetComponent<TextMeshProUGUI>();
+        topHpText.fontSize = 15f;
+        topHpText.fontStyle = FontStyles.Bold;
+        topHpText.color = Color.white;
+        topHpText.alignment = TextAlignmentOptions.Center;
+        topHpText.raycastTarget = false;
     }
 
 

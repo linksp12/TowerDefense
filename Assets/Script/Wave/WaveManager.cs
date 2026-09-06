@@ -146,6 +146,17 @@ public class WaveManager : MonoBehaviour
         if (monster != null)
         {
             aliveMonsterCount++;
+
+            MonsterHealth monsterHealth =
+                monster.GetComponent<MonsterHealth>();
+
+            if (
+                monsterHealth != null &&
+                monsterHealth.isBoss &&
+                BossWarningUI.Instance != null)
+            {
+                BossWarningUI.Instance.ShowBossWarning();
+            }
         }
     }
 

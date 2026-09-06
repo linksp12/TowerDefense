@@ -6,6 +6,7 @@ using System.Collections;
 public class ResultSceneManager : MonoBehaviour
 {
     public static bool isVictory = false;
+    public static string restartSceneName = "Stage1Scene";
 
     [Header("Result Panels")]
     public GameObject victoryPanel;
@@ -60,7 +61,18 @@ public class ResultSceneManager : MonoBehaviour
 
     public void OnClickRestart()
     {
-        SceneManager.LoadScene("GameScene");
+        if (Application.CanStreamedLevelBeLoaded(restartSceneName))
+        {
+            SceneManager.LoadScene(restartSceneName);
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"재시작할 씬을 찾을 수 없습니다: {restartSceneName}. Stage1Scene으로 이동합니다."
+            );
+
+            SceneManager.LoadScene("Stage1Scene");
+        }
     }
 
     public void OnClickMainMenu()

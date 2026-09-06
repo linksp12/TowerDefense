@@ -100,7 +100,7 @@ public class StorySceneManager : MonoBehaviour
         if (nextIndex < stories.Length)
             ShowStory(nextIndex);
         else
-            LoadGameScene();
+            LoadStage1Scene();
     }
 
     // ───────── 버튼 콜백 ─────────
@@ -117,12 +117,12 @@ public class StorySceneManager : MonoBehaviour
         if (autoAdvanceCoroutine != null)
             StopCoroutine(autoAdvanceCoroutine);
 
-        LoadGameScene();
+        LoadStage1Scene();
     }
 
     // ───────── 게임씬 전환 ─────────
-    private void LoadGameScene()
+    private void LoadStage1Scene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Stage1Scene");
     }
 }
