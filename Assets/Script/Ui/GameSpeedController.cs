@@ -31,11 +31,11 @@ public class GameSpeedController : MonoBehaviour
         buttonRect.anchorMin = new Vector2(1f, 1f);
         buttonRect.anchorMax = new Vector2(1f, 1f);
         buttonRect.pivot = new Vector2(1f, 1f);
-        buttonRect.anchoredPosition = new Vector2(-155f, -16f);
+        buttonRect.anchoredPosition = new Vector2(-120f, -0f);
         buttonRect.sizeDelta = new Vector2(92f, 50f);
 
         Image buttonImage = buttonObject.GetComponent<Image>();
-        buttonImage.color = new Color(0.055f, 0.075f, 0.11f, 0.94f);
+        buttonImage.color = Color.clear;
 
         Button button = buttonObject.GetComponent<Button>();
         button.targetGraphic = buttonImage;

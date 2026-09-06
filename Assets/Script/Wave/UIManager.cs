@@ -16,6 +16,15 @@ public class UIManager : MonoBehaviour
     private bool hasShownStealthTip = false;
     private GameObject stealthTipObject;
     private CanvasGroup stealthTipCanvasGroup;
+    
+    // 웨이브 확인
+    private void Start()
+    {
+    if (waveText != null && waveManager != null)
+    {
+        waveText.text = $" 0 / {waveManager.TotalWaves}";
+    }
+    }
 
     // 웨이브 시작
     public void OnWaveStart(int waveNumber)
