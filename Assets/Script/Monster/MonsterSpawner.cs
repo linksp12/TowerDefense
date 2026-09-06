@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Header("4개 출발 경로")]
+    [Header("기본 경로")]
+    public GameObject monsterPrefab;
+    public Transform[] waypoints;
+
+    [Header("2개 경로 설정 (Stage 3)")]
+    public Transform[] secondaryWaypoints;
+    public bool useMultipleRoutes = false;
+
+    [Header("4개 출발 경로 (Stage 4)")]
     public Transform[] path1Waypoints;
     public Transform[] path2Waypoints;
     public Transform[] path3Waypoints;
     public Transform[] path4Waypoints;
 
-    public IEnumerator SpawnWave(
+    [Header("기본 스폰 설정")]
+    public int spawnCount = 5;
+    public float spawnInterval = 1f;
+
+    private int nextRouteIndex = 0;
+    private int runningCoroutinesCount = 0;
+
+    public virtual IEnumerator SpawnWave(
         WaveData wave,
         Action<GameObject> onSpawned)
     {
@@ -26,57 +41,177 @@ public class MonsterSpawner : MonoBehaviour
             yield break;
         }
 
-        foreach (var info in wave.spawnInfos)
+        nextRouteIndex = 0;
+
+        /*
+         * Stage 4
+         *
+         * path1~4 중 하나라도 연결되어 있으면
+         * WaveData의 pathIndex를 사용하는 4경로 방식으로 작동한다.
+         */
+        if (HasStage4Routes())
         {
-            if (info == null)
-                continue;
-
-            if (info.monsterPrefab == null)
+            foreach (WaveData.SpawnInfo info in wave.spawnInfos)
             {
-                Debug.LogError("MonsterSpawner: Monster Prefab이 없습니다.");
-                continue;
-            }
-
-            for (int i = 0; i < info.count; i++)
-            {
-                GameObject monster = SpawnOneMonster(
-                    info.monsterPrefab,
-                    info.pathIndex
-                );
-
-                if (monster != null)
+                if (info == null)
                 {
-                    onSpawned?.Invoke(monster);
+                    continue;
                 }
 
-                yield return new WaitForSeconds(info.interval);
+                if (info.monsterPrefab == null)
+                {
+                    Debug.LogError(
+                        "MonsterSpawner: Monster Prefab이 없습니다."
+                    );
+
+                    continue;
+                }
+
+                for (int i = 0; i < info.count; i++)
+                {
+                    GameObject monster = SpawnOneMonster(
+                        info.monsterPrefab,
+                        info.pathIndex
+                    );
+
+                    if (monster != null)
+                    {
+                        onSpawned?.Invoke(monster);
+                    }
+
+                    yield return new WaitForSeconds(info.interval);
+                }
             }
+
+            yield break;
         }
+
+        /*
+         * Stage 1 및 Stage 3
+         *
+         * 각 SpawnInfo를 동시에 실행한다.
+         * Stage 3에서는 useMultipleRoutes가 켜져 있으면
+         * 기본 경로와 두 번째 경로를 번갈아 사용한다.
+         */
+        foreach (WaveData.SpawnInfo info in wave.spawnInfos)
+        {
+            if (info == null)
+            {
+                continue;
+            }
+
+            StartCoroutine(
+                SpawnSingleInfo(info, onSpawned)
+            );
+        }
+
+        yield return new WaitUntil(
+            () => runningCoroutinesCount <= 0
+        );
+    }
+
+    private IEnumerator SpawnSingleInfo(
+        WaveData.SpawnInfo info,
+        Action<GameObject> onSpawned)
+    {
+        runningCoroutinesCount++;
+
+        if (info.monsterPrefab == null)
+        {
+            Debug.LogError(
+                "MonsterSpawner: Monster Prefab이 없습니다."
+            );
+
+            runningCoroutinesCount--;
+            yield break;
+        }
+
+        for (int i = 0; i < info.count; i++)
+        {
+            GameObject monster = SpawnOneMonster(
+                info.monsterPrefab,
+                info.pathIndex
+            );
+
+            if (monster != null)
+            {
+                onSpawned?.Invoke(monster);
+            }
+
+            yield return new WaitForSeconds(info.interval);
+        }
+
+        runningCoroutinesCount--;
     }
 
     private GameObject SpawnOneMonster(
         GameObject prefab,
         int pathIndex)
     {
-        Transform[] selectedWaypoints = GetPathWaypoints(pathIndex);
-
-        if (selectedWaypoints == null || selectedWaypoints.Length == 0)
+        if (prefab == null)
         {
             Debug.LogError(
-                $"MonsterSpawner: Path{pathIndex} 웨이포인트가 연결되지 않았습니다."
+                "MonsterSpawner: 생성할 Prefab이 없습니다."
             );
 
             return null;
         }
 
-        // 첫 번째 웨이포인트 위치에서 생성
+        Transform[] selectedWaypoints;
+
+        /*
+         * Stage 4의 4개 경로
+         */
+        if (HasStage4Routes())
+        {
+            selectedWaypoints = GetPathWaypoints(pathIndex);
+        }
+        /*
+         * Stage 3의 2개 경로
+         */
+        else if (
+            useMultipleRoutes &&
+            secondaryWaypoints != null &&
+            secondaryWaypoints.Length > 0)
+        {
+            if (nextRouteIndex % 2 == 0)
+            {
+                selectedWaypoints = waypoints;
+            }
+            else
+            {
+                selectedWaypoints = secondaryWaypoints;
+            }
+
+            nextRouteIndex++;
+        }
+        /*
+         * Stage 1 및 일반 스테이지 기본 경로
+         */
+        else
+        {
+            selectedWaypoints = waypoints;
+        }
+
+        if (
+            selectedWaypoints == null ||
+            selectedWaypoints.Length == 0)
+        {
+            Debug.LogError(
+                $"MonsterSpawner: Path{pathIndex}의 웨이포인트가 연결되지 않았습니다."
+            );
+
+            return null;
+        }
+
         GameObject monster = Instantiate(
             prefab,
             selectedWaypoints[0].position,
             Quaternion.identity
         );
 
-        MonsterMove monsterMove = monster.GetComponent<MonsterMove>();
+        MonsterMove monsterMove =
+            monster.GetComponent<MonsterMove>();
 
         if (monsterMove == null)
         {
@@ -87,10 +222,23 @@ public class MonsterSpawner : MonoBehaviour
             return monster;
         }
 
-        // 선택된 길의 웨이포인트를 몬스터에게 전달
         monsterMove.waypoints = selectedWaypoints;
 
         return monster;
+    }
+
+    private bool HasStage4Routes()
+    {
+        return HasWaypoints(path1Waypoints) ||
+               HasWaypoints(path2Waypoints) ||
+               HasWaypoints(path3Waypoints) ||
+               HasWaypoints(path4Waypoints);
+    }
+
+    private bool HasWaypoints(Transform[] targetWaypoints)
+    {
+        return targetWaypoints != null &&
+               targetWaypoints.Length > 0;
     }
 
     private Transform[] GetPathWaypoints(int pathIndex)
@@ -111,7 +259,7 @@ public class MonsterSpawner : MonoBehaviour
 
             default:
                 Debug.LogWarning(
-                    $"MonsterSpawner: 잘못된 pathIndex ({pathIndex})입니다. Path1을 사용합니다."
+                    $"MonsterSpawner: 잘못된 pathIndex({pathIndex})입니다. Path1을 사용합니다."
                 );
 
                 return path1Waypoints;

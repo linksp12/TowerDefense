@@ -7,6 +7,9 @@ public class TowerAttack : MonoBehaviour
     public float attackCooldown = 1f;
     public int damage = 10;
 
+    [Header("Stealth Detection")]
+    public bool canDetectStealth = false;
+
     [Header("Projectile")]
     public GameObject arrowPrefab;
     public Transform firePoint;
@@ -35,6 +38,15 @@ public class TowerAttack : MonoBehaviour
 
         foreach (GameObject monster in monsters)
         {
+            StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+
+            if (stealthMonster != null &&
+                stealthMonster.IsStealthed &&
+                !canDetectStealth)
+            {
+                continue;
+            }
+
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 
             if (distance <= attackRange && distance < nearestDistance)
@@ -63,7 +75,7 @@ public class TowerAttack : MonoBehaviour
 
         if (projectile != null)
         {
-            projectile.SetTarget(target.transform, damage);
+            projectile.SetTarget(target.transform, damage, canDetectStealth);
         }
     }
 
