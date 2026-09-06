@@ -42,7 +42,7 @@ public class PauseManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1f;
+        GameSpeedController.ResumeSelectedSpeed();
         pausePanel.SetActive(false);
     }
 
@@ -64,7 +64,7 @@ public class PauseManager : MonoBehaviour
     public void ToggleTimeScale()
     {
         if (Time.timeScale == 0f)
-            Time.timeScale = 1f;
+            GameSpeedController.ResumeSelectedSpeed();
         else
             Time.timeScale = 0f;
     }

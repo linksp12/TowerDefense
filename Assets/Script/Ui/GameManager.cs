@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
 
         UpdateHpText();
         UpdateShieldVisual();
+
+        Canvas gameCanvas = moneyText != null
+            ? moneyText.canvas
+            : FindAnyObjectByType<Canvas>();
+        GameSpeedController.Create(gameCanvas, testTimeScale);
     }
 
     public void AddMoney(int amount)
@@ -187,9 +192,37 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         StopGameUiTweens();
 
-        ResultSceneManager.isVictory = victory;
-        ResultSceneManager.restartSceneName = SceneManager.GetActiveScene().name;
-        StartCoroutine(LoadResultScene());
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
+        if (victory && currentSceneName == "Stage4Scene")
+        {
+            ResultSceneManager.isVictory = true;
+            ResultSceneManager.restartSceneName = currentSceneName;
+            StartCoroutine(LoadResultScene());
+            return;
+        }
+
+        string nextSceneName = GetNextStageSceneName(currentSceneName);
+
+        // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
+        StageResultUI.Show(victory, currentSceneName, nextSceneName);
+        Time.timeScale = 0f;
+    }
+
+    private string GetNextStageSceneName(string currentSceneName)
+    {
+        switch (currentSceneName)
+        {
+            case "Stage1Scene":
+                return "Stage2Scene";
+            case "Stage2Scene":
+                return "Stage3Scene";
+            case "Stage3Scene":
+                return "Stage4Scene";
+            default:
+                return string.Empty;
+        }
     }
 
     private IEnumerator LoadResultScene()
