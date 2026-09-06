@@ -112,6 +112,7 @@ MonoBehaviour:
   attackRange: 8
   attackCooldown: 1.5
   damage: 60
+  canDetectStealth: 1
   arrowPrefab: {fileID: 7569482764291632213, guid: cf0254410cad1e649a52268da805d8ba, type: 3}
   firePoint: {fileID: 2361390071131446573}
 --- !u!114 &-6655255251374041850

@@ -6,6 +6,13 @@ public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
     public Transform[] waypoints;
+
+    [Header("다중 경로 설정")]
+    public Transform[] secondaryWaypoints;
+    public bool useMultipleRoutes = false;
+
+    private int nextRouteIndex = 0;
+    
     public int spawnCount = 5;
     public float spawnInterval = 1f;
     private int runningCoroutinesCount = 0;
@@ -15,6 +22,8 @@ public class MonsterSpawner : MonoBehaviour
 
     public virtual IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
     {
+        nextRouteIndex = 0;
+
         foreach (var info in wave.spawnInfos)
         {
             StartCoroutine(SpawnSingleInfo(info, onSpawned));
@@ -40,11 +49,35 @@ public class MonsterSpawner : MonoBehaviour
     GameObject SpawnOneMonster(GameObject prefab)
     {
         GameObject monster = Instantiate(prefab);
+
         MonsterMove monsterMove = monster.GetComponent<MonsterMove>();
+
         if (monsterMove != null)
         {
-            monsterMove.waypoints = waypoints;
+            bool canUseSecondRoute =
+                useMultipleRoutes &&
+                secondaryWaypoints != null &&
+                secondaryWaypoints.Length > 0;
+
+            if (canUseSecondRoute)
+            {
+                if (nextRouteIndex % 2 == 0)
+                {
+                    monsterMove.waypoints = waypoints;
+                }
+                else
+                {
+                    monsterMove.waypoints = secondaryWaypoints;
+                }
+
+                nextRouteIndex++;
+            }
+            else
+            {
+                monsterMove.waypoints = waypoints;
+            }
         }
+
         return monster;
     }
 }
