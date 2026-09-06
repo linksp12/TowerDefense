@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
-  m_Name: WaveData1
+  m_Name: Stage2Wave3
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnInfos:
-  - monsterPrefab: {fileID: 1180854866472190489, guid: 5681e84cc819bb0479f3d045513f6be7, type: 3}
-    count: 6
-    interval: 1
-  waveStartDelay: 3
+  - monsterPrefab: {fileID: 7937657383654623975, guid: 8b897d49cfdf38649b54d8cbcb281503, type: 3}
+    count: 2
+    interval: 0.75
+  - monsterPrefab: {fileID: 3617554075397364918, guid: 2b85f5e08f9db894a95973ce9251faa2, type: 3}
+    count: 9
+    interval: 0.28

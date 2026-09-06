@@ -15,23 +15,35 @@ public class MonsterSpawner : MonoBehaviour
     
     public int spawnCount = 5;
     public float spawnInterval = 1f;
+    private int runningCoroutinesCount = 0;
 
     // ↑ Start() 와 SpawnMonsters() 삭제함
     // WaveManager가 대신 스폰을 제어하기 때문
 
-    public IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
+    public virtual IEnumerator SpawnWave(WaveData wave, Action<GameObject> onSpawned)
     {
         nextRouteIndex = 0;
 
         foreach (var info in wave.spawnInfos)
         {
-            for (int i = 0; i < info.count; i++)
-            {
-                GameObject monster = SpawnOneMonster(info.monsterPrefab);
-                onSpawned?.Invoke(monster);
-                yield return new WaitForSeconds(info.interval);
-            }
+            StartCoroutine(SpawnSingleInfo(info, onSpawned));
         }
+
+        yield return new WaitUntil(() => runningCoroutinesCount <= 0);
+    }
+
+    private IEnumerator SpawnSingleInfo(WaveData.SpawnInfo info, Action<GameObject> onSpawned)
+    {
+        runningCoroutinesCount++;
+
+        for (int i = 0; i < info.count; i++)
+        {
+            GameObject monster = SpawnOneMonster(info.monsterPrefab);
+            onSpawned?.Invoke(monster);
+            yield return new WaitForSeconds(info.interval);
+        }
+
+        runningCoroutinesCount--;
     }
 
     GameObject SpawnOneMonster(GameObject prefab)

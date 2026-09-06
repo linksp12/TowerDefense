@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class MonsterHealth : MonoBehaviour
 {
     public int maxHp = 200;
+    public int maxShield = 10;
+    public GameObject shieldFXObject;
 
     [Header("Reward")]
     public int goldReward = 20;
@@ -35,6 +37,7 @@ public class MonsterHealth : MonoBehaviour
     public string deathStateName = "death_NormalSlime";
 
     private int currentHp;
+    private int currentShield;
     private bool isDead = false;
 
     public bool IsDead => isDead;
@@ -70,6 +73,7 @@ public class MonsterHealth : MonoBehaviour
 
         // HP 초기화
         currentHp = maxHp;
+        currentShield = maxShield;
         isDead = false;
     }
 
@@ -105,7 +109,21 @@ public class MonsterHealth : MonoBehaviour
         if (isDead)
             return;
 
-        currentHp -= damage;
+        if (shieldFXObject != null && currentShield > 0)
+        {
+            currentShield -= 1;
+            if (currentShield <= 0 && shieldFXObject != null)
+            {
+                shieldFXObject.SetActive(false);
+            }
+        }
+        else
+        {
+            currentHp -= damage;
+        }
+
+        // 피해 숫자는 전용 DamagePopup이 생성·애니메이션·삭제를 담당한다.
+        DamagePopup.Show(transform.position, damage);
 
         // 피격 효과
         PlayHitFeedback(playHitSound);
