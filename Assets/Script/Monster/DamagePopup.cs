@@ -26,6 +26,25 @@ public class DamagePopup : MonoBehaviour
         int damage,
         bool critical)
     {
+        ShowText(
+            hitPosition,
+            critical ? $"CRITICAL!\n{damage}" : damage.ToString(),
+            critical ? new Color32(255, 190, 35, 255) : GetDamageColor(damage),
+            critical
+        );
+    }
+
+    public static void ShowShield(Vector3 hitPosition)
+    {
+        ShowText(hitPosition, "Shield", Color.white, false);
+    }
+
+    private static void ShowText(
+        Vector3 hitPosition,
+        string text,
+        Color color,
+        bool critical)
+    {
         Camera camera = Camera.main;
         if (camera == null)
             camera = FindFirstObjectByType<Camera>();
@@ -38,12 +57,8 @@ public class DamagePopup : MonoBehaviour
         popup.worldCamera = camera;
         popup.worldPosition = hitPosition + Vector3.up * 0.55f;
         popup.isCritical = critical;
-        popup.damageText = critical
-            ? $"CRITICAL!\n{damage}"
-            : damage.ToString();
-        popup.damageColor = critical
-            ? new Color32(255, 190, 35, 255)
-            : GetDamageColor(damage);
+        popup.damageText = text;
+        popup.damageColor = color;
     }
 
     private static Color GetDamageColor(int damage)
