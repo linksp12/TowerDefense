@@ -145,12 +145,14 @@ MonoBehaviour:
   level2Cost: 200
   level3Cost: 400
   sellRate: 0.7
-  pathALv2Damage: 45
-  pathALv2Cooldown: 1.8
+  pathALv2Damage: 180
+  pathALv2Cooldown: 2
   pathALv2Range: 4.5
   pathALv3Damage: 65
   pathALv3Cooldown: 2
   pathALv3Range: 5
+  cannonPathBLv2Damage: 300
+  cannonPathBLv2Cooldown: 3.5
   pathBLv2Range: 5.5
   pathBLv3Range: 6.5
 --- !u!114 &5671456848655801379
