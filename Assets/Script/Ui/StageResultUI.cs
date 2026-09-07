@@ -251,6 +251,12 @@ public class StageResultUI : MonoBehaviour
         colors.selectedColor = colors.highlightedColor;
         colors.fadeDuration = 0.08f;
         button.colors = colors;
+        button.onClick.AddListener(() =>
+        {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayButtonClick();
+        });
+
         button.onClick.AddListener(onClick);
 
         CreateText(

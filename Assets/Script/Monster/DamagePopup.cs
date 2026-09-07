@@ -30,6 +30,21 @@ public class DamagePopup : MonoBehaviour
         popup.damageText = damage.ToString();
     }
 
+    public static void HideAll()
+    {
+        DamagePopup[] activePopups =
+            FindObjectsByType<DamagePopup>(FindObjectsInactive.Include);
+
+        foreach (DamagePopup popup in activePopups)
+        {
+            if (popup == null)
+                continue;
+
+            popup.enabled = false;
+            Destroy(popup.gameObject);
+        }
+    }
+
     private void Update()
     {
         elapsed += Time.deltaTime;

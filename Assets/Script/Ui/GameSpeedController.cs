@@ -40,6 +40,14 @@ public class GameSpeedController : MonoBehaviour
         Button button = buttonObject.GetComponent<Button>();
         button.targetGraphic = buttonImage;
 
+        UIButtonSound existingButtonSound = FindAnyObjectByType<UIButtonSound>();
+
+        if (existingButtonSound != null && existingButtonSound.clickSound != null)
+        {
+            UIButtonSound speedButtonSound = buttonObject.AddComponent<UIButtonSound>();
+            speedButtonSound.clickSound = existingButtonSound.clickSound;
+        }
+
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
         colors.highlightedColor = new Color(1.15f, 1.15f, 1.15f, 1f);

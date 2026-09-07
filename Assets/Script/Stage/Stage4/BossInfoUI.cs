@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -81,6 +82,15 @@ public class BossInfoUI : MonoBehaviour
     // =========================================================
     private Vector3 popupOriginalScale;
 
+    private sealed class BossHealthEntry
+    {
+        public MonsterHealth boss;
+        public int maxHp;
+    }
+
+    private readonly List<BossHealthEntry> registeredBosses =
+        new List<BossHealthEntry>();
+
 
     // =========================================================
     // Awake
@@ -101,20 +111,92 @@ public class BossInfoUI : MonoBehaviour
             if (rect != null)
             {
                 popupOriginalScale = rect.localScale;
+                ConfigureBossInfoPanelAsTopBar(rect);
             }
 
             bossInfoPanel.SetActive(false);
-        }
-
-        if (topBossHPPanel == null)
-        {
-            CreateRuntimeTopBossHPBar();
         }
 
         if (topBossHPPanel != null)
         {
             topBossHPPanel.SetActive(false);
         }
+    }
+
+    private void ConfigureBossInfoPanelAsTopBar(RectTransform panelRect)
+    {
+        panelRect.anchorMin = new Vector2(0.5f, 1f);
+        panelRect.anchorMax = new Vector2(0.5f, 1f);
+        panelRect.pivot = new Vector2(0.5f, 1f);
+        panelRect.anchoredPosition = new Vector2(0f, 20f);
+        panelRect.sizeDelta = new Vector2(620f, 96f);
+        panelRect.localScale = Vector3.one;
+
+        SetTopBarRect(
+            bossInfoPanel.transform.Find("Background") as RectTransform,
+            new Vector2(0f, -48f),
+            new Vector2(620f, 96f)
+        );
+        SetTopBarRect(
+            portraitImage != null ? portraitImage.rectTransform : null,
+            new Vector2(-265f, -48f),
+            new Vector2(78f, 78f)
+        );
+        SetTopBarRect(
+            hpSlider != null ? hpSlider.GetComponent<RectTransform>() : null,
+            new Vector2(25f, -30f),
+            new Vector2(480f, 22f)
+        );
+        SetTopBarRect(
+            hpText != null ? hpText.rectTransform : null,
+            new Vector2(25f, -30f),
+            new Vector2(250f, 22f)
+        );
+        SetTopBarRect(
+            bossNameText != null ? bossNameText.rectTransform : null,
+            new Vector2(-95f, -67f),
+            new Vector2(260f, 25f)
+        );
+        SetTopBarRect(
+            defenseText != null ? defenseText.rectTransform : null,
+            new Vector2(95f, -67f),
+            new Vector2(115f, 22f)
+        );
+        SetTopBarRect(
+            magicResistanceText != null
+                ? magicResistanceText.rectTransform
+                : null,
+            new Vector2(225f, -67f),
+            new Vector2(135f, 22f)
+        );
+
+        TMP_FontAsset maplestoryFont =
+            defenseText != null ? defenseText.font : null;
+
+        if (maplestoryFont != null)
+        {
+            if (bossNameText != null)
+                bossNameText.font = maplestoryFont;
+
+            if (hpText != null)
+                hpText.font = maplestoryFont;
+        }
+    }
+
+    private static void SetTopBarRect(
+        RectTransform rect,
+        Vector2 position,
+        Vector2 size)
+    {
+        if (rect == null)
+            return;
+
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = position;
+        rect.sizeDelta = size;
+        rect.localScale = Vector3.one;
     }
 
     private void CreateRuntimeTopBossHPBar()
@@ -305,39 +387,7 @@ public class BossInfoUI : MonoBehaviour
     // =========================================================
     private void Update()
     {
-        // 현재 보스가 없으면 종료
-        if (currentBoss == null)
-            return;
-
-
-        // =====================================================
-        // 보스가 죽었는지 확인
-        // =====================================================
-        if (currentBoss.IsDead)
-        {
-            HideBossInfo();
-            return;
-        }
-
-
-        // =====================================================
-        // 큰 팝업 HP 업데이트
-        // =====================================================
-        if (bossInfoPanel != null &&
-            bossInfoPanel.activeSelf)
-        {
-            UpdatePopupHP();
-        }
-
-
-        // =====================================================
-        // 상단 HP바 업데이트
-        // =====================================================
-        if (topBossHPPanel != null &&
-            topBossHPPanel.activeSelf)
-        {
-            UpdateTopHP();
-        }
+        UpdateCombinedTopHP();
     }
 
 
@@ -346,52 +396,95 @@ public class BossInfoUI : MonoBehaviour
     // =========================================================
     public void ShowBossInfo(MonsterHealth boss)
     {
-        // 보스가 없으면 종료
-        if (boss == null)
+        RegisterBoss(boss);
+    }
+
+    public void RegisterBoss(MonsterHealth boss)
+    {
+        if (boss == null || !boss.isBoss || boss.IsDead)
             return;
 
-        // 죽은 보스면 표시하지 않음
-        if (boss.IsDead)
-            return;
-
-
-        // =====================================================
-        // 기존 코루틴 정리
-        // =====================================================
-        if (popupCoroutine != null)
+        for (int i = 0; i < registeredBosses.Count; i++)
         {
-            StopCoroutine(popupCoroutine);
-            popupCoroutine = null;
+            if (registeredBosses[i].boss == boss)
+                return;
         }
 
+        registeredBosses.Add(
+            new BossHealthEntry
+            {
+                boss = boss,
+                maxHp = Mathf.Max(1, boss.maxHp)
+            }
+        );
 
-        // =====================================================
-        // 현재 보스 저장
-        // =====================================================
-        currentBoss = boss;
+        if (bossInfoPanel != null)
+            bossInfoPanel.SetActive(false);
 
-
-        // =====================================================
-        // 기존 상단 HP바 숨기기
-        // 새로운 보스가 등장했기 때문
-        // =====================================================
         if (topBossHPPanel != null)
-        {
             topBossHPPanel.SetActive(false);
+
+        if (bossInfoPanel != null)
+            bossInfoPanel.SetActive(true);
+
+        if (bossNameText != null)
+        {
+            string displayName = string.IsNullOrWhiteSpace(boss.bossName)
+                ? "BOSS"
+                : boss.bossName.ToUpperInvariant();
+
+            bossNameText.text =
+                "보스 : " + displayName +
+                (registeredBosses.Count > 1
+                    ? " × " + registeredBosses.Count
+                    : string.Empty);
         }
 
+        if (portraitImage != null && portraitImage.sprite == null)
+            portraitImage.sprite = boss.bossPortrait;
 
-        // =====================================================
-        // 보스 정보 설정
-        // =====================================================
-        SetBossData(boss);
+        if (defenseText != null)
+            defenseText.text = "방어력 : " + boss.defense;
 
+        if (magicResistanceText != null)
+            magicResistanceText.text = "마법 저항 : " + boss.magicResistance;
 
-        // =====================================================
-        // 팝업 시작
-        // =====================================================
-        popupCoroutine =
-            StartCoroutine(BossPopupCoroutine());
+        UpdateCombinedTopHP();
+    }
+
+    private void UpdateCombinedTopHP()
+    {
+        if (registeredBosses.Count == 0)
+            return;
+
+        int totalMaxHp = 0;
+        int totalCurrentHp = 0;
+
+        for (int i = 0; i < registeredBosses.Count; i++)
+        {
+            BossHealthEntry entry = registeredBosses[i];
+            totalMaxHp += entry.maxHp;
+
+            if (entry.boss != null && !entry.boss.IsDead)
+                totalCurrentHp += Mathf.Max(0, entry.boss.CurrentHp);
+        }
+
+        if (bossInfoPanel != null && !bossInfoPanel.activeSelf)
+            bossInfoPanel.SetActive(true);
+
+        if (hpSlider != null)
+        {
+            hpSlider.maxValue = Mathf.Max(1, totalMaxHp);
+            hpSlider.value = totalCurrentHp;
+        }
+
+        if (hpText != null)
+        {
+            hpText.text =
+                totalCurrentHp.ToString("N0") +
+                " / " +
+                totalMaxHp.ToString("N0");
+        }
     }
 
 

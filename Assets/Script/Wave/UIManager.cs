@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,17 +21,23 @@ public class UIManager : MonoBehaviour
     // 웨이브 확인
     private void Start()
     {
-    if (waveText != null && waveManager != null)
-    {
-        waveText.text = $" 0 / {waveManager.TotalWaves}";
-    }
+        if (waveText != null && waveManager != null)
+        {
+            waveText.text = $" 0 / {waveManager.TotalWaves}";
+        }
     }
 
     // 웨이브 시작
     public void OnWaveStart(int waveNumber)
     {
         waveText.text = $" {waveNumber} / {waveManager.TotalWaves}";
-        StartCoroutine(ShowAlert($"Wave {waveNumber} 시작!"));
+
+        bool isStage4BossWave =
+            SceneManager.GetActiveScene().name == "Stage4Scene" &&
+            waveNumber == 4;
+
+        if (!isStage4BossWave)
+            StartCoroutine(ShowAlert($"Wave {waveNumber} 시작!"));
     }
 
     // 웨이브 클리어
@@ -42,8 +49,27 @@ public class UIManager : MonoBehaviour
     // 전체 클리어
     public void OnAllWavesCleared()
     {
-        waveText.text = "게임 클리어!";
-        StartCoroutine(ShowAlert("모든 웨이브 클리어!"));
+        PrepareForGameResult();
+    }
+
+    public void PrepareForGameResult()
+    {
+        StopAllCoroutines();
+
+        if (waveAlertText != null)
+        {
+            waveAlertText.text = string.Empty;
+            waveAlertText.gameObject.SetActive(false);
+        }
+
+        if (waveText != null)
+        {
+            waveText.text = string.Empty;
+            waveText.gameObject.SetActive(false);
+        }
+
+        if (stealthTipObject != null)
+            stealthTipObject.SetActive(false);
     }
 
     IEnumerator ShowAlert(string message)

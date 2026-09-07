@@ -190,7 +190,13 @@ public class GameManager : MonoBehaviour
         Debug.Log(victory ? "게임 클리어" : "게임 오버");
 
         Time.timeScale = 1f;
-        StopGameUiTweens();
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayStageResultSound();
+        }
+
+        PrepareGameUiForResult();
 
         string currentSceneName = SceneManager.GetActiveScene().name;
 
@@ -208,6 +214,27 @@ public class GameManager : MonoBehaviour
         // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
         StageResultUI.Show(victory, currentSceneName, nextSceneName);
         Time.timeScale = 0f;
+    }
+
+    private void PrepareGameUiForResult()
+    {
+        StopGameUiTweens();
+
+        if (hpText != null)
+            hpText.color = Color.white;
+
+        if (damageImage != null)
+        {
+            Color damageColor = damageImage.color;
+            damageColor.a = 0f;
+            damageImage.color = damageColor;
+        }
+
+        DamagePopup.HideAll();
+
+        UIManager uiManager = FindAnyObjectByType<UIManager>();
+        if (uiManager != null)
+            uiManager.PrepareForGameResult();
     }
 
     private string GetNextStageSceneName(string currentSceneName)

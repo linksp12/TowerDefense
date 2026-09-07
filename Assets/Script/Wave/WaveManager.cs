@@ -150,12 +150,13 @@ public class WaveManager : MonoBehaviour
             MonsterHealth monsterHealth =
                 monster.GetComponent<MonsterHealth>();
 
-            if (
-                monsterHealth != null &&
-                monsterHealth.isBoss &&
-                BossWarningUI.Instance != null)
+            if (monsterHealth != null && monsterHealth.isBoss)
             {
-                BossWarningUI.Instance.ShowBossWarning();
+                if (BossWarningUI.Instance != null)
+                    BossWarningUI.Instance.ShowBossWarning();
+
+                if (BossInfoUI.Instance != null)
+                    BossInfoUI.Instance.RegisterBoss(monsterHealth);
             }
         }
     }
