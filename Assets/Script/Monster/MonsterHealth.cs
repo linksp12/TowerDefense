@@ -109,10 +109,22 @@ public class MonsterHealth : MonoBehaviour
 
     public void TakeDamage(int damage, bool playHitSound)
     {
+        TakeDamage(damage, playHitSound, 0f, 1f);
+    }
+
+    public void TakeDamage(
+        int damage,
+        bool playHitSound,
+        float criticalChance,
+        float criticalDamageMultiplier)
+    {
         if (isDead)
         {
             return;
         }
+
+        int finalDamage = Mathf.Max(0, damage);
+        bool isCritical = false;
 
         if (shieldFXObject != null && currentShield > 0)
         {
@@ -125,11 +137,20 @@ public class MonsterHealth : MonoBehaviour
         }
         else
         {
-            currentHp -= damage;
+            if (criticalChance > 0f &&
+                Random.value < Mathf.Clamp01(criticalChance))
+            {
+                finalDamage = Mathf.RoundToInt(
+                    finalDamage * Mathf.Max(1f, criticalDamageMultiplier)
+                );
+                isCritical = true;
+            }
+
+            currentHp -= finalDamage;
             currentHp = Mathf.Max(currentHp, 0);
         }
 
-        DamagePopup.Show(transform.position, damage);
+        DamagePopup.Show(transform.position, finalDamage, isCritical);
 
         PlayHitFeedback(playHitSound);
 

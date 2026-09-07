@@ -12,9 +12,19 @@ public class DamagePopup : MonoBehaviour
     private Camera worldCamera;
     private Vector3 worldPosition;
     private string damageText;
+    private Color damageColor = Color.white;
+    private bool isCritical;
     private float elapsed;
 
     public static void Show(Vector3 hitPosition, int damage)
+    {
+        Show(hitPosition, damage, false);
+    }
+
+    public static void Show(
+        Vector3 hitPosition,
+        int damage,
+        bool critical)
     {
         Camera camera = Camera.main;
         if (camera == null)
@@ -27,7 +37,27 @@ public class DamagePopup : MonoBehaviour
         DamagePopup popup = popupObject.AddComponent<DamagePopup>();
         popup.worldCamera = camera;
         popup.worldPosition = hitPosition + Vector3.up * 0.55f;
-        popup.damageText = damage.ToString();
+        popup.isCritical = critical;
+        popup.damageText = critical
+            ? $"CRITICAL!\n{damage}"
+            : damage.ToString();
+        popup.damageColor = critical
+            ? new Color32(255, 190, 35, 255)
+            : GetDamageColor(damage);
+    }
+
+    private static Color GetDamageColor(int damage)
+    {
+        if (damage >= 200)
+            return new Color32(255, 55, 45, 255);
+
+        if (damage >= 100)
+            return new Color32(255, 140, 35, 255);
+
+        if (damage >= 50)
+            return new Color32(255, 225, 55, 255);
+
+        return Color.white;
     }
 
     public static void HideAll()
@@ -64,15 +94,24 @@ public class DamagePopup : MonoBehaviour
 
         float progress = Mathf.Clamp01(elapsed / lifetime);
         float y = Screen.height - screenPosition.y - (risePixels * progress);
-        Rect rect = new Rect(screenPosition.x - 70f, y - 30f, 140f, 60f);
+        float width = isCritical ? 220f : 140f;
+        float height = isCritical ? 90f : 60f;
+        Rect rect = new Rect(
+            screenPosition.x - (width * 0.5f),
+            y - (height * 0.5f),
+            width,
+            height
+        );
 
         GUIStyle style = new GUIStyle(GUI.skin.label)
         {
             alignment = TextAnchor.MiddleCenter,
-            fontSize = 30,
+            fontSize = isCritical ? 34 : 30,
             fontStyle = FontStyle.Bold
         };
-        style.normal.textColor = new Color(1f, 1f, 1f, 1f - progress);
+        Color fadingColor = damageColor;
+        fadingColor.a = 1f - progress;
+        style.normal.textColor = fadingColor;
 
         GUI.Label(rect, damageText, style);
     }

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 메인 화면 매니저 (업데이트 버전)
-/// - 시작, 이어하기(임시: 게임 시작), 설정, 종료
+/// - 시작, 저장된 스테이지 이어하기, 설정, 종료
 /// - ESC로 설정창 열기 (SettingsPopup에서 처리)
 /// - 씬 진입 시 메인 BGM 자동 재생
 /// </summary>
@@ -24,11 +24,12 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("StoryScene");
     }
 
-    // ──────── 이어하기 버튼 (임시: 게임 바로 시작) ────────
+    // ──────── 이어하기 버튼 ────────
     public void OnContinueButtonClicked()
     {
-        Debug.Log("이어하기 (임시) - Stage1Scene으로 이동");
-        SceneManager.LoadScene("Stage1Scene");
+        string savedStageScene = GameUIManager.GetSavedStageScene();
+        Debug.Log($"이어하기 - {savedStageScene}으로 이동");
+        SceneManager.LoadScene(savedStageScene);
     }
 
     // ──────── 설정 버튼 ────────
