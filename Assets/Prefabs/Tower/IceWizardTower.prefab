@@ -145,14 +145,18 @@ MonoBehaviour:
   level2Cost: 180
   level3Cost: 360
   sellRate: 0.7
-  pathALv2Damage: 25
-  pathALv2Cooldown: 0.9
-  pathALv2Range: 4.5
-  pathALv3Damage: 35
-  pathALv3Cooldown: 0.6
-  pathALv3Range: 5
-  pathBLv2Range: 4.5
-  pathBLv3Range: 5.5
+  pathALv2Damage: 35
+  pathALv2Cooldown: 0.75
+  pathALv2Range: 8.2
+  pathALv3Damage: 50
+  pathALv3Cooldown: 0.55
+  pathALv3Range: 8.6
+  pathBLv2Damage: 40
+  pathBLv2Cooldown: 0.8
+  pathBLv2Range: 8.2
+  pathBLv3Damage: 65
+  pathBLv3Cooldown: 0.7
+  pathBLv3Range: 8.8
 --- !u!61 &-5727476445743022551
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -57,16 +57,13 @@ public class TowerUpgrade : MonoBehaviour
     public float pathALv3Range = 4.5f;
 
     [Header("Path B Lv.2 능력치")]
-    // 대포 공성 루트의 공용 1차 업그레이드 값입니다.
-    public int cannonPathBLv2Damage = 300;
-    public float cannonPathBLv2Cooldown = 3.5f;
-    public int pathBLv2Damage => towerType == TowerType.Cannon ? cannonPathBLv2Damage : 28;
-    public float pathBLv2Cooldown => towerType == TowerType.Cannon ? cannonPathBLv2Cooldown : 1.0f;
+    public int pathBLv2Damage = 32;
+    public float pathBLv2Cooldown = 0.8f;
     public float pathBLv2Range = 4.8f;
 
     [Header("Path B Lv.3 능력치")]
-    public int pathBLv3Damage => 55;
-    public float pathBLv3Cooldown => 1.3f;
+    public int pathBLv3Damage = 55;
+    public float pathBLv3Cooldown = 0.6f;
     public float pathBLv3Range = 5.5f;
 
     private SpriteRenderer spriteRenderer;
