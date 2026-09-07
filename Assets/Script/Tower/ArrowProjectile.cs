@@ -32,17 +32,23 @@ public class ArrowProjectile : MonoBehaviour
     private Transform target;
     private int currentHitCount = 0;
     private bool canHitStealth = false;
+    private float criticalChance = 0.1f;
+    private float criticalDamageMultiplier = 2f;
 
     private HashSet<GameObject> hitMonsters = new HashSet<GameObject>();
 
     public void SetTarget(
         Transform newTarget,
         int newDamage,
-        bool newCanHitStealth)
+        bool newCanHitStealth,
+        float newCriticalChance,
+        float newCriticalDamageMultiplier)
     {
         target = newTarget;
         damage = newDamage;
         canHitStealth = newCanHitStealth;
+        criticalChance = Mathf.Clamp01(newCriticalChance);
+        criticalDamageMultiplier = Mathf.Max(1f, newCriticalDamageMultiplier);
     }
 
     void Update()
@@ -108,7 +114,12 @@ public class ArrowProjectile : MonoBehaviour
                 stealthMonster.Reveal();
             }
 
-            monsterHealth.TakeDamage(damage);
+            monsterHealth.TakeDamage(
+                damage,
+                true,
+                criticalChance,
+                criticalDamageMultiplier
+            );
             hitMonsters.Add(monster);
             currentHitCount++;
         }
@@ -179,7 +190,12 @@ public class ArrowProjectile : MonoBehaviour
                     }
 
                     int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
-                    monsterHealth.TakeDamage(splashDamage);
+                    monsterHealth.TakeDamage(
+                        splashDamage,
+                        true,
+                        criticalChance,
+                        criticalDamageMultiplier
+                    );
                 }
 
                 ApplySpecialEffect(monster);

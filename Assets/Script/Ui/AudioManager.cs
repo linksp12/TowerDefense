@@ -34,6 +34,9 @@ public class AudioManager : MonoBehaviour
     private const string KEY_BGM = "Volume_BGM";
     private const string KEY_SFX = "Volume_SFX";
     private const string KEY_UI = "Volume_UI";
+    private const string RESULT_POPUP_SFX_PATH = "Audio/StageResultPopup";
+
+    private AudioClip resultPopupSFX;
 
     private void Awake()
     {
@@ -48,6 +51,7 @@ public class AudioManager : MonoBehaviour
 
         SetupAudioSources();
         LoadVolumeSettings();
+        resultPopupSFX = Resources.Load<AudioClip>(RESULT_POPUP_SFX_PATH);
 
         // 씬이 바뀔 때마다 자동으로 BGM 교체
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -114,7 +118,10 @@ public class AudioManager : MonoBehaviour
     public void StopBGM()
     {
         if (bgmSource != null)
+        {
             bgmSource.Stop();
+            bgmSource.time = 0f;
+        }
     }
 
     public void PlayBGMForScene(string sceneName)
@@ -165,6 +172,20 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClick()
     {
         PlayUISound(buttonClickSFX);
+    }
+
+    public void PlayStageResultSound()
+    {
+        if (resultPopupSFX == null)
+            resultPopupSFX = Resources.Load<AudioClip>(RESULT_POPUP_SFX_PATH);
+
+        if (resultPopupSFX == null)
+        {
+            Debug.LogWarning("AudioManager: 결과창 효과음을 찾지 못했습니다.");
+            return;
+        }
+
+        PlayUISound(resultPopupSFX);
     }
 
     public float MasterVolume

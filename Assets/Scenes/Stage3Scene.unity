@@ -4203,6 +4203,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a84107fc954a4174fa633eafdc3368ef, type: 2}
   - {fileID: 11400000, guid: f163dec52a14dc448a05b6b0bffb4bb2, type: 2}
   - {fileID: 11400000, guid: 72dba1556dbff3d409d6211d68f3921c, type: 2}
+  - {fileID: 11400000, guid: d6e3178b4ef84d36a087baa3dceef6fa, type: 2}
   spawner: {fileID: 858498215}
   timeBetweenWaves: 5
   onWaveStart:

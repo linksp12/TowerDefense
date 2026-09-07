@@ -369,7 +369,7 @@ MonoBehaviour:
   defense: 80
   magicResistance: 80
   bossPortrait: {fileID: 2362635009126112453, guid: c5b3ef211eb30384eaa3211685138c99, type: 3}
-  bossName: Forest Golem
+  bossName: 숲의 골렘
   monsterHpSlider: {fileID: 2548741801484140464}
   hitEffectPrefab: {fileID: 0}
   hitEffectDestroyTime: 0.6

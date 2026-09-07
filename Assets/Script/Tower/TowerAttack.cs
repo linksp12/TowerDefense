@@ -10,6 +10,10 @@ public class TowerAttack : MonoBehaviour
     [Header("Stealth Detection")]
     public bool canDetectStealth = false;
 
+    [Header("Critical Settings")]
+    [Range(0f, 1f)] public float criticalChance = 0.1f;
+    [Min(1f)] public float criticalDamageMultiplier = 2f;
+
     [Header("Projectile")]
     public GameObject arrowPrefab;
     public Transform firePoint;
@@ -75,7 +79,13 @@ public class TowerAttack : MonoBehaviour
 
         if (projectile != null)
         {
-            projectile.SetTarget(target.transform, damage, canDetectStealth);
+            projectile.SetTarget(
+                target.transform,
+                damage,
+                canDetectStealth,
+                criticalChance,
+                criticalDamageMultiplier
+            );
         }
     }
 

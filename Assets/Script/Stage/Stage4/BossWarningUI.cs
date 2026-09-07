@@ -35,7 +35,10 @@ public class BossWarningUI : MonoBehaviour
 
     public void ShowBossWarning()
     {
-        ShowBossWarning("⚠ 경고 ⚠\n보스가 출현합니다!");
+        ShowBossWarning(
+            "<size=48><color=#FF4A3D>보스 웨이브 시작!</color></size>\n" +
+            "<size=28><color=#FFE3B0>강력한 적이 다가옵니다.</color></size>"
+        );
     }
 
 

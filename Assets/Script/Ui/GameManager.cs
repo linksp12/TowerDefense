@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
 
         UpdateHpText();
         UpdateShieldVisual();
+
+        Canvas gameCanvas = moneyText != null
+            ? moneyText.canvas
+            : FindAnyObjectByType<Canvas>();
+        GameSpeedController.Create(gameCanvas, testTimeScale);
     }
 
     public void AddMoney(int amount)
@@ -185,11 +190,66 @@ public class GameManager : MonoBehaviour
         Debug.Log(victory ? "게임 클리어" : "게임 오버");
 
         Time.timeScale = 1f;
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayStageResultSound();
+        }
+
+        PrepareGameUiForResult();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
+        if (victory && currentSceneName == "Stage4Scene")
+        {
+            ResultSceneManager.isVictory = true;
+            ResultSceneManager.restartSceneName = currentSceneName;
+            StartCoroutine(LoadResultScene());
+            return;
+        }
+
+        string nextSceneName = GetNextStageSceneName(currentSceneName);
+
+        // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
+        StageResultUI.Show(victory, currentSceneName, nextSceneName);
+        Time.timeScale = 0f;
+    }
+
+    private void PrepareGameUiForResult()
+    {
         StopGameUiTweens();
 
-        ResultSceneManager.isVictory = victory;
-        ResultSceneManager.restartSceneName = SceneManager.GetActiveScene().name;
-        StartCoroutine(LoadResultScene());
+        if (hpText != null)
+            hpText.color = Color.white;
+
+        if (damageImage != null)
+        {
+            Color damageColor = damageImage.color;
+            damageColor.a = 0f;
+            damageImage.color = damageColor;
+        }
+
+        DamagePopup.HideAll();
+
+        UIManager uiManager = FindAnyObjectByType<UIManager>();
+        if (uiManager != null)
+            uiManager.PrepareForGameResult();
+    }
+
+    private string GetNextStageSceneName(string currentSceneName)
+    {
+        switch (currentSceneName)
+        {
+            case "Stage1Scene":
+                return "Stage2Scene";
+            case "Stage2Scene":
+                return "Stage3Scene";
+            case "Stage3Scene":
+                return "Stage4Scene";
+            default:
+                return string.Empty;
+        }
     }
 
     private IEnumerator LoadResultScene()
