@@ -108,9 +108,9 @@ MonoBehaviour:
   rotationOffset: 0
   canPierce: 0
   maxHitCount: 1
-  canExplode: 0
-  explosionRadius: 1.5
-  splashDamageRate: 0.7
+  canExplode: 1
+  explosionRadius: 1.8
+  splashDamageRate: 0.75
   canSlow: 0
   slowRate: 0.5
   slowDuration: 2

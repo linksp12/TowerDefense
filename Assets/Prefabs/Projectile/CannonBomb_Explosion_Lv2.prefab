@@ -109,8 +109,8 @@ MonoBehaviour:
   canPierce: 0
   maxHitCount: 1
   canExplode: 1
-  explosionRadius: 2.1
-  splashDamageRate: 0.5
+  explosionRadius: 2.5
+  splashDamageRate: 0.75
   canSlow: 0
   slowRate: 0.5
   slowDuration: 2
