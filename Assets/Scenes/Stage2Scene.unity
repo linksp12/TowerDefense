@@ -15405,8 +15405,8 @@ MonoBehaviour:
   cannonTowerPrefab: {fileID: 759459309904499257, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
   magicTowerPrefab: {fileID: 2236469722719090783, guid: 7a910a9fe43a58344ad640512f287932, type: 3}
   basicTowerCost: 50
-  cannonTowerCost: 80
-  magicTowerCost: 120
+  cannonTowerCost: 100
+  magicTowerCost: 90
 --- !u!4 &890087694
 Transform:
   m_ObjectHideFlags: 0
@@ -20255,7 +20255,7 @@ MonoBehaviour:
   description: "\uD2B9\uC218 \uD6A8\uACFC\uB97C \uAC00\uC9C4 \uB9C8\uBC95 \uACF5\uACA9
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C
     \uD558\uAC70\uB098 \uC9C0\uC18D \uD53C\uD574\uB97C \uC904 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  statInfo: "\uBE44\uC6A9: 150G\n\uACF5\uACA9\uB825: 30\n\uACF5\uACA9\uC18D\uB3C4:
+  statInfo: "\uBE44\uC6A9: 90G\n\uACF5\uACA9\uB825: 30\n\uACF5\uACA9\uC18D\uB3C4:
     \uBCF4\uD1B5\n\uC0AC\uAC70\uB9AC: \uB113\uC74C\n\uC5C5\uADF8\uB808\uC774\uB4DC:
     \uB9C8\uBC95\uD654\uC0B4 / \uD654\uC5FC"
 --- !u!1 &1185429745

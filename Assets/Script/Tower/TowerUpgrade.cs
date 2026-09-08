@@ -121,7 +121,7 @@ public class TowerUpgrade : MonoBehaviour
     {
         if (towerType == TowerType.Archer) return 50;
         if (towerType == TowerType.Cannon) return 100;
-        if (towerType == TowerType.Magic) return 150;
+        if (towerType == TowerType.Magic) return 90;
 
         return 50;
     }

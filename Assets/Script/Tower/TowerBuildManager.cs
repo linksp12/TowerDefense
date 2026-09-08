@@ -24,7 +24,7 @@ public class TowerBuildManager : MonoBehaviour
     [Header("Tower Costs")]
     public int basicTowerCost = 50;
     public int cannonTowerCost = 100;
-    public int magicTowerCost = 150;
+    public int magicTowerCost = 90;
 
     private BuildPoint selectedBuildPoint;
 
