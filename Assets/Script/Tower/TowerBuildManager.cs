@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TowerBuildManager : MonoBehaviour
@@ -23,10 +24,14 @@ public class TowerBuildManager : MonoBehaviour
 
     [Header("Tower Costs")]
     public int basicTowerCost = 50;
-    public int cannonTowerCost = 100;
-    public int magicTowerCost = 150;
+    public int cannonTowerCost = 80;
+    public int magicTowerCost = 120;
 
     private BuildPoint selectedBuildPoint;
+    private bool isOpen;
+    private Coroutine closeCoroutine;
+
+    public bool IsOpen => isOpen;
 
     private void Awake()
     {
@@ -61,6 +66,23 @@ public class TowerBuildManager : MonoBehaviour
     {
         if (buildPoint == null)
             return;
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (TowerUpgradeUI.Instance != null && TowerUpgradeUI.Instance.IsOpen)
+            TowerUpgradeUI.Instance.Close();
+
+        isOpen = true;
+
+        if (towerBuildPanel != null)
+            towerBuildPanel.transform.SetAsLastSibling();
+
+        if (BossInfoUI.Instance != null)
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
 
         selectedBuildPoint = buildPoint;
 
@@ -173,6 +195,11 @@ public class TowerBuildManager : MonoBehaviour
         CloseBuildPanel(true);
     }
 
+    public void CloseBuildPanelSilently()
+    {
+        CloseBuildPanel(false);
+    }
+
     private void CloseBuildPanel(bool playSound)
     {
         if (playSound && UISoundManager.Instance != null)
@@ -188,6 +215,26 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         selectedBuildPoint = null;
+
+        if (closeCoroutine != null)
+            StopCoroutine(closeCoroutine);
+
+        closeCoroutine = StartCoroutine(FinishClose());
+    }
+
+    private IEnumerator FinishClose()
+    {
+        if (towerBuildPanelAnimator != null)
+            yield return new WaitForSecondsRealtime(towerBuildPanelAnimator.animationTime);
+
+        isOpen = false;
+        closeCoroutine = null;
+
+        if (BossInfoUI.Instance != null &&
+            (TowerUpgradeUI.Instance == null || !TowerUpgradeUI.Instance.IsOpen))
+        {
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(false);
+        }
     }
 
     private void PlayFailFeedback()

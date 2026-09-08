@@ -5562,6 +5562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0930a3cbcfd264880fee276fd2e726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
+  easterEggSuccessSound: {fileID: 8300000, guid: 83e2cc7d7e9e4cdca8237a5f7d244e13, type: 3}
+  easterEggFont: {fileID: 0}
 --- !u!4 &1724833695
 Transform:
   m_ObjectHideFlags: 0

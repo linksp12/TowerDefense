@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class DamagePopup : MonoBehaviour
 {
+    private static readonly Vector3[] PanelWorldCorners = new Vector3[4];
+
     [SerializeField] private float lifetime = 0.65f;
     [SerializeField] private float risePixels = 42f;
 
@@ -26,6 +28,28 @@ public class DamagePopup : MonoBehaviour
         int damage,
         bool critical)
     {
+        ShowText(
+            hitPosition,
+            critical ? $"CRITICAL!\n{damage}" : damage.ToString(),
+            critical ? new Color32(255, 190, 35, 255) : GetDamageColor(damage),
+            critical
+        );
+    }
+
+    public static void ShowShield(Vector3 hitPosition)
+    {
+        ShowText(hitPosition, "Shield", Color.white, false);
+    }
+
+    private static void ShowText(
+        Vector3 hitPosition,
+        string text,
+        Color color,
+        bool critical)
+    {
+        if (IsGloballyBlocked())
+            return;
+
         Camera camera = Camera.main;
         if (camera == null)
             camera = FindFirstObjectByType<Camera>();
@@ -38,12 +62,8 @@ public class DamagePopup : MonoBehaviour
         popup.worldCamera = camera;
         popup.worldPosition = hitPosition + Vector3.up * 0.55f;
         popup.isCritical = critical;
-        popup.damageText = critical
-            ? $"CRITICAL!\n{damage}"
-            : damage.ToString();
-        popup.damageColor = critical
-            ? new Color32(255, 190, 35, 255)
-            : GetDamageColor(damage);
+        popup.damageText = text;
+        popup.damageColor = color;
     }
 
     private static Color GetDamageColor(int damage)
@@ -85,7 +105,7 @@ public class DamagePopup : MonoBehaviour
 
     private void OnGUI()
     {
-        if (worldCamera == null)
+        if (worldCamera == null || IsGloballyBlocked())
             return;
 
         Vector3 screenPosition = worldCamera.WorldToScreenPoint(worldPosition);
@@ -103,6 +123,9 @@ public class DamagePopup : MonoBehaviour
             height
         );
 
+        if (OverlapsTowerPanel(rect))
+            return;
+
         GUIStyle style = new GUIStyle(GUI.skin.label)
         {
             alignment = TextAnchor.MiddleCenter,
@@ -114,5 +137,82 @@ public class DamagePopup : MonoBehaviour
         style.normal.textColor = fadingColor;
 
         GUI.Label(rect, damageText, style);
+    }
+
+    private static bool IsGloballyBlocked()
+    {
+        return Time.timeScale <= 0f;
+    }
+
+    private static bool OverlapsTowerPanel(Rect popupRect)
+    {
+        if (TowerBuildManager.Instance != null &&
+            TowerBuildManager.Instance.IsOpen &&
+            OverlapsPanel(popupRect, TowerBuildManager.Instance.towerBuildPanel))
+        {
+            return true;
+        }
+
+        if (TowerUpgradeUI.Instance != null &&
+            TowerUpgradeUI.Instance.IsOpen &&
+            OverlapsPanel(popupRect, TowerUpgradeUI.Instance.panel))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool OverlapsPanel(Rect popupRect, GameObject panel)
+    {
+        if (panel == null || !panel.activeInHierarchy)
+            return false;
+
+        RectTransform panelRect = panel.GetComponent<RectTransform>();
+        if (panelRect == null)
+            return false;
+
+        Canvas panelCanvas = panel.GetComponentInParent<Canvas>();
+        Camera uiCamera = null;
+
+        if (panelCanvas != null &&
+            panelCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        {
+            uiCamera = panelCanvas.worldCamera;
+        }
+
+        panelRect.GetWorldCorners(PanelWorldCorners);
+
+        Vector2 firstCorner = RectTransformUtility.WorldToScreenPoint(
+            uiCamera,
+            PanelWorldCorners[0]
+        );
+
+        float minX = firstCorner.x;
+        float maxX = firstCorner.x;
+        float minY = firstCorner.y;
+        float maxY = firstCorner.y;
+
+        for (int i = 1; i < PanelWorldCorners.Length; i++)
+        {
+            Vector2 screenCorner = RectTransformUtility.WorldToScreenPoint(
+                uiCamera,
+                PanelWorldCorners[i]
+            );
+
+            minX = Mathf.Min(minX, screenCorner.x);
+            maxX = Mathf.Max(maxX, screenCorner.x);
+            minY = Mathf.Min(minY, screenCorner.y);
+            maxY = Mathf.Max(maxY, screenCorner.y);
+        }
+
+        Rect panelScreenRect = new Rect(
+            minX,
+            Screen.height - maxY,
+            maxX - minX,
+            maxY - minY
+        );
+
+        return popupRect.Overlaps(panelScreenRect, true);
     }
 }

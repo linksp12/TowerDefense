@@ -36,7 +36,10 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f;
+
+        DamagePopup.HideAll();
         pausePanel.SetActive(true);
+        pausePanel.transform.SetAsLastSibling();
     }
 
     public void ResumeGame()

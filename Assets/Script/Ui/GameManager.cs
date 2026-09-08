@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     private int currentMoney;
 
     [Header("Player HP")]
-    public int maxPlayerHp => 100;
+    public int maxPlayerHp => MainMenuManager.EasterEggPlayerHpOverride > 0
+        ? MainMenuManager.EasterEggPlayerHpOverride
+        : 100;
     private int currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;

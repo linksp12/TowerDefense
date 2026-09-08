@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -66,6 +67,10 @@ public class TowerUpgradeUI : MonoBehaviour
     public Vector2 onePathClosePosition = new Vector2(300f, 120f);
 
     private TowerUpgrade selectedTower;
+    private bool isOpen;
+    private Coroutine closeCoroutine;
+
+    public bool IsOpen => isOpen;
 
     void Awake()
     {
@@ -115,6 +120,29 @@ public class TowerUpgradeUI : MonoBehaviour
 
     public void Open(TowerUpgrade tower)
     {
+        if (tower == null)
+            return;
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (TowerBuildManager.Instance != null &&
+            TowerBuildManager.Instance.IsOpen)
+        {
+            TowerBuildManager.Instance.CloseBuildPanelSilently();
+        }
+
+        isOpen = true;
+
+        if (panel != null)
+            panel.transform.SetAsLastSibling();
+
+        if (BossInfoUI.Instance != null)
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
+
         selectedTower = tower;
 
         MovePanelToTowerPosition();
@@ -556,5 +584,25 @@ public class TowerUpgradeUI : MonoBehaviour
             panel.SetActive(false);
 
         selectedTower = null;
+
+        if (closeCoroutine != null)
+            StopCoroutine(closeCoroutine);
+
+        closeCoroutine = StartCoroutine(FinishClose());
+    }
+
+    private IEnumerator FinishClose()
+    {
+        if (panelAnimator != null)
+            yield return new WaitForSecondsRealtime(panelAnimator.animationTime);
+
+        isOpen = false;
+        closeCoroutine = null;
+
+        if (BossInfoUI.Instance != null &&
+            (TowerBuildManager.Instance == null || !TowerBuildManager.Instance.IsOpen))
+        {
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(false);
+        }
     }
 }

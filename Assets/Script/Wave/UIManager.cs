@@ -17,7 +17,25 @@ public class UIManager : MonoBehaviour
     private bool hasShownStealthTip = false;
     private GameObject stealthTipObject;
     private CanvasGroup stealthTipCanvasGroup;
-    
+
+    private void Awake()
+    {
+        CenterWaveAlert();
+    }
+
+    private void CenterWaveAlert()
+    {
+        if (waveAlertText == null)
+            return;
+
+        RectTransform alertRect = waveAlertText.rectTransform;
+        alertRect.anchorMin = new Vector2(0.5f, 0.5f);
+        alertRect.anchorMax = new Vector2(0.5f, 0.5f);
+        alertRect.pivot = new Vector2(0.5f, 0.5f);
+        alertRect.anchoredPosition = Vector2.zero;
+        waveAlertText.alignment = TextAlignmentOptions.Center;
+    }
+
     // 웨이브 확인
     private void Start()
     {
