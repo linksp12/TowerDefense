@@ -125,8 +125,9 @@ public class MonsterHealth : MonoBehaviour
 
         int finalDamage = Mathf.Max(0, damage);
         bool isCritical = false;
+        bool shieldBlocked = shieldFXObject != null && currentShield > 0;
 
-        if (shieldFXObject != null && currentShield > 0)
+        if (shieldBlocked)
         {
             currentShield -= 1;
 
@@ -150,7 +151,10 @@ public class MonsterHealth : MonoBehaviour
             currentHp = Mathf.Max(currentHp, 0);
         }
 
-        DamagePopup.Show(transform.position, finalDamage, isCritical);
+        if (shieldBlocked)
+            DamagePopup.ShowShield(transform.position);
+        else
+            DamagePopup.Show(transform.position, finalDamage, isCritical);
 
         PlayHitFeedback(playHitSound);
 
