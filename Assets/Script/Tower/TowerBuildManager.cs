@@ -201,6 +201,23 @@ public class TowerBuildManager : MonoBehaviour
         CloseBuildPanel(false);
     }
 
+    public void CloseBuildPanelInstantly()
+    {
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (towerBuildPanelAnimator != null)
+            towerBuildPanelAnimator.HideInstant();
+        else if (towerBuildPanel != null)
+            towerBuildPanel.SetActive(false);
+
+        selectedBuildPoint = null;
+        isOpen = false;
+    }
+
     private void CloseBuildPanel(bool playSound)
     {
         if (playSound && UISoundManager.Instance != null)

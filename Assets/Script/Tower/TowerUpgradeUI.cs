@@ -591,6 +591,25 @@ public class TowerUpgradeUI : MonoBehaviour
         closeCoroutine = StartCoroutine(FinishClose());
     }
 
+    public void CloseInstantly()
+    {
+        HideTooltip();
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (panelAnimator != null)
+            panelAnimator.HideInstant();
+        else if (panel != null)
+            panel.SetActive(false);
+
+        selectedTower = null;
+        isOpen = false;
+    }
+
     private IEnumerator FinishClose()
     {
         if (panelAnimator != null)

@@ -108,11 +108,20 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log(
             isEnabled
                 ? "이스터에그 활성화: 이번 플레이의 기지 체력이 50으로 변경됨"
-                : "이스터에그 해제: 이번 플레이의 기지 체력이 100으로 복구됨"
+                : "이스터에그 해제: 이번 플레이의 기지 체력이 15로 복구됨"
         );
     }
 
     private void ShowEasterEggMessage(bool isEnabled)
+    {
+        string message = isEnabled
+            ? "숨겨진 힘이 깨어났습니다!  기지 체력 50"
+            : "숨겨진 힘이 사라졌습니다.  기지 체력 15";
+
+        ShowMainMenuMessage(message, new Color32(255, 205, 75, 255));
+    }
+
+    private void ShowMainMenuMessage(string message, Color textColor)
     {
         if (mainMenuCanvas == null)
             return;
@@ -167,15 +176,13 @@ public class MainMenuManager : MonoBehaviour
         textRect.sizeDelta = new Vector2(584f, 60f);
 
         TextMeshProUGUI messageText = textObject.GetComponent<TextMeshProUGUI>();
-        messageText.text = isEnabled
-            ? "숨겨진 힘이 깨어났습니다!  기지 체력 50"
-            : "숨겨진 힘이 사라졌습니다.  기지 체력 100";
+        messageText.text = message;
         messageText.font = easterEggFont != null
             ? easterEggFont
             : FindMaplestoryFont();
         messageText.fontSize = 28f;
         messageText.fontStyle = FontStyles.Bold;
-        messageText.color = new Color32(255, 205, 75, 255);
+        messageText.color = textColor;
         messageText.alignment = TextAlignmentOptions.Center;
         messageText.overflowMode = TextOverflowModes.Overflow;
         messageText.raycastTarget = false;
@@ -254,7 +261,16 @@ public class MainMenuManager : MonoBehaviour
     // ──────── 이어하기 버튼 ────────
     public void OnContinueButtonClicked()
     {
-        string savedStageScene = GameUIManager.GetSavedStageScene();
+        if (!GameUIManager.TryGetSavedStageScene(out string savedStageScene))
+        {
+            ShowMainMenuMessage(
+                "저장 데이터가 없습니다.",
+                new Color32(255, 205, 75, 255)
+            );
+            Debug.Log("이어하기 - 저장 데이터 없음");
+            return;
+        }
+
         Debug.Log($"이어하기 - {savedStageScene}으로 이동");
         SceneManager.LoadScene(savedStageScene);
     }

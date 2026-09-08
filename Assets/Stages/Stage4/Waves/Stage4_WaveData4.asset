@@ -45,4 +45,20 @@ MonoBehaviour:
     count: 10
     interval: 1
     pathIndex: 4
+  - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
+    count: 10
+    interval: 1
+    pathIndex: 4
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
+    count: 10
+    interval: 1
+    pathIndex: 4
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
+    count: 10
+    interval: 1
+    pathIndex: 1
+  - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
+    count: 10
+    interval: 1
+    pathIndex: 1
   waveStartDelay: 3
