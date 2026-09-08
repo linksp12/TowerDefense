@@ -56,6 +56,12 @@ public class GameUIManager : MonoBehaviour
             : "Stage1Scene";
     }
 
+    public static bool TryGetSavedStageScene(out string savedSceneName)
+    {
+        savedSceneName = PlayerPrefs.GetString(SavedStageKey, string.Empty);
+        return IsStageScene(savedSceneName);
+    }
+
     private void ConfigureSaveButton()
     {
         GameObject saveButtonObject = GameObject.Find("BtnHome");
