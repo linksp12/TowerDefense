@@ -108,7 +108,7 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log(
             isEnabled
                 ? "이스터에그 활성화: 이번 플레이의 기지 체력이 50으로 변경됨"
-                : "이스터에그 해제: 이번 플레이의 기지 체력이 100으로 복구됨"
+                : "이스터에그 해제: 이번 플레이의 기지 체력이 15로 복구됨"
         );
     }
 
@@ -169,7 +169,7 @@ public class MainMenuManager : MonoBehaviour
         TextMeshProUGUI messageText = textObject.GetComponent<TextMeshProUGUI>();
         messageText.text = isEnabled
             ? "숨겨진 힘이 깨어났습니다!  기지 체력 50"
-            : "숨겨진 힘이 사라졌습니다.  기지 체력 100";
+            : "숨겨진 힘이 사라졌습니다.  기지 체력 15";
         messageText.font = easterEggFont != null
             ? easterEggFont
             : FindMaplestoryFont();
