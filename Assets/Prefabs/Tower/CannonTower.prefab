@@ -151,9 +151,11 @@ MonoBehaviour:
   pathALv3Damage: 65
   pathALv3Cooldown: 2
   pathALv3Range: 5
-  cannonPathBLv2Damage: 300
-  cannonPathBLv2Cooldown: 3.5
+  pathBLv2Damage: 300
+  pathBLv2Cooldown: 3.5
   pathBLv2Range: 5.5
+  pathBLv3Damage: 55
+  pathBLv3Cooldown: 1.3
   pathBLv3Range: 6.5
 --- !u!114 &5671456848655801379
 MonoBehaviour:
