@@ -14963,6 +14963,9 @@ MonoBehaviour:
   resumeButton: {fileID: 112619316}
   restartButton: {fileID: 896064373}
   mainMenuButton: {fileID: 1735417993}
+  pauseBackgroundSprite: {fileID: -5427546145974743593, guid: addc8862756e6734c9e6e1107e5d8fba, type: 3}
+  pauseBoxSize: {x: 760, y: 430}
+  backdropAlpha: 0.72
 --- !u!114 &1522208317
 MonoBehaviour:
   m_ObjectHideFlags: 0
