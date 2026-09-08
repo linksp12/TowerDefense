@@ -91,6 +91,8 @@ public class BossInfoUI : MonoBehaviour
     private readonly List<BossHealthEntry> registeredBosses =
         new List<BossHealthEntry>();
 
+    private bool isSuppressedByTowerPanel;
+
 
     // =========================================================
     // Awake
@@ -424,7 +426,7 @@ public class BossInfoUI : MonoBehaviour
         if (topBossHPPanel != null)
             topBossHPPanel.SetActive(false);
 
-        if (bossInfoPanel != null)
+        if (bossInfoPanel != null && !isSuppressedByTowerPanel)
             bossInfoPanel.SetActive(true);
 
         if (bossNameText != null)
@@ -469,8 +471,12 @@ public class BossInfoUI : MonoBehaviour
                 totalCurrentHp += Mathf.Max(0, entry.boss.CurrentHp);
         }
 
-        if (bossInfoPanel != null && !bossInfoPanel.activeSelf)
+        if (bossInfoPanel != null &&
+            !isSuppressedByTowerPanel &&
+            !bossInfoPanel.activeSelf)
+        {
             bossInfoPanel.SetActive(true);
+        }
 
         if (hpSlider != null)
         {
@@ -485,6 +491,28 @@ public class BossInfoUI : MonoBehaviour
                 " / " +
                 totalMaxHp.ToString("N0");
         }
+    }
+
+    public void SetSuppressedByTowerPanel(bool suppressed)
+    {
+        isSuppressedByTowerPanel = suppressed;
+
+        if (bossInfoPanel == null)
+            return;
+
+        bool hasActiveBoss = false;
+
+        for (int i = 0; i < registeredBosses.Count; i++)
+        {
+            MonsterHealth boss = registeredBosses[i].boss;
+            if (boss != null && !boss.IsDead)
+            {
+                hasActiveBoss = true;
+                break;
+            }
+        }
+
+        bossInfoPanel.SetActive(!suppressed && hasActiveBoss);
     }
 
 
