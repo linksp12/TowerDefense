@@ -9925,7 +9925,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE30\uBCF8 \uD0C0\uC6CC"
+  m_text: "50 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -9934,8 +9934,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278254847
+  m_fontColor: {r: 1, g: 0.98995423, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10155,9 +10155,10 @@ MonoBehaviour:
   description: "\uB290\uB9AC\uC9C0\uB9CC \uAC15\uD55C \uD53C\uD574\uB97C \uC8FC\uB294
     \uC911\uD654\uAE30 \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uCCB4\uB825\uC774 \uB192\uC740
     \uBAAC\uC2A4\uD130\uB098 \uBB49\uCE5C \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
-  statInfo: "\uBE44\uC6A9: 100G\n\uACF5\uACA9\uB825: 100\n\uACF5\uACA9\uC18D\uB3C4:
-    \uB290\uB9BC\n\uC0AC\uAC70\uB9AC: \uBCF4\uD1B5\n\uC5C5\uADF8\uB808\uC774\uB4DC:
-    \uD3ED\uBC1C / \uACF5\uC131"
+  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>100</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
+    <color=white>\uB290\uB9BC</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
+    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
+    <color=white>\uD3ED\uBC1C / \uACF5\uC131</color>"
 --- !u!1 &1039176194
 GameObject:
   m_ObjectHideFlags: 0
@@ -12373,7 +12374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE90\uB17C \uD0C0\uC6CC"
+  m_text: "100 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -12382,8 +12383,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278254847
+  m_fontColor: {r: 1, g: 0.9882353, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12898,9 +12899,10 @@ MonoBehaviour:
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uCD08\uBC18 \uBAAC\uC2A4\uD130\uB97C \uC548\uC815\uC801\uC73C\uB85C
     \uCC98\uB9AC\uD558\uAE30 \uC88B\uC2B5\uB2C8\uB2E4."
-  statInfo: "\uBE44\uC6A9: 50G\n\uACF5\uACA9\uB825: 24\n\uACF5\uACA9\uC18D\uB3C4:
-    \uBE60\uB984\n\uC0AC\uAC70\uB9AC: \uBCF4\uD1B5\n\uC5C5\uADF8\uB808\uC774\uB4DC:
-    \uC5F0\uC0AC / \uAD00\uD1B5"
+  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>24</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
+    <color=white>\uBE60\uB984</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
+    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
+    <color=white>\uC5F0\uC0AC / \uAD00\uD1B5</color>"
 --- !u!114 &1287081251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13089,9 +13091,10 @@ MonoBehaviour:
   description: "\uD2B9\uC218 \uD6A8\uACFC\uB97C \uAC00\uC9C4 \uB9C8\uBC95 \uACF5\uACA9
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C
     \uD558\uAC70\uB098 \uC9C0\uC18D \uD53C\uD574\uB97C \uC904 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  statInfo: "\uBE44\uC6A9: 90G\n\uACF5\uACA9\uB825: 60\n\uACF5\uACA9\uC18D\uB3C4:
-    \uBCF4\uD1B5\n\uC0AC\uAC70\uB9AC: \uB113\uC74C\n\uC5C5\uADF8\uB808\uC774\uB4DC:
-    \uB9C8\uBC95\uD654\uC0B4 / \uD654\uC5FC"
+  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>60</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
+    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
+    <color=white>\uB113\uC74C</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
+    <color=white>\uB9C8\uBC95\uD654\uC0B4 / \uD654\uC5FC</color>"
 --- !u!1 &1289713773
 GameObject:
   m_ObjectHideFlags: 0
@@ -15171,7 +15174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB9C8\uBC95\uD0C0\uC6CC"
+  m_text: "90 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -15180,8 +15183,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278254847
+  m_fontColor: {r: 1, g: 0.9882353, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -17377,7 +17380,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.9519157, b: 0.4764151, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
