@@ -73,12 +73,6 @@ public class BuildPoint : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance != null && !GameManager.Instance.CanAfford(minimumBuildCost))
-        {
-            Debug.Log("돈이 부족해서 타워를 설치할 수 없습니다.");
-            return;
-        }
-
         if (TowerBuildManager.Instance != null)
         {
             TowerBuildManager.Instance.OpenBuildPanel(this);
@@ -149,14 +143,8 @@ public class BuildPoint : MonoBehaviour
 
         previewObject.SetActive(true);
 
-        if (CanBuildHere())
-        {
-            previewRenderer.color = canBuildColor;
-        }
-        else
-        {
-            previewRenderer.color = cannotBuildColor;
-        }
+        previewRenderer.color = canBuildColor;
+        
     }
 
     private void HidePreview()
@@ -165,17 +153,6 @@ public class BuildPoint : MonoBehaviour
         {
             previewObject.SetActive(false);
         }
-    }
-
-    private bool CanBuildHere()
-    {
-        if (hasTower)
-            return false;
-
-        if (GameManager.Instance == null)
-            return true;
-
-        return GameManager.Instance.CanAfford(TowerBuildManager.Instance.GetCheapestTowerCost());
     }
 
     private bool IsPointerOverUI()
