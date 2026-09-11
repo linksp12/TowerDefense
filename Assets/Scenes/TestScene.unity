@@ -13219,8 +13219,8 @@ MonoBehaviour:
   canvasGroup: {fileID: 0}
   rectTransform: {fileID: 0}
   animationTime: 0.15
-  startScale: {x: 0.85, y: 0.85, z: 1}
-  endScale: {x: 1, y: 1, z: 1}
+  startScale: {x: 0.65, y: 0.65, z: 1}
+  endScale: {x: 0.8, y: 0.8, z: 1}
 --- !u!225 &1298639255
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -21215,8 +21215,8 @@ MonoBehaviour:
   canvasGroup: {fileID: 2110398855}
   rectTransform: {fileID: 2110398851}
   animationTime: 0.15
-  startScale: {x: 0.85, y: 0.85, z: 1}
-  endScale: {x: 1, y: 1, z: 1}
+  startScale: {x: 0.65, y: 0.65, z: 1}
+  endScale: {x: 0.8, y: 0.8, z: 1}
 --- !u!225 &2110398855
 CanvasGroup:
   m_ObjectHideFlags: 0
