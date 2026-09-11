@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerBuildManager : MonoBehaviour
 {
@@ -63,10 +64,40 @@ public class TowerBuildManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // 패널이 열려 있을 때 마우스 좌클릭 감지
+        if (isOpen && Input.GetMouseButtonDown(0))
+        {
+            // UI 버튼이나 패널 자체를 클릭한 경우는 예외 (타워 건설 버튼 클릭 등)
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            // 3D/2D 레이캐스트로 클릭한 월드 오브젝트 확인
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+
+            // 클릭한 대상이 현재 선택된 BuildPoint라면 BuildPoint.OnMouseDown에서 토글 처리하므로 무시
+            if (hit.collider != null && selectedBuildPoint != null && hit.collider.gameObject == selectedBuildPoint.gameObject)
+            {
+                return;
+            }
+
+            // 그 외 배경, 땅, 맵의 빈 공간을 클릭했다면 패널 닫기
+            CloseBuildPanel();
+        }
+    }
+
     public void OpenBuildPanel(BuildPoint buildPoint)
     {
         if (buildPoint == null)
             return;
+
+        if (isOpen && selectedBuildPoint == buildPoint)
+        {
+            CloseBuildPanel();
+            return;
+        }
 
         if (closeCoroutine != null)
         {
