@@ -12897,8 +12897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
   towerName: "\uAE30\uBCF8 \uD0C0\uC6CC"
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
-    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uCD08\uBC18 \uBAAC\uC2A4\uD130\uB97C \uC548\uC815\uC801\uC73C\uB85C
-    \uCC98\uB9AC\uD558\uAE30 \uC88B\uC2B5\uB2C8\uB2E4."
+    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC274\uB4DC \uBAAC\uC2A4\uD130\uC5D0\uAC8C
+    \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
   statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>24</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
     <color=white>\uBE60\uB984</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
     <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
@@ -13089,8 +13089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
   towerName: "\uB9C8\uBC95 \uD0C0\uC6CC"
   description: "\uD2B9\uC218 \uD6A8\uACFC\uB97C \uAC00\uC9C4 \uB9C8\uBC95 \uACF5\uACA9
-    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C
-    \uD558\uAC70\uB098 \uC9C0\uC18D \uD53C\uD574\uB97C \uC904 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC720\uB839 \uBAAC\uC2A4\uD130\uC758 \uBAA8\uC2B5\uC744
+    \uB4DC\uB7EC\uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>60</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
     <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
     <color=white>\uB113\uC74C</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
