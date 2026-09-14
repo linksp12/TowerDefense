@@ -19,16 +19,16 @@ public class SoundManager : MonoBehaviour
         CancelInvoke("HideMoneyWarning");
 
         if (moneyWarningText != null)
-    {
-        moneyWarningText.SetActive(true);
-
-        var textComponent = moneyWarningText.GetComponent<TMPro.TextMeshProUGUI>();
-        
-        if (textComponent != null)
         {
-            textComponent.text = $"{amount}원이 부족합니다!";
+            moneyWarningText.SetActive(true);
+
+            var textComponent = moneyWarningText.GetComponent<TMPro.TextMeshProUGUI>();
+            
+            if (textComponent != null)
+            {
+                textComponent.text = $"{amount}원이 부족합니다!";
+            }
         }
-    }
 
         if (uiAudioSource != null && errorSound != null)
         {
