@@ -748,6 +748,7 @@ GameObject:
   - component: {fileID: 126587416}
   - component: {fileID: 126587418}
   - component: {fileID: 126587417}
+  - component: {fileID: 126587419}
   m_Layer: 5
   m_Name: MoneyWarningText
   m_TagString: Untagged
@@ -772,7 +773,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
+  m_SizeDelta: {x: 350, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126587417
 MonoBehaviour:
@@ -874,6 +875,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126587415}
   m_CullTransparentMesh: 1
+--- !u!223 &126587419
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126587415}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &131911632
 GameObject:
   m_ObjectHideFlags: 0
@@ -10373,6 +10398,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 836378142}
+  - {fileID: 126587416}
   - {fileID: 2110398851}
   - {fileID: 1298639251}
   - {fileID: 696026490}
@@ -10380,7 +10406,6 @@ RectTransform:
   - {fileID: 329306081}
   - {fileID: 618016135}
   - {fileID: 982882896}
-  - {fileID: 126587416}
   - {fileID: 1049173455}
   - {fileID: 1039176195}
   m_Father: {fileID: 0}
