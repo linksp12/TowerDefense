@@ -11,14 +11,15 @@ public class ResultSceneManager : MonoBehaviour
 
     [Header("Result Panels")]
     public GameObject victoryPanel;
-    public GameObject defeatPanel;
+    // 최종 ResultScene은 승리 전용입니다.
+    // public GameObject defeatPanel;
 
     [Header("페이드 설정")]
     public float fadeDuration = 1.0f;
 
     [Header("사운드")]
     public AudioClip victorySound;
-    public AudioClip defeatSound;
+    // public AudioClip defeatSound;
     private AudioSource audioSource;
 
     void Start()
@@ -27,21 +28,19 @@ public class ResultSceneManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        if (isVictory && victorySound != null)
+        if (victorySound != null)
             audioSource.PlayOneShot(victorySound);
-        else if (!isVictory && defeatSound != null)
-            audioSource.PlayOneShot(defeatSound);
+        // else if (!isVictory && defeatSound != null)
+        //     audioSource.PlayOneShot(defeatSound);
 
         if (victoryPanel != null) victoryPanel.SetActive(false);
-        if (defeatPanel != null) defeatPanel.SetActive(false);
+        // if (defeatPanel != null) defeatPanel.SetActive(false);
 
-        if (isVictory)
-        {
-            ConfigureVictoryMessage();
-            StartCoroutine(FadeIn(victoryPanel));
-        }
-        else
-            StartCoroutine(FadeIn(defeatPanel));
+        ConfigureVictoryMessage();
+        StartCoroutine(FadeIn(victoryPanel));
+
+        // 패배는 각 스테이지의 StageResultUI에서 처리합니다.
+        // StartCoroutine(FadeIn(defeatPanel));
     }
 
     private void ConfigureVictoryMessage()
