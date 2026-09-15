@@ -42,7 +42,6 @@ public class MonsterHealth : MonoBehaviour
 
     [Header("Sound")]
     public AudioSource audioSource;
-    public AudioClip hitSound;
     public AudioClip deathSound;
 
     [Header("Death Animation")]
@@ -75,6 +74,7 @@ public class MonsterHealth : MonoBehaviour
             originalColor = spriteRenderer.color;
         }
 
+        // 죽음 효과음 등에 사용할 AudioSource
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -102,6 +102,9 @@ public class MonsterHealth : MonoBehaviour
         }
     }
 
+    // =========================================================
+    // 데미지 처리
+    // =========================================================
     public void TakeDamage(int damage)
     {
         TakeDamage(damage, true);
@@ -125,8 +128,12 @@ public class MonsterHealth : MonoBehaviour
 
         int finalDamage = Mathf.Max(0, damage);
         bool isCritical = false;
-        bool shieldBlocked = shieldFXObject != null && currentShield > 0;
+        bool shieldBlocked =
+            shieldFXObject != null && currentShield > 0;
 
+        // =====================================================
+        // 실드 처리
+        // =====================================================
         if (shieldBlocked)
         {
             currentShield -= 1;
@@ -138,12 +145,17 @@ public class MonsterHealth : MonoBehaviour
         }
         else
         {
+            // =================================================
+            // 치명타 처리
+            // =================================================
             if (criticalChance > 0f &&
                 Random.value < Mathf.Clamp01(criticalChance))
             {
                 finalDamage = Mathf.RoundToInt(
-                    finalDamage * Mathf.Max(1f, criticalDamageMultiplier)
+                    finalDamage *
+                    Mathf.Max(1f, criticalDamageMultiplier)
                 );
+
                 isCritical = true;
             }
 
@@ -151,29 +163,55 @@ public class MonsterHealth : MonoBehaviour
             currentHp = Mathf.Max(currentHp, 0);
         }
 
+        // =====================================================
+        // 데미지 팝업
+        // =====================================================
         if (shieldBlocked)
+        {
             DamagePopup.ShowShield(transform.position);
+        }
         else
-            DamagePopup.Show(transform.position, finalDamage, isCritical);
+        {
+            DamagePopup.Show(
+                transform.position,
+                finalDamage,
+                isCritical
+            );
+        }
 
+        // =====================================================
+        // 피격 효과
+        // =====================================================
         PlayHitFeedback(playHitSound);
 
+        // =====================================================
+        // HP UI
+        // =====================================================
         if (monsterHpSlider != null)
         {
             monsterHpSlider.value = currentHp;
         }
 
+        // =====================================================
+        // 골렘 스킬
+        // =====================================================
         if (currentHp > 0 && golemRootSkill != null)
         {
             golemRootSkill.OnDamaged();
         }
 
+        // =====================================================
+        // 사망
+        // =====================================================
         if (currentHp <= 0)
         {
             Die();
         }
     }
 
+    // =========================================================
+    // 피격 효과 전체
+    // =========================================================
     private void PlayHitFeedback(bool playHitSound)
     {
         if (playHitSound)
@@ -185,14 +223,22 @@ public class MonsterHealth : MonoBehaviour
         PlayHitFlash();
     }
 
+    // =========================================================
+    // 타격음
+    // =========================================================
     private void PlayHitSound()
     {
-        if (audioSource != null && hitSound != null)
+        // 이제 몬스터 개별 AudioSource에서 재생하지 않고
+        // 씬의 HitSoundManager가 전체 타격음을 관리함
+        if (HitSoundManager.Instance != null)
         {
-            audioSource.PlayOneShot(hitSound);
+            HitSoundManager.Instance.PlayHitSound();
         }
     }
 
+    // =========================================================
+    // 피격 이펙트
+    // =========================================================
     private void SpawnHitEffect()
     {
         if (hitEffectPrefab == null)
@@ -209,6 +255,9 @@ public class MonsterHealth : MonoBehaviour
         Destroy(effect, hitEffectDestroyTime);
     }
 
+    // =========================================================
+    // 피격 플래시
+    // =========================================================
     private void PlayHitFlash()
     {
         if (!useHitFlash || spriteRenderer == null)
@@ -238,6 +287,9 @@ public class MonsterHealth : MonoBehaviour
         flashCoroutine = null;
     }
 
+    // =========================================================
+    // 사망 처리
+    // =========================================================
     private void Die()
     {
         if (isDead)
@@ -249,6 +301,9 @@ public class MonsterHealth : MonoBehaviour
 
         Debug.Log(gameObject.name + " 몬스터 사망");
 
+        // =====================================================
+        // 이동 중지
+        // =====================================================
         MonsterMove move = GetComponent<MonsterMove>();
 
         if (move != null)
@@ -256,6 +311,9 @@ public class MonsterHealth : MonoBehaviour
             move.enabled = false;
         }
 
+        // =====================================================
+        // 콜라이더 비활성화
+        // =====================================================
         Collider2D col = GetComponent<Collider2D>();
 
         if (col != null)
@@ -263,6 +321,9 @@ public class MonsterHealth : MonoBehaviour
             col.enabled = false;
         }
 
+        // =====================================================
+        // 죽음 효과음
+        // =====================================================
         if (deathSound != null)
         {
             AudioSource.PlayClipAtPoint(
@@ -272,35 +333,54 @@ public class MonsterHealth : MonoBehaviour
             );
         }
 
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+        // =====================================================
+        // 웨이브 매니저에 처치 알림
+        // =====================================================
+        WaveManager waveManager =
+            FindFirstObjectByType<WaveManager>();
 
         if (waveManager != null)
         {
             waveManager.OnMonsterKilled();
         }
 
+        // =====================================================
+        // 골드 지급
+        // =====================================================
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddMoney(goldReward);
         }
 
+        // =====================================================
+        // 죽음 애니메이션
+        // =====================================================
         PlayDeathAnimation();
+
         StartCoroutine(DeathCoroutine());
     }
 
+    // =========================================================
+    // 죽음 애니메이션
+    // =========================================================
     private void PlayDeathAnimation()
     {
         if (animator == null)
         {
-            Debug.LogWarning(gameObject.name + " : Animator가 없습니다.");
+            Debug.LogWarning(
+                gameObject.name + " : Animator가 없습니다."
+            );
+
             return;
         }
 
         if (string.IsNullOrEmpty(deathStateName))
         {
             Debug.LogWarning(
-                gameObject.name + " : deathStateName이 비어 있습니다."
+                gameObject.name +
+                " : deathStateName이 비어 있습니다."
             );
+
             return;
         }
 
@@ -309,7 +389,11 @@ public class MonsterHealth : MonoBehaviour
 
         if (animator.HasState(0, stateHash))
         {
-            animator.Play(statePath, 0, 0f);
+            animator.Play(
+                statePath,
+                0,
+                0f
+            );
         }
         else
         {
@@ -322,9 +406,13 @@ public class MonsterHealth : MonoBehaviour
         }
     }
 
+    // =========================================================
+    // 죽음 후 삭제
+    // =========================================================
     private IEnumerator DeathCoroutine()
     {
         yield return new WaitForSeconds(deathAnimationTime);
+
         Destroy(gameObject);
     }
 }
