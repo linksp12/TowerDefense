@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,12 +103,12 @@ TextureImporter:
       name: Fire ball effect test_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1536
-        height: 1024
+        x: 34
+        y: 839
+        width: 102
+        height: 185
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -121,11 +121,407 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 822
+        width: 102
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeebed658d0761e499ea0006bf52a5b4
+      internalID: 191493396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_2
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 815
+        width: 114
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96800202e78eef74298bc8cf7796058a
+      internalID: -1283535506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_3
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 787
+        width: 124
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d7b05348945c6c4580865908502c285
+      internalID: -446368563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_4
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 754
+        width: 147
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e413a0dcec287d14ba50ef026130a131
+      internalID: -115882687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_5
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 717
+        width: 164
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7f24da6c5203a24d8e3fe0092c1924a
+      internalID: 504156944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_6
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 686
+        width: 208
+        height: 312
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e391c2163aa2c9a419bdd74341c23e56
+      internalID: 22784132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_7
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 680
+        width: 236
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77859531bc11a604b93ce24a7e30b923
+      internalID: 1498155384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_8
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 339
+        width: 257
+        height: 375
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd7207e00d86e841882d91b3e98d442
+      internalID: -587905702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_9
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 339
+        width: 273
+        height: 365
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a943558eb2f0e440b4019e313c1ff8e
+      internalID: -1279497713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_10
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 338
+        width: 303
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d17dd3fe38844464aa0bd12bcc306d3b
+      internalID: 493979764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_11
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 343
+        width: 280
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4ca5d8da9cfb40498f649375bba42b5
+      internalID: 1222655603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_12
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 346
+        width: 300
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 689ea0638eda5484a90f0ad4fd6b52d9
+      internalID: 736931899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_13
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 50
+        width: 289
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2127be008e85acf4c97ed93088dd7f34
+      internalID: -134032570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_14
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 58
+        width: 237
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23a9a4804a8e42d4ea5726a0e851f3bc
+      internalID: 1488514582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_15
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 50
+        width: 182
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16217a7ca30eab04690ee9d669ca9961
+      internalID: 25764687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_16
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 47
+        width: 176
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3432e139054cdef43be3d552b31669fc
+      internalID: 2129510435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_17
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 47
+        width: 159
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694bfb7d15643f54fa1157e9ed73d34a
+      internalID: -683883678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire ball effect test_18
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 53
+        width: 143
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05991f8ca9727b142929fd3487bde13a
+      internalID: -2127485400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 56f935698517dc84ba84573d58e87cac
     internalID: 0
     vertices: []
     indices: 
@@ -136,6 +532,24 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Fire ball effect test_0: -9133347686658752358
+      Fire ball effect test_1: 191493396
+      Fire ball effect test_10: 493979764
+      Fire ball effect test_11: 1222655603
+      Fire ball effect test_12: 736931899
+      Fire ball effect test_13: -134032570
+      Fire ball effect test_14: 1488514582
+      Fire ball effect test_15: 25764687
+      Fire ball effect test_16: 2129510435
+      Fire ball effect test_17: -683883678
+      Fire ball effect test_18: -2127485400
+      Fire ball effect test_2: -1283535506
+      Fire ball effect test_3: -446368563
+      Fire ball effect test_4: -115882687
+      Fire ball effect test_5: 504156944
+      Fire ball effect test_6: 22784132
+      Fire ball effect test_7: 1498155384
+      Fire ball effect test_8: -587905702
+      Fire ball effect test_9: -1279497713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
