@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d88e224a006413d4caa00bffb1afa42a
+guid: b8fcbd9ae7f053a438f4cf072243e2bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4248292939998936545
-    second: electric_magic_effect_0
+      213: -9133347686658752358
+    second: Fire ball effect test_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.49753636, y: 0.52463657}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 162, y: 218, z: 181, w: 131}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: electric_magic_effect_0
+      name: Fire ball effect test_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 59
-        width: 1254
-        height: 1137
+        y: 0
+        width: 1536
+        height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f12409954180b05c0800000000000000
-      internalID: -4248292939998936545
+      spriteID: a90c1966ba4df3180800000000000000
+      internalID: -9133347686658752358
       vertices: []
       indices: 
       edges: []
@@ -125,8 +125,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      electric_magic_effect_0: -4248292939998936545
+      Fire ball effect test_0: -9133347686658752358
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

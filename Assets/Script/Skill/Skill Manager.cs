@@ -54,6 +54,9 @@ public class SkillManager : MonoBehaviour
 
     public float fireDotInterval = 0.5f;
 
+    [Tooltip("메테오/폭발 이펙트의 크기 배율") ]
+    public float fireEffectScale = 2f;
+
 
     // =========================================================
     // 번개 스킬 밸런스
@@ -598,6 +601,10 @@ public class SkillManager : MonoBehaviour
             );
 
 
+        Vector3 castPosition =
+            transform.position;
+
+
         foreach (var enemy in enemies)
         {
             if (enemy == null)
@@ -625,18 +632,19 @@ public class SkillManager : MonoBehaviour
                     )
                 );
             }
-
-
-            CreateEffect(
-                fireEffectPrefab,
-                enemy.transform.position,
-                fireDotDuration
-            );
         }
 
 
+        // 기존처럼 몬스터마다 이펙트를 만들지 않고
+        // 스킬 발동 위치에 메테오 이펙트 1개만 생성
+        CreateFireEffect(
+            castPosition,
+            fireDotDuration
+        );
+
+
         Debug.Log(
-            "불 스킬 발동!"
+            "불 스킬 발동! (메테오 1개)"
         );
     }
 
@@ -656,6 +664,13 @@ public class SkillManager : MonoBehaviour
                 FindObjectsSortMode.None
             );
 
+
+        int hitCount = 0;
+
+
+        // -----------------------------------------------------
+        // 범위 안의 모든 몬스터에게 데미지
+        // -----------------------------------------------------
 
         foreach (var enemy in enemies)
         {
@@ -683,6 +698,8 @@ public class SkillManager : MonoBehaviour
                 false
             );
 
+            hitCount++;
+
 
             if (
                 fireDotDamage > 0 &&
@@ -695,18 +712,24 @@ public class SkillManager : MonoBehaviour
                     )
                 );
             }
-
-
-            CreateEffect(
-                fireEffectPrefab,
-                enemy.transform.position,
-                fireDotDuration
-            );
         }
 
 
+        // -----------------------------------------------------
+        // ★ 메테오/폭발 이펙트는 범위의 중심에 1개만 생성
+        // -----------------------------------------------------
+
+        CreateFireEffect(
+            castPosition,
+            fireDotDuration
+        );
+
+
         Debug.Log(
-            "불 범위 스킬 발동!"
+            "불 범위 스킬 발동! " +
+            " / 적중 수 : " +
+            hitCount +
+            " / 메테오 : 1개"
         );
     }
 
@@ -1119,6 +1142,51 @@ public class SkillManager : MonoBehaviour
             "번개 범위 스킬 발동! " +
             "적중 수 : " +
             hitCount
+        );
+    }
+
+
+    // =========================================================
+    // ★ 불 스킬 전용 메테오 이펙트 생성
+    // =========================================================
+
+    private void CreateFireEffect(
+        Vector3 position,
+        float destroyTime
+    )
+    {
+        if (fireEffectPrefab == null)
+            return;
+
+
+        GameObject effect =
+            Instantiate(
+                fireEffectPrefab,
+                position,
+                Quaternion.identity
+            );
+
+
+        // 메테오와 폭발 이펙트를 원하는 크기로 확대
+        effect.transform.localScale =
+            Vector3.one * fireEffectScale;
+
+
+        SpriteRenderer sr =
+            effect.GetComponent<
+                SpriteRenderer
+            >();
+
+
+        if (sr != null)
+        {
+            sr.sortingOrder = 100;
+        }
+
+
+        Destroy(
+            effect,
+            destroyTime
         );
     }
 

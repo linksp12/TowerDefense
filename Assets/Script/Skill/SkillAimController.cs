@@ -5,13 +5,65 @@ public class SkillAimController : MonoBehaviour
 {
     public static SkillAimController Instance;
 
+
     // =========================================================
     // 마법진 표시 오브젝트
     // =========================================================
 
     [Header("마법진 표시 오브젝트")]
-    [Tooltip("MagicCircleVisual을 연결하세요.")]
+    [Tooltip("기존 MagicCircleVisual을 연결하세요.")]
     public GameObject magicCircleObject;
+
+
+    // =========================================================
+    // 스킬 범위 표시
+    // =========================================================
+
+    [Header("스킬 범위 표시 - LineRenderer")]
+
+    [Tooltip("빨간/파란/노란 원을 그릴 RangeIndicator 오브젝트")]
+    public GameObject rangeIndicatorObject;
+
+    [Tooltip("불 스킬 범위 색상")]
+    public Color fireRangeColor =
+        new Color(1f, 0f, 0f, 1f);
+
+    [Tooltip("얼음 스킬 범위 색상")]
+    public Color iceRangeColor =
+        new Color(0.2f, 0.8f, 1f, 1f);
+
+    [Tooltip("번개 스킬 범위 색상")]
+    public Color lightningRangeColor =
+        new Color(1f, 0.85f, 0f, 1f);
+
+    [Tooltip("범위 원 선 두께")]
+    [Min(0.001f)]
+    public float rangeIndicatorWidth = 0.05f;
+
+    [Tooltip("원 정밀도")]
+    [Range(32, 128)]
+    public int rangeIndicatorSegments = 64;
+
+    private LineRenderer rangeLineRenderer;
+
+
+    // =========================================================
+    // 스킬별 범위 보정
+    // =========================================================
+
+    [Header("스킬별 범위 보정")]
+
+    [Tooltip("Fireball 실제 공격 범위 보정")]
+    [Range(0.5f, 1.5f)]
+    public float fireRangeRadiusMultiplier = 0.75f;
+
+    [Tooltip("Ice Attack 실제 공격 범위 보정")]
+    [Range(0.5f, 1.5f)]
+    public float iceRangeRadiusMultiplier = 0.75f;
+
+    [Tooltip("Lightning 실제 공격 범위 보정")]
+    [Range(0.5f, 1.5f)]
+    public float lightningRangeRadiusMultiplier = 0.75f;
 
 
     // =========================================================
@@ -19,8 +71,11 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     [Header("마법진 이미지")]
+
     public Sprite fireMagicCircle;
+
     public Sprite iceMagicCircle;
+
     public Sprite lightningMagicCircle;
 
 
@@ -29,6 +84,7 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     [Header("마법진 크기")]
+
     [Tooltip("전체 마법진 크기")]
     public float magicCircleScale = 1f;
 
@@ -47,6 +103,7 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     [Header("마우스 이동")]
+
     [Tooltip("마법진이 마우스를 따라가는 속도")]
     public float followSpeed = 15f;
 
@@ -59,6 +116,7 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     [Header("마법진 회전")]
+
     [Tooltip("마법진 회전 사용")]
     public bool rotateMagicCircle = true;
 
@@ -67,26 +125,11 @@ public class SkillAimController : MonoBehaviour
 
 
     // =========================================================
-    // 펄스
-    // =========================================================
-
-    [Header("마법진 펄스 효과")]
-    [Tooltip("마법진이 살짝 커졌다 작아집니다.")]
-    public bool usePulseEffect = true;
-
-    [Tooltip("펄스 크기")]
-    [Range(0f, 0.3f)]
-    public float pulseAmount = 0.04f;
-
-    [Tooltip("펄스 속도")]
-    public float pulseSpeed = 3f;
-
-
-    // =========================================================
     // 몬스터 Layer
     // =========================================================
 
     [Header("몬스터 감지")]
+
     [Tooltip("몬스터가 사용하는 Layer")]
     public LayerMask monsterLayer;
 
@@ -96,6 +139,7 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     [Header("범위 내 몬스터 강조")]
+
     public bool highlightWhenEnemyInside = true;
 
     [Tooltip("평소 마법진 투명도")]
@@ -122,14 +166,11 @@ public class SkillAimController : MonoBehaviour
 
     private string selectedSkillName = "";
 
-    // 마우스가 향하는 위치
     private Vector3 targetPosition;
 
-    // 마법진 기본 크기
     private Vector3 originalScale;
 
-    // 실제 공격 반경
-    // 스킬 선택 순간에 계산해서 고정
+    // 현재 선택된 스킬의 실제 공격 반경
     private float currentSkillRadius = 0f;
 
 
@@ -146,6 +187,10 @@ public class SkillAimController : MonoBehaviour
         FindSpriteRenderer();
 
 
+        // -----------------------------------------------------
+        // 기존 마법진
+        // -----------------------------------------------------
+
         if (magicCircleObject != null)
         {
             magicCircleObject.SetActive(false);
@@ -153,6 +198,13 @@ public class SkillAimController : MonoBehaviour
             originalScale =
                 magicCircleObject.transform.localScale;
         }
+
+
+        // -----------------------------------------------------
+        // 범위 표시 준비
+        // -----------------------------------------------------
+
+        SetupRangeIndicator();
     }
 
 
@@ -168,6 +220,8 @@ public class SkillAimController : MonoBehaviour
                 normalAlpha
             );
         }
+
+        HideRangeIndicator();
     }
 
 
@@ -182,31 +236,31 @@ public class SkillAimController : MonoBehaviour
 
 
         // -----------------------------------------------------
-        // 마우스 위치 갱신
+        // 마우스 위치
         // -----------------------------------------------------
 
         UpdateTargetPosition();
 
 
         // -----------------------------------------------------
-        // 마우스를 따라 이동
+        // 마법진 이동
         // -----------------------------------------------------
 
         FollowMouseSmooth();
 
 
         // -----------------------------------------------------
-        // 회전
+        // 범위 원 갱신
+        // -----------------------------------------------------
+
+        UpdateRangeIndicator();
+
+
+        // -----------------------------------------------------
+        // 마법진 회전
         // -----------------------------------------------------
 
         RotateMagicCircle();
-
-
-        // -----------------------------------------------------
-        // 펄스
-        // -----------------------------------------------------
-
-        PulseMagicCircle();
 
 
         // -----------------------------------------------------
@@ -239,7 +293,7 @@ public class SkillAimController : MonoBehaviour
 
 
         // -----------------------------------------------------
-        // ★ 좌클릭 = 현재 마법진 위치에 스킬 발동
+        // 좌클릭 = 스킬 발동
         // -----------------------------------------------------
 
         if (Input.GetMouseButtonDown(0))
@@ -259,18 +313,359 @@ public class SkillAimController : MonoBehaviour
             return;
 
 
-        // 자기 자신
         spriteRenderer =
             magicCircleObject.GetComponent<SpriteRenderer>();
 
 
-        // 자식까지 검색
         if (spriteRenderer == null)
         {
             spriteRenderer =
                 magicCircleObject.GetComponentInChildren<SpriteRenderer>(
                     true
                 );
+        }
+    }
+
+
+    // =========================================================
+    // LineRenderer 설정
+    // =========================================================
+
+    private void SetupRangeIndicator()
+    {
+        if (rangeIndicatorObject == null)
+        {
+            Debug.LogWarning(
+                "SkillAimController : " +
+                "Range Indicator Object가 연결되지 않았습니다."
+            );
+
+            return;
+        }
+
+
+        rangeLineRenderer =
+            rangeIndicatorObject.GetComponent<LineRenderer>();
+
+
+        if (rangeLineRenderer == null)
+        {
+            rangeLineRenderer =
+                rangeIndicatorObject.AddComponent<LineRenderer>();
+        }
+
+
+        // -----------------------------------------------------
+        // 기본 설정
+        // -----------------------------------------------------
+
+        rangeLineRenderer.useWorldSpace = false;
+
+        rangeLineRenderer.loop = true;
+
+        rangeLineRenderer.positionCount =
+            Mathf.Max(
+                32,
+                rangeIndicatorSegments
+            );
+
+
+        rangeLineRenderer.startWidth =
+            rangeIndicatorWidth;
+
+        rangeLineRenderer.endWidth =
+            rangeIndicatorWidth;
+
+
+        rangeLineRenderer.alignment =
+            LineAlignment.View;
+
+
+        rangeLineRenderer.textureMode =
+            LineTextureMode.Stretch;
+
+
+        // -----------------------------------------------------
+        // Material 생성
+        // -----------------------------------------------------
+
+        Shader shader =
+            Shader.Find("Sprites/Default");
+
+
+        if (shader != null)
+        {
+            Material material =
+                new Material(shader);
+
+            material.name =
+                "SkillRangeLineMaterial";
+
+            material.color =
+                fireRangeColor;
+
+            rangeLineRenderer.material =
+                material;
+        }
+
+
+        // -----------------------------------------------------
+        // 렌더링 순서
+        // -----------------------------------------------------
+
+        rangeLineRenderer.sortingLayerID =
+            SortingLayer.NameToID("Default");
+
+        // 기존 MagicCircleVisual보다 뒤
+        rangeLineRenderer.sortingOrder = 5;
+
+
+        // -----------------------------------------------------
+        // 처음에는 숨김
+        // -----------------------------------------------------
+
+        HideRangeIndicator();
+    }
+
+
+    // =========================================================
+    // 현재 스킬의 범위 색상 가져오기
+    // =========================================================
+
+    private Color GetCurrentRangeColor()
+    {
+        switch (selectedSkillName)
+        {
+            case "Fireball":
+                return fireRangeColor;
+
+            case "Ice Attack":
+                return iceRangeColor;
+
+            case "Lightning":
+                return lightningRangeColor;
+
+            default:
+                return fireRangeColor;
+        }
+    }
+
+
+    // =========================================================
+    // 현재 스킬의 범위 보정값 가져오기
+    // =========================================================
+
+    private float GetCurrentRangeMultiplier()
+    {
+        switch (selectedSkillName)
+        {
+            case "Fireball":
+                return fireRangeRadiusMultiplier;
+
+            case "Ice Attack":
+                return iceRangeRadiusMultiplier;
+
+            case "Lightning":
+                return lightningRangeRadiusMultiplier;
+
+            default:
+                return 1f;
+        }
+    }
+
+
+    // =========================================================
+    // 빨간/파란/노란 원 그리기
+    // =========================================================
+
+    private void DrawRangeCircle()
+    {
+        if (rangeLineRenderer == null)
+            return;
+
+
+        int segments =
+            Mathf.Clamp(
+                rangeIndicatorSegments,
+                32,
+                128
+            );
+
+
+        rangeLineRenderer.positionCount =
+            segments;
+
+
+        float radius =
+            currentSkillRadius;
+
+
+        if (radius <= 0f)
+            return;
+
+
+        // -----------------------------------------------------
+        // 현재 스킬 색상
+        // -----------------------------------------------------
+
+        Color currentColor =
+            GetCurrentRangeColor();
+
+
+        // -----------------------------------------------------
+        // 원형 좌표 생성
+        // -----------------------------------------------------
+
+        for (int i = 0; i < segments; i++)
+        {
+            float angle =
+                (360f / segments) * i;
+
+            float radian =
+                angle * Mathf.Deg2Rad;
+
+
+            float x =
+                Mathf.Cos(radian) *
+                radius;
+
+
+            float y =
+                Mathf.Sin(radian) *
+                radius;
+
+
+            rangeLineRenderer.SetPosition(
+                i,
+                new Vector3(
+                    x,
+                    y,
+                    0f
+                )
+            );
+        }
+
+
+        // -----------------------------------------------------
+        // 선 두께
+        // -----------------------------------------------------
+
+        rangeLineRenderer.startWidth =
+            rangeIndicatorWidth;
+
+        rangeLineRenderer.endWidth =
+            rangeIndicatorWidth;
+
+
+        // -----------------------------------------------------
+        // LineRenderer 색상
+        // -----------------------------------------------------
+
+        rangeLineRenderer.startColor =
+            currentColor;
+
+        rangeLineRenderer.endColor =
+            currentColor;
+
+
+        // -----------------------------------------------------
+        // Material 색상
+        // -----------------------------------------------------
+
+        if (rangeLineRenderer.material != null)
+        {
+            rangeLineRenderer.material.color =
+                currentColor;
+        }
+    }
+
+
+    // =========================================================
+    // 범위 표시 업데이트
+    // =========================================================
+
+    private void UpdateRangeIndicator()
+    {
+        if (rangeLineRenderer == null)
+            return;
+
+
+        if (magicCircleObject == null)
+        {
+            HideRangeIndicator();
+            return;
+        }
+
+
+        if (currentSkillRadius <= 0f)
+        {
+            HideRangeIndicator();
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 마법진과 같은 위치
+        // -----------------------------------------------------
+
+        rangeIndicatorObject.transform.position =
+            magicCircleObject.transform.position;
+
+
+        // -----------------------------------------------------
+        // 범위 원은 회전하지 않음
+        // -----------------------------------------------------
+
+        rangeIndicatorObject.transform.rotation =
+            Quaternion.identity;
+
+
+        // -----------------------------------------------------
+        // 원 다시 그리기
+        // -----------------------------------------------------
+
+        DrawRangeCircle();
+
+
+        rangeLineRenderer.enabled = true;
+    }
+
+
+    // =========================================================
+    // 범위 표시 숨기기
+    // =========================================================
+
+    private void HideRangeIndicator()
+    {
+        if (rangeLineRenderer != null)
+        {
+            rangeLineRenderer.enabled = false;
+        }
+
+
+        if (rangeIndicatorObject != null)
+        {
+            rangeIndicatorObject.SetActive(false);
+        }
+    }
+
+
+    // =========================================================
+    // 범위 표시 보이기
+    // =========================================================
+
+    private void ShowRangeIndicator()
+    {
+        if (rangeIndicatorObject == null)
+            return;
+
+
+        rangeIndicatorObject.SetActive(true);
+
+
+        if (rangeLineRenderer != null)
+        {
+            rangeLineRenderer.enabled = true;
         }
     }
 
@@ -377,7 +772,7 @@ public class SkillAimController : MonoBehaviour
 
 
         // -----------------------------------------------------
-        // 스킬별 마법진 이미지 설정
+        // 스킬별 마법진 이미지
         // -----------------------------------------------------
 
         if (
@@ -401,7 +796,7 @@ public class SkillAimController : MonoBehaviour
 
 
         // -----------------------------------------------------
-        // 마법진 크기 설정
+        // 마법진 크기
         // -----------------------------------------------------
 
         SetMagicCircleSize(
@@ -410,7 +805,7 @@ public class SkillAimController : MonoBehaviour
 
 
         // -----------------------------------------------------
-        // ★ 실제 공격 반경 저장
+        // 실제 공격 반경
         // -----------------------------------------------------
 
         currentSkillRadius =
@@ -424,9 +819,26 @@ public class SkillAimController : MonoBehaviour
         UpdateTargetPosition();
 
 
-        // 시작할 때 마우스 위치에 바로 배치
         magicCircleObject.transform.position =
             targetPosition;
+
+
+        // -----------------------------------------------------
+        // 범위 원 표시
+        // -----------------------------------------------------
+
+        ShowRangeIndicator();
+
+
+        rangeIndicatorObject.transform.position =
+            targetPosition;
+
+
+        rangeIndicatorObject.transform.rotation =
+            Quaternion.identity;
+
+
+        DrawRangeCircle();
 
 
         // -----------------------------------------------------
@@ -600,21 +1012,40 @@ public class SkillAimController : MonoBehaviour
             return 0f;
 
 
-        // Sprite의 가로 반쪽 크기
+        // -----------------------------------------------------
+        // Sprite 전체 가로 반경
+        // -----------------------------------------------------
+
         float spriteRadius =
             spriteRenderer.sprite.bounds.extents.x;
 
 
-        // 월드 스케일
+        // -----------------------------------------------------
+        // 실제 월드 스케일
+        // -----------------------------------------------------
+
         float worldScale =
             Mathf.Abs(
                 magicCircleObject.transform.lossyScale.x
             );
 
 
+        // -----------------------------------------------------
+        // 스킬별 범위 보정
+        // -----------------------------------------------------
+
+        float rangeMultiplier =
+            GetCurrentRangeMultiplier();
+
+
+        // -----------------------------------------------------
+        // 최종 공격 반경
+        // -----------------------------------------------------
+
         return
             spriteRadius *
-            worldScale;
+            worldScale *
+            rangeMultiplier;
     }
 
 
@@ -712,41 +1143,6 @@ public class SkillAimController : MonoBehaviour
 
 
     // =========================================================
-    // 펄스
-    // =========================================================
-
-    private void PulseMagicCircle()
-    {
-        if (!usePulseEffect)
-            return;
-
-
-        if (magicCircleObject == null)
-            return;
-
-
-        float pulse =
-            Mathf.Sin(
-                Time.unscaledTime *
-                pulseSpeed
-            );
-
-
-        float multiplier =
-            1f +
-            pulse *
-            pulseAmount;
-
-
-        // ★ 공격 반경은 바뀌지 않고
-        // 화면상의 마법진만 펄스됨
-        magicCircleObject.transform.localScale =
-            originalScale *
-            multiplier;
-    }
-
-
-    // =========================================================
     // 범위 안 몬스터 확인
     // =========================================================
 
@@ -805,7 +1201,7 @@ public class SkillAimController : MonoBehaviour
 
 
     // =========================================================
-    // 범위 안 몬스터가 있으면 밝게
+    // 범위 내 몬스터 강조
     // =========================================================
 
     private void UpdateEnemyHighlight()
@@ -887,10 +1283,7 @@ public class SkillAimController : MonoBehaviour
 
 
     // =========================================================
-    // ★ 실제 스킬 사용
-    // =========================================================
-    // 몬스터를 클릭할 필요 없음
-    // 화면 어디든 클릭하면 그 위치에서 발동
+    // 실제 스킬 사용
     // =========================================================
 
     private void TryUseSkill()
@@ -926,9 +1319,9 @@ public class SkillAimController : MonoBehaviour
         }
 
 
-        // =====================================================
-        // ★ 클릭 순간 마우스 위치를 바로 확정
-        // =====================================================
+        // -----------------------------------------------------
+        // 클릭 순간 위치 확정
+        // -----------------------------------------------------
 
         UpdateTargetPosition();
 
@@ -937,17 +1330,24 @@ public class SkillAimController : MonoBehaviour
             targetPosition;
 
 
-        // =====================================================
-        // ★ 클릭 위치를 스킬 발동 위치로 사용
-        // =====================================================
+        if (rangeIndicatorObject != null)
+        {
+            rangeIndicatorObject.transform.position =
+                targetPosition;
+        }
+
+
+        // -----------------------------------------------------
+        // 스킬 발동 위치
+        // -----------------------------------------------------
 
         Vector3 castPosition =
             targetPosition;
 
 
-        // =====================================================
+        // -----------------------------------------------------
         // 실제 공격 반경
-        // =====================================================
+        // -----------------------------------------------------
 
         float radius =
             currentSkillRadius;
@@ -963,9 +1363,9 @@ public class SkillAimController : MonoBehaviour
         }
 
 
-        // =====================================================
-        // ★ SkillManager에서 범위 스킬 발동
-        // =====================================================
+        // -----------------------------------------------------
+        // SkillManager에서 범위 스킬 발동
+        // -----------------------------------------------------
 
         bool success =
             SkillManager.Instance.UseSkillAtPosition(
@@ -981,10 +1381,6 @@ public class SkillAimController : MonoBehaviour
         }
 
 
-        // -----------------------------------------------------
-        // 디버그
-        // -----------------------------------------------------
-
         Debug.Log(
             "스킬 발동 : " +
             selectedSkillName +
@@ -995,9 +1391,9 @@ public class SkillAimController : MonoBehaviour
         );
 
 
-        // =====================================================
+        // -----------------------------------------------------
         // 조준 종료
-        // =====================================================
+        // -----------------------------------------------------
 
         FinishAiming();
     }
@@ -1020,6 +1416,9 @@ public class SkillAimController : MonoBehaviour
         {
             magicCircleObject.SetActive(false);
         }
+
+
+        HideRangeIndicator();
     }
 
 
@@ -1040,6 +1439,9 @@ public class SkillAimController : MonoBehaviour
         {
             magicCircleObject.SetActive(false);
         }
+
+
+        HideRangeIndicator();
 
 
         Debug.Log(
