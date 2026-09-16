@@ -24,9 +24,9 @@ public class TowerBuildManager : MonoBehaviour
     public GameObject magicTowerPrefab;
 
     [Header("Tower Costs")]
-    public int basicTowerCost = 50;
-    public int cannonTowerCost = 100;
-    public int magicTowerCost = 90;
+    public int basicTowerCost => basicTowerPrefab.GetComponent<TowerAttack>().cost;
+    public int cannonTowerCost => cannonTowerPrefab.GetComponent<TowerAttack>().cost;
+    public int magicTowerCost => magicTowerPrefab.GetComponent<TowerAttack>().cost;
 
 
     private BuildPoint selectedBuildPoint;

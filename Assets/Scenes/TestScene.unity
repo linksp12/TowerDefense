@@ -9012,9 +9012,6 @@ MonoBehaviour:
   basicTowerPrefab: {fileID: 392977616497477778, guid: 66359338a5ad1614f92ed7bb63c0a14b, type: 3}
   cannonTowerPrefab: {fileID: 759459309904499257, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
   magicTowerPrefab: {fileID: 2236469722719090783, guid: 7a910a9fe43a58344ad640512f287932, type: 3}
-  basicTowerCost: 50
-  cannonTowerCost: 100
-  magicTowerCost: 90
 --- !u!4 &890087694
 Transform:
   m_ObjectHideFlags: 0
@@ -9879,8 +9876,9 @@ GameObject:
   - component: {fileID: 1013088379}
   - component: {fileID: 1013088381}
   - component: {fileID: 1013088380}
+  - component: {fileID: 1013088382}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9925,7 +9923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "50 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -10005,6 +10003,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013088378}
   m_CullTransparentMesh: 1
+--- !u!114 &1013088382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013088378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f1763c27b28204e88f663140c9ade0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextUpdate
+  text: {fileID: 1013088380}
+  targetTowerPrefab: {fileID: 5053530343326660732, guid: 66359338a5ad1614f92ed7bb63c0a14b, type: 3}
 --- !u!1 &1031905665
 GameObject:
   m_ObjectHideFlags: 0
@@ -10151,14 +10163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c9165fb3f334742bd848f1256f3730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
+  targetTowerPrefab: {fileID: 7747170803467462667, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
   towerName: "\uCE90\uB17C \uD0C0\uC6CC"
   description: "\uB290\uB9AC\uC9C0\uB9CC \uAC15\uD55C \uD53C\uD574\uB97C \uC8FC\uB294
     \uC911\uD654\uAE30 \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uCCB4\uB825\uC774 \uB192\uC740
     \uBAAC\uC2A4\uD130\uB098 \uBB49\uCE5C \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
-  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>100</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
-    <color=white>\uB290\uB9BC</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
-    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
-    <color=white>\uD3ED\uBC1C / \uACF5\uC131</color>"
 --- !u!1 &1039176194
 GameObject:
   m_ObjectHideFlags: 0
@@ -12328,8 +12337,9 @@ GameObject:
   - component: {fileID: 1246639043}
   - component: {fileID: 1246639045}
   - component: {fileID: 1246639044}
+  - component: {fileID: 1246639046}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12374,7 +12384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "100 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -12454,6 +12464,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246639042}
   m_CullTransparentMesh: 1
+--- !u!114 &1246639046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246639042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f1763c27b28204e88f663140c9ade0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextUpdate
+  text: {fileID: 1246639044}
+  targetTowerPrefab: {fileID: 7747170803467462667, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
 --- !u!1 &1269707159
 GameObject:
   m_ObjectHideFlags: 0
@@ -12895,14 +12919,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c9165fb3f334742bd848f1256f3730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
+  targetTowerPrefab: {fileID: 5053530343326660732, guid: 66359338a5ad1614f92ed7bb63c0a14b, type: 3}
   towerName: "\uAE30\uBCF8 \uD0C0\uC6CC"
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC274\uB4DC \uBAAC\uC2A4\uD130\uC5D0\uAC8C
     \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
-  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>24</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
-    <color=white>\uBE60\uB984</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
-    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
-    <color=white>\uC5F0\uC0AC / \uAD00\uD1B5</color>"
 --- !u!114 &1287081251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13087,14 +13108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c9165fb3f334742bd848f1256f3730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCardUI
+  targetTowerPrefab: {fileID: -6595029652421767102, guid: 7a910a9fe43a58344ad640512f287932, type: 3}
   towerName: "\uB9C8\uBC95 \uD0C0\uC6CC"
   description: "\uD2B9\uC218 \uD6A8\uACFC\uB97C \uAC00\uC9C4 \uB9C8\uBC95 \uACF5\uACA9
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC720\uB839 \uBAAC\uC2A4\uD130\uC758 \uBAA8\uC2B5\uC744
     \uB4DC\uB7EC\uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  statInfo: "<color=#FFF379>\uACF5\uACA9\uB825:</color> <color=white>60</color>\r\n<color=#FFF379>\uACF5\uACA9\uC18D\uB3C4:</color>
-    <color=white>\uBCF4\uD1B5</color>\r\n<color=#FFF379>\uC0AC\uAC70\uB9AC:</color>
-    <color=white>\uB113\uC74C</color>\r\n<color=#FFF379>\uC5C5\uADF8\uB808\uC774\uB4DC:</color>
-    <color=white>\uB9C8\uBC95\uD654\uC0B4 / \uD654\uC5FC</color>"
 --- !u!1 &1289713773
 GameObject:
   m_ObjectHideFlags: 0
@@ -15128,8 +15146,9 @@ GameObject:
   - component: {fileID: 1534023346}
   - component: {fileID: 1534023348}
   - component: {fileID: 1534023347}
+  - component: {fileID: 1534023349}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15174,7 +15193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "90 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
@@ -15254,6 +15273,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534023345}
   m_CullTransparentMesh: 1
+--- !u!114 &1534023349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534023345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f1763c27b28204e88f663140c9ade0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextUpdate
+  text: {fileID: 1534023347}
+  targetTowerPrefab: {fileID: -6595029652421767102, guid: 7a910a9fe43a58344ad640512f287932, type: 3}
 --- !u!1 &1571644720
 GameObject:
   m_ObjectHideFlags: 0
