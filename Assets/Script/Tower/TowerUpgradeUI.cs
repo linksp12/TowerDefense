@@ -248,10 +248,10 @@ public class TowerUpgradeUI : MonoBehaviour
             pathBImage.sprite = selectedTower.GetPathBSprite();
 
         if (pathANameText != null)
-            pathANameText.text = selectedTower.GetPathAName();
+            pathANameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
 
         if (pathBNameText != null)
-            pathBNameText.text = selectedTower.GetPathBName();
+            pathBNameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
 
         if (sellButton != null)
             sellButton.gameObject.SetActive(true);
