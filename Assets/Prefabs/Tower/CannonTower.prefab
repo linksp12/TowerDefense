@@ -152,7 +152,7 @@ MonoBehaviour:
   pathALv2Damage: 180
   pathALv2Cooldown: 2
   pathALv2Range: 4.5
-  pathALv3Damage: 65
+  pathALv3Damage: 300
   pathALv3Cooldown: 2
   pathALv3Range: 5
   pathBLv2Damage: 300

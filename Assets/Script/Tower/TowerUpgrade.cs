@@ -434,11 +434,11 @@ public class TowerUpgrade : MonoBehaviour
         }
 
         return $"{featureText}\n\n" +
-       $"<align=left>" +
-       $"  공격력: <color=#00FF00>{pathALv2Damage}</color>\n" +
-       $"  공격속도(s): <color=#00FF00>{pathALv2Cooldown}</color>\n" +
-       $"  사거리: <color=#00FF00>{pathALv2Range}</color>" +
-       $"</align>";
+            $"<align=left>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathALv2Damage}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathALv2Cooldown}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathALv2Range}</color>" +
+            $"</align>";
     }
 
     public string GetPathBDescription()
@@ -459,11 +459,11 @@ public class TowerUpgrade : MonoBehaviour
         }
 
         return $"{featureText}\n\n" +
-        $"<align=left>" +
-        $"  공격력: <color=#00FF00>{pathBLv2Damage}</color>\n" +
-        $"  공격속도(s): <color=#00FF00>{pathBLv2Cooldown}</color>\n" +
-        $"  사거리: <color=#00FF00>{pathBLv2Range}</color>" +
-        $"</align>";
+            $"<align=left>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathBLv2Damage}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathBLv2Cooldown}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathBLv2Range}</color>" +
+            $"</align>";
     }
 
     public string GetFinalUpgradeDescription()
@@ -494,12 +494,12 @@ public class TowerUpgrade : MonoBehaviour
         float targetRange = (path == UpgradePath.PathA) ? pathALv3Range : pathBLv3Range;
 
         return $"최종 단계로 업그레이드합니다.\n" +
-            $"효과: {effectText}\n\n" +
-            $"<align=left>" +
-            $"  공격력: <color=#00FF00>{targetDamage}</color>\n" +
-            $"  공격속도(s): <color=#00FF00>{targetCooldown}</color>\n" +
-            $"  사거리: <color=#00FF00>{targetRange}</color>" +
-            $"</align>";
+           $"효과: {effectText}\n\n" +
+           $"<align=left>" +
+           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{targetDamage}</color>\n" +
+           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{targetCooldown}</color>\n" +
+           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{targetRange}</color>" +
+           $"</align>";
     }
 
     public Sprite GetFinalUpgradeSprite()
