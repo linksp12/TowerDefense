@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class TowerUpgradeUI : MonoBehaviour
 {
@@ -94,6 +95,25 @@ public class TowerUpgradeUI : MonoBehaviour
             panel.SetActive(false);
     }
 
+    private void Update()
+{
+    if (isOpen && Input.GetMouseButtonDown(0))
+    {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+
+        if (hit.collider != null && selectedTower != null && hit.collider.gameObject == selectedTower.gameObject)
+        {
+            return;
+        }
+
+        Close();
+    }
+}
+
     void Start()
     {
         if (pathAButton != null)
@@ -122,6 +142,12 @@ public class TowerUpgradeUI : MonoBehaviour
     {
         if (tower == null)
             return;
+
+        if (isOpen && selectedTower == tower)
+        {
+            Close();
+            return;
+        }
 
         if (closeCoroutine != null)
         {
@@ -480,6 +506,9 @@ public class TowerUpgradeUI : MonoBehaviour
 
     public void Close()
     {
+        if (UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayClosePanel();
+
         HideTooltip();
 
         if (panelAnimator != null)
