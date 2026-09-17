@@ -72,16 +72,15 @@ public class MonsterMove : MonoBehaviour
 
         hasReachedShield = true;
 
-        if (GameManager.Instance != null)
+        // 연습 몬스터가 도착해도 실제 기지 체력과 웨이브 상태는 그대로 둔다.
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            GameManager.Instance.TakePlayerDamage(1);
-        }
+            if (GameManager.Instance != null)
+                GameManager.Instance.TakePlayerDamage(1);
 
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
-        {
-            waveManager.OnMonsterPassed();
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterPassed();
         }
 
         Destroy(gameObject);
@@ -134,11 +133,11 @@ public class MonsterMove : MonoBehaviour
 
     public void Die()
     {
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            waveManager.OnMonsterKilled();
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterKilled();
         }
 
         Destroy(gameObject);

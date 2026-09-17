@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
+    public event System.Action<string> SkillUsed;
 
     [Header("스킬 목록")]
     public List<SkillData> skills = new List<SkillData>();
@@ -88,10 +89,20 @@ public class SkillManager : MonoBehaviour
 
         // 스킬 실행
         ExecuteSkill(skillName);
+        SkillUsed?.Invoke(skillName);
 
         Debug.Log(skillName + " 사용!");
 
         return true;
+    }
+
+    public void ResetAllCooldowns()
+    {
+        foreach (SkillData skill in skills)
+        {
+            if (skill != null)
+                cooldownEndTime[skill.skillName] = 0f;
+        }
     }
 
     // =========================

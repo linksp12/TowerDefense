@@ -272,16 +272,15 @@ public class MonsterHealth : MonoBehaviour
             );
         }
 
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
+        // 연습 몬스터는 실제 웨이브의 생존 수나 골드를 변경하지 않는다.
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            waveManager.OnMonsterKilled();
-        }
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterKilled();
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddMoney(goldReward);
+            if (GameManager.Instance != null)
+                GameManager.Instance.AddMoney(goldReward);
         }
 
         PlayDeathAnimation();
