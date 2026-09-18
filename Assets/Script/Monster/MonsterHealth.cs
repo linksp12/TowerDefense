@@ -333,23 +333,15 @@ public class MonsterHealth : MonoBehaviour
             );
         }
 
-        // =====================================================
-        // 웨이브 매니저에 처치 알림
-        // =====================================================
-        WaveManager waveManager =
-            FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
+        // 연습 몬스터는 실제 웨이브 처치 수와 골드를 변경하지 않는다.
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            waveManager.OnMonsterKilled();
-        }
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterKilled();
 
-        // =====================================================
-        // 골드 지급
-        // =====================================================
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddMoney(goldReward);
+            if (GameManager.Instance != null)
+                GameManager.Instance.AddMoney(goldReward);
         }
 
         // =====================================================
