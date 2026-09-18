@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,18 @@ public class AudioManager : MonoBehaviour
     private float bgmVolume = 1f;
     private float sfxVolume = 1f;
     private float uiVolume = 1f;
+    private float sfxSourceBaseVolume = 1f;
+    private float uiSourceBaseVolume = 1f;
+
+    private struct ExternalSource
+    {
+        public float baseVolume;
+        public bool isUI;
+    }
+
+    private readonly Dictionary<AudioSource, ExternalSource> externalSources =
+        new Dictionary<AudioSource, ExternalSource>();
+    private readonly List<AudioSource> destroyedSources = new List<AudioSource>();
 
     private const string KEY_MASTER = "Volume_Master";
     private const string KEY_BGM = "Volume_BGM";
@@ -86,6 +99,7 @@ public class AudioManager : MonoBehaviour
 
         sfxSource.loop = false;
         sfxSource.playOnAwake = false;
+        sfxSourceBaseVolume = sfxSource.volume;
 
         if (uiSource == null)
         {
@@ -94,10 +108,12 @@ public class AudioManager : MonoBehaviour
 
         uiSource.loop = false;
         uiSource.playOnAwake = false;
+        uiSourceBaseVolume = uiSource.volume;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        ApplyVolumes();
         PlayBGMForScene(scene.name);
     }
 
@@ -153,20 +169,99 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || sfxSource == null)
             return;
 
-        sfxSource.PlayOneShot(clip, sfxVolume * masterVolume);
+        sfxSource.PlayOneShot(clip, Mathf.Max(0f, volumeScale));
     }
 
-    public void PlayUISound(AudioClip clip)
+    public void PlayUISound(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || uiSource == null)
             return;
 
-        uiSource.PlayOneShot(clip, uiVolume * masterVolume);
+        uiSource.PlayOneShot(clip, Mathf.Max(0f, volumeScale));
+    }
+
+    // 기존 컴포넌트의 AudioSource와 피치/볼륨 설정은 유지하고,
+    // 모든 효과음의 최종 음량만 이 매니저에서 관리한다.
+    public static void PlaySFXOn(AudioSource source, AudioClip clip, float volumeScale = 1f)
+    {
+        PlayOn(source, clip, volumeScale, false);
+    }
+
+    public static void PlayUISoundOn(AudioSource source, AudioClip clip, float volumeScale = 1f)
+    {
+        PlayOn(source, clip, volumeScale, true);
+    }
+
+    public static void PlaySFXAtPoint(AudioClip clip, Vector3 position, float volumeScale = 1f)
+    {
+        if (clip == null)
+            return;
+
+        float groupVolume = Instance != null
+            ? Instance.masterVolume * Instance.sfxVolume
+            : GetSavedGroupVolume(false);
+
+        AudioSource.PlayClipAtPoint(
+            clip, position, Mathf.Max(0f, volumeScale) * groupVolume);
+    }
+
+    private static void PlayOn(AudioSource source, AudioClip clip, float volumeScale, bool isUI)
+    {
+        if (clip == null)
+            return;
+
+        if (Instance != null)
+        {
+            if (source == null || source == Instance.sfxSource || source == Instance.uiSource)
+            {
+                if (isUI)
+                    Instance.PlayUISound(clip, volumeScale);
+                else
+                    Instance.PlaySFX(clip, volumeScale);
+                return;
+            }
+
+            Instance.PlayOnExternalSource(source, clip, volumeScale, isUI);
+        }
+        else if (source != null)
+        {
+            // 에디터에서 스테이지 씬만 직접 실행한 경우에도 저장된 음량을 적용한다.
+            source.PlayOneShot(
+                clip, Mathf.Max(0f, volumeScale) * GetSavedGroupVolume(isUI));
+        }
+    }
+
+    private void PlayOnExternalSource(AudioSource source, AudioClip clip, float volumeScale, bool isUI)
+    {
+        if (!externalSources.TryGetValue(source, out ExternalSource settings))
+        {
+            settings = new ExternalSource
+            {
+                baseVolume = source.volume,
+                isUI = isUI
+            };
+        }
+        else
+        {
+            settings.isUI = isUI;
+        }
+
+        externalSources[source] = settings;
+        source.volume = settings.baseVolume * masterVolume *
+            (isUI ? uiVolume : sfxVolume);
+        source.PlayOneShot(clip, Mathf.Max(0f, volumeScale));
+    }
+
+    private static float GetSavedGroupVolume(bool isUI)
+    {
+        float savedMaster = Mathf.Clamp01(PlayerPrefs.GetFloat(KEY_MASTER, 1f));
+        float savedGroup = Mathf.Clamp01(PlayerPrefs.GetFloat(isUI ? KEY_UI : KEY_SFX, 1f));
+        return savedMaster * savedGroup;
     }
 
     public void PlayButtonClick()
@@ -216,6 +311,7 @@ public class AudioManager : MonoBehaviour
         set
         {
             sfxVolume = Mathf.Clamp01(value);
+            ApplyVolumes();
             PlayerPrefs.SetFloat(KEY_SFX, sfxVolume);
         }
     }
@@ -226,6 +322,7 @@ public class AudioManager : MonoBehaviour
         set
         {
             uiVolume = Mathf.Clamp01(value);
+            ApplyVolumes();
             PlayerPrefs.SetFloat(KEY_UI, uiVolume);
         }
     }
@@ -234,6 +331,28 @@ public class AudioManager : MonoBehaviour
     {
         if (bgmSource != null)
             bgmSource.volume = bgmVolume * masterVolume;
+
+        if (sfxSource != null)
+            sfxSource.volume = sfxSourceBaseVolume * sfxVolume * masterVolume;
+
+        if (uiSource != null)
+            uiSource.volume = uiSourceBaseVolume * uiVolume * masterVolume;
+
+        destroyedSources.Clear();
+        foreach (KeyValuePair<AudioSource, ExternalSource> entry in externalSources)
+        {
+            if (entry.Key == null)
+            {
+                destroyedSources.Add(entry.Key);
+                continue;
+            }
+
+            entry.Key.volume = entry.Value.baseVolume * masterVolume *
+                (entry.Value.isUI ? uiVolume : sfxVolume);
+        }
+
+        foreach (AudioSource source in destroyedSources)
+            externalSources.Remove(source);
     }
 
     private void LoadVolumeSettings()

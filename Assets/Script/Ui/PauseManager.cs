@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     [Header("Pause Panel")]
+    public GameObject pausePanelPrefab;
     public GameObject pausePanel;
     public Button resumeButton;
     public Button restartButton;
@@ -19,12 +20,87 @@ public class PauseManager : MonoBehaviour
 
     void Awake()
     {
+        CreateSharedPausePanel();
+
+        if (pausePanel == null)
+        {
+            Debug.LogWarning("PauseManager: 일시정지 패널을 찾지 못했습니다.");
+            return;
+        }
+
+        FindPauseButtons();
         ConfigurePauseVisual();
         pausePanel.SetActive(false);
 
-        resumeButton.onClick.AddListener(ResumeGame);
-        restartButton.onClick.AddListener(RestartGame);
-        mainMenuButton.onClick.AddListener(GoToMainMenu);
+        if (resumeButton != null)
+            resumeButton.onClick.AddListener(ResumeGame);
+
+        if (restartButton != null)
+            restartButton.onClick.AddListener(RestartGame);
+
+        if (mainMenuButton != null)
+            mainMenuButton.onClick.AddListener(GoToMainMenu);
+    }
+
+    private void CreateSharedPausePanel()
+    {
+        if (pausePanelPrefab == null)
+            return;
+
+        GameObject scenePausePanel = pausePanel;
+        Canvas canvas = scenePausePanel != null
+            ? scenePausePanel.GetComponentInParent<Canvas>()
+            : null;
+
+        if (!IsSceneUiCanvas(canvas))
+        {
+            foreach (Canvas candidate in FindObjectsByType<Canvas>(FindObjectsInactive.Exclude))
+            {
+                if (IsSceneUiCanvas(candidate))
+                {
+                    canvas = candidate;
+                    break;
+                }
+            }
+        }
+
+        if (!IsSceneUiCanvas(canvas))
+        {
+            Debug.LogWarning("PauseManager: 현재 씬에 클릭 가능한 UI Canvas가 없습니다.");
+            return;
+        }
+
+        pausePanel = Instantiate(pausePanelPrefab, canvas.transform);
+        pausePanel.name = "PausePanel";
+
+        if (scenePausePanel != null)
+            scenePausePanel.SetActive(false);
+    }
+
+    private bool IsSceneUiCanvas(Canvas candidate)
+    {
+        if (candidate == null || !candidate.isActiveAndEnabled ||
+            candidate.gameObject.scene != gameObject.scene ||
+            candidate.renderMode == RenderMode.WorldSpace)
+            return false;
+
+        GraphicRaycaster raycaster = candidate.GetComponent<GraphicRaycaster>();
+        return raycaster != null && raycaster.isActiveAndEnabled;
+    }
+
+    private void FindPauseButtons()
+    {
+        resumeButton = FindButton("PopupBox/ResumeButton", resumeButton);
+        restartButton = FindButton("PopupBox/RestartButton", restartButton);
+        mainMenuButton = FindButton("PopupBox/MainMenuButton", mainMenuButton);
+    }
+
+    private Button FindButton(string path, Button fallback)
+    {
+        Transform buttonTransform = pausePanel.transform.Find(path);
+        return buttonTransform != null
+            ? buttonTransform.GetComponent<Button>()
+            : fallback;
     }
 
     void Update()

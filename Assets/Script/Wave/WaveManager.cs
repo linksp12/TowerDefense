@@ -22,8 +22,21 @@ public class WaveManager : MonoBehaviour
     public int CurrentWave => currentWaveIndex + 1;
     public int TotalWaves => waves.Length;
 
+    [SerializeField] private bool waitForTutorial;
+    private bool wavesStarted;
+
     private void Start()
     {
+        if (!waitForTutorial)
+            StartWaves();
+    }
+
+    public void StartWaves()
+    {
+        if (wavesStarted)
+            return;
+
+        wavesStarted = true;
         StartCoroutine(RunWaves());
     }
 

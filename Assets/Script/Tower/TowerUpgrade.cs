@@ -119,11 +119,16 @@ public class TowerUpgrade : MonoBehaviour
 
     public int GetBaseCost()
     {
-        if (towerType == TowerType.Archer) return 50;
-        if (towerType == TowerType.Cannon) return 100;
-        if (towerType == TowerType.Magic) return 90;
+        if (towerAttack == null)
+            towerAttack = GetComponent<TowerAttack>();
 
-        return 50;
+        if (towerAttack == null)
+        {
+            Debug.LogWarning($"{name}: TowerAttack가 없어 판매가를 계산할 수 없습니다.", this);
+            return 0;
+        }
+
+        return towerAttack.cost;
     }
 
     public int GetTotalUsedCost()
@@ -414,6 +419,92 @@ public class TowerUpgrade : MonoBehaviour
         }
 
         return "최종 업그레이드";
+    }
+
+    public string GetPathADescription()
+    {
+        string featureText = "";
+
+        switch (towerType)
+        {
+            case TowerType.Archer:
+                featureText = "빠른 공격 속도를 강화하는 루트입니다.\n특징: 공격속도 증가";
+                break;
+            case TowerType.Cannon:
+                featureText = "범위 폭발 피해를 강화하는 루트입니다.\n특징: 광역 공격력 증가";
+                break;
+            case TowerType.Magic:
+                featureText = "마법 화살 연사력을 강화하는 루트입니다.\n특징: 단일 연사력 증가";
+                break;
+        }
+
+        return $"{featureText}\n\n" +
+            $"<align=left>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathALv2Damage}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathALv2Cooldown}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathALv2Range}</color>" +
+            $"</align>";
+    }
+
+    public string GetPathBDescription()
+    {
+        string featureText = "";
+
+        switch (towerType)
+        {
+            case TowerType.Archer:
+                featureText = "강한 화살과 관통 공격을 강화하는 루트입니다.\n특징: 높은 공격력 / 관통 공격";
+                break;
+            case TowerType.Cannon:
+                featureText = "강력한 한 방 피해를 강화하는 루트입니다.\n특징: 높은 단일 피해";
+                break;
+            case TowerType.Magic:
+                featureText = "화염 피해를 강화하는 루트입니다.\n특징: 지속 피해 부여";
+                break;
+        }
+
+        return $"{featureText}\n\n" +
+            $"<align=left>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathBLv2Damage}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathBLv2Cooldown}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathBLv2Range}</color>" +
+            $"</align>";
+    }
+
+    public string GetFinalUpgradeDescription()
+    {
+        string effectText = "";
+
+        switch (towerType)
+        {
+            case TowerType.Archer:
+                effectText = (path == UpgradePath.PathA) 
+                    ? "공격속도가 크게 증가합니다." 
+                    : "관통 성능과 공격력이 크게 증가합니다.";
+                break;
+            case TowerType.Cannon:
+                effectText = (path == UpgradePath.PathA) 
+                    ? "폭발 범위와 피해가 크게 증가합니다." 
+                    : "강력한 공성 피해를 입힙니다.";
+                break;
+            case TowerType.Magic:
+                effectText = (path == UpgradePath.PathA) 
+                    ? "마법화살의 슬로우 효과가 강화됩니다." 
+                    : "화염 지속 피해가 강화됩니다.";
+                break;
+        }
+
+        int targetDamage = (path == UpgradePath.PathA) ? pathALv3Damage : pathBLv3Damage;
+        float targetCooldown = (path == UpgradePath.PathA) ? pathALv3Cooldown : pathBLv3Cooldown;
+        float targetRange = (path == UpgradePath.PathA) ? pathALv3Range : pathBLv3Range;
+
+        return $"최종 단계로 업그레이드합니다.\n" +
+           $"효과: {effectText}\n\n" +
+           $"<align=left>" +
+           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{targetDamage}</color>\n" +
+           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{targetCooldown}</color>\n" +
+           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{targetRange}</color>" +
+           $"</align>";
     }
 
     public Sprite GetFinalUpgradeSprite()

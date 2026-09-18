@@ -6,6 +6,8 @@ public class TowerAttack : MonoBehaviour
     public float attackRange = 4f;
     public float attackCooldown = 1f;
     public int damage = 10;
+    public int cost = 50;
+    public string upgrade;
 
     [Header("Stealth Detection")]
     public bool canDetectStealth = false;

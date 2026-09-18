@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,15 +14,25 @@ public class SoundManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void ShowMoneyWarning()
+    public void ShowMoneyWarning(int amount)
     {
         CancelInvoke("HideMoneyWarning");
 
-        if (moneyWarningText != null) moneyWarningText.SetActive(true);
+        if (moneyWarningText != null)
+        {
+            moneyWarningText.SetActive(true);
+
+            var textComponent = moneyWarningText.GetComponent<TMPro.TextMeshProUGUI>();
+            
+            if (textComponent != null)
+            {
+                textComponent.text = $"{amount}원이 부족합니다!";
+            }
+        }
 
         if (uiAudioSource != null && errorSound != null)
         {
-            uiAudioSource.PlayOneShot(errorSound);
+            AudioManager.PlayUISoundOn(uiAudioSource, errorSound);
         }
 
         Invoke("HideMoneyWarning", 1.5f);
