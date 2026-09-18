@@ -113,7 +113,11 @@ MonoBehaviour:
   attackRange: 5
   attackCooldown: 2.5
   damage: 100
+  cost: 100
+  upgrade: "\uD3ED\uBC1C / \uACF5\uC131"
   canDetectStealth: 0
+  criticalChance: 0.1
+  criticalDamageMultiplier: 2
   arrowPrefab: {fileID: 7817520689033560513, guid: b1fa7695a2af1dc4d81d121a77f6e613, type: 3}
   firePoint: {fileID: 6874363203842704408}
 --- !u!114 &-1101487246671468892
@@ -148,15 +152,15 @@ MonoBehaviour:
   pathALv2Damage: 180
   pathALv2Cooldown: 2
   pathALv2Range: 4.5
-  pathALv3Damage: 65
+  pathALv3Damage: 300
   pathALv3Cooldown: 2
   pathALv3Range: 5
   pathBLv2Damage: 300
   pathBLv2Cooldown: 3.5
   pathBLv2Range: 5.5
-  pathBLv3Damage: 55
-  pathBLv3Cooldown: 1.3
-  pathBLv3Range: 6.5
+  pathBLv3Damage: 700
+  pathBLv3Cooldown: 5
+  pathBLv3Range: 7
 --- !u!114 &5671456848655801379
 MonoBehaviour:
   m_ObjectHideFlags: 0
