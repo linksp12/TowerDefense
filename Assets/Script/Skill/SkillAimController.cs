@@ -316,13 +316,18 @@ public class SkillAimController : MonoBehaviour
         spriteRenderer =
             magicCircleObject.GetComponent<SpriteRenderer>();
 
-
         if (spriteRenderer == null)
         {
             spriteRenderer =
                 magicCircleObject.GetComponentInChildren<SpriteRenderer>(
                     true
                 );
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingLayerID = SortingLayer.NameToID("Effects");
+            spriteRenderer.sortingOrder = 6;
         }
     }
 
@@ -414,7 +419,7 @@ public class SkillAimController : MonoBehaviour
         // -----------------------------------------------------
 
         rangeLineRenderer.sortingLayerID =
-            SortingLayer.NameToID("Default");
+            SortingLayer.NameToID("Effects");
 
         // 기존 MagicCircleVisual보다 뒤
         rangeLineRenderer.sortingOrder = 5;

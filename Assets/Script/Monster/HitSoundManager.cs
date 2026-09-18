@@ -63,7 +63,8 @@ public class HitSoundManager : MonoBehaviour
             audioSource.pitch = 1f;
         }
 
-        audioSource.PlayOneShot(
+        AudioManager.PlaySFXOn(
+            audioSource,
             hitSound,
             hitSoundVolume
         );

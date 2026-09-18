@@ -119,11 +119,16 @@ public class TowerUpgrade : MonoBehaviour
 
     public int GetBaseCost()
     {
-        if (towerType == TowerType.Archer) return 50;
-        if (towerType == TowerType.Cannon) return 100;
-        if (towerType == TowerType.Magic) return 90;
+        if (towerAttack == null)
+            towerAttack = GetComponent<TowerAttack>();
 
-        return 50;
+        if (towerAttack == null)
+        {
+            Debug.LogWarning($"{name}: TowerAttack가 없어 판매가를 계산할 수 없습니다.", this);
+            return 0;
+        }
+
+        return towerAttack.cost;
     }
 
     public int GetTotalUsedCost()

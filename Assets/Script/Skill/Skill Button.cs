@@ -970,10 +970,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             >();
 
 
-        tooltipText.font =
-            tooltipFont != null
-                ? tooltipFont
-                : TMP_Settings.defaultFontAsset;
+        tooltipText.font = ResolveTooltipFont();
 
 
         tooltipText.fontSize =
@@ -1065,6 +1062,9 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         tooltipText.text =
             BuildTooltipText(skill);
 
+        // 공용 툴팁을 다른 스킬 버튼이 재사용해도 현재 버튼의 한글 글꼴을 적용한다.
+        tooltipText.font = ResolveTooltipFont();
+
 
         tooltipText.color =
             tooltipTextColor;
@@ -1095,6 +1095,17 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 
         PositionTooltip();
+    }
+
+    private TMP_FontAsset ResolveTooltipFont()
+    {
+        if (tooltipFont != null)
+            return tooltipFont;
+
+        if (cooldownMessageFont != null)
+            return cooldownMessageFont;
+
+        return TMP_Settings.defaultFontAsset;
     }
 
 

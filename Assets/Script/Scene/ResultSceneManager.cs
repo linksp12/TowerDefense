@@ -29,7 +29,7 @@ public class ResultSceneManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         if (victorySound != null)
-            audioSource.PlayOneShot(victorySound);
+            AudioManager.PlaySFXOn(audioSource, victorySound);
         // else if (!isVictory && defeatSound != null)
         //     audioSource.PlayOneShot(defeatSound);
 

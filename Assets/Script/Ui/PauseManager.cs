@@ -50,11 +50,23 @@ public class PauseManager : MonoBehaviour
         GameObject scenePausePanel = pausePanel;
         Canvas canvas = scenePausePanel != null
             ? scenePausePanel.GetComponentInParent<Canvas>()
-            : FindFirstObjectByType<Canvas>();
+            : null;
 
-        if (canvas == null)
+        if (!IsSceneUiCanvas(canvas))
         {
-            Debug.LogWarning("PauseManager: 일시정지 패널을 둘 Canvas가 없습니다.");
+            foreach (Canvas candidate in FindObjectsByType<Canvas>(FindObjectsInactive.Exclude))
+            {
+                if (IsSceneUiCanvas(candidate))
+                {
+                    canvas = candidate;
+                    break;
+                }
+            }
+        }
+
+        if (!IsSceneUiCanvas(canvas))
+        {
+            Debug.LogWarning("PauseManager: 현재 씬에 클릭 가능한 UI Canvas가 없습니다.");
             return;
         }
 
@@ -63,6 +75,17 @@ public class PauseManager : MonoBehaviour
 
         if (scenePausePanel != null)
             scenePausePanel.SetActive(false);
+    }
+
+    private bool IsSceneUiCanvas(Canvas candidate)
+    {
+        if (candidate == null || !candidate.isActiveAndEnabled ||
+            candidate.gameObject.scene != gameObject.scene ||
+            candidate.renderMode == RenderMode.WorldSpace)
+            return false;
+
+        GraphicRaycaster raycaster = candidate.GetComponent<GraphicRaycaster>();
+        return raycaster != null && raycaster.isActiveAndEnabled;
     }
 
     private void FindPauseButtons()

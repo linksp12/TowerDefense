@@ -326,7 +326,7 @@ public class MonsterHealth : MonoBehaviour
         // =====================================================
         if (deathSound != null)
         {
-            AudioSource.PlayClipAtPoint(
+            AudioManager.PlaySFXAtPoint(
                 deathSound,
                 transform.position,
                 0.8f

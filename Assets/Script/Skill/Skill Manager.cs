@@ -525,7 +525,8 @@ public class SkillManager : MonoBehaviour
         }
 
 
-        skillAudioSource.PlayOneShot(
+        AudioManager.PlaySFXOn(
+            skillAudioSource,
             clip,
             skillSoundVolume
         );

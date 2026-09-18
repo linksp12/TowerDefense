@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
 
         if (uiAudioSource != null && errorSound != null)
         {
-            uiAudioSource.PlayOneShot(errorSound);
+            AudioManager.PlayUISoundOn(uiAudioSource, errorSound);
         }
 
         Invoke("HideMoneyWarning", 1.5f);

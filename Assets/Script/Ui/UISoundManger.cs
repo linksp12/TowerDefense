@@ -71,6 +71,6 @@ public class UISoundManager : MonoBehaviour
         if (audioSource == null || clip == null)
             return;
 
-        audioSource.PlayOneShot(clip);
+        AudioManager.PlayUISoundOn(audioSource, clip);
     }
 }

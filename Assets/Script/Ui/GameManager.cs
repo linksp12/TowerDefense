@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         }
         if (audioSource != null && damageSound != null)
         {
-            audioSource.PlayOneShot(damageSound);
+            AudioManager.PlaySFXOn(audioSource, damageSound);
         }
 
         if (currentPlayerHp <= 0)

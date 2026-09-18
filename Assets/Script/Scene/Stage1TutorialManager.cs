@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Stage1TutorialTest 전용: 연습 웨이브를 실제 1웨이브와 분리한다.
+// Stage1 전용: 연습 웨이브를 실제 1웨이브와 분리한다.
 public class Stage1TutorialManager : MonoBehaviour
 {
     [SerializeField] private WaveManager waveManager;
@@ -72,6 +72,10 @@ public class Stage1TutorialManager : MonoBehaviour
             waveManager.spawner.waypoints.Length == 0 || skillManager == null)
         {
             Debug.LogError("Stage1TutorialManager: 튜토리얼 UI 연결이 누락됐습니다.");
+            if (tutorialRoot != null)
+                tutorialRoot.SetActive(false);
+            if (waveManager != null)
+                waveManager.StartWaves();
             enabled = false;
             return;
         }
@@ -87,6 +91,8 @@ public class Stage1TutorialManager : MonoBehaviour
             tutorialPointRenderer == null)
         {
             Debug.LogError("Stage1TutorialManager: 안내 대상 또는 설치 지점 구성 요소가 없습니다.");
+            tutorialRoot.SetActive(false);
+            waveManager.StartWaves();
             enabled = false;
             return;
         }
