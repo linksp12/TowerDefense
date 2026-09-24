@@ -8,6 +8,8 @@ using UnityEngine;
 public class MonsterData : ScriptableObject
 {
     [Header("기본 정보")]
+    [Tooltip("카탈로그와 코드에서 사용하는 고유 ID (예: goblin)")]
+    public string id;
     public string monsterName;
 
     [Header("기본 능력치")]

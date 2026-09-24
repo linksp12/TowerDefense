@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af3e7c0f9dc44cfa1b79e3b837438b1, type: 3}
   m_Name: ArrowTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  id: arrow_tower
   towerName: "\uae30\ubcf8 \ud654\uc0b4 \ud0c0\uc6cc"
   buildCost: 50
   sellRate: 0.7

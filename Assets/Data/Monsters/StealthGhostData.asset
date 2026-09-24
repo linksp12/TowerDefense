@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7a5b4e642c4f22b560dd64100fb69a, type: 3}
   m_Name: StealthGhostData
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  id: stealth_ghost
   monsterName: Stealth Ghost
   maxHp: 500
   moveSpeed: 2

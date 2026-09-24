@@ -37,6 +37,8 @@ public class TowerData : ScriptableObject
     }
 
     [Header("기본 정보")]
+    [Tooltip("카탈로그와 코드에서 사용하는 고유 ID (예: arrow_tower)")]
+    public string id;
     public string towerName;
     public int buildCost;
     [Range(0f, 1f)] public float sellRate = 0.7f;
