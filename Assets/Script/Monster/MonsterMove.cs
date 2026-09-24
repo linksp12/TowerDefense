@@ -6,6 +6,7 @@ public class MonsterMove : MonoBehaviour
     public Transform[] waypoints;
     public float moveSpeed = 1.5f;
 
+    private MonsterHealth monsterHealth;
     private float originalMoveSpeed;
     private Coroutine slowCoroutine;
     
@@ -16,6 +17,16 @@ public class MonsterMove : MonoBehaviour
 
     // 스킬용 빙결 상태
     private bool isFrozen = false;
+
+    void Awake()
+    {
+        monsterHealth = GetComponent<MonsterHealth>();
+
+        if (monsterHealth != null && monsterHealth.monsterData != null)
+        {
+            moveSpeed = monsterHealth.monsterData.moveSpeed;
+        }
+    }
 
     void Start()
     {

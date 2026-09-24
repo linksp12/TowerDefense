@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e7a523ca380e14b811b885d20875b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
+  monsterData: {fileID: 11400000, guid: 21da630e3ab34e5f8d17be338e74fa01, type: 2}
   maxHp: 360
   goldReward: 13
   monsterHpSlider: {fileID: 6327119867833483347}

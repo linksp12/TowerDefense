@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class MonsterHealth : MonoBehaviour
 {
+    [Header("Balance Data")]
+    [Tooltip("연결하면 최대 체력과 처치 골드를 이 데이터에서 읽습니다.")]
+    public MonsterData monsterData;
+
     [Header("HP")]
     public int maxHp = 200;
     public int maxShield = 10;
@@ -67,6 +71,8 @@ public class MonsterHealth : MonoBehaviour
 
     private void Awake()
     {
+        ApplyStatsFromData();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (spriteRenderer != null)
@@ -86,6 +92,15 @@ public class MonsterHealth : MonoBehaviour
         currentHp = maxHp;
         currentShield = maxShield;
         isDead = false;
+    }
+
+    public void ApplyStatsFromData()
+    {
+        if (monsterData == null)
+            return;
+
+        maxHp = monsterData.maxHp;
+        goldReward = monsterData.goldReward;
     }
 
     private void Start()
