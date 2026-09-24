@@ -12,6 +12,8 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [TextArea]
     public string description;
 
+    private TowerData Data => targetTowerPrefab != null ? targetTowerPrefab.towerData : null;
+
     public string statInfo 
     {
         get 
@@ -29,7 +31,15 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (TowerInfoPanel.Instance != null)
         {
-            TowerInfoPanel.Instance.Show(towerName, description, statInfo);
+            string displayName = Data != null && !string.IsNullOrWhiteSpace(Data.towerName)
+                ? Data.towerName
+                : towerName;
+
+            string displayDescription = Data != null && !string.IsNullOrWhiteSpace(Data.description)
+                ? Data.description
+                : description;
+
+            TowerInfoPanel.Instance.Show(displayName, displayDescription, statInfo);
         }
     }
 
