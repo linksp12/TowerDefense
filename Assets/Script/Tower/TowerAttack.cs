@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class TowerAttack : MonoBehaviour
 {
-    [Header("Tower Settings")]
-    public float attackRange = 4f;
-    public float attackCooldown = 1f;
-    public int damage = 10;
-    public int cost = 50;
+    [Header("Balance Data")]
+    [Tooltip("연결하면 기본 공격 수치와 설치 비용을 이 데이터에서 읽습니다.")]
+    public TowerData towerData;
+
+    // 전투 중 변하는 현재 수치입니다. 저장 원본은 TowerData이며 프리팹에는 직렬화하지 않습니다.
+    [System.NonSerialized] public float attackRange;
+    [System.NonSerialized] public float attackCooldown;
+    [System.NonSerialized] public int damage;
+    [System.NonSerialized] public int cost;
     public string upgrade;
 
     [Header("Stealth Detection")]
@@ -24,6 +28,31 @@ public class TowerAttack : MonoBehaviour
     public Transform firePoint;
 
     private float attackTimer = 0f;
+
+    // 프리팹을 직접 참조하는 UI/건설 코드도 데이터 에셋의 기본값을 사용할 수 있도록 제공합니다.
+    public int BuildCost => towerData != null ? towerData.buildCost : cost;
+    public int BaseDamage => towerData != null ? towerData.baseStats.damage : damage;
+    public float BaseAttackCooldown => towerData != null ? towerData.baseStats.attackCooldown : attackCooldown;
+    public float BaseAttackRange => towerData != null ? towerData.baseStats.attackRange : attackRange;
+
+    private void Awake()
+    {
+        ApplyBaseStatsFromData();
+    }
+
+    public void ApplyBaseStatsFromData()
+    {
+        if (towerData == null)
+        {
+            Debug.LogError($"{name}: TowerData가 연결되지 않았습니다.", this);
+            return;
+        }
+
+        damage = towerData.baseStats.damage;
+        attackCooldown = towerData.baseStats.attackCooldown;
+        attackRange = towerData.baseStats.attackRange;
+        cost = towerData.buildCost;
+    }
 
     private void Update()
     {

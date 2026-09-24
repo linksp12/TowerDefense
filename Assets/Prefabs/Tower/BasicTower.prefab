@@ -110,10 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8308972b1d56f3747aac772148c0ff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
-  attackRange: 5
-  attackCooldown: 0.7
-  damage: 24
-  cost: 50
+  towerData: {fileID: 11400000, guid: b1ea6329c61c4ae39e429d6dd00d8a01, type: 2}
   upgrade: "\uC5F0\uC0AC / \uAD00\uD1B5"
   canDetectStealth: 0
   criticalChance: 0.1
@@ -132,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdb72e2b275d464980a31ff0e895563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerUpgrade
-  towerType: 0
   level: 1
   maxLevel: 3
   path: 0
@@ -146,21 +142,6 @@ MonoBehaviour:
   pathALv3ProjectilePrefab: {fileID: 6252503050366267477, guid: b954df67f212f1f4d94f8594f76443e4, type: 3}
   pathBLv2ProjectilePrefab: {fileID: 6252503050366267477, guid: 9ab8b307957272c449a0d5d5eb07e605, type: 3}
   pathBLv3ProjectilePrefab: {fileID: 6252503050366267477, guid: 578e166a2b5efcc4e8eed2a0e63c1bfc, type: 3}
-  level2Cost: 150
-  level3Cost: 300
-  sellRate: 0.7
-  pathALv2Damage: 15
-  pathALv2Cooldown: 0.3
-  pathALv2Range: 5.2
-  pathALv3Damage: 20
-  pathALv3Cooldown: 0.2
-  pathALv3Range: 5.5
-  pathBLv2Damage: 32
-  pathBLv2Cooldown: 0.8
-  pathBLv2Range: 5.4
-  pathBLv3Damage: 55
-  pathBLv3Cooldown: 0.6
-  pathBLv3Range: 6
 --- !u!114 &7657479176763447362
 MonoBehaviour:
   m_ObjectHideFlags: 0

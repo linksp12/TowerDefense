@@ -2,22 +2,12 @@ using UnityEngine;
 
 public class TowerUpgrade : MonoBehaviour
 {
-    public enum TowerType
-    {
-        Archer,
-        Cannon,
-        Magic
-    }
-
     public enum UpgradePath
     {
         None,
         PathA,
         PathB
     }
-
-    [Header("타워 종류")]
-    public TowerType towerType = TowerType.Archer;
 
     [Header("현재 상태")]
     public int level = 1;
@@ -38,38 +28,12 @@ public class TowerUpgrade : MonoBehaviour
     public GameObject pathBLv2ProjectilePrefab;
     public GameObject pathBLv3ProjectilePrefab;
 
-    [Header("업그레이드 비용")]
-    public int level2Cost = 150;
-    public int level3Cost = 300;
-
-    [Header("판매 설정")]
-    [Range(0f, 1f)]
-    public float sellRate = 0.7f;
-
-    [Header("Path A Lv.2 능력치")]
-    public int pathALv2Damage = 15;
-    public float pathALv2Cooldown = 0.7f;
-    public float pathALv2Range = 4.2f;
-
-    [Header("Path A Lv.3 능력치")]
-    public int pathALv3Damage = 20;
-    public float pathALv3Cooldown = 0.45f;
-    public float pathALv3Range = 4.5f;
-
-    [Header("Path B Lv.2 능력치")]
-    public int pathBLv2Damage = 32;
-    public float pathBLv2Cooldown = 0.8f;
-    public float pathBLv2Range = 4.8f;
-
-    [Header("Path B Lv.3 능력치")]
-    public int pathBLv3Damage = 55;
-    public float pathBLv3Cooldown = 0.6f;
-    public float pathBLv3Range = 5.5f;
-
     private SpriteRenderer spriteRenderer;
     private TowerAttack towerAttack;
 
     private BuildPoint ownerBuildPoint;
+
+    private TowerData Data => towerAttack != null ? towerAttack.towerData : null;
 
     void Awake()
     {
@@ -112,8 +76,13 @@ public class TowerUpgrade : MonoBehaviour
 
     public int GetUpgradeCost()
     {
-        if (level == 1) return level2Cost;
-        if (level == 2) return level3Cost;
+        TowerData data = Data;
+
+        if (data == null)
+            return 0;
+
+        if (level == 1) return data.level2Cost;
+        if (level == 2) return data.level3Cost;
         return 0;
     }
 
@@ -128,24 +97,31 @@ public class TowerUpgrade : MonoBehaviour
             return 0;
         }
 
-        return towerAttack.cost;
+        return towerAttack.BuildCost;
     }
 
     public int GetTotalUsedCost()
     {
         int totalCost = GetBaseCost();
 
+        TowerData data = Data;
+
+        if (data == null)
+            return totalCost;
+
         if (level >= 2)
-            totalCost += level2Cost;
+            totalCost += data.level2Cost;
 
         if (level >= 3)
-            totalCost += level3Cost;
+            totalCost += data.level3Cost;
 
         return totalCost;
     }
 
     public int GetSellPrice()
     {
+        TowerData data = Data;
+        float sellRate = data != null ? data.sellRate : 0f;
         return Mathf.RoundToInt(GetTotalUsedCost() * sellRate);
     }
 
@@ -175,6 +151,12 @@ public class TowerUpgrade : MonoBehaviour
 
     void SelectPathAndUpgrade(UpgradePath selectedPath)
     {
+        if (Data == null)
+        {
+            Debug.LogError($"{name}: TowerData가 연결되지 않아 업그레이드할 수 없습니다.", this);
+            return;
+        }
+
         if (level != 1)
         {
             Debug.Log("이미 업그레이드 루트가 선택되었습니다.");
@@ -209,6 +191,12 @@ public class TowerUpgrade : MonoBehaviour
 
     public void Upgrade()
     {
+        if (Data == null)
+        {
+            Debug.LogError($"{name}: TowerData가 연결되지 않아 업그레이드할 수 없습니다.", this);
+            return;
+        }
+
         if (!CanUpgrade())
         {
             Debug.Log("이미 최대 레벨입니다.");
@@ -241,15 +229,15 @@ public class TowerUpgrade : MonoBehaviour
 
     void ApplyUpgrade()
     {
+        TowerData.CombatStats targetStats = GetStats(path, level);
+
         if (path == UpgradePath.PathA)
         {
             if (level == 2)
             {
                 ChangeTower(
                     pathALv2TowerSprite,
-                    pathALv2Damage,
-                    pathALv2Cooldown,
-                    pathALv2Range,
+                    targetStats,
                     pathALv2ProjectilePrefab
                 );
             }
@@ -257,9 +245,7 @@ public class TowerUpgrade : MonoBehaviour
             {
                 ChangeTower(
                     pathALv3TowerSprite,
-                    pathALv3Damage,
-                    pathALv3Cooldown,
-                    pathALv3Range,
+                    targetStats,
                     pathALv3ProjectilePrefab
                 );
             }
@@ -270,9 +256,7 @@ public class TowerUpgrade : MonoBehaviour
             {
                 ChangeTower(
                     pathBLv2TowerSprite,
-                    pathBLv2Damage,
-                    pathBLv2Cooldown,
-                    pathBLv2Range,
+                    targetStats,
                     pathBLv2ProjectilePrefab
                 );
             }
@@ -280,16 +264,14 @@ public class TowerUpgrade : MonoBehaviour
             {
                 ChangeTower(
                     pathBLv3TowerSprite,
-                    pathBLv3Damage,
-                    pathBLv3Cooldown,
-                    pathBLv3Range,
+                    targetStats,
                     pathBLv3ProjectilePrefab
                 );
             }
         }
     }
 
-    void ChangeTower(Sprite newSprite, int newDamage, float newCooldown, float newRange, GameObject newProjectilePrefab)
+    void ChangeTower(Sprite newSprite, TowerData.CombatStats newStats, GameObject newProjectilePrefab)
     {
         if (spriteRenderer != null && newSprite != null)
         {
@@ -298,7 +280,12 @@ public class TowerUpgrade : MonoBehaviour
 
         if (towerAttack != null)
         {
-            towerAttack.ApplyUpgradeStats(newDamage, newCooldown, newRange, newProjectilePrefab);
+            towerAttack.ApplyUpgradeStats(
+                newStats.damage,
+                newStats.attackCooldown,
+                newStats.attackRange,
+                newProjectilePrefab
+            );
         }
 
         TowerEffectAnimator effectAnimator = GetComponent<TowerEffectAnimator>();
@@ -310,200 +297,122 @@ public class TowerUpgrade : MonoBehaviour
         Debug.Log(GetTowerName() + " 업그레이드 완료");
     }
 
+    private TowerData.CombatStats GetStats(UpgradePath targetPath, int targetLevel)
+    {
+        TowerData data = Data;
+
+        if (data == null)
+            return default;
+
+        if (targetPath == UpgradePath.PathA)
+            return targetLevel == 2 ? data.pathALv2Stats : data.pathALv3Stats;
+
+        if (targetPath == UpgradePath.PathB)
+            return targetLevel == 2 ? data.pathBLv2Stats : data.pathBLv3Stats;
+
+        return default;
+    }
+
+    // =========================================================
+    // 이름 / 설명 텍스트 (TowerData 에셋에서 읽어옵니다)
+    // =========================================================
+    private TowerData.PathTextInfo GetPathTextInfo(UpgradePath targetPath)
+    {
+        TowerData data = Data;
+
+        if (data == null)
+            return null;
+
+        if (targetPath == UpgradePath.PathA)
+            return data.pathA;
+
+        if (targetPath == UpgradePath.PathB)
+            return data.pathB;
+
+        return null;
+    }
+
     public string GetTowerName()
     {
-        if (towerType == TowerType.Archer)
-            return GetArcherTowerName();
+        TowerData data = Data;
 
-        if (towerType == TowerType.Cannon)
-            return GetCannonTowerName();
+        if (data == null)
+        {
+            Debug.LogWarning($"{name}: TowerData가 연결되지 않아 타워 이름을 표시할 수 없습니다.", this);
+            return "타워";
+        }
 
-        if (towerType == TowerType.Magic)
-            return GetMagicTowerName();
-
-        return "타워";
-    }
-
-    string GetArcherTowerName()
-    {
         if (path == UpgradePath.None)
-            return "기본 화살 타워";
+            return data.towerName;
 
-        if (path == UpgradePath.PathA)
-        {
-            if (level == 2) return "연사 화살 타워";
-            if (level == 3) return "폭풍 화살 타워";
-        }
+        TowerData.PathTextInfo info = GetPathTextInfo(path);
 
-        if (path == UpgradePath.PathB)
-        {
-            if (level == 2) return "강화 화살 타워";
-            if (level == 3) return "관통 화살 타워";
-        }
+        if (info == null)
+            return data.towerName;
 
-        return "기본 화살 타워";
-    }
-
-    string GetCannonTowerName()
-    {
-        if (path == UpgradePath.None)
-            return "기본 캐논 타워";
-
-        if (path == UpgradePath.PathA)
-        {
-            if (level == 2) return "폭발 캐논";
-            if (level == 3) return "대폭발 캐논";
-        }
-
-        if (path == UpgradePath.PathB)
-        {
-            if (level == 2) return "중포 타워";
-            if (level == 3) return "공성포 타워";
-        }
-
-        return "기본 캐논 타워";
-    }
-
-    string GetMagicTowerName()
-    {
-        if (path == UpgradePath.None)
-            return "기본 마법 타워";
-
-        if (path == UpgradePath.PathA)
-        {
-            if (level == 2) return "강화 마법화살 타워";
-            if (level == 3) return "연속 마법화살 타워";
-        }
-
-        if (path == UpgradePath.PathB)
-        {
-            if (level == 2) return "화염 마법 타워";
-            if (level == 3) return "지옥불 마법 타워";
-        }
-
-        return "기본 마법 타워";
+        return level >= 3 ? info.lv3Name : info.lv2Name;
     }
 
     public string GetPathAName()
     {
-        if (towerType == TowerType.Archer) return "연사 루트";
-        if (towerType == TowerType.Cannon) return "폭발 루트";
-        if (towerType == TowerType.Magic) return "마법화살 루트";
-
-        return "루트 A";
+        TowerData.PathTextInfo info = GetPathTextInfo(UpgradePath.PathA);
+        return info != null ? info.routeName : "루트 A";
     }
 
     public string GetPathBName()
     {
-        if (towerType == TowerType.Archer) return "관통 루트";
-        if (towerType == TowerType.Cannon) return "공성 루트";
-        if (towerType == TowerType.Magic) return "화염 루트";
-
-        return "루트 B";
+        TowerData.PathTextInfo info = GetPathTextInfo(UpgradePath.PathB);
+        return info != null ? info.routeName : "루트 B";
     }
 
+    // Lv.3(최종 업그레이드) 이름은 위 GetTowerName()의 lv3Name과 동일한 값이라
+    // 별도로 하드코딩하지 않고 같은 데이터를 그대로 가져다 씁니다.
     public string GetFinalUpgradeName()
     {
-        if (path == UpgradePath.PathA)
-        {
-            if (towerType == TowerType.Archer) return "폭풍 화살 타워";
-            if (towerType == TowerType.Cannon) return "대폭발 캐논";
-            if (towerType == TowerType.Magic) return "연속 마법화살 타워";
-        }
-
-        if (path == UpgradePath.PathB)
-        {
-            if (towerType == TowerType.Archer) return "관통 화살 타워";
-            if (towerType == TowerType.Cannon) return "공성포 타워";
-            if (towerType == TowerType.Magic) return "지옥불 마법 타워";
-        }
-
-        return "최종 업그레이드";
+        TowerData.PathTextInfo info = GetPathTextInfo(path);
+        return info != null ? info.lv3Name : "최종 업그레이드";
     }
 
     public string GetPathADescription()
     {
-        string featureText = "";
-
-        switch (towerType)
-        {
-            case TowerType.Archer:
-                featureText = "빠른 공격 속도를 강화하는 루트입니다.\n특징: 공격속도 증가";
-                break;
-            case TowerType.Cannon:
-                featureText = "범위 폭발 피해를 강화하는 루트입니다.\n특징: 광역 공격력 증가";
-                break;
-            case TowerType.Magic:
-                featureText = "마법 화살 연사력을 강화하는 루트입니다.\n특징: 단일 연사력 증가";
-                break;
-        }
-
-        return $"{featureText}\n\n" +
-            $"<align=left>" +
-            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathALv2Damage}</color>\n" +
-            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathALv2Cooldown}</color>\n" +
-            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathALv2Range}</color>" +
-            $"</align>";
+        return BuildPathDescription(UpgradePath.PathA);
     }
 
     public string GetPathBDescription()
     {
-        string featureText = "";
+        return BuildPathDescription(UpgradePath.PathB);
+    }
 
-        switch (towerType)
-        {
-            case TowerType.Archer:
-                featureText = "강한 화살과 관통 공격을 강화하는 루트입니다.\n특징: 높은 공격력 / 관통 공격";
-                break;
-            case TowerType.Cannon:
-                featureText = "강력한 한 방 피해를 강화하는 루트입니다.\n특징: 높은 단일 피해";
-                break;
-            case TowerType.Magic:
-                featureText = "화염 피해를 강화하는 루트입니다.\n특징: 지속 피해 부여";
-                break;
-        }
+    private string BuildPathDescription(UpgradePath targetPath)
+    {
+        TowerData.PathTextInfo info = GetPathTextInfo(targetPath);
+        string featureText = info != null ? info.featureText : "";
+
+        TowerData.CombatStats lv2Stats = GetStats(targetPath, 2);
 
         return $"{featureText}\n\n" +
             $"<align=left>" +
-            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{pathBLv2Damage}</color>\n" +
-            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{pathBLv2Cooldown}</color>\n" +
-            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{pathBLv2Range}</color>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{lv2Stats.damage}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{lv2Stats.attackCooldown}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{lv2Stats.attackRange}</color>" +
             $"</align>";
     }
 
     public string GetFinalUpgradeDescription()
     {
-        string effectText = "";
+        if (path == UpgradePath.None)
+            return "먼저 업그레이드 루트를 선택해야 합니다.";
 
-        switch (towerType)
-        {
-            case TowerType.Archer:
-                effectText = (path == UpgradePath.PathA) 
-                    ? "공격속도가 크게 증가합니다." 
-                    : "관통 성능과 공격력이 크게 증가합니다.";
-                break;
-            case TowerType.Cannon:
-                effectText = (path == UpgradePath.PathA) 
-                    ? "폭발 범위와 피해가 크게 증가합니다." 
-                    : "강력한 공성 피해를 입힙니다.";
-                break;
-            case TowerType.Magic:
-                effectText = (path == UpgradePath.PathA) 
-                    ? "마법화살의 슬로우 효과가 강화됩니다." 
-                    : "화염 지속 피해가 강화됩니다.";
-                break;
-        }
-
-        int targetDamage = (path == UpgradePath.PathA) ? pathALv3Damage : pathBLv3Damage;
-        float targetCooldown = (path == UpgradePath.PathA) ? pathALv3Cooldown : pathBLv3Cooldown;
-        float targetRange = (path == UpgradePath.PathA) ? pathALv3Range : pathBLv3Range;
+        TowerData.PathTextInfo info = GetPathTextInfo(path);
+        string effectText = info != null ? info.effectText : "";
+        TowerData.CombatStats targetStats = GetStats(path, 3);
 
         return $"최종 단계로 업그레이드합니다.\n" +
            $"효과: {effectText}\n\n" +
            $"<align=left>" +
-           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{targetDamage}</color>\n" +
-           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{targetCooldown}</color>\n" +
-           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{targetRange}</color>" +
+           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{targetStats.damage}</color>\n" +
+           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{targetStats.attackCooldown}</color>\n" +
+           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{targetStats.attackRange}</color>" +
            $"</align>";
     }
 
