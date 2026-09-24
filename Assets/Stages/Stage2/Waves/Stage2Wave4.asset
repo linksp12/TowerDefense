@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage2Wave4
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   spawnInfos:
-  - monsterPrefab: {fileID: 7937657383654623975, guid: 8b897d49cfdf38649b54d8cbcb281503, type: 3}
+  - monsterPrefab: {fileID: 7990183225493823835, guid: 7d6acd30bf8560b4f94f69fc0f77c9f7, type: 3}
     count: 5
     interval: 0.42
   - monsterPrefab: {fileID: 3470370912176926543, guid: a6806fd22ebe4334f89b6ad3624c60ac, type: 3}

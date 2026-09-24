@@ -12,15 +12,17 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [TextArea]
     public string description;
 
+    private TowerData Data => targetTowerPrefab != null ? targetTowerPrefab.towerData : null;
+
     public string statInfo 
     {
         get 
         {
             if (targetTowerPrefab == null) return "정보 없음";
 
-            return $"<color=#FFF379>공격력:</color> <color=white>{targetTowerPrefab.damage}</color>\n" +
-                   $"<color=#FFF379>공격속도(s):</color> <color=white>{targetTowerPrefab.attackCooldown}</color>\n" +
-                   $"<color=#FFF379>사거리:</color> <color=white>{targetTowerPrefab.attackRange}</color>\n" +
+            return $"<color=#FFF379>공격력:</color> <color=white>{targetTowerPrefab.BaseDamage}</color>\n" +
+                   $"<color=#FFF379>공격속도(s):</color> <color=white>{targetTowerPrefab.BaseAttackCooldown}</color>\n" +
+                   $"<color=#FFF379>사거리:</color> <color=white>{targetTowerPrefab.BaseAttackRange}</color>\n" +
                    $"<color=#FFF379>업그레이드:</color> <color=white>{targetTowerPrefab.upgrade}</color>";
         }
     }
@@ -29,7 +31,15 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (TowerInfoPanel.Instance != null)
         {
-            TowerInfoPanel.Instance.Show(towerName, description, statInfo);
+            string displayName = Data != null && !string.IsNullOrWhiteSpace(Data.towerName)
+                ? Data.towerName
+                : towerName;
+
+            string displayDescription = Data != null && !string.IsNullOrWhiteSpace(Data.description)
+                ? Data.description
+                : description;
+
+            TowerInfoPanel.Instance.Show(displayName, displayDescription, statInfo);
         }
     }
 

@@ -18,7 +18,7 @@ public class TextUpdate : MonoBehaviour
 
         if (targetTowerPrefab != null)
         {
-            text.text = $"{targetTowerPrefab.cost} 원";
+            text.text = $"{targetTowerPrefab.BuildCost} 원";
         }
     }
 }
