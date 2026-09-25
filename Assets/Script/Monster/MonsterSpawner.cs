@@ -18,11 +18,6 @@ public class MonsterSpawner : MonoBehaviour
     public Transform[] path3Waypoints;
     public Transform[] path4Waypoints;
 
-    [Header("기본 스폰 설정")]
-    public int spawnCount = 5;
-    public float spawnInterval = 1f;
-
-    private int nextRouteIndex = 0;
     private int runningCoroutinesCount = 0;
 
     public virtual IEnumerator SpawnWave(
@@ -31,17 +26,24 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (wave == null)
         {
-            Debug.LogError("MonsterSpawner: WaveData가 없습니다.");
+            Debug.LogError(
+                "MonsterSpawner: WaveData가 없습니다.",
+                this
+            );
+
             yield break;
         }
 
-        if (wave.spawnInfos == null || wave.spawnInfos.Length == 0)
+        if (wave.spawnInfos == null ||
+            wave.spawnInfos.Length == 0)
         {
-            Debug.LogWarning("MonsterSpawner: SpawnInfo가 없습니다.");
+            Debug.LogError(
+                "MonsterSpawner: SpawnInfo가 없습니다.",
+                this
+            );
+
             yield break;
         }
-
-        nextRouteIndex = 0;
 
         /*
          * Stage 4
@@ -55,17 +57,16 @@ public class MonsterSpawner : MonoBehaviour
             {
                 if (info == null)
                 {
-                    continue;
-                }
-
-                if (info.monsterPrefab == null)
-                {
                     Debug.LogError(
-                        "MonsterSpawner: Monster Prefab이 없습니다."
+                        "MonsterSpawner: SpawnInfo가 비어 있습니다.",
+                        this
                     );
 
                     continue;
                 }
+
+                if (!IsSpawnInfoValid(info))
+                    continue;
 
                 for (int i = 0; i < info.count; i++)
                 {
@@ -79,7 +80,9 @@ public class MonsterSpawner : MonoBehaviour
                         onSpawned?.Invoke(monster);
                     }
 
-                    yield return new WaitForSeconds(info.interval);
+                    yield return new WaitForSeconds(
+                        info.interval
+                    );
                 }
             }
 
@@ -90,13 +93,17 @@ public class MonsterSpawner : MonoBehaviour
          * Stage 1 및 Stage 3
          *
          * 각 SpawnInfo를 동시에 실행한다.
-         * Stage 3에서는 useMultipleRoutes가 켜져 있으면
-         * 기본 경로와 두 번째 경로를 번갈아 사용한다.
+         * Stage 3에서는 WaveData의 pathIndex를 이용한다.
          */
         foreach (WaveData.SpawnInfo info in wave.spawnInfos)
         {
             if (info == null)
             {
+                Debug.LogError(
+                    "MonsterSpawner: SpawnInfo가 비어 있습니다.",
+                    this
+                );
+
                 continue;
             }
 
@@ -116,10 +123,21 @@ public class MonsterSpawner : MonoBehaviour
     {
         runningCoroutinesCount++;
 
-        if (info.monsterPrefab == null)
+        if (!IsSpawnInfoValid(info))
+        {
+            runningCoroutinesCount--;
+            yield break;
+        }
+
+        Transform[] selectedWaypoints =
+            GetPathWaypoints(info.pathIndex);
+
+        if (selectedWaypoints == null ||
+            selectedWaypoints.Length == 0)
         {
             Debug.LogError(
-                "MonsterSpawner: Monster Prefab이 없습니다."
+                $"MonsterSpawner: Path{info.pathIndex}의 웨이포인트가 연결되지 않았습니다.",
+                this
             );
 
             runningCoroutinesCount--;
@@ -138,7 +156,9 @@ public class MonsterSpawner : MonoBehaviour
                 onSpawned?.Invoke(monster);
             }
 
-            yield return new WaitForSeconds(info.interval);
+            yield return new WaitForSeconds(
+                info.interval
+            );
         }
 
         runningCoroutinesCount--;
@@ -151,54 +171,22 @@ public class MonsterSpawner : MonoBehaviour
         if (prefab == null)
         {
             Debug.LogError(
-                "MonsterSpawner: 생성할 Prefab이 없습니다."
+                "MonsterSpawner: 생성할 Prefab이 없습니다.",
+                this
             );
 
             return null;
         }
 
-        Transform[] selectedWaypoints;
+        Transform[] selectedWaypoints =
+            GetPathWaypoints(pathIndex);
 
-        /*
-         * Stage 4의 4개 경로
-         */
-        if (HasStage4Routes())
-        {
-            selectedWaypoints = GetPathWaypoints(pathIndex);
-        }
-        /*
-         * Stage 3의 2개 경로
-         */
-        else if (
-            useMultipleRoutes &&
-            secondaryWaypoints != null &&
-            secondaryWaypoints.Length > 0)
-        {
-            if (nextRouteIndex % 2 == 0)
-            {
-                selectedWaypoints = waypoints;
-            }
-            else
-            {
-                selectedWaypoints = secondaryWaypoints;
-            }
-
-            nextRouteIndex++;
-        }
-        /*
-         * Stage 1 및 일반 스테이지 기본 경로
-         */
-        else
-        {
-            selectedWaypoints = waypoints;
-        }
-
-        if (
-            selectedWaypoints == null ||
+        if (selectedWaypoints == null ||
             selectedWaypoints.Length == 0)
         {
             Debug.LogError(
-                $"MonsterSpawner: Path{pathIndex}의 웨이포인트가 연결되지 않았습니다."
+                $"MonsterSpawner: Path{pathIndex}의 웨이포인트가 연결되지 않았습니다.",
+                this
             );
 
             return null;
@@ -216,7 +204,8 @@ public class MonsterSpawner : MonoBehaviour
         if (monsterMove == null)
         {
             Debug.LogError(
-                $"MonsterSpawner: {prefab.name}에 MonsterMove가 없습니다."
+                $"MonsterSpawner: {prefab.name}에 MonsterMove가 없습니다.",
+                this
             );
 
             return monster;
@@ -227,6 +216,58 @@ public class MonsterSpawner : MonoBehaviour
         return monster;
     }
 
+    private bool IsSpawnInfoValid(
+        WaveData.SpawnInfo info)
+    {
+        if (info == null)
+        {
+            return false;
+        }
+
+        if (info.monsterPrefab == null)
+        {
+            Debug.LogError(
+                "MonsterSpawner: Monster Prefab이 없습니다.",
+                this
+            );
+
+            return false;
+        }
+
+        if (info.count < 1)
+        {
+            Debug.LogError(
+                $"MonsterSpawner: Count는 1 이상이어야 합니다. count={info.count}",
+                this
+            );
+
+            return false;
+        }
+
+        if (info.interval <= 0f)
+        {
+            Debug.LogError(
+                $"MonsterSpawner: Interval은 0보다 커야 합니다. interval={info.interval}",
+                this
+            );
+
+            return false;
+        }
+
+        if (info.pathIndex < 1 ||
+            info.pathIndex > 4)
+        {
+            Debug.LogError(
+                $"MonsterSpawner: 잘못된 pathIndex({info.pathIndex})입니다.",
+                this
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
     private bool HasStage4Routes()
     {
         return HasWaypoints(path1Waypoints) ||
@@ -235,35 +276,82 @@ public class MonsterSpawner : MonoBehaviour
                HasWaypoints(path4Waypoints);
     }
 
-    private bool HasWaypoints(Transform[] targetWaypoints)
+    private bool HasWaypoints(
+        Transform[] targetWaypoints)
     {
         return targetWaypoints != null &&
                targetWaypoints.Length > 0;
     }
 
-    private Transform[] GetPathWaypoints(int pathIndex)
+    private Transform[] GetPathWaypoints(
+        int pathIndex)
     {
-        switch (pathIndex)
+        /*
+         * Stage 4
+         */
+        if (HasStage4Routes())
         {
-            case 1:
-                return path1Waypoints;
+            switch (pathIndex)
+            {
+                case 1:
+                    return path1Waypoints;
 
-            case 2:
-                return path2Waypoints;
+                case 2:
+                    return path2Waypoints;
 
-            case 3:
-                return path3Waypoints;
+                case 3:
+                    return path3Waypoints;
 
-            case 4:
-                return path4Waypoints;
+                case 4:
+                    return path4Waypoints;
 
-            default:
-                Debug.LogWarning(
-                    $"MonsterSpawner: 잘못된 pathIndex({pathIndex})입니다. Path1을 사용합니다."
-                );
+                default:
+                    Debug.LogError(
+                        $"MonsterSpawner: Stage 4의 잘못된 pathIndex({pathIndex})입니다.",
+                        this
+                    );
 
-                return path1Waypoints;
+                    return null;
+            }
         }
+
+        /*
+         * Stage 3
+         */
+        if (useMultipleRoutes)
+        {
+            switch (pathIndex)
+            {
+                case 1:
+                    return waypoints;
+
+                case 2:
+                    return secondaryWaypoints;
+
+                default:
+                    Debug.LogError(
+                        $"MonsterSpawner: Stage 3에서는 pathIndex 1~2만 사용할 수 있습니다. 입력값={pathIndex}",
+                        this
+                    );
+
+                    return null;
+            }
+        }
+
+        /*
+         * Stage 1 및 기본 1개 경로
+         */
+        if (pathIndex != 1)
+        {
+            Debug.LogError(
+                $"MonsterSpawner: 현재 스테이지는 Path1만 사용할 수 있습니다. 입력값={pathIndex}",
+                this
+            );
+
+            return null;
+        }
+
+        return waypoints;
     }
 }
 

@@ -20,7 +20,9 @@ public class WaveManager : MonoBehaviour
     private bool isAllWavesFinished = false;
 
     public int CurrentWave => currentWaveIndex + 1;
-    public int TotalWaves => waves.Length;
+
+    public int TotalWaves =>
+        waves != null ? waves.Length : 0;
 
     [SerializeField] private bool waitForTutorial;
     private bool wavesStarted;
@@ -35,6 +37,26 @@ public class WaveManager : MonoBehaviour
     {
         if (wavesStarted)
             return;
+
+        if (waves == null || waves.Length == 0)
+        {
+            Debug.LogError(
+                "WaveManager: WaveData가 연결되지 않았습니다.",
+                this
+            );
+
+            return;
+        }
+
+        if (spawner == null)
+        {
+            Debug.LogError(
+                "WaveManager: MonsterSpawner가 연결되지 않았습니다.",
+                this
+            );
+
+            return;
+        }
 
         wavesStarted = true;
         StartCoroutine(RunWaves());
@@ -53,6 +75,16 @@ public class WaveManager : MonoBehaviour
 
             WaveData wave = waves[currentWaveIndex];
 
+            if (wave == null)
+            {
+                Debug.LogError(
+                    $"WaveManager: waves[{currentWaveIndex}]에 WaveData가 없습니다.",
+                    this
+                );
+
+                yield break;
+            }
+
             aliveMonsterCount = 0;
             isSpawningDone = false;
 
@@ -68,15 +100,6 @@ public class WaveManager : MonoBehaviour
             Debug.Log(
                 $"Wave {CurrentWave} / {TotalWaves} 시작!"
             );
-
-            if (spawner == null)
-            {
-                Debug.LogError(
-                    "WaveManager: MonsterSpawner가 연결되지 않았습니다."
-                );
-
-                yield break;
-            }
 
             // 웨이브 몬스터 생성
             yield return StartCoroutine(
@@ -194,6 +217,38 @@ public class WaveManager : MonoBehaviour
 
         if (aliveMonsterCount < 0)
             aliveMonsterCount = 0;
+    }
+
+    private void OnValidate()
+    {
+        if (waves == null || waves.Length == 0)
+        {
+            Debug.LogError(
+                "WaveManager: WaveData가 연결되지 않았습니다.",
+                this
+            );
+        }
+        else
+        {
+            for (int i = 0; i < waves.Length; i++)
+            {
+                if (waves[i] == null)
+                {
+                    Debug.LogError(
+                        $"WaveManager: waves[{i}]가 비어 있습니다.",
+                        this
+                    );
+                }
+            }
+        }
+
+        if (spawner == null)
+        {
+            Debug.LogError(
+                "WaveManager: MonsterSpawner가 연결되지 않았습니다.",
+                this
+            );
+        }
     }
 
     private bool IsGameEnded()

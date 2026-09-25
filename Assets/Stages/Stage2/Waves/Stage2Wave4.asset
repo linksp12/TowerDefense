@@ -15,7 +15,10 @@ MonoBehaviour:
   spawnInfos:
   - monsterPrefab: {fileID: 7990183225493823835, guid: 7d6acd30bf8560b4f94f69fc0f77c9f7, type: 3}
     count: 5
-    interval: 0.42
+    interval: 1
+    pathIndex: 1
   - monsterPrefab: {fileID: 3470370912176926543, guid: a6806fd22ebe4334f89b6ad3624c60ac, type: 3}
     count: 5
-    interval: 0.38
+    interval: 1
+    pathIndex: 1
+  waveStartDelay: 3
