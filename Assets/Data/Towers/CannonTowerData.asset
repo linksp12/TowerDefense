@@ -15,14 +15,26 @@ MonoBehaviour:
   id: cannon_tower
   towerName: "\uae30\ubcf8 \uce90\ub17c \ud0c0\uc6cc"
   description: "\ub290\ub9ac\uc9c0\ub9cc \uac15\ud55c \ud53c\ud574\ub97c \uc8fc\ub294 \uc911\ud654\uae30 \ud0c0\uc6cc\uc785\ub2c8\ub2e4.\n\uccb4\ub825\uc774 \ub192\uc740 \ubaac\uc2a4\ud130\ub098 \ubb49\uce5c \ubaac\uc2a4\ud130\uc5d0\uac8c \ud6a8\uacfc\uc801\uc785\ub2c8\ub2e4."
-  icon: {fileID: 21300000, guid: 2f0b8ad7ef85a7f47b548e3278a8bde6, type: 3}
-  towerPrefab: {fileID: 100100000, guid: 97e7ebf672bb6e443b935cb4c561b1e2, type: 3}
+  icon: {fileID: 21300000, guid: 804684f855fb5eb45a8fb996168ffe53, type: 3}
   buildCost: 100
   sellRate: 0.7
   baseStats:
     damage: 100
     attackCooldown: 2.5
     attackRange: 5
+  baseProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 1
+    explosionRadius: 1.8
+    splashDamageRate: 0.75
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
   level2Cost: 200
   level3Cost: 400
   pathALv2Stats:
@@ -33,6 +45,32 @@ MonoBehaviour:
     damage: 300
     attackCooldown: 2
     attackRange: 5
+  pathALv2ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 1
+    explosionRadius: 2.5
+    splashDamageRate: 0.75
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathALv3ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 1
+    explosionRadius: 2.5
+    splashDamageRate: 0.7
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
   pathBLv2Stats:
     damage: 300
     attackCooldown: 3.5
@@ -41,6 +79,32 @@ MonoBehaviour:
     damage: 700
     attackCooldown: 5
     attackRange: 7
+  pathBLv2ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathBLv3ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
   pathA:
     routeName: "\ud3ed\ubc1c \ub8e8\ud2b8"
     lv2Name: "\ud3ed\ubc1c \uce90\ub17c"

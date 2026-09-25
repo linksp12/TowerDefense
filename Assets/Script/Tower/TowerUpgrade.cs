@@ -230,6 +230,7 @@ public class TowerUpgrade : MonoBehaviour
     void ApplyUpgrade()
     {
         TowerData.CombatStats targetStats = GetStats(path, level);
+        TowerData.ProjectileEffectStats targetProjectileEffects = GetProjectileEffects(path, level);
 
         if (path == UpgradePath.PathA)
         {
@@ -238,7 +239,8 @@ public class TowerUpgrade : MonoBehaviour
                 ChangeTower(
                     pathALv2TowerSprite,
                     targetStats,
-                    pathALv2ProjectilePrefab
+                    pathALv2ProjectilePrefab,
+                    targetProjectileEffects
                 );
             }
             else if (level == 3)
@@ -246,7 +248,8 @@ public class TowerUpgrade : MonoBehaviour
                 ChangeTower(
                     pathALv3TowerSprite,
                     targetStats,
-                    pathALv3ProjectilePrefab
+                    pathALv3ProjectilePrefab,
+                    targetProjectileEffects
                 );
             }
         }
@@ -257,7 +260,8 @@ public class TowerUpgrade : MonoBehaviour
                 ChangeTower(
                     pathBLv2TowerSprite,
                     targetStats,
-                    pathBLv2ProjectilePrefab
+                    pathBLv2ProjectilePrefab,
+                    targetProjectileEffects
                 );
             }
             else if (level == 3)
@@ -265,13 +269,18 @@ public class TowerUpgrade : MonoBehaviour
                 ChangeTower(
                     pathBLv3TowerSprite,
                     targetStats,
-                    pathBLv3ProjectilePrefab
+                    pathBLv3ProjectilePrefab,
+                    targetProjectileEffects
                 );
             }
         }
     }
 
-    void ChangeTower(Sprite newSprite, TowerData.CombatStats newStats, GameObject newProjectilePrefab)
+    void ChangeTower(
+        Sprite newSprite,
+        TowerData.CombatStats newStats,
+        GameObject newProjectilePrefab,
+        TowerData.ProjectileEffectStats newProjectileEffects)
     {
         if (spriteRenderer != null && newSprite != null)
         {
@@ -284,7 +293,8 @@ public class TowerUpgrade : MonoBehaviour
                 newStats.damage,
                 newStats.attackCooldown,
                 newStats.attackRange,
-                newProjectilePrefab
+                newProjectilePrefab,
+                newProjectileEffects
             );
         }
 
@@ -309,6 +319,28 @@ public class TowerUpgrade : MonoBehaviour
 
         if (targetPath == UpgradePath.PathB)
             return targetLevel == 2 ? data.pathBLv2Stats : data.pathBLv3Stats;
+
+        return default;
+    }
+
+    private TowerData.ProjectileEffectStats GetProjectileEffects(
+        UpgradePath targetPath,
+        int targetLevel)
+    {
+        TowerData data = Data;
+
+        if (data == null)
+            return default;
+
+        if (targetPath == UpgradePath.PathA)
+            return targetLevel == 2
+                ? data.pathALv2ProjectileEffects
+                : data.pathALv3ProjectileEffects;
+
+        if (targetPath == UpgradePath.PathB)
+            return targetLevel == 2
+                ? data.pathBLv2ProjectileEffects
+                : data.pathBLv3ProjectileEffects;
 
         return default;
     }

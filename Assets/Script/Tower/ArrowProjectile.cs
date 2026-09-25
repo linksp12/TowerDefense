@@ -4,30 +4,24 @@ using UnityEngine;
 public class ArrowProjectile : MonoBehaviour
 {
     public float speed => 8f;
-    public int damage = 10;
+    private int damage = 10;
 
     [Header("Rotation Settings")]
     public float rotationOffset = 0f;
 
-    [Header("Pierce Settings")]
-    public bool canPierce = false;
-    public int maxHitCount = 1;
-
-    [Header("Explosion Settings")]
-    public bool canExplode = false;
-    public float explosionRadius = 1.5f;
-    public float splashDamageRate = 0.7f;
-
-    [Header("Slow Settings")]
-    public bool canSlow = false;
-    [Range(0f, 1f)] public float slowRate = 0.5f;
-    public float slowDuration = 2f;
-
-    [Header("DoT Settings")]
-    public bool canDot = false;
-    public int dotDamage = 5;
-    public float dotDuration = 3f;
-    public float dotInterval = 1f;
+    // 투사체 특수효과는 프리팹 Inspector가 아니라 TowerData에서 발사 시점에 적용됩니다.
+    private bool canPierce;
+    private int maxHitCount = 1;
+    private bool canExplode;
+    private float explosionRadius;
+    private float splashDamageRate;
+    private bool canSlow;
+    private float slowRate;
+    private float slowDuration;
+    private bool canDot;
+    private int dotDamage;
+    private float dotDuration;
+    private float dotInterval;
 
     private Transform target;
     private int currentHitCount = 0;
@@ -49,6 +43,25 @@ public class ArrowProjectile : MonoBehaviour
         canHitStealth = newCanHitStealth;
         criticalChance = Mathf.Clamp01(newCriticalChance);
         criticalDamageMultiplier = Mathf.Max(1f, newCriticalDamageMultiplier);
+    }
+
+    public void ApplyEffectStats(TowerData.ProjectileEffectStats effectStats)
+    {
+        canPierce = effectStats.canPierce;
+        maxHitCount = Mathf.Max(1, effectStats.maxHitCount);
+
+        canExplode = effectStats.canExplode;
+        explosionRadius = Mathf.Max(0f, effectStats.explosionRadius);
+        splashDamageRate = Mathf.Clamp01(effectStats.splashDamageRate);
+
+        canSlow = effectStats.canSlow;
+        slowRate = Mathf.Clamp01(effectStats.slowRate);
+        slowDuration = Mathf.Max(0f, effectStats.slowDuration);
+
+        canDot = effectStats.canDot;
+        dotDamage = Mathf.Max(0, effectStats.dotDamage);
+        dotDuration = Mathf.Max(0f, effectStats.dotDuration);
+        dotInterval = Mathf.Max(0f, effectStats.dotInterval);
     }
 
     void Update()

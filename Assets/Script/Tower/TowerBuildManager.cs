@@ -24,9 +24,9 @@ public class TowerBuildManager : MonoBehaviour
     public GameObject magicTowerPrefab;
 
     [Header("Tower Costs")]
-    public int basicTowerCost => basicTowerPrefab.GetComponent<TowerAttack>().BuildCost;
-    public int cannonTowerCost => cannonTowerPrefab.GetComponent<TowerAttack>().BuildCost;
-    public int magicTowerCost => magicTowerPrefab.GetComponent<TowerAttack>().BuildCost;
+    public int basicTowerCost => GetConfiguredBuildCost(basicTowerPrefab);
+    public int cannonTowerCost => GetConfiguredBuildCost(cannonTowerPrefab);
+    public int magicTowerCost => GetConfiguredBuildCost(magicTowerPrefab);
 
 
     private BuildPoint selectedBuildPoint;
@@ -178,20 +178,20 @@ public class TowerBuildManager : MonoBehaviour
 
     public void BuildBasicTower()
     {
-        BuildTower(basicTowerPrefab, basicTowerCost);
+        BuildTower(basicTowerPrefab);
     }
 
     public void BuildCannonTower()
     {
-        BuildTower(cannonTowerPrefab, cannonTowerCost);
+        BuildTower(cannonTowerPrefab);
     }
 
     public void BuildMagicTower()
     {
-        BuildTower(magicTowerPrefab, magicTowerCost);
+        BuildTower(magicTowerPrefab);
     }
 
-    private void BuildTower(GameObject towerPrefab, int cost)
+    private void BuildTower(GameObject towerPrefab)
     {
         if (selectedBuildPoint == null)
         {
@@ -203,6 +203,12 @@ public class TowerBuildManager : MonoBehaviour
         if (towerPrefab == null)
         {
             Debug.LogWarning("타워 프리팹이 연결되지 않았습니다.");
+            PlayFailFeedback();
+            return;
+        }
+
+        if (!TryGetBuildCost(towerPrefab, out int cost))
+        {
             PlayFailFeedback();
             return;
         }
@@ -297,14 +303,54 @@ public class TowerBuildManager : MonoBehaviour
 
     public int GetCheapestTowerCost()
     {
-        int cheapest = basicTowerCost;
+        int cheapest = int.MaxValue;
 
-        if (cannonTowerCost < cheapest)
-            cheapest = cannonTowerCost;
+        TryUpdateCheapestCost(basicTowerPrefab, ref cheapest);
+        TryUpdateCheapestCost(cannonTowerPrefab, ref cheapest);
+        TryUpdateCheapestCost(magicTowerPrefab, ref cheapest);
 
-        if (magicTowerCost < cheapest)
-            cheapest = magicTowerCost;
+        return cheapest == int.MaxValue ? 0 : cheapest;
+    }
 
-        return cheapest;
+    private int GetConfiguredBuildCost(GameObject towerPrefab)
+    {
+        if (towerPrefab == null)
+            return 0;
+
+        TowerAttack towerAttack = towerPrefab.GetComponent<TowerAttack>();
+
+        return towerAttack != null && towerAttack.towerData != null
+            ? towerAttack.BuildCost
+            : 0;
+    }
+
+    private bool TryGetBuildCost(GameObject towerPrefab, out int cost)
+    {
+        cost = 0;
+
+        TowerAttack towerAttack = towerPrefab.GetComponent<TowerAttack>();
+
+        if (towerAttack == null)
+        {
+            Debug.LogError($"{towerPrefab.name}: TowerAttack 컴포넌트가 없어 설치할 수 없습니다.", towerPrefab);
+            return false;
+        }
+
+        if (towerAttack.towerData == null)
+        {
+            Debug.LogError($"{towerPrefab.name}: TowerData가 연결되지 않아 설치할 수 없습니다.", towerPrefab);
+            return false;
+        }
+
+        cost = towerAttack.BuildCost;
+        return true;
+    }
+
+    private void TryUpdateCheapestCost(GameObject towerPrefab, ref int cheapest)
+    {
+        int cost = GetConfiguredBuildCost(towerPrefab);
+
+        if (cost > 0 && cost < cheapest)
+            cheapest = cost;
     }
 }
