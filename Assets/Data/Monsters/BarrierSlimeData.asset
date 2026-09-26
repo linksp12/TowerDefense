@@ -16,4 +16,5 @@ MonoBehaviour:
   monsterName: Barrier Slime
   maxHp: 360
   moveSpeed: 2
+  maxShield: 5
   goldReward: 15

@@ -101,6 +101,7 @@ public class MonsterHealth : MonoBehaviour
 
         maxHp = monsterData.maxHp;
         goldReward = monsterData.goldReward;
+        maxShield = monsterData.maxShield;
     }
 
     private void Start()
