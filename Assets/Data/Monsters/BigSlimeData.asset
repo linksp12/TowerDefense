@@ -16,5 +16,6 @@ MonoBehaviour:
   monsterName: Big Slime
   maxHp: 840
   moveSpeed: 1.15
-  maxShield: 0
   goldReward: 24
+  maxShield: 0
+  baseDamage: 1

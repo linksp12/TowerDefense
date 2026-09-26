@@ -15,8 +15,13 @@ public class MonsterData : ScriptableObject
     [Header("기본 능력치")]
     [Min(1)] public int maxHp;
     [Min(0f)] public float moveSpeed;
-    [Min(0f)] public int maxShield;
 
     [Header("처치 보상")]
     [Min(0)] public int goldReward;
+
+    [Header("특수 능력치")]
+    [Min(0)] public int maxShield;
+
+    [Header("기지 피해량")]
+    [Min(0)] public int baseDamage;
 }

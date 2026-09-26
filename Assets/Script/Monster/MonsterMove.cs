@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MonsterMove : MonoBehaviour
 {
+    public MonsterData monsterData;
+
     public Transform[] waypoints;
     public float moveSpeed = 1.5f;
 
@@ -18,8 +20,11 @@ public class MonsterMove : MonoBehaviour
     // 스킬용 빙결 상태
     private bool isFrozen = false;
 
+    private int baseDamage;
+
     void Awake()
     {
+        ApplyStatsFromData();
         monsterHealth = GetComponent<MonsterHealth>();
 
         if (monsterHealth != null && monsterHealth.monsterData != null)
@@ -68,6 +73,14 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
+    public void ApplyStatsFromData()
+    {
+        if (monsterData == null)
+            return;
+
+        baseDamage = monsterData.baseDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Shield"))
@@ -87,7 +100,7 @@ public class MonsterMove : MonoBehaviour
         if (GetComponent<TutorialPracticeMonster>() == null)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.TakePlayerDamage(1);
+                GameManager.Instance.TakePlayerDamage(baseDamage);
 
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
             if (waveManager != null)

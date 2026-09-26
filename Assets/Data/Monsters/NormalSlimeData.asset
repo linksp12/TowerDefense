@@ -16,5 +16,6 @@ MonoBehaviour:
   monsterName: Normal Slime
   maxHp: 360
   moveSpeed: 2
-  maxShield: 0
   goldReward: 13
+  maxShield: 0
+  baseDamage: 1

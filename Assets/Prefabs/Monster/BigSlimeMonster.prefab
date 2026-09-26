@@ -9,10 +9,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5432581987418936079, guid: 428b6582a319ed745b60b477324c635b, type: 3}
-      propertyPath: monsterData
-      value:
-      objectReference: {fileID: 11400000, guid: 31eb741f4bc54f609e28cf449f85ab02, type: 2}
-    - target: {fileID: -5432581987418936079, guid: 428b6582a319ed745b60b477324c635b, type: 3}
       propertyPath: maxHp
       value: 840
       objectReference: {fileID: 0}
@@ -20,6 +16,10 @@ PrefabInstance:
       propertyPath: goldReward
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: -5432581987418936079, guid: 428b6582a319ed745b60b477324c635b, type: 3}
+      propertyPath: monsterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 31eb741f4bc54f609e28cf449f85ab02, type: 2}
     - target: {fileID: -4207646481965875172, guid: 428b6582a319ed745b60b477324c635b, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 1.15
       objectReference: {fileID: 0}
+    - target: {fileID: 3619351296178954280, guid: 428b6582a319ed745b60b477324c635b, type: 3}
+      propertyPath: monsterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 31eb741f4bc54f609e28cf449f85ab02, type: 2}
     - target: {fileID: 6533506964428784888, guid: 428b6582a319ed745b60b477324c635b, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.35
