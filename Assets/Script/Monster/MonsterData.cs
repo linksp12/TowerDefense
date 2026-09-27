@@ -24,4 +24,11 @@ public class MonsterData : ScriptableObject
 
     [Header("기지 피해량")]
     [Min(0)] public int baseDamage;
+
+    [Header("보스 정보")]
+    public bool isBoss;
+    public int defense;
+    public int magicResistance;
+    public Sprite bossPortrait;
+    public string bossName;
 }

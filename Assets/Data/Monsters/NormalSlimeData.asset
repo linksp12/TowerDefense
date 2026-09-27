@@ -19,3 +19,8 @@ MonoBehaviour:
   goldReward: 13
   maxShield: 0
   baseDamage: 1
+  isBoss: 0
+  defense: 0
+  magicResistance: 0
+  bossPortrait: {fileID: 0}
+  bossName: 
