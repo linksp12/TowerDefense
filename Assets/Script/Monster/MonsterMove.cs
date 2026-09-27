@@ -6,10 +6,8 @@ public class MonsterMove : MonoBehaviour
     public MonsterData monsterData;
 
     public Transform[] waypoints;
-    public float moveSpeed = 1.5f;
+    [HideInInspector] public float moveSpeed;
 
-    private MonsterHealth monsterHealth;
-    private float originalMoveSpeed;
     private Coroutine slowCoroutine;
     
     private Coroutine freezeCoroutine;
@@ -25,18 +23,15 @@ public class MonsterMove : MonoBehaviour
     void Awake()
     {
         ApplyStatsFromData();
-        monsterHealth = GetComponent<MonsterHealth>();
 
-        if (monsterHealth != null && monsterHealth.monsterData != null)
+        if (monsterData != null)
         {
-            moveSpeed = monsterHealth.monsterData.moveSpeed;
+            moveSpeed = monsterData.moveSpeed;
         }
     }
 
     void Start()
     {
-        originalMoveSpeed = moveSpeed;
-
         if (waypoints != null && waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -116,7 +111,7 @@ public class MonsterMove : MonoBehaviour
         if (slowCoroutine != null)
         {
             StopCoroutine(slowCoroutine);
-            moveSpeed = originalMoveSpeed;
+            moveSpeed = monsterData.moveSpeed;
         }
 
         slowCoroutine = StartCoroutine(SlowRoutine(slowRate, duration));
@@ -124,11 +119,11 @@ public class MonsterMove : MonoBehaviour
 
     IEnumerator SlowRoutine(float slowRate, float duration)
     {
-        moveSpeed = originalMoveSpeed * slowRate;
+        moveSpeed = monsterData.moveSpeed * slowRate;
 
         yield return new WaitForSeconds(duration);
 
-        moveSpeed = originalMoveSpeed;
+        moveSpeed = monsterData.moveSpeed;
         slowCoroutine = null;
 
     }
