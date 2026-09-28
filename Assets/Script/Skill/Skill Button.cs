@@ -9,6 +9,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Header("연결할 스킬 이름")]
     public string skillName;
 
+    [SerializeField] private SkillData skillData;
+
     [Header("UI 컴포넌트")]
     public Button button;
     public Image iconImage;
@@ -285,6 +287,10 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (SkillManager.Instance == null)
             return;
 
+        SkillData resolvedSkill = ResolveSkillData();
+        if (resolvedSkill == null)
+            return;
+
 
         if (SkillAimController.Instance == null)
         {
@@ -301,9 +307,19 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // -----------------------------------------------------
 
         if (!SkillManager.Instance.CanUseSkill(
-                skillName))
+                resolvedSkill.SkillId))
         {
             ShowCentralCooldownMessage();
+            return;
+        }
+
+        if (
+            SkillAimController.Instance.IsAiming() &&
+            SkillAimController.Instance.GetSelectedSkillName() == resolvedSkill.SkillId
+        )
+        {
+            SkillAimController.Instance.CancelAiming();
+            HideTooltip();
             return;
         }
 
@@ -313,7 +329,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // -----------------------------------------------------
 
         SkillAimController.Instance.StartAiming(
-            skillName
+            resolvedSkill.SkillId
         );
 
 
@@ -349,30 +365,31 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (iconImage == null)
             return;
 
-        if (SkillManager.Instance == null)
-            return;
-
-
-        SkillData skill =
-            SkillManager.Instance.skills.Find(
-                s =>
-                    s != null &&
-                    s.skillName == skillName
-            );
-
-
+        SkillData skill = ResolveSkillData();
         if (skill == null)
             return;
 
 
         if (
-            skill.icon != null &&
-            iconImage.sprite != skill.icon
+            skill.Icon != null &&
+            iconImage.sprite != skill.Icon
         )
         {
             iconImage.sprite =
-                skill.icon;
+                skill.Icon;
         }
+    }
+
+    private SkillData ResolveSkillData()
+    {
+        if (skillData != null)
+            return skillData;
+
+        if (SkillManager.Instance == null)
+            return null;
+
+        SkillManager.Instance.TryGetSkill(skillName, out skillData);
+        return skillData;
     }
 
 
@@ -385,22 +402,26 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (SkillManager.Instance == null)
             return;
 
+        SkillData resolvedSkill = ResolveSkillData();
+        if (resolvedSkill == null)
+            return;
+
 
         bool onCooldown =
             !SkillManager.Instance.CanUseSkill(
-                skillName
+                resolvedSkill.SkillId
             );
 
 
         float remaining =
             SkillManager.Instance.GetCooldownRemaining(
-                skillName
+                resolvedSkill.SkillId
             );
 
 
         float normalized =
             SkillManager.Instance.GetCooldownNormalized(
-                skillName
+                resolvedSkill.SkillId
             );
 
 
@@ -1025,12 +1046,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             return;
 
 
-        SkillData skill =
-            SkillManager.Instance.skills.Find(
-                s =>
-                    s != null &&
-                    s.skillName == skillName
-            );
+        SkillData skill = ResolveSkillData();
 
 
         if (skill == null)
@@ -1117,137 +1133,37 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SkillData skill
     )
     {
-        SkillManager manager =
-            SkillManager.Instance;
-
-
         string title =
-            skill.skillName;
+            skill.DisplayName;
 
+        string description = string.IsNullOrWhiteSpace(skill.Description)
+            ? "스킬 설명이 설정되지 않았습니다."
+            : skill.Description;
 
-        string effect;
-        string target;
-        string range;
-        string durationLine = "";
+        string details =
+            $"범위: {skill.Range:0.##}\n" +
+            $"재사용 대기시간: {skill.Cooldown:0.##}초";
 
+        if (skill.Damage > 0)
+            details = $"피해량: {skill.Damage}\n" + details;
 
-        switch (skill.skillName)
+        if (skill.Duration > 0f)
+            details += $"\n지속 시간: {skill.Duration:0.##}초";
+
+        if (skill.MaxTargets > 0)
+            details += $"\n최대 대상 수: {skill.MaxTargets}";
+
+        if (skill.PeriodicDamage > 0)
         {
-            case "Fireball":
-
-                effect =
-                    $"마법진 범위 안의 몬스터에게 최초 " +
-                    $"{manager.fireInitialDamage} 피해\n" +
-                    $"이후 {manager.fireDotInterval:0.##}초마다 " +
-                    $"{manager.fireDotDamage} 피해";
-
-
-                target =
-                    "적용 대상: 마법진 범위 안의 몬스터";
-
-
-                range =
-                    "범위: 마법진 내부";
-
-
-                durationLine =
-                    $"지속 시간: " +
-                    $"{manager.fireDotDuration:0.##}초";
-
-                break;
-
-
-            case "Ice Attack":
-
-                effect =
-                    "마법진 범위 안의 몬스터를 얼려 이동을 멈춥니다.";
-
-
-                target =
-                    "적용 대상: 마법진 범위 안의 몬스터";
-
-
-                range =
-                    "범위: 마법진 내부";
-
-
-                durationLine =
-                    "지속 시간: 3초";
-
-                break;
-
-
-            case "Lightning":
-
-                effect =
-                    $"마법진 범위 안의 최대 " +
-                    $"{manager.lightningMaxTargets}명의 " +
-                    $"몬스터에게 {manager.lightningDamage} 피해";
-
-
-                target =
-                    $"적용 대상: 마법진 범위 안의 최대 " +
-                    $"{manager.lightningMaxTargets}명";
-
-
-                range =
-                    "범위: 마법진 내부";
-
-                break;
-
-
-            default:
-
-                effect =
-                    string.IsNullOrWhiteSpace(
-                        skill.description
-                    )
-                    ? "스킬 설명이 설정되지 않았습니다."
-                    : skill.description;
-
-
-                target =
-                    "적용 대상: 설정값 기준";
-
-
-                range =
-                    "범위: 설정값 기준";
-
-
-                if (skill.duration > 0f)
-                {
-                    durationLine =
-                        $"지속 시간: " +
-                        $"{skill.duration:0.##}초";
-                }
-
-                break;
+            details +=
+                $"\n지속 피해: {skill.PeriodicDamage}" +
+                $" / {skill.PeriodicInterval:0.##}초";
         }
-
-
-        string cooldownLine =
-            $"재사용 대기시간: " +
-            $"{skill.cooldown:0.##}초";
-
-
-        if (!string.IsNullOrEmpty(durationLine))
-        {
-            return
-                $"<size=28><b>{title}</b></size>\n\n" +
-                $"효과: {effect}\n" +
-                $"{target}\n" +
-                $"{range}\n" +
-                $"{durationLine}\n" +
-                $"{cooldownLine}";
-        }
-
 
         return
             $"<size=28><b>{title}</b></size>\n\n" +
-            $"효과: {effect}\n" +
-            $"{target}\n" +
-            $"{range}\n" +
-            $"{cooldownLine}";
+            $"효과: {description}\n" +
+            details;
     }
 
 

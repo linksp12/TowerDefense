@@ -166,6 +166,8 @@ public class SkillAimController : MonoBehaviour
 
     private string selectedSkillName = "";
 
+    private SkillData selectedSkillData;
+
     private Vector3 targetPosition;
 
     private Vector3 originalScale;
@@ -439,15 +441,18 @@ public class SkillAimController : MonoBehaviour
 
     private Color GetCurrentRangeColor()
     {
-        switch (selectedSkillName)
+        if (selectedSkillData == null)
+            return fireRangeColor;
+
+        switch (selectedSkillData.EffectType)
         {
-            case "Fireball":
+            case SkillEffectType.Fire:
                 return fireRangeColor;
 
-            case "Ice Attack":
+            case SkillEffectType.Ice:
                 return iceRangeColor;
 
-            case "Lightning":
+            case SkillEffectType.Lightning:
                 return lightningRangeColor;
 
             default:
@@ -717,6 +722,16 @@ public class SkillAimController : MonoBehaviour
             return;
         }
 
+        if (!SkillManager.Instance.TryGetSkill(skillName, out SkillData skill))
+        {
+            Debug.LogError(
+                "SkillAimController : SkillData를 찾을 수 없습니다. " +
+                skillName
+            );
+
+            return;
+        }
+
 
         // -----------------------------------------------------
         // 쿨타임 확인
@@ -724,7 +739,7 @@ public class SkillAimController : MonoBehaviour
 
         if (
             !SkillManager.Instance.CanUseSkill(
-                skillName
+                skill.SkillId
             )
         )
         {
@@ -772,8 +787,10 @@ public class SkillAimController : MonoBehaviour
         // 스킬 이름 저장
         // -----------------------------------------------------
 
+        selectedSkillData = skill;
+
         selectedSkillName =
-            skillName;
+            skill.SkillId;
 
 
         // -----------------------------------------------------
@@ -782,11 +799,12 @@ public class SkillAimController : MonoBehaviour
 
         if (
             !SetMagicCircle(
-                skillName
+                skill
             )
         )
         {
             selectedSkillName = "";
+            selectedSkillData = null;
             return;
         }
 
@@ -805,7 +823,7 @@ public class SkillAimController : MonoBehaviour
         // -----------------------------------------------------
 
         SetMagicCircleSize(
-            skillName
+            skill
         );
 
 
@@ -814,7 +832,7 @@ public class SkillAimController : MonoBehaviour
         // -----------------------------------------------------
 
         currentSkillRadius =
-            CalculateBaseMagicCircleRadius();
+            skill.Range;
 
 
         // -----------------------------------------------------
@@ -884,57 +902,23 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     private bool SetMagicCircle(
-        string skillName
+        SkillData skill
     )
     {
         if (spriteRenderer == null)
             return false;
 
 
-        Sprite selectedSprite = null;
+        if (skill == null)
+            return false;
 
-
-        switch (skillName)
-        {
-            case "Fireball":
-
-                selectedSprite =
-                    fireMagicCircle;
-
-                break;
-
-
-            case "Ice Attack":
-
-                selectedSprite =
-                    iceMagicCircle;
-
-                break;
-
-
-            case "Lightning":
-
-                selectedSprite =
-                    lightningMagicCircle;
-
-                break;
-
-
-            default:
-
-                Debug.LogError(
-                    "등록되지 않은 스킬 : " +
-                    skillName
-                );
-
-                return false;
-        }
+        Sprite selectedSprite = skill.MagicCircle;
 
 
         if (selectedSprite == null)
         {
             Debug.LogError(
-                skillName +
+                skill.DisplayName +
                 "의 마법진 Sprite가 연결되지 않았습니다."
             );
 
@@ -959,16 +943,16 @@ public class SkillAimController : MonoBehaviour
     // =========================================================
 
     private void SetMagicCircleSize(
-        string skillName
+        SkillData skill
     )
     {
         float scale =
             magicCircleScale;
 
 
-        switch (skillName)
+        switch (skill.EffectType)
         {
-            case "Fireball":
+            case SkillEffectType.Fire:
 
                 scale *=
                     fireCircleScaleMultiplier;
@@ -976,7 +960,7 @@ public class SkillAimController : MonoBehaviour
                 break;
 
 
-            case "Ice Attack":
+            case SkillEffectType.Ice:
 
                 scale *=
                     iceCircleScaleMultiplier;
@@ -984,7 +968,7 @@ public class SkillAimController : MonoBehaviour
                 break;
 
 
-            case "Lightning":
+            case SkillEffectType.Lightning:
 
                 scale *=
                     lightningCircleScaleMultiplier;
@@ -1414,6 +1398,8 @@ public class SkillAimController : MonoBehaviour
 
         selectedSkillName = "";
 
+        selectedSkillData = null;
+
         currentSkillRadius = 0f;
 
 
@@ -1436,6 +1422,8 @@ public class SkillAimController : MonoBehaviour
         isAiming = false;
 
         selectedSkillName = "";
+
+        selectedSkillData = null;
 
         currentSkillRadius = 0f;
 
