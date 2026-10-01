@@ -12,37 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
   m_Name: Stage4_WaveData1
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveId: stage_04_wave_01
+  waveNumber: 1
   spawnInfos:
   - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 1
   - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 2
   - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 3
   - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 4
   - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 1
   - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 2
   - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 3
   - monsterPrefab: {fileID: 2638662418386846195, guid: 94e3aa802ee164f489220f12db92cd8a, type: 3}
-    count: 10
+    count: 7
     interval: 1
     pathIndex: 4
   waveStartDelay: 3

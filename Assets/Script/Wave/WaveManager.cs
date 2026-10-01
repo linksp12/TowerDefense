@@ -19,10 +19,28 @@ public class WaveManager : MonoBehaviour
     private bool isSpawningDone = false;
     private bool isAllWavesFinished = false;
 
-    public int CurrentWave => currentWaveIndex + 1;
-    public int TotalWaves => waves.Length;
+    public int CurrentWave
+    {
+        get
+        {
+            if (waves == null ||
+                currentWaveIndex < 0 ||
+                currentWaveIndex >= waves.Length ||
+                waves[currentWaveIndex] == null)
+            {
+                return currentWaveIndex + 1;
+            }
 
-    [SerializeField] private bool waitForTutorial;
+            return waves[currentWaveIndex].WaveNumber;
+        }
+    }
+
+    public int TotalWaves =>
+        waves != null ? waves.Length : 0;
+
+    [SerializeField]
+    private bool waitForTutorial;
+
     private bool wavesStarted;
 
     private void Start()
@@ -36,7 +54,29 @@ public class WaveManager : MonoBehaviour
         if (wavesStarted)
             return;
 
+        if (waves == null ||
+            waves.Length == 0)
+        {
+            Debug.LogError(
+                "WaveManager: WaveData가 연결되지 않았습니다.",
+                this
+            );
+
+            return;
+        }
+
+        if (spawner == null)
+        {
+            Debug.LogError(
+                "WaveManager: MonsterSpawner가 연결되지 않았습니다.",
+                this
+            );
+
+            return;
+        }
+
         wavesStarted = true;
+
         StartCoroutine(RunWaves());
     }
 
@@ -51,34 +91,35 @@ public class WaveManager : MonoBehaviour
             if (IsGameEnded())
                 yield break;
 
-            WaveData wave = waves[currentWaveIndex];
+            WaveData wave =
+                waves[currentWaveIndex];
 
-            aliveMonsterCount = 0;
-            isSpawningDone = false;
-
-            // 웨이브 시작 전 대기
-            yield return new WaitForSeconds(wave.waveStartDelay);
-
-            if (IsGameEnded())
-                yield break;
-
-            // 웨이브 시작 이벤트
-            onWaveStart?.Invoke(CurrentWave);
-
-            Debug.Log(
-                $"Wave {CurrentWave} / {TotalWaves} 시작!"
-            );
-
-            if (spawner == null)
+            if (wave == null)
             {
                 Debug.LogError(
-                    "WaveManager: MonsterSpawner가 연결되지 않았습니다."
+                    $"WaveManager: waves[{currentWaveIndex}]에 WaveData가 없습니다.",
+                    this
                 );
 
                 yield break;
             }
 
-            // 웨이브 몬스터 생성
+            aliveMonsterCount = 0;
+            isSpawningDone = false;
+
+            yield return new WaitForSeconds(
+                wave.waveStartDelay
+            );
+
+            if (IsGameEnded())
+                yield break;
+
+            onWaveStart?.Invoke(CurrentWave);
+
+            Debug.Log(
+                $"Wave {CurrentWave} / {TotalWaves} 시작! ID: {wave.WaveId}"
+            );
+
             yield return StartCoroutine(
                 spawner.SpawnWave(
                     wave,
@@ -86,13 +127,25 @@ public class WaveManager : MonoBehaviour
                 )
             );
 
+            /*
+             * Spawn 실패 시 웨이브와 게임 클리어를 진행하지 않는다.
+             */
+            if (spawner.HasSpawnError)
+            {
+                Debug.LogError(
+                    $"WaveManager: Wave {wave.WaveNumber}의 스폰 오류로 웨이브 진행을 중단합니다. ID: {wave.WaveId}",
+                    this
+                );
+
+                yield break;
+            }
+
             isSpawningDone = true;
 
             Debug.Log(
                 $"스폰 완료! 남은 몬스터: {aliveMonsterCount}"
             );
 
-            // 모든 몬스터가 죽거나 도착할 때까지 대기
             yield return new WaitUntil(() =>
                 IsGameEnded() ||
                 (
@@ -104,14 +157,12 @@ public class WaveManager : MonoBehaviour
             if (IsGameEnded())
                 yield break;
 
-            // 웨이브 클리어
             onWaveCleared?.Invoke(CurrentWave);
 
             Debug.Log(
                 $"Wave {CurrentWave} 클리어!"
             );
 
-            // 다음 웨이브까지 대기
             if (currentWaveIndex < waves.Length - 1)
             {
                 yield return new WaitForSeconds(
@@ -133,7 +184,9 @@ public class WaveManager : MonoBehaviour
 
         isAllWavesFinished = true;
 
-        Debug.Log("모든 웨이브 클리어!");
+        Debug.Log(
+            "모든 웨이브 클리어!"
+        );
 
         Time.timeScale = 1f;
 
@@ -151,7 +204,8 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void OnMonsterSpawned(GameObject monster)
+    private void OnMonsterSpawned(
+        GameObject monster)
     {
         if (IsGameEnded())
             return;
@@ -163,13 +217,16 @@ public class WaveManager : MonoBehaviour
             MonsterHealth monsterHealth =
                 monster.GetComponent<MonsterHealth>();
 
-            if (monsterHealth != null && monsterHealth.isBoss)
+            if (monsterHealth != null &&
+                monsterHealth.isBoss)
             {
                 if (BossWarningUI.Instance != null)
                     BossWarningUI.Instance.ShowBossWarning();
 
                 if (BossInfoUI.Instance != null)
-                    BossInfoUI.Instance.RegisterBoss(monsterHealth);
+                    BossInfoUI.Instance.RegisterBoss(
+                        monsterHealth
+                    );
             }
         }
     }
@@ -194,6 +251,75 @@ public class WaveManager : MonoBehaviour
 
         if (aliveMonsterCount < 0)
             aliveMonsterCount = 0;
+    }
+
+    private void OnValidate()
+    {
+        if (waves == null ||
+            waves.Length == 0)
+        {
+            Debug.LogError(
+                "WaveManager: WaveData가 연결되지 않았습니다.",
+                this
+            );
+        }
+        else
+        {
+            for (int i = 0;
+                 i < waves.Length;
+                 i++)
+            {
+                if (waves[i] == null)
+                {
+                    Debug.LogError(
+                        $"WaveManager: waves[{i}]가 비어 있습니다.",
+                        this
+                    );
+
+                    continue;
+                }
+
+                if (waves[i].WaveNumber != i + 1)
+                {
+                    Debug.LogError(
+                        $"WaveManager: {waves[i].name}의 Wave Number가 잘못되었습니다. " +
+                        $"예상={i + 1}, 실제={waves[i].WaveNumber}",
+                        this
+                    );
+                }
+
+                for (int j = i + 1;
+                     j < waves.Length;
+                     j++)
+                {
+                    if (waves[j] == null)
+                        continue;
+
+                    if (string.IsNullOrWhiteSpace(
+                        waves[i].WaveId))
+                    {
+                        continue;
+                    }
+
+                    if (waves[i].WaveId ==
+                        waves[j].WaveId)
+                    {
+                        Debug.LogError(
+                            $"WaveManager: Wave ID가 중복되었습니다. ID={waves[i].WaveId}",
+                            this
+                        );
+                    }
+                }
+            }
+        }
+
+        if (spawner == null)
+        {
+            Debug.LogError(
+                "WaveManager: MonsterSpawner가 연결되지 않았습니다.",
+                this
+            );
+        }
     }
 
     private bool IsGameEnded()
