@@ -1,1248 +1,404 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    public static SkillManager Instance;
-    public event System.Action<string> SkillUsed;
+    public static SkillManager Instance { get; private set; }
 
+    public event Action<string> SkillUsed;
 
-    // =========================================================
-    // 스킬 목록
-    // =========================================================
+    [Header("Skill Data")]
+    [Tooltip("비어 있으면 Resources/SkillData의 에셋을 자동으로 사용합니다.")]
+    [SerializeField] private List<SkillData> skills = new List<SkillData>();
 
-    [Header("스킬 목록")]
-    public List<SkillData> skills =
-        new List<SkillData>();
+    [Header("Audio")]
+    [SerializeField] private AudioSource skillAudioSource;
 
+    private readonly Dictionary<string, SkillData> skillsById =
+        new Dictionary<string, SkillData>(StringComparer.OrdinalIgnoreCase);
 
-    // =========================================================
-    // 스킬 이펙트
-    // =========================================================
+    private readonly Dictionary<string, float> cooldownEndTime =
+        new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
-    [Header("스킬 이펙트")]
-    public GameObject fireEffectPrefab;
-    public GameObject iceEffectPrefab;
-    public GameObject lightningEffectPrefab;
-
-
-    // =========================================================
-    // ★ 스킬 효과음
-    // =========================================================
-
-    [Header("스킬 효과음")]
-    public AudioSource skillAudioSource;
-
-    public AudioClip fireSkillSound;
-    public AudioClip iceSkillSound;
-    public AudioClip lightningSkillSound;
-
-    [Range(0f, 1f)]
-    public float skillSoundVolume = 0.7f;
-
-
-    // =========================================================
-    // 불 스킬 밸런스
-    // =========================================================
-
-    [Header("불 스킬 밸런스")]
-    public int fireInitialDamage = 20;
-
-    public int fireDotDamage = 5;
-
-    public float fireDotDuration = 3f;
-
-    public float fireDotInterval = 0.5f;
-
-    [Tooltip("메테오/폭발 이펙트의 크기 배율") ]
-    public float fireEffectScale = 2f;
-
-
-    // =========================================================
-    // 번개 스킬 밸런스
-    // =========================================================
-
-    [Header("번개 스킬 밸런스")]
-    public int lightningDamage = 100;
-
-    public int lightningMaxTargets = 5;
-
-
-    // =========================================================
-    // 쿨타임 저장
-    // =========================================================
-
-    private Dictionary<string, float> cooldownEndTime =
-        new Dictionary<string, float>();
-
-
-    // =========================================================
-    // Awake
-    // =========================================================
+    public IReadOnlyList<SkillData> Skills => skills;
 
     private void Awake()
     {
-        if (
-            Instance != null &&
-            Instance != this
-        )
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-
         Instance = this;
-
-
-        // AudioSource 자동 연결
-        if (skillAudioSource == null)
-        {
-            skillAudioSource =
-                GetComponent<AudioSource>();
-        }
-
-
-        // AudioSource가 없으면 자동 생성
-        if (skillAudioSource == null)
-        {
-            skillAudioSource =
-                gameObject.AddComponent<AudioSource>();
-        }
-
-
-        skillAudioSource.playOnAwake = false;
-        skillAudioSource.loop = false;
+        LoadAndValidateSkillData();
+        SetupAudioSource();
     }
 
-
-    // =========================================================
-    // Start
-    // =========================================================
-
-    private void Start()
+    private void OnDestroy()
     {
-        foreach (var skill in skills)
-        {
-            if (skill == null)
-                continue;
-
-
-            cooldownEndTime[
-                skill.skillName
-            ] = 0f;
-        }
+        if (Instance == this)
+            Instance = null;
     }
 
-
-    // =========================================================
-    // 스킬 사용 가능 여부
-    // =========================================================
-
-    public bool CanUseSkill(
-        string skillName
-    )
+    public bool TryGetSkill(string idOrName, out SkillData skill)
     {
-        if (string.IsNullOrEmpty(
-                skillName))
-        {
+        skill = null;
+        if (string.IsNullOrWhiteSpace(idOrName))
             return false;
-        }
 
+        if (skillsById.TryGetValue(idOrName, out skill))
+            return skill != null;
 
-        if (!cooldownEndTime.ContainsKey(
-                skillName))
-        {
-            return true;
-        }
-
-
-        return Time.time >=
-               cooldownEndTime[
-                   skillName
-               ];
+        skill = skills.Find(candidate => candidate != null && candidate.Matches(idOrName));
+        return skill != null;
     }
 
-
-    // =========================================================
-    // 기존 스킬 사용
-    // =========================================================
-    // 다른 코드에서 사용할 수 있도록 유지
-    // =========================================================
-
-    public bool UseSkill(
-        string skillName
-    )
+    public bool CanUseSkill(string idOrName)
     {
-        Debug.Log(
-            "스킬 사용 요청 : " +
-            skillName
-        );
-
-
-        if (!CanUseSkill(
-                skillName))
-        {
-            Debug.Log(
-                skillName +
-                " 쿨타임 중!"
-            );
-
-            return false;
-        }
-
-
-        SkillData skill =
-            skills.Find(
-                s =>
-                    s != null &&
-                    s.skillName == skillName
-            );
-
-
-        if (skill == null)
-        {
-            Debug.LogError(
-                "스킬 데이터를 찾을 수 없음 : " +
-                skillName
-            );
-
-            return false;
-        }
-
-
-        bool executed =
-            ExecuteSkill(
-                skillName
-            );
-
-
-        if (!executed)
+        if (!TryGetSkill(idOrName, out SkillData skill))
             return false;
 
+        return !cooldownEndTime.TryGetValue(skill.SkillId, out float endTime)
+            || Time.time >= endTime;
+    }
 
-        cooldownEndTime[
-            skillName
-        ] =
-            Time.time +
-            skill.cooldown;
+    public bool UseSkill(string idOrName)
+    {
+        if (!TryBeginUse(idOrName, out SkillData skill))
+            return false;
 
-
-        // 기존 방식으로 직접 UseSkill 호출해도
-        // 스킬 사운드가 나오도록 유지
-        PlaySkillSound(
-            skillName
-        );
-
-
-        Debug.Log(
-            skillName +
-            " 사용!"
-        );
-        SkillUsed?.Invoke(skillName);
-
-
+        ExecuteGlobalSkill(skill);
+        CompleteUse(skill);
         return true;
     }
 
-
-    // =========================================================
-    // ★ 마법진 위치에서 스킬 사용
-    // =========================================================
-
-    public bool UseSkillAtPosition(
-        string skillName,
-        Vector3 castPosition,
-        float radius
-    )
+    public bool UseSkillAtPosition(string idOrName, Vector3 castPosition, float radius)
     {
-        Debug.Log(
-            "범위 스킬 사용 : " +
-            skillName +
-            " / 위치 : " +
-            castPosition +
-            " / 범위 : " +
-            radius
-        );
-
-
-        // -----------------------------------------------------
-        // 쿨타임 확인
-        // -----------------------------------------------------
-
-        if (!CanUseSkill(
-                skillName))
-        {
-            Debug.Log(
-                skillName +
-                " 쿨타임 중!"
-            );
-
+        if (!TryBeginUse(idOrName, out SkillData skill))
             return false;
+
+        if (!Mathf.Approximately(radius, skill.Range))
+        {
+            Debug.LogWarning(
+                $"{skill.DisplayName}: 전달된 범위 {radius:0.##} 대신 SkillData 범위 {skill.Range:0.##}를 사용합니다.",
+                this);
         }
 
-
-        // -----------------------------------------------------
-        // SkillData 찾기
-        // -----------------------------------------------------
-
-        SkillData skill =
-            skills.Find(
-                s =>
-                    s != null &&
-                    s.skillName == skillName
-            );
-
-
-        if (skill == null)
-        {
-            Debug.LogError(
-                "스킬 데이터를 찾을 수 없음 : " +
-                skillName
-            );
-
-            return false;
-        }
-
-
-        // -----------------------------------------------------
-        // 범위 보정
-        // -----------------------------------------------------
-
-        radius =
-            Mathf.Max(
-                0f,
-                radius
-            );
-
-
-        // -----------------------------------------------------
-        // 실제 스킬 실행
-        // -----------------------------------------------------
-
-        bool executed =
-            ExecuteSkillAtPosition(
-                skillName,
-                castPosition,
-                radius
-            );
-
-
-        if (!executed)
-            return false;
-
-
-        // -----------------------------------------------------
-        // 쿨타임 시작
-        // -----------------------------------------------------
-
-        cooldownEndTime[
-            skillName
-        ] =
-            Time.time +
-            skill.cooldown;
-
-
-        // =====================================================
-        // ★ 여기서 효과음 재생
-        // =====================================================
-
-        PlaySkillSound(
-            skillName
-        );
-
-
-        Debug.Log(
-            skillName +
-            " 범위 스킬 발동!"
-        );
-
-
-        SkillUsed?.Invoke(skillName);
-
+        ExecuteSkillAtPosition(skill, castPosition);
+        CompleteUse(skill);
         return true;
     }
-
 
     public void ResetAllCooldowns()
     {
         foreach (SkillData skill in skills)
         {
-            if (skill != null)
-                cooldownEndTime[skill.skillName] = 0f;
+            if (skill != null && !string.IsNullOrWhiteSpace(skill.SkillId))
+                cooldownEndTime[skill.SkillId] = 0f;
         }
     }
 
-
-    // =========================================================
-    // 일반 스킬 실행
-    // =========================================================
-
-    private bool ExecuteSkill(
-        string skillName
-    )
+    public float GetCooldownNormalized(string idOrName)
     {
-        switch (skillName)
-        {
-            case "Fireball":
+        if (!TryGetSkill(idOrName, out SkillData skill) || skill.Cooldown <= 0f)
+            return 0f;
 
-                FireballSkill();
-
-                return true;
-
-
-            case "Ice Attack":
-
-                IceAttackSkill();
-
-                return true;
-
-
-            case "Lightning":
-
-                LightningSkill();
-
-                return true;
-
-
-            default:
-
-                Debug.LogWarning(
-                    "등록되지 않은 스킬 : " +
-                    skillName
-                );
-
-                return false;
-        }
+        return Mathf.Clamp01(GetCooldownRemaining(skill.SkillId) / skill.Cooldown);
     }
 
-
-    // =========================================================
-    // 범위 스킬 실행
-    // =========================================================
-
-    private bool ExecuteSkillAtPosition(
-        string skillName,
-        Vector3 castPosition,
-        float radius
-    )
+    public float GetCooldownRemaining(string idOrName)
     {
-        switch (skillName)
+        if (!TryGetSkill(idOrName, out SkillData skill))
+            return 0f;
+
+        return cooldownEndTime.TryGetValue(skill.SkillId, out float endTime)
+            ? Mathf.Max(0f, endTime - Time.time)
+            : 0f;
+    }
+
+    private void LoadAndValidateSkillData()
+    {
+        skills.RemoveAll(skill => skill == null);
+
+        if (skills.Count == 0)
         {
-            case "Fireball":
+            SkillData[] loadedSkills = Resources.LoadAll<SkillData>("SkillData");
+            skills.AddRange(loadedSkills);
+        }
 
-                FireballSkill(
-                    castPosition,
-                    radius
-                );
+        skillsById.Clear();
+        cooldownEndTime.Clear();
 
-                return true;
+        foreach (SkillData skill in skills)
+        {
+            if (!ValidateSkillData(skill))
+                continue;
 
+            if (skillsById.ContainsKey(skill.SkillId))
+            {
+                Debug.LogError($"중복된 스킬 ID입니다: {skill.SkillId}", skill);
+                continue;
+            }
 
-            case "Ice Attack":
+            skillsById.Add(skill.SkillId, skill);
+            cooldownEndTime[skill.SkillId] = 0f;
+        }
 
-                IceAttackSkill(
-                    castPosition,
-                    radius
-                );
-
-                return true;
-
-
-            case "Lightning":
-
-                LightningSkill(
-                    castPosition,
-                    radius
-                );
-
-                return true;
-
-
-            default:
-
-                Debug.LogWarning(
-                    "등록되지 않은 스킬 : " +
-                    skillName
-                );
-
-                return false;
+        if (skillsById.Count == 0)
+        {
+            Debug.LogError(
+                "SkillData가 연결되지 않았습니다. SkillManager 목록 또는 " +
+                "Assets/Data/Skills/Resources/SkillData를 확인하세요.",
+                this);
         }
     }
 
+    private static bool ValidateSkillData(SkillData skill)
+    {
+        if (skill == null)
+            return false;
 
-    // =========================================================
-    // ★ 스킬 효과음
-    // =========================================================
+        if (string.IsNullOrWhiteSpace(skill.SkillId))
+        {
+            Debug.LogError("SkillData의 ID가 비어 있습니다.", skill);
+            return false;
+        }
 
-    private void PlaySkillSound(
-        string skillName
-    )
+        if (string.IsNullOrWhiteSpace(skill.DisplayName))
+        {
+            Debug.LogError($"{skill.SkillId}: 표시 이름이 비어 있습니다.", skill);
+            return false;
+        }
+
+        if (skill.Range <= 0f)
+        {
+            Debug.LogError($"{skill.SkillId}: 공격 범위는 0보다 커야 합니다.", skill);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void SetupAudioSource()
     {
         if (skillAudioSource == null)
-            return;
+            skillAudioSource = GetComponent<AudioSource>();
 
+        if (skillAudioSource == null)
+            skillAudioSource = gameObject.AddComponent<AudioSource>();
 
-        AudioClip clip = null;
+        skillAudioSource.playOnAwake = false;
+        skillAudioSource.loop = false;
+    }
 
-
-        switch (skillName)
+    private bool TryBeginUse(string idOrName, out SkillData skill)
+    {
+        if (!TryGetSkill(idOrName, out skill))
         {
-            case "Fireball":
+            Debug.LogError($"스킬 데이터를 찾을 수 없습니다: {idOrName}", this);
+            return false;
+        }
 
-                clip =
-                    fireSkillSound;
+        if (!CanUseSkill(skill.SkillId))
+        {
+            Debug.Log($"{skill.DisplayName} 스킬은 현재 쿨타임 중입니다.", this);
+            return false;
+        }
 
+        return true;
+    }
+
+    private void CompleteUse(SkillData skill)
+    {
+        cooldownEndTime[skill.SkillId] = Time.time + skill.Cooldown;
+        PlaySkillSound(skill);
+        SkillUsed?.Invoke(skill.DisplayName);
+    }
+
+    private void ExecuteGlobalSkill(SkillData skill)
+    {
+        switch (skill.EffectType)
+        {
+            case SkillEffectType.Fire:
+                ApplyFire(skill, transform.position, float.PositiveInfinity);
                 break;
-
-
-            case "Ice Attack":
-
-                clip =
-                    iceSkillSound;
-
+            case SkillEffectType.Ice:
+                ApplyIce(skill, transform.position, float.PositiveInfinity);
                 break;
-
-
-            case "Lightning":
-
-                clip =
-                    lightningSkillSound;
-
+            case SkillEffectType.Lightning:
+                ApplyLightning(skill, transform.position, float.PositiveInfinity);
+                break;
+            default:
+                Debug.LogError($"지원하지 않는 스킬 효과입니다: {skill.EffectType}", skill);
                 break;
         }
-
-
-        if (clip == null)
-        {
-            Debug.LogWarning(
-                "스킬 효과음이 설정되지 않았습니다 : " +
-                skillName
-            );
-
-            return;
-        }
-
-
-        AudioManager.PlaySFXOn(
-            skillAudioSource,
-            clip,
-            skillSoundVolume
-        );
     }
 
-
-    // =========================================================
-    // 쿨타임 UI 표시
-    // =========================================================
-
-    public float GetCooldownNormalized(
-        string skillName
-    )
+    private void ExecuteSkillAtPosition(SkillData skill, Vector3 castPosition)
     {
-        if (!cooldownEndTime.ContainsKey(
-                skillName))
+        switch (skill.EffectType)
         {
-            return 0f;
+            case SkillEffectType.Fire:
+                ApplyFire(skill, castPosition, skill.Range);
+                break;
+            case SkillEffectType.Ice:
+                ApplyIce(skill, castPosition, skill.Range);
+                break;
+            case SkillEffectType.Lightning:
+                ApplyLightning(skill, castPosition, skill.Range);
+                break;
+            default:
+                Debug.LogError($"지원하지 않는 스킬 효과입니다: {skill.EffectType}", skill);
+                break;
         }
-
-
-        SkillData skill =
-            skills.Find(
-                s =>
-                    s != null &&
-                    s.skillName == skillName
-            );
-
-
-        if (skill == null)
-            return 0f;
-
-
-        if (skill.cooldown <= 0f)
-            return 0f;
-
-
-        float remaining =
-            cooldownEndTime[
-                skillName
-            ] -
-            Time.time;
-
-
-        return Mathf.Clamp01(
-            remaining /
-            skill.cooldown
-        );
     }
 
-
-    // =========================================================
-    // 남은 쿨타임
-    // =========================================================
-
-    public float GetCooldownRemaining(
-        string skillName
-    )
+    private void ApplyFire(SkillData skill, Vector3 castPosition, float radius)
     {
-        if (!cooldownEndTime.ContainsKey(
-                skillName))
+        MonsterHealth[] monsters = FindObjectsByType<MonsterHealth>(
+            FindObjectsInactive.Exclude,
+            FindObjectsSortMode.None);
+
+        foreach (MonsterHealth monster in monsters)
         {
-            return 0f;
+            if (!IsValidTarget(monster, castPosition, radius))
+                continue;
+
+            monster.TakeDamage(skill.Damage, false);
+            if (skill.PeriodicDamage > 0 && skill.Duration > 0f)
+                StartCoroutine(ApplyPeriodicDamage(monster, skill));
         }
 
-
-        return Mathf.Max(
-            0f,
-            cooldownEndTime[
-                skillName
-            ] -
-            Time.time
-        );
+        CreateEffect(skill, castPosition, Mathf.Max(1f, skill.Duration), skill.EffectScale);
     }
 
-
-    // =========================================================
-    // 불 스킬 - 전체
-    // =========================================================
-
-    private void FireballSkill()
+    private IEnumerator ApplyPeriodicDamage(MonsterHealth monster, SkillData skill)
     {
-        MonsterHealth[] enemies =
-            FindObjectsByType<MonsterHealth>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
-
-
-        Vector3 castPosition =
-            transform.position;
-
-
-        foreach (var enemy in enemies)
-        {
-            if (enemy == null)
-                continue;
-
-
-            if (enemy.IsDead)
-                continue;
-
-
-            enemy.TakeDamage(
-                fireInitialDamage,
-                false
-            );
-
-
-            if (
-                fireDotDamage > 0 &&
-                fireDotDuration > 0f
-            )
-            {
-                StartCoroutine(
-                    ApplyFireDot(
-                        enemy
-                    )
-                );
-            }
-        }
-
-
-        // 기존처럼 몬스터마다 이펙트를 만들지 않고
-        // 스킬 발동 위치에 메테오 이펙트 1개만 생성
-        CreateFireEffect(
-            castPosition,
-            fireDotDuration
-        );
-
-
-        Debug.Log(
-            "불 스킬 발동! (메테오 1개)"
-        );
-    }
-
-
-    // =========================================================
-    // 불 스킬 - 마법진 범위
-    // =========================================================
-
-    private void FireballSkill(
-        Vector3 castPosition,
-        float radius
-    )
-    {
-        MonsterHealth[] enemies =
-            FindObjectsByType<MonsterHealth>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
-
-
-        int hitCount = 0;
-
-
-        // -----------------------------------------------------
-        // 범위 안의 모든 몬스터에게 데미지
-        // -----------------------------------------------------
-
-        foreach (var enemy in enemies)
-        {
-            if (enemy == null)
-                continue;
-
-
-            if (enemy.IsDead)
-                continue;
-
-
-            float distance =
-                Vector2.Distance(
-                    castPosition,
-                    enemy.transform.position
-                );
-
-
-            if (distance > radius)
-                continue;
-
-
-            enemy.TakeDamage(
-                fireInitialDamage,
-                false
-            );
-
-            hitCount++;
-
-
-            if (
-                fireDotDamage > 0 &&
-                fireDotDuration > 0f
-            )
-            {
-                StartCoroutine(
-                    ApplyFireDot(
-                        enemy
-                    )
-                );
-            }
-        }
-
-
-        // -----------------------------------------------------
-        // ★ 메테오/폭발 이펙트는 범위의 중심에 1개만 생성
-        // -----------------------------------------------------
-
-        CreateFireEffect(
-            castPosition,
-            fireDotDuration
-        );
-
-
-        Debug.Log(
-            "불 범위 스킬 발동! " +
-            " / 적중 수 : " +
-            hitCount +
-            " / 메테오 : 1개"
-        );
-    }
-
-
-    // =========================================================
-    // 불 지속 데미지
-    // =========================================================
-
-    private IEnumerator ApplyFireDot(
-        MonsterHealth enemy
-    )
-    {
-        float interval =
-            Mathf.Max(
-                0.05f,
-                fireDotInterval
-            );
-
-
         float elapsed = 0f;
+        float interval = Mathf.Max(0.05f, skill.PeriodicInterval);
 
-
-        while (
-            elapsed <
-            fireDotDuration
-        )
+        while (elapsed < skill.Duration)
         {
-            yield return new WaitForSeconds(
-                interval
-            );
-
-
-            if (
-                enemy == null ||
-                enemy.IsDead
-            )
-            {
+            yield return new WaitForSeconds(interval);
+            if (monster == null || monster.IsDead)
                 yield break;
-            }
 
-
-            enemy.TakeDamage(
-                fireDotDamage,
-                false
-            );
-
-
+            monster.TakeDamage(skill.PeriodicDamage, false);
             elapsed += interval;
         }
     }
 
-
-    // =========================================================
-    // 얼음 스킬 - 전체
-    // =========================================================
-
-    private void IceAttackSkill()
+    private void ApplyIce(SkillData skill, Vector3 castPosition, float radius)
     {
-        MonsterMove[] enemies =
-            FindObjectsByType<MonsterMove>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
+        MonsterMove[] monsters = FindObjectsByType<MonsterMove>(
+            FindObjectsInactive.Exclude,
+            FindObjectsSortMode.None);
 
-
-        foreach (var enemy in enemies)
+        foreach (MonsterMove monster in monsters)
         {
-            if (enemy == null)
+            if (monster == null)
                 continue;
 
-
-            MonsterHealth health =
-                enemy.GetComponent<
-                    MonsterHealth
-                >();
-
-
-            if (
-                health != null &&
-                health.IsDead
-            )
-            {
+            MonsterHealth health = monster.GetComponent<MonsterHealth>();
+            if (!IsValidTarget(health, castPosition, radius))
                 continue;
-            }
 
-
-            enemy.Freeze(3f);
-
-
-            CreateIceEffect(
-                enemy
-            );
+            monster.Freeze(skill.Duration);
+            CreateAttachedEffect(skill, monster.transform, Mathf.Max(1f, skill.Duration));
         }
-
-
-        Debug.Log(
-            "얼음 스킬 발동!"
-        );
     }
 
-
-    // =========================================================
-    // 얼음 스킬 - 마법진 범위
-    // =========================================================
-
-    private void IceAttackSkill(
-        Vector3 castPosition,
-        float radius
-    )
+    private void ApplyLightning(SkillData skill, Vector3 castPosition, float radius)
     {
-        MonsterMove[] enemies =
-            FindObjectsByType<MonsterMove>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
+        MonsterHealth[] allMonsters = FindObjectsByType<MonsterHealth>(
+            FindObjectsInactive.Exclude,
+            FindObjectsSortMode.None);
+        List<MonsterHealth> targets = new List<MonsterHealth>();
 
-
-        foreach (var enemy in enemies)
+        foreach (MonsterHealth monster in allMonsters)
         {
-            if (enemy == null)
-                continue;
-
-
-            MonsterHealth health =
-                enemy.GetComponent<
-                    MonsterHealth
-                >();
-
-
-            if (
-                health != null &&
-                health.IsDead
-            )
-            {
-                continue;
-            }
-
-
-            float distance =
-                Vector2.Distance(
-                    castPosition,
-                    enemy.transform.position
-                );
-
-
-            if (distance > radius)
-                continue;
-
-
-            enemy.Freeze(3f);
-
-
-            CreateIceEffect(
-                enemy
-            );
+            if (IsValidTarget(monster, castPosition, radius))
+                targets.Add(monster);
         }
 
+        targets.Sort((left, right) =>
+            Vector2.Distance(castPosition, left.transform.position).CompareTo(
+                Vector2.Distance(castPosition, right.transform.position)));
 
-        Debug.Log(
-            "얼음 범위 스킬 발동!"
-        );
+        int targetLimit = skill.MaxTargets > 0 ? skill.MaxTargets : targets.Count;
+        int hitCount = Mathf.Min(targetLimit, targets.Count);
+        for (int index = 0; index < hitCount; index++)
+        {
+            MonsterHealth target = targets[index];
+            target.TakeDamage(skill.Damage, false);
+            CreateEffect(skill, target.transform.position, 1f, skill.EffectScale);
+        }
     }
 
-
-    // =========================================================
-    // 얼음 이펙트
-    // =========================================================
-
-    private void CreateIceEffect(
-        MonsterMove enemy
-    )
+    private static bool IsValidTarget(
+        MonsterHealth monster,
+        Vector3 center,
+        float radius)
     {
-        if (iceEffectPrefab == null)
+        if (monster == null || monster.IsDead)
+            return false;
+
+        return float.IsPositiveInfinity(radius)
+            || Vector2.Distance(center, monster.transform.position) <= radius;
+    }
+
+    private static void ConfigureEffectRenderer(GameObject effect)
+    {
+        SpriteRenderer renderer = effect.GetComponent<SpriteRenderer>();
+        if (renderer == null)
             return;
 
-
-        GameObject effect =
-            Instantiate(
-                iceEffectPrefab,
-                enemy.transform
-            );
-
-
-        effect.transform.localPosition =
-            Vector3.zero;
-
-
-        effect.transform.localRotation =
-            Quaternion.identity;
-
-
-        SpriteRenderer sr =
-            effect.GetComponent<
-                SpriteRenderer
-            >();
-
-
-        if (sr != null)
-        {
-            sr.sortingOrder = 100;
-        }
-
-
-        Destroy(
-            effect,
-            3f
-        );
+        renderer.sortingLayerID = SortingLayer.NameToID("Effects");
+        renderer.sortingOrder = 100;
     }
 
-
-    // =========================================================
-    // 번개 스킬 - 전체
-    // =========================================================
-
-    private void LightningSkill()
+    private static void CreateAttachedEffect(
+        SkillData skill,
+        Transform parent,
+        float destroyTime)
     {
-        MonsterHealth[] allEnemies =
-            FindObjectsByType<MonsterHealth>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
+        if (skill.EffectPrefab == null)
+            return;
 
-
-        List<MonsterHealth> enemies =
-            new List<MonsterHealth>();
-
-
-        foreach (var enemy in allEnemies)
-        {
-            if (enemy == null)
-                continue;
-
-
-            if (enemy.IsDead)
-                continue;
-
-
-            enemies.Add(
-                enemy
-            );
-        }
-
-
-        enemies.Sort(
-            (a, b) =>
-                Vector3.Distance(
-                    transform.position,
-                    a.transform.position
-                ).CompareTo(
-                    Vector3.Distance(
-                        transform.position,
-                        b.transform.position
-                    )
-                )
-        );
-
-
-        int hitCount =
-            Mathf.Min(
-                lightningMaxTargets,
-                enemies.Count
-            );
-
-
-        for (
-            int i = 0;
-            i < hitCount;
-            i++
-        )
-        {
-            if (
-                enemies[i] == null ||
-                enemies[i].IsDead
-            )
-            {
-                continue;
-            }
-
-
-            enemies[i].TakeDamage(
-                lightningDamage,
-                false
-            );
-
-
-            CreateEffect(
-                lightningEffectPrefab,
-                enemies[i].transform.position,
-                1f
-            );
-        }
-
-
-        Debug.Log(
-            "번개 스킬 발동!"
-        );
+        GameObject effect = Instantiate(skill.EffectPrefab, parent);
+        effect.transform.localPosition = Vector3.zero;
+        effect.transform.localRotation = Quaternion.identity;
+        effect.transform.localScale *= skill.EffectScale;
+        ConfigureEffectRenderer(effect);
+        Destroy(effect, destroyTime);
     }
 
-
-    // =========================================================
-    // 번개 스킬 - 마법진 범위
-    // =========================================================
-
-    private void LightningSkill(
-        Vector3 castPosition,
-        float radius
-    )
-    {
-        MonsterHealth[] allEnemies =
-            FindObjectsByType<MonsterHealth>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
-
-
-        List<MonsterHealth> enemies =
-            new List<MonsterHealth>();
-
-
-        // -----------------------------------------------------
-        // 마법진 범위 안의 몬스터만 찾기
-        // -----------------------------------------------------
-
-        foreach (var enemy in allEnemies)
-        {
-            if (enemy == null)
-                continue;
-
-
-            if (enemy.IsDead)
-                continue;
-
-
-            float distance =
-                Vector2.Distance(
-                    castPosition,
-                    enemy.transform.position
-                );
-
-
-            if (distance > radius)
-                continue;
-
-
-            enemies.Add(
-                enemy
-            );
-        }
-
-
-        // -----------------------------------------------------
-        // 가까운 순서
-        // -----------------------------------------------------
-
-        enemies.Sort(
-            (a, b) =>
-                Vector2.Distance(
-                    castPosition,
-                    a.transform.position
-                ).CompareTo(
-                    Vector2.Distance(
-                        castPosition,
-                        b.transform.position
-                    )
-                )
-        );
-
-
-        // -----------------------------------------------------
-        // 최대 5마리
-        // -----------------------------------------------------
-
-        int hitCount =
-            Mathf.Min(
-                lightningMaxTargets,
-                enemies.Count
-            );
-
-
-        for (
-            int i = 0;
-            i < hitCount;
-            i++
-        )
-        {
-            if (
-                enemies[i] == null ||
-                enemies[i].IsDead
-            )
-            {
-                continue;
-            }
-
-
-            enemies[i].TakeDamage(
-                lightningDamage,
-                false
-            );
-
-
-            CreateEffect(
-                lightningEffectPrefab,
-                enemies[i].transform.position,
-                1f
-            );
-        }
-
-
-        Debug.Log(
-            "번개 범위 스킬 발동! " +
-            "적중 수 : " +
-            hitCount
-        );
-    }
-
-
-    // =========================================================
-    // ★ 불 스킬 전용 메테오 이펙트 생성
-    // =========================================================
-
-    private void CreateFireEffect(
+    private static void CreateEffect(
+        SkillData skill,
         Vector3 position,
-        float destroyTime
-    )
+        float destroyTime,
+        float scale)
     {
-        if (fireEffectPrefab == null)
+        if (skill.EffectPrefab == null)
             return;
 
-
-        GameObject effect =
-            Instantiate(
-                fireEffectPrefab,
-                position,
-                Quaternion.identity
-            );
-
-
-        // 메테오와 폭발 이펙트를 원하는 크기로 확대
-        effect.transform.localScale =
-            Vector3.one * fireEffectScale;
-
-
-        SpriteRenderer sr =
-            effect.GetComponent<
-                SpriteRenderer
-            >();
-
-
-        if (sr != null)
-        {
-            sr.sortingOrder = 100;
-        }
-
-
-        Destroy(
-            effect,
-            destroyTime
-        );
+        GameObject effect = Instantiate(skill.EffectPrefab, position, Quaternion.identity);
+        effect.transform.localScale *= scale;
+        ConfigureEffectRenderer(effect);
+        Destroy(effect, destroyTime);
     }
 
-
-    // =========================================================
-    // 일반 이펙트 생성
-    // =========================================================
-
-    private void CreateEffect(
-        GameObject effectPrefab,
-        Vector3 position,
-        float destroyTime
-    )
+    private void PlaySkillSound(SkillData skill)
     {
-        if (effectPrefab == null)
-            return;
-
-
-        GameObject effect =
-            Instantiate(
-                effectPrefab,
-                position,
-                Quaternion.identity
-            );
-
-
-        SpriteRenderer sr =
-            effect.GetComponent<
-                SpriteRenderer
-            >();
-
-
-        if (sr != null)
+        if (skillAudioSource == null || skill.Sound == null)
         {
-            sr.sortingOrder = 100;
+            Debug.LogWarning($"{skill.DisplayName}: 효과음이 연결되지 않았습니다.", skill);
+            return;
         }
 
-
-        Destroy(
-            effect,
-            destroyTime
-        );
+        AudioManager.PlaySFXOn(skillAudioSource, skill.Sound, skill.SoundVolume);
     }
 }
