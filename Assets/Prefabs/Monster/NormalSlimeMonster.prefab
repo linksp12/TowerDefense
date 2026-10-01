@@ -224,7 +224,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 621207420
-  m_SortingLayer: 0
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2620475467820581989, guid: 1ae3debed002daa45ab399f40d61f8f2, type: 3}
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c1d7f89d1052c41a775ccdb1efa46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
+  monsterData: {fileID: 11400000, guid: 21da630e3ab34e5f8d17be338e74fa01, type: 2}
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -293,7 +294,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
   monsterData: {fileID: 11400000, guid: 21da630e3ab34e5f8d17be338e74fa01, type: 2}
   maxHp: 360
+  maxShield: 10
+  shieldFXObject: {fileID: 0}
   goldReward: 13
+  isBoss: 0
+  defense: 0
+  magicResistance: 0
+  bossPortrait: {fileID: 0}
+  bossName: Forest Golem
   monsterHpSlider: {fileID: 6327119867833483347}
   hitEffectPrefab: {fileID: 0}
   hitEffectDestroyTime: 0.6
@@ -301,7 +309,6 @@ MonoBehaviour:
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   flashTime: 0.08
   audioSource: {fileID: 0}
-  hitSound: {fileID: 8300000, guid: 137abfdd63c4cb54b98d0b64971bfe22, type: 3}
   deathSound: {fileID: 8300000, guid: d1e1920180d988d4cbe86a6460cebf93, type: 3}
   deathAnimationTime: 1.5
   deathStateName: death_NormalSlime

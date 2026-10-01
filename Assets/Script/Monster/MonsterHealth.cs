@@ -7,30 +7,15 @@ public class MonsterHealth : MonoBehaviour
     [Header("Balance Data")]
     [Tooltip("연결하면 최대 체력과 처치 골드를 이 데이터에서 읽습니다.")]
     public MonsterData monsterData;
-
-    [Header("HP")]
-    public int maxHp = 200;
-    public int maxShield = 10;
+    [HideInInspector] public int maxHp;
+    [HideInInspector] public int maxShield;
     public GameObject shieldFXObject;
-
-    [Header("Reward")]
-    public int goldReward = 20;
-
-    [Header("Boss Stats")]
-    [Tooltip("보스 몬스터인지 여부")]
-    public bool isBoss = false;
-
-    [Tooltip("보스의 방어력")]
-    public int defense = 0;
-
-    [Tooltip("보스의 마법 저항력")]
-    public int magicResistance = 0;
-
-    [Tooltip("보스 정보창에 표시할 초상화")]
-    public Sprite bossPortrait;
-
-    [Tooltip("보스 정보창에 표시할 이름")]
-    public string bossName = "Forest Golem";
+    [HideInInspector] public int goldReward;
+    [HideInInspector] public bool isBoss;
+    [HideInInspector] public int defense;
+    [HideInInspector] public int magicResistance;
+    [HideInInspector] public Sprite bossPortrait;
+    [HideInInspector] public string bossName;
 
     [Header("HP UI")]
     public Slider monsterHpSlider;
@@ -101,6 +86,12 @@ public class MonsterHealth : MonoBehaviour
 
         maxHp = monsterData.maxHp;
         goldReward = monsterData.goldReward;
+        maxShield = monsterData.maxShield;
+        isBoss = monsterData.isBoss;
+        defense = monsterData.defense;
+        magicResistance = monsterData.magicResistance;
+        bossPortrait = monsterData.bossPortrait;
+        bossName = monsterData.bossName;
     }
 
     private void Start()

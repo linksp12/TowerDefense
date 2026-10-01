@@ -17,3 +17,5 @@ MonoBehaviour:
   maxHp: 840
   moveSpeed: 1.15
   goldReward: 24
+  maxShield: 0
+  baseDamage: 1

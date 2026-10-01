@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class MonsterMove : MonoBehaviour
 {
-    public Transform[] waypoints;
-    public float moveSpeed = 1.5f;
+    public MonsterData monsterData;
 
-    private MonsterHealth monsterHealth;
-    private float originalMoveSpeed;
+    public Transform[] waypoints;
+    [HideInInspector] public float moveSpeed;
+
     private Coroutine slowCoroutine;
     
     private Coroutine freezeCoroutine;
@@ -18,20 +18,20 @@ public class MonsterMove : MonoBehaviour
     // 스킬용 빙결 상태
     private bool isFrozen = false;
 
+    private int baseDamage;
+
     void Awake()
     {
-        monsterHealth = GetComponent<MonsterHealth>();
+        ApplyStatsFromData();
 
-        if (monsterHealth != null && monsterHealth.monsterData != null)
+        if (monsterData != null)
         {
-            moveSpeed = monsterHealth.monsterData.moveSpeed;
+            moveSpeed = monsterData.moveSpeed;
         }
     }
 
     void Start()
     {
-        originalMoveSpeed = moveSpeed;
-
         if (waypoints != null && waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -68,6 +68,14 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
+    public void ApplyStatsFromData()
+    {
+        if (monsterData == null)
+            return;
+
+        baseDamage = monsterData.baseDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Shield"))
@@ -87,7 +95,7 @@ public class MonsterMove : MonoBehaviour
         if (GetComponent<TutorialPracticeMonster>() == null)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.TakePlayerDamage(1);
+                GameManager.Instance.TakePlayerDamage(baseDamage);
 
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
             if (waveManager != null)
@@ -103,7 +111,7 @@ public class MonsterMove : MonoBehaviour
         if (slowCoroutine != null)
         {
             StopCoroutine(slowCoroutine);
-            moveSpeed = originalMoveSpeed;
+            moveSpeed = monsterData.moveSpeed;
         }
 
         slowCoroutine = StartCoroutine(SlowRoutine(slowRate, duration));
@@ -111,11 +119,11 @@ public class MonsterMove : MonoBehaviour
 
     IEnumerator SlowRoutine(float slowRate, float duration)
     {
-        moveSpeed = originalMoveSpeed * slowRate;
+        moveSpeed = monsterData.moveSpeed * slowRate;
 
         yield return new WaitForSeconds(duration);
 
-        moveSpeed = originalMoveSpeed;
+        moveSpeed = monsterData.moveSpeed;
         slowCoroutine = null;
 
     }

@@ -18,4 +18,17 @@ public class MonsterData : ScriptableObject
 
     [Header("처치 보상")]
     [Min(0)] public int goldReward;
+
+    [Header("특수 능력치")]
+    [Min(0)] public int maxShield;
+
+    [Header("기지 피해량")]
+    [Min(0)] public int baseDamage;
+
+    [Header("보스 정보")]
+    public bool isBoss;
+    public int defense;
+    public int magicResistance;
+    public Sprite bossPortrait;
+    public string bossName;
 }
