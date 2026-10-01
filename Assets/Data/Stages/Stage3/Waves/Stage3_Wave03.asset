@@ -22,11 +22,11 @@ MonoBehaviour:
   - monsterPrefab: {fileID: 7990183225493823835, guid: 7d6acd30bf8560b4f94f69fc0f77c9f7, type: 3}
     count: 6
     interval: 1
-    pathIndex: 1
+    pathIndex: 2
   - monsterPrefab: {fileID: 2638662418386846195, guid: 428b6582a319ed745b60b477324c635b, type: 3}
     count: 5
     interval: 0.8
-    pathIndex: 1
+    pathIndex: 3
   - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
     count: 6
     interval: 3

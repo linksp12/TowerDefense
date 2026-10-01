@@ -22,5 +22,9 @@ MonoBehaviour:
   - monsterPrefab: {fileID: 6164203917051182554, guid: 5655ba9693f685345964e5ceebd5f62c, type: 3}
     count: 9
     interval: 1
-    pathIndex: 1
+    pathIndex: 2
+  - monsterPrefab: {fileID: 6164203917051182554, guid: 5655ba9693f685345964e5ceebd5f62c, type: 3}
+    count: 9
+    interval: 1
+    pathIndex: 3
   waveStartDelay: 3
