@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
   m_Name: Stage4_WaveData3
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveId: stage_04_wave_03
+  waveNumber: 3
   spawnInfos:
   - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
     count: 10

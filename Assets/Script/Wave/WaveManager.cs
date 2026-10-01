@@ -19,7 +19,21 @@ public class WaveManager : MonoBehaviour
     private bool isSpawningDone = false;
     private bool isAllWavesFinished = false;
 
-    public int CurrentWave => currentWaveIndex + 1;
+    public int CurrentWave
+    {
+        get
+        {
+            if (waves == null ||
+                currentWaveIndex < 0 ||
+                currentWaveIndex >= waves.Length ||
+                waves[currentWaveIndex] == null)
+            {
+                return currentWaveIndex + 1;
+            }
+
+            return waves[currentWaveIndex].WaveNumber;
+        }
+    }
 
     public int TotalWaves =>
         waves != null ? waves.Length : 0;
@@ -89,7 +103,9 @@ public class WaveManager : MonoBehaviour
             isSpawningDone = false;
 
             // 웨이브 시작 전 대기
-            yield return new WaitForSeconds(wave.waveStartDelay);
+            yield return new WaitForSeconds(
+                wave.waveStartDelay
+            );
 
             if (IsGameEnded())
                 yield break;
@@ -98,7 +114,7 @@ public class WaveManager : MonoBehaviour
             onWaveStart?.Invoke(CurrentWave);
 
             Debug.Log(
-                $"Wave {CurrentWave} / {TotalWaves} 시작!"
+                $"Wave {CurrentWave} / {TotalWaves} 시작! ID: {wave.WaveId}"
             );
 
             // 웨이브 몬스터 생성

@@ -3,6 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WaveData", menuName = "TowerDefense/WaveData")]
 public class WaveData : ScriptableObject
 {
+    [Header("웨이브 정보")]
+    [SerializeField]
+    private string waveId;
+
+    [Min(1)]
+    [SerializeField]
+    private int waveNumber = 1;
+
     [System.Serializable]
     public class SpawnInfo
     {
@@ -10,7 +18,6 @@ public class WaveData : ScriptableObject
         public GameObject monsterPrefab;
 
         [Header("스폰 설정")]
-
         [Min(1)]
         public int count = 1;
 
@@ -30,14 +37,34 @@ public class WaveData : ScriptableObject
     [Min(0f)]
     public float waveStartDelay = 4f;
 
+    public string WaveId => waveId;
+    public int WaveNumber => waveNumber;
+
     private void OnValidate()
     {
+        if (string.IsNullOrWhiteSpace(waveId))
+        {
+            Debug.LogError(
+                $"{name}: Wave ID가 비어 있습니다.",
+                this
+            );
+        }
+
+        if (waveNumber < 1)
+        {
+            Debug.LogError(
+                $"{name}: Wave Number는 1 이상이어야 합니다.",
+                this
+            );
+        }
+
         if (spawnInfos == null || spawnInfos.Length == 0)
         {
             Debug.LogError(
                 $"{name}: SpawnInfo가 없습니다.",
                 this
             );
+
             return;
         }
 
@@ -51,6 +78,7 @@ public class WaveData : ScriptableObject
                     $"{name}: SpawnInfo[{i}]가 비어 있습니다.",
                     this
                 );
+
                 continue;
             }
 

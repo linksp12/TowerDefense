@@ -37,6 +37,16 @@ public class Stage2MonsterSpawner : MonsterSpawner
             yield break;
         }
 
+        if (!HasStage2Routes())
+        {
+            Debug.LogError(
+                "Stage2MonsterSpawner: Stage 2 경로가 연결되지 않았습니다.",
+                this
+            );
+
+            yield break;
+        }
+
         foreach (WaveData.SpawnInfo info in wave.spawnInfos)
         {
             if (info == null)
@@ -46,7 +56,7 @@ public class Stage2MonsterSpawner : MonsterSpawner
                     this
                 );
 
-                continue;
+                yield break;
             }
 
             if (info.monsterPrefab == null)
@@ -56,7 +66,7 @@ public class Stage2MonsterSpawner : MonsterSpawner
                     this
                 );
 
-                continue;
+                yield break;
             }
 
             if (info.count < 1)
@@ -66,7 +76,7 @@ public class Stage2MonsterSpawner : MonsterSpawner
                     this
                 );
 
-                continue;
+                yield break;
             }
 
             if (info.interval <= 0f)
@@ -76,21 +86,20 @@ public class Stage2MonsterSpawner : MonsterSpawner
                     this
                 );
 
-                continue;
+                yield break;
             }
 
             Transform[] route =
                 GetStage2Route(info.pathIndex);
 
-            if (route == null ||
-                route.Length == 0)
+            if (route == null || route.Length == 0)
             {
                 Debug.LogError(
                     $"Stage2MonsterSpawner: Path{info.pathIndex}가 연결되지 않았습니다.",
                     this
                 );
 
-                continue;
+                yield break;
             }
 
             for (int i = 0; i < info.count; i++)
@@ -110,11 +119,11 @@ public class Stage2MonsterSpawner : MonsterSpawner
                         $"Stage2MonsterSpawner: {info.monsterPrefab.name}에 MonsterMove가 없습니다.",
                         this
                     );
+
+                    yield break;
                 }
-                else
-                {
-                    monsterMove.waypoints = route;
-                }
+
+                monsterMove.waypoints = route;
 
                 onSpawned?.Invoke(monster);
 
@@ -125,8 +134,7 @@ public class Stage2MonsterSpawner : MonsterSpawner
         }
     }
 
-    private Transform[] GetStage2Route(
-        int pathIndex)
+    private Transform[] GetStage2Route(int pathIndex)
     {
         switch (pathIndex)
         {
@@ -141,11 +149,22 @@ public class Stage2MonsterSpawner : MonsterSpawner
 
             default:
                 Debug.LogError(
-                    $"Stage2MonsterSpawner: Stage 2에서는 pathIndex 1~3만 사용할 수 있습니다. 입력값={pathIndex}",
+                    $"Stage2MonsterSpawner: 잘못된 pathIndex({pathIndex})입니다. " +
+                    "Stage 2에서는 1~3만 사용할 수 있습니다.",
                     this
                 );
 
                 return null;
         }
+    }
+
+    private bool HasStage2Routes()
+    {
+        return waypoints != null &&
+               waypoints.Length > 0 &&
+               secondRoute != null &&
+               secondRoute.Length > 0 &&
+               thirdRoute != null &&
+               thirdRoute.Length > 0;
     }
 }
