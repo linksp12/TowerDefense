@@ -10,8 +10,7 @@ public class TowerAttack : MonoBehaviour
     [System.NonSerialized] public float attackRange;
     [System.NonSerialized] public float attackCooldown;
     [System.NonSerialized] public int damage;
-    [System.NonSerialized] public int cost;
-    public string upgrade;
+    [System.NonSerialized] public TowerData.ProjectileEffectStats projectileEffects;
 
     [Header("Stealth Detection")]
     public bool canDetectStealth = false;
@@ -30,10 +29,30 @@ public class TowerAttack : MonoBehaviour
     private float attackTimer = 0f;
 
     // 프리팹을 직접 참조하는 UI/건설 코드도 데이터 에셋의 기본값을 사용할 수 있도록 제공합니다.
-    public int BuildCost => towerData != null ? towerData.buildCost : cost;
+    public int BuildCost => towerData != null ? towerData.buildCost : 0;
     public int BaseDamage => towerData != null ? towerData.baseStats.damage : damage;
     public float BaseAttackCooldown => towerData != null ? towerData.baseStats.attackCooldown : attackCooldown;
     public float BaseAttackRange => towerData != null ? towerData.baseStats.attackRange : attackRange;
+
+    public string UpgradeRouteSummary
+    {
+        get
+        {
+            if (towerData == null)
+                return "정보 없음";
+
+            string pathAName = towerData.pathA != null ? towerData.pathA.routeName : "";
+            string pathBName = towerData.pathB != null ? towerData.pathB.routeName : "";
+
+            if (string.IsNullOrEmpty(pathAName))
+                return pathBName;
+
+            if (string.IsNullOrEmpty(pathBName))
+                return pathAName;
+
+            return $"{pathAName} / {pathBName}";
+        }
+    }
 
     private void Awake()
     {
@@ -51,7 +70,7 @@ public class TowerAttack : MonoBehaviour
         damage = towerData.baseStats.damage;
         attackCooldown = towerData.baseStats.attackCooldown;
         attackRange = towerData.baseStats.attackRange;
-        cost = towerData.buildCost;
+        projectileEffects = towerData.baseProjectileEffects;
     }
 
     private void Update()
@@ -180,6 +199,7 @@ public class TowerAttack : MonoBehaviour
                 criticalChance,
                 criticalDamageMultiplier
             );
+            projectile.ApplyEffectStats(projectileEffects);
         }
         else
         {
@@ -209,11 +229,13 @@ public class TowerAttack : MonoBehaviour
         int newDamage,
         float newCooldown,
         float newRange,
-        GameObject newArrowPrefab)
+        GameObject newArrowPrefab,
+        TowerData.ProjectileEffectStats newProjectileEffects)
     {
         damage = newDamage;
         attackCooldown = newCooldown;
         attackRange = newRange;
+        projectileEffects = newProjectileEffects;
 
         if (newArrowPrefab != null)
         {
