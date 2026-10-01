@@ -30,5 +30,5 @@ MonoBehaviour:
   - monsterPrefab: {fileID: 1180854866472190489, guid: 18bca312aef52b24d8a6a56c3f12d0b0, type: 3}
     count: 4
     interval: 3
-    pathIndex: 3
+    pathIndex: 1
   waveStartDelay: 4
