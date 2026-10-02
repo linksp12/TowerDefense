@@ -258,6 +258,7 @@ public class SkillManager : MonoBehaviour
 
     private void ApplyFire(SkillData skill, Vector3 castPosition, float radius)
     {
+        float duration = ResearchStatResolver.GetSkillDuration(skill);
         MonsterHealth[] monsters = FindObjectsByType<MonsterHealth>(
             FindObjectsInactive.Exclude,
             FindObjectsSortMode.None);
@@ -267,32 +268,34 @@ public class SkillManager : MonoBehaviour
             if (!IsValidTarget(monster, castPosition, radius))
                 continue;
 
-            monster.TakeDamage(skill.Damage, false);
-            if (skill.PeriodicDamage > 0 && skill.Duration > 0f)
+            monster.TakeDamage(ResearchStatResolver.GetSkillDamage(skill), false);
+            if (skill.PeriodicDamage > 0 && duration > 0f)
                 StartCoroutine(ApplyPeriodicDamage(monster, skill));
         }
 
-        CreateEffect(skill, castPosition, Mathf.Max(1f, skill.Duration), skill.EffectScale);
+        CreateEffect(skill, castPosition, Mathf.Max(1f, duration), skill.EffectScale);
     }
 
     private IEnumerator ApplyPeriodicDamage(MonsterHealth monster, SkillData skill)
     {
         float elapsed = 0f;
         float interval = Mathf.Max(0.05f, skill.PeriodicInterval);
+        float duration = ResearchStatResolver.GetSkillDuration(skill);
 
-        while (elapsed < skill.Duration)
+        while (elapsed < duration)
         {
             yield return new WaitForSeconds(interval);
             if (monster == null || monster.IsDead)
                 yield break;
 
-            monster.TakeDamage(skill.PeriodicDamage, false);
+            monster.TakeDamage(ResearchStatResolver.GetSkillPeriodicDamage(skill), false);
             elapsed += interval;
         }
     }
 
     private void ApplyIce(SkillData skill, Vector3 castPosition, float radius)
     {
+        float duration = ResearchStatResolver.GetSkillDuration(skill);
         MonsterMove[] monsters = FindObjectsByType<MonsterMove>(
             FindObjectsInactive.Exclude,
             FindObjectsSortMode.None);
@@ -306,8 +309,8 @@ public class SkillManager : MonoBehaviour
             if (!IsValidTarget(health, castPosition, radius))
                 continue;
 
-            monster.Freeze(skill.Duration);
-            CreateAttachedEffect(skill, monster.transform, Mathf.Max(1f, skill.Duration));
+            monster.Freeze(duration);
+            CreateAttachedEffect(skill, monster.transform, Mathf.Max(1f, duration));
         }
     }
 
@@ -333,7 +336,7 @@ public class SkillManager : MonoBehaviour
         for (int index = 0; index < hitCount; index++)
         {
             MonsterHealth target = targets[index];
-            target.TakeDamage(skill.Damage, false);
+            target.TakeDamage(ResearchStatResolver.GetSkillDamage(skill), false);
             CreateEffect(skill, target.transform.position, 1f, skill.EffectScale);
         }
     }

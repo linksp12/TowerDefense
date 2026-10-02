@@ -1144,19 +1144,21 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             $"범위: {skill.Range:0.##}\n" +
             $"재사용 대기시간: {skill.Cooldown:0.##}초";
 
-        if (skill.Damage > 0)
-            details = $"피해량: {skill.Damage}\n" + details;
+        int modifiedDamage = ResearchStatResolver.GetSkillDamage(skill);
+        if (modifiedDamage > 0)
+            details = $"피해량: {modifiedDamage}\n" + details;
 
         if (skill.Duration > 0f)
-            details += $"\n지속 시간: {skill.Duration:0.##}초";
+            details += $"\n지속 시간: {ResearchStatResolver.GetSkillDuration(skill):0.##}초";
 
         if (skill.MaxTargets > 0)
             details += $"\n최대 대상 수: {skill.MaxTargets}";
 
-        if (skill.PeriodicDamage > 0)
+        int modifiedPeriodicDamage = ResearchStatResolver.GetSkillPeriodicDamage(skill);
+        if (modifiedPeriodicDamage > 0)
         {
             details +=
-                $"\n지속 피해: {skill.PeriodicDamage}" +
+                $"\n지속 피해: {modifiedPeriodicDamage}" +
                 $" / {skill.PeriodicInterval:0.##}초";
         }
 

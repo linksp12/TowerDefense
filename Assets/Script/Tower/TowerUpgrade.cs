@@ -417,6 +417,10 @@ public class TowerUpgrade : MonoBehaviour
 
     private string BuildPathDescription(UpgradePath targetPath)
     {
+        TowerData data = Data;
+        if (data == null)
+            return "능력치 정보를 불러올 수 없습니다.";
+
         TowerData.PathTextInfo info = GetPathTextInfo(targetPath);
         string featureText = info != null ? info.featureText : "";
 
@@ -424,9 +428,9 @@ public class TowerUpgrade : MonoBehaviour
 
         return $"{featureText}\n\n" +
             $"<align=left>" +
-            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{lv2Stats.damage}</color>\n" +
-            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{lv2Stats.attackCooldown}</color>\n" +
-            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{lv2Stats.attackRange}</color>" +
+            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{ResearchStatResolver.GetTowerDamage(data.id, lv2Stats.damage)}</color>\n" +
+            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackCooldown(data.id, lv2Stats.attackCooldown):0.##}</color>\n" +
+            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackRange(data.id, lv2Stats.attackRange):0.##}</color>" +
             $"</align>";
     }
 
@@ -435,6 +439,10 @@ public class TowerUpgrade : MonoBehaviour
         if (path == UpgradePath.None)
             return "먼저 업그레이드 루트를 선택해야 합니다.";
 
+        TowerData data = Data;
+        if (data == null)
+            return "능력치 정보를 불러올 수 없습니다.";
+
         TowerData.PathTextInfo info = GetPathTextInfo(path);
         string effectText = info != null ? info.effectText : "";
         TowerData.CombatStats targetStats = GetStats(path, 3);
@@ -442,9 +450,9 @@ public class TowerUpgrade : MonoBehaviour
         return $"최종 단계로 업그레이드합니다.\n" +
            $"효과: {effectText}\n\n" +
            $"<align=left>" +
-           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{targetStats.damage}</color>\n" +
-           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{targetStats.attackCooldown}</color>\n" +
-           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{targetStats.attackRange}</color>" +
+           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{ResearchStatResolver.GetTowerDamage(data.id, targetStats.damage)}</color>\n" +
+           $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackCooldown(data.id, targetStats.attackCooldown):0.##}</color>\n" +
+           $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackRange(data.id, targetStats.attackRange):0.##}</color>" +
            $"</align>";
     }
 

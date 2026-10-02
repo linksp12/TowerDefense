@@ -30,9 +30,15 @@ public class TowerAttack : MonoBehaviour
 
     // 프리팹을 직접 참조하는 UI/건설 코드도 데이터 에셋의 기본값을 사용할 수 있도록 제공합니다.
     public int BuildCost => towerData != null ? towerData.buildCost : 0;
-    public int BaseDamage => towerData != null ? towerData.baseStats.damage : damage;
-    public float BaseAttackCooldown => towerData != null ? towerData.baseStats.attackCooldown : attackCooldown;
-    public float BaseAttackRange => towerData != null ? towerData.baseStats.attackRange : attackRange;
+    public int BaseDamage => towerData != null
+        ? ResearchStatResolver.GetTowerDamage(towerData.id, towerData.baseStats.damage)
+        : damage;
+    public float BaseAttackCooldown => towerData != null
+        ? ResearchStatResolver.GetTowerAttackCooldown(towerData.id, towerData.baseStats.attackCooldown)
+        : attackCooldown;
+    public float BaseAttackRange => towerData != null
+        ? ResearchStatResolver.GetTowerAttackRange(towerData.id, towerData.baseStats.attackRange)
+        : attackRange;
 
     public string UpgradeRouteSummary
     {
@@ -67,9 +73,10 @@ public class TowerAttack : MonoBehaviour
             return;
         }
 
-        damage = towerData.baseStats.damage;
-        attackCooldown = towerData.baseStats.attackCooldown;
-        attackRange = towerData.baseStats.attackRange;
+        ApplyGrowthToCombatStats(
+            towerData.baseStats.damage,
+            towerData.baseStats.attackCooldown,
+            towerData.baseStats.attackRange);
         projectileEffects = towerData.baseProjectileEffects;
     }
 
@@ -232,9 +239,7 @@ public class TowerAttack : MonoBehaviour
         GameObject newArrowPrefab,
         TowerData.ProjectileEffectStats newProjectileEffects)
     {
-        damage = newDamage;
-        attackCooldown = newCooldown;
-        attackRange = newRange;
+        ApplyGrowthToCombatStats(newDamage, newCooldown, newRange);
         projectileEffects = newProjectileEffects;
 
         if (newArrowPrefab != null)
@@ -250,5 +255,13 @@ public class TowerAttack : MonoBehaviour
             " / 사거리: " +
             attackRange
         );
+    }
+
+    private void ApplyGrowthToCombatStats(int baseDamage, float baseCooldown, float baseRange)
+    {
+        string towerId = towerData != null ? towerData.id : string.Empty;
+        damage = ResearchStatResolver.GetTowerDamage(towerId, baseDamage);
+        attackCooldown = ResearchStatResolver.GetTowerAttackCooldown(towerId, baseCooldown);
+        attackRange = ResearchStatResolver.GetTowerAttackRange(towerId, baseRange);
     }
 }
