@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 186b286beef669b4581d5f518e24e739
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5233310941544532854
+    second: house.pixcel_0
+  - first:
+      213: 3830996478819059466
+    second: house.pixcel_1
+  - first:
+      213: 241869143736524413
+    second: house.pixcel_2
+  - first:
+      213: 3750862276195109420
+    second: house.pixcel_3
+  - first:
+      213: 366408804723199620
+    second: house.pixcel_4
+  - first:
+      213: -4859663367035943525
+    second: house.pixcel_5
+  - first:
+      213: -3186891635809602593
+    second: house.pixcel_6
+  - first:
+      213: 5659630238915012229
+    second: house.pixcel_7
+  - first:
+      213: -937625080350645944
+    second: house.pixcel_8
+  - first:
+      213: 3971257063111296819
+    second: house.pixcel_9
+  - first:
+      213: -7945802982614228926
+    second: house.pixcel_10
+  - first:
+      213: 3191879041999002498
+    second: house.pixcel_11
+  - first:
+      213: -4207141070829424432
+    second: house.pixcel_12
+  - first:
+      213: 7855752053047429789
+    second: house.pixcel_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: house.pixcel_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 487
+        width: 583
+        height: 485
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67b4de5f29470a840800000000000000
+      internalID: 5233310941544532854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: house.pixcel_3
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 456
+        width: 502
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2ac5060e5dbd0430800000000000000
+      internalID: 3750862276195109420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: house.pixcel_6
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 33
+        width: 581
+        height: 451
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd3b7ed21f2e5c3d0800000000000000
+      internalID: -3186891635809602593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2f37c40e808136345b59e3c480fd4978
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      house.pixcel_0: 5233310941544532854
+      house.pixcel_1: 3830996478819059466
+      house.pixcel_10: -7945802982614228926
+      house.pixcel_11: 3191879041999002498
+      house.pixcel_12: -4207141070829424432
+      house.pixcel_13: 7855752053047429789
+      house.pixcel_2: 241869143736524413
+      house.pixcel_3: 3750862276195109420
+      house.pixcel_4: 366408804723199620
+      house.pixcel_5: -4859663367035943525
+      house.pixcel_6: -3186891635809602593
+      house.pixcel_7: 5659630238915012229
+      house.pixcel_8: -937625080350645944
+      house.pixcel_9: 3971257063111296819
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
