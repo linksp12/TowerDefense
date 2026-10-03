@@ -1,16 +1,22 @@
 using UnityEngine;
+using System;
 
-public class QuestSaveData : MonoBehaviour
+[Serializable]
+public class QuestSaveData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public string questId;
+
+    public enum QuestState
     {
-        
+        InProgress,
+        Cleared,
     }
 
-    // Update is called once per frame
-    void Update()
+    public QuestState questState;
+
+    public QuestSaveData(string id, QuestState state)
     {
-        
+        questId = id;
+        questState = state;
     }
 }
