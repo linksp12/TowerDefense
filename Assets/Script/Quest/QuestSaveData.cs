@@ -10,6 +10,7 @@ public class QuestSaveData
     {
         InProgress,
         Cleared,
+        Rewarded
     }
 
     public QuestState questState;
