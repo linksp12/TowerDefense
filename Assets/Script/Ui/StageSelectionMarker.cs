@@ -13,7 +13,14 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private GameObject detailsPanel;
 
     private bool hovered;
+    private StageSelectionDetailsUI details;
     public bool IsSelected { get; private set; }
+
+    private void Awake()
+    {
+        if (detailsPanel != null)
+            details = detailsPanel.GetComponent<StageSelectionDetailsUI>();
+    }
 
     private void OnEnable()
     {
@@ -43,18 +50,21 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         IsSelected = true;
         Refresh();
-        if (detailsPanel != null)
+        if (details != null)
         {
             detailsPanel.SetActive(true);
-            detailsPanel.GetComponent<StageSelectionDetailsUI>().Show();
+            details.Show();
         }
     }
 
     public void CloseDetails()
     {
+        // 상세창을 닫으면 선택도 풀어 지도 표시를 기본 상태로 되돌린다.
+        IsSelected = false;
+        hovered = false;
         Refresh();
-        if (detailsPanel != null)
-            detailsPanel.GetComponent<StageSelectionDetailsUI>().Hide();
+        if (details != null)
+            details.Hide();
     }
 
     private void Refresh()

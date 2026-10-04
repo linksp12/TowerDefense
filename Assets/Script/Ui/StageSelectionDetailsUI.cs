@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StageSelectionDetailsUI : MonoBehaviour
+public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
 {
     [Serializable]
     public class MonsterEntry
@@ -26,6 +27,8 @@ public class StageSelectionDetailsUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private MonsterEntry[] monsters;
     [SerializeField] private TowerEntry[] towers;
+    [SerializeField] private WaveData[] waves;
+    [SerializeField] private TextMeshProUGUI waveSummaryLabel;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform panel;
     [SerializeField] private float openDuration = 0.22f;
@@ -53,6 +56,30 @@ public class StageSelectionDetailsUI : MonoBehaviour
             entry.label.text = entry.data.towerName;
             entry.icon.sprite = entry.data.icon;
         }
+        if (waveSummaryLabel != null)
+            waveSummaryLabel.text = BuildWaveSummary();
+    }
+
+    private void Update()
+    {
+        if (!closing && Input.GetKeyDown(KeyCode.Escape))
+            marker.CloseDetails();
+    }
+
+    // 패널 바깥의 어두운 배경을 직접 눌렀을 때만 닫는다. 패널 안쪽 클릭이 올라온 경우는 무시한다.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!closing && eventData.pointerCurrentRaycast.gameObject == gameObject)
+            marker.CloseDetails();
+    }
+
+    private string BuildWaveSummary()
+    {
+        int monsterCount = 0;
+        foreach (WaveData wave in waves)
+            foreach (WaveData.SpawnInfo spawn in wave.spawnInfos)
+                monsterCount += spawn.count;
+        return $"웨이브 {waves.Length}  ·  몬스터 {monsterCount}마리";
     }
 
     private void OnDisable()
