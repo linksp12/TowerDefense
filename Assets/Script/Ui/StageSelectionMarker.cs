@@ -13,6 +13,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private GameObject detailsPanel;
 
     private bool hovered;
+    private bool progressKnown = true;
+    private bool cleared;
     private StageSelectionDetailsUI details;
     public bool IsSelected { get; private set; }
 
@@ -69,6 +71,13 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
             details.Hide();
     }
 
+    public void SetProgressState(bool known, bool isCleared)
+    {
+        progressKnown = known;
+        cleared = known && isCleared;
+        Refresh();
+    }
+
     private void Refresh()
     {
         bool highlighted = hovered || IsSelected;
@@ -78,7 +87,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
         surface.color = highlighted
             ? new Color32(29, 45, 58, 250)
             : new Color32(14, 26, 37, 245);
-        statusText.text = IsSelected ? "선택됨" : hovered ? "클릭하여 선택" : "도전 가능";
+        statusText.text = IsSelected ? "선택됨" : hovered ? "클릭하여 선택" :
+            !progressKnown ? "기록 확인 불가" : cleared ? "다시 도전 가능" : "도전 가능";
         statusText.color = highlighted
             ? new Color32(255, 221, 151, 255)
             : new Color32(177, 189, 181, 255);
