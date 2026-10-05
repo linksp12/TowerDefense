@@ -11,6 +11,7 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private GameObject selectionAccent;
     [SerializeField] private GameObject detailsPanel;
+    [SerializeField] private bool previewOnly;
 
     private bool hovered;
     private bool progressKnown = true;
@@ -88,7 +89,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
             ? new Color32(29, 45, 58, 250)
             : new Color32(14, 26, 37, 245);
         statusText.text = IsSelected ? "선택됨" : hovered ? "클릭하여 선택" :
-            !progressKnown ? "기록 확인 불가" : cleared ? "다시 도전 가능" : "도전 가능";
+            previewOnly ? "상세 보기" : !progressKnown ? "기록 확인 불가" :
+            cleared ? "다시 도전 가능" : "도전 가능";
         statusText.color = highlighted
             ? new Color32(255, 221, 151, 255)
             : new Color32(177, 189, 181, 255);
