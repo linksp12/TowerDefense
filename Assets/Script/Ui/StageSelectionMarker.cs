@@ -59,6 +59,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void CloseDetails()
     {
+        if (details != null && !details.CanClose)
+            return;
         // 상세창을 닫으면 선택도 풀어 지도 표시를 기본 상태로 되돌린다.
         IsSelected = false;
         hovered = false;

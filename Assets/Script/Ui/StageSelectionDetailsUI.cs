@@ -37,7 +37,9 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
     private Coroutine animation;
     private Vector2 restingPosition;
     private bool closing;
+    private bool transitioning;
     public bool IsAnimating => animation != null;
+    public bool CanClose => !transitioning;
 
     private void Awake()
     {
@@ -62,14 +64,14 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (!closing && Input.GetKeyDown(KeyCode.Escape))
+        if (!closing && !transitioning && Input.GetKeyDown(KeyCode.Escape))
             marker.CloseDetails();
     }
 
     // 패널 바깥의 어두운 배경을 직접 눌렀을 때만 닫는다. 패널 안쪽 클릭이 올라온 경우는 무시한다.
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!closing && eventData.pointerCurrentRaycast.gameObject == gameObject)
+        if (!closing && !transitioning && eventData.pointerCurrentRaycast.gameObject == gameObject)
             marker.CloseDetails();
     }
 
@@ -93,6 +95,8 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
 
     public void Show()
     {
+        if (transitioning)
+            return;
         if (animation != null)
             StopCoroutine(animation);
         closing = false;
@@ -106,13 +110,20 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
 
     public void Hide()
     {
-        if (closing)
+        if (closing || transitioning)
             return;
         closing = true;
         if (animation != null)
             StopCoroutine(animation);
         canvasGroup.interactable = false;
         animation = StartCoroutine(Animate(false));
+    }
+
+    public void SetTransitioning(bool value)
+    {
+        transitioning = value;
+        canvasGroup.interactable = !value && !closing && !IsAnimating;
+        canvasGroup.blocksRaycasts = true;
     }
 
     private IEnumerator Animate(bool opening)
