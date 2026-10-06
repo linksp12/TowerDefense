@@ -13,6 +13,22 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void OnStageClear(string targetStageId)
+    {
+        foreach (var data in allQuestDatas)
+        {
+            if (data != null && data.targetStageId == targetStageId)
+            {
+                string questId = data.questId;
+
+                if (saveData.questStates.ContainsKey(questId) && saveData.questStates[questId] == QuestState.InProgress)
+                {
+                    saveData.questStates[questId] = QuestState.Completed;
+                }
+            }
+        }
+    }
+
     public string GetQuestDescription(string questId)
     {
         foreach (var data in allQuestDatas)

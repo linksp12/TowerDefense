@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestSlotUI
   descriptionText: {fileID: 2785154475018519328}
+  buttonText: {fileID: 8088562457160750468}
 --- !u!1 &7151156312917559856
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +403,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 212, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5411344421677463145
 CanvasRenderer:
