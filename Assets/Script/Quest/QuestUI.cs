@@ -24,7 +24,7 @@ public class QuestUI : MonoBehaviour
         }
     }
 
-    private void RefreshQuestList()
+    public void RefreshQuestList()
     {
         ClearQuestList();
 
@@ -40,7 +40,7 @@ public class QuestUI : MonoBehaviour
                     if (slotUI != null)
                     {
                         string description = manager.GetQuestDescription(kvp.Key);
-                        slotUI.Setup(description, kvp.Value);
+                        slotUI.Setup(kvp.Key, description, kvp.Value);
                     }
                 }
             }

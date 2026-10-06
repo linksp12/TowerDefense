@@ -13,6 +13,21 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void ClaimReward(string questId)
+    {
+        if (saveData.questStates.ContainsKey(questId) && saveData.questStates[questId] == QuestState.Completed)
+        {
+            saveData.questStates[questId] = QuestState.Rewarded;
+            
+            QuestUI ui = FindFirstObjectByType<QuestUI>();
+            if (ui != null)
+            {
+                ui.RefreshQuestList();
+            }
+            // TODO: 보상 지급 로직 추가
+        }
+    }
+
     public void OnStageClear(string targetStageId) //TODO: 퀘스트 클리어 로직과 연결, 매개변수: 몇 스테이지인지 (ex: 1)
     {
         foreach (var data in allQuestDatas)

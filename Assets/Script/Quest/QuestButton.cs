@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class QuestButton : MonoBehaviour
+public class QuestButton : MonoBehaviour //해당 파일은 임시라서 삭제 가능하다.
 {
     [SerializeField] private string questId = "1";
     [SerializeField] private string stageId = "1";
