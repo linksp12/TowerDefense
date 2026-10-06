@@ -224,7 +224,9 @@ public class SkillManager : MonoBehaviour
 
     private void PlaySkillSound(SkillData skill)
     {
-        if (skillAudioSource == null || skill.Sound == null)
+        // Sound is optional for newly authored skills.
+        if (skill.Sound == null) return;
+        if (skillAudioSource == null)
         {
             Debug.LogWarning($"{skill.DisplayName}: 효과음이 연결되지 않았습니다.", skill);
             return;

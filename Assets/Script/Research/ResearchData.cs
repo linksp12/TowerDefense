@@ -14,14 +14,15 @@ public enum ResearchModifierType
     AttackCooldownPercent,
     AttackRangePercent,
     PeriodicDamagePercent,
-    DurationFlat
+    DurationFlat,
+    AttackSpeedBonusFlat
 }
 
 [Serializable]
 public struct ResearchRank
 {
     [Min(1)] public int skillPointCost;
-    [Tooltip("DamageFlat은 고정 피해량, DurationFlat은 초, 나머지는 % 단위입니다.")]
+    [Tooltip("DamageFlat은 고정 피해량, DurationFlat은 초, AttackSpeedBonusFlat은 공속 증가율의 %p, 나머지는 % 단위입니다.")]
     public float modifierValue;
 }
 

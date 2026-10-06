@@ -12,6 +12,8 @@ internal static class SkillDescriptionFormatter
         if (damage > 0) details = $"피해량: {damage}\n" + details;
         if (skill.Duration > 0f)
             details += $"\n지속 시간: {ResearchStatResolver.GetSkillDuration(skill):0.##}초";
+        if (skill.EffectType == SkillEffectType.TowerHaste)
+            details += $"\n타워 공격 속도: +{ResearchStatResolver.GetSkillAttackSpeedBonus(skill) * 100f:0.#}%";
         if (skill.MaxTargets > 0) details += $"\n최대 대상 수: {skill.MaxTargets}";
         int periodicDamage = ResearchStatResolver.GetSkillPeriodicDamage(skill);
         if (periodicDamage > 0)

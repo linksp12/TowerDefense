@@ -26,6 +26,10 @@ public class SkillAimController : MonoBehaviour
     public Color lightningRangeColor =
         new Color(1f, 0.85f, 0f, 1f);
 
+    [Tooltip("타워 가속 스킬 범위 색상")]
+    public Color hasteRangeColor =
+        new Color(0.25f, 1f, 0.55f, 1f);
+
     [Tooltip("범위 원 선 두께")]
     [Min(0.001f)]
     public float rangeIndicatorWidth = 0.05f;
@@ -207,6 +211,7 @@ public class SkillAimController : MonoBehaviour
         return new SkillAimVisualSettings
         {
             FireColor = fireRangeColor, IceColor = iceRangeColor, LightningColor = lightningRangeColor,
+            HasteColor = hasteRangeColor,
             CircleScale = magicCircleScale, FireScale = fireCircleScaleMultiplier,
             IceScale = iceCircleScaleMultiplier, LightningScale = lightningCircleScaleMultiplier,
             FollowSpeed = followSpeed, Rotate = rotateMagicCircle, RotationSpeed = rotationSpeed,

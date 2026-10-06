@@ -3,7 +3,7 @@ using UnityEngine;
 
 internal struct SkillAimVisualSettings
 {
-    public Color FireColor, IceColor, LightningColor;
+    public Color FireColor, IceColor, LightningColor, HasteColor;
     public float CircleScale, FireScale, IceScale, LightningScale;
     public float FollowSpeed, RotationSpeed, NormalAlpha, HighlightAlpha, HighlightSpeed, LineWidth;
     public bool Rotate, Highlight;
@@ -17,6 +17,7 @@ internal sealed class SkillAimVisual : IDisposable
     private readonly GameObject circle;
     private readonly GameObject indicator;
     private readonly SpriteRenderer spriteRenderer;
+    private readonly Vector3 originalSpriteScale;
     private readonly LineRenderer line;
     private readonly Material material;
     private Collider2D[] overlapBuffer = new Collider2D[16];
@@ -39,6 +40,7 @@ internal sealed class SkillAimVisual : IDisposable
             if (spriteRenderer == null) spriteRenderer = circle.GetComponentInChildren<SpriteRenderer>(true);
             if (spriteRenderer != null)
             {
+                originalSpriteScale = spriteRenderer.transform.localScale;
                 spriteRenderer.sortingLayerID = SortingLayer.NameToID("Effects");
                 spriteRenderer.sortingOrder = 6;
             }
@@ -69,6 +71,8 @@ internal sealed class SkillAimVisual : IDisposable
         effectType = skill.EffectType;
         spriteRenderer.sprite = skill.MagicCircle;
         spriteRenderer.enabled = true;
+        if (spriteRenderer.transform != circle.transform)
+            spriteRenderer.transform.localScale = originalSpriteScale;
         float scale = settings.CircleScale;
         switch (effectType)
         {
@@ -77,6 +81,8 @@ internal sealed class SkillAimVisual : IDisposable
             case SkillEffectType.Lightning: scale *= settings.LightningScale; break;
         }
         circle.transform.localScale = Vector3.one * scale;
+        if (effectType == SkillEffectType.TowerHaste)
+            SkillRangeVisual.Fit(spriteRenderer, radius, skill.MagicCircleRadiusFraction);
         circle.transform.rotation = Quaternion.identity;
         Color color = spriteRenderer.color;
         color.a = Mathf.Clamp01(settings.NormalAlpha);
@@ -100,8 +106,9 @@ internal sealed class SkillAimVisual : IDisposable
             indicator.transform.rotation = Quaternion.identity;
         }
         UpdateLine(radius, settings);
-        float targetAlpha = settings.Highlight && HasEnemyInside(radius, settings.MonsterLayer)
+        float targetAlpha = settings.Highlight && HasTargetInside(radius, settings.MonsterLayer)
             ? settings.HighlightAlpha : settings.NormalAlpha;
+        if (effectType == SkillEffectType.TowerHaste) targetAlpha = Mathf.Min(targetAlpha, 0.6f);
         Color color = spriteRenderer.color;
         color.a = settings.Highlight
             ? Mathf.Lerp(color.a, targetAlpha, settings.HighlightSpeed * Time.unscaledDeltaTime)
@@ -139,6 +146,7 @@ internal sealed class SkillAimVisual : IDisposable
         Color color = settings.FireColor;
         if (effectType == SkillEffectType.Ice) color = settings.IceColor;
         else if (effectType == SkillEffectType.Lightning) color = settings.LightningColor;
+        else if (effectType == SkillEffectType.TowerHaste) color = settings.HasteColor;
         if (!hasDrawnColor || color != drawnColor)
         {
             line.startColor = line.endColor = color;
@@ -152,6 +160,17 @@ internal sealed class SkillAimVisual : IDisposable
             drawnWidth = settings.LineWidth;
         }
         line.enabled = true;
+    }
+
+    private bool HasTargetInside(float radius, LayerMask monsterLayer)
+    {
+        if (effectType != SkillEffectType.TowerHaste) return HasEnemyInside(radius, monsterLayer);
+        if (circle == null || radius <= 0f) return false;
+        foreach (TowerAttack tower in TowerAttack.ActiveTowers)
+            if (tower != null && tower.isActiveAndEnabled && tower.towerData != null &&
+                ((Vector2)(tower.transform.position - circle.transform.position)).sqrMagnitude <= radius * radius)
+                return true;
+        return false;
     }
 
     private bool HasEnemyInside(float radius, LayerMask monsterLayer)

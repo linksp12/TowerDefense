@@ -23,6 +23,8 @@ internal sealed class SkillEffectExecutor
             case SkillEffectType.Lightning:
                 ApplyLightning(skill, position, radius, stats);
                 return true;
+            case SkillEffectType.TowerHaste:
+                return ApplyTowerHaste(skill, position, radius, stats);
             default:
                 Debug.LogError($"지원하지 않는 스킬 효과입니다: {skill.EffectType}", skill);
                 return false;
@@ -126,6 +128,28 @@ internal sealed class SkillEffectExecutor
         }
     }
 
+    // The field owns target updates and cleanup; the executor only starts it.
+    private bool ApplyTowerHaste(SkillData skill, Vector3 castPosition, float radius, CastStats stats)
+    {
+        float duration = stats.Duration;
+        float bonus = ResearchStatResolver.GetSkillAttackSpeedBonus(skill);
+        if (duration <= 0f || bonus <= 0f)
+        {
+            Debug.LogError($"{skill.DisplayName}: 지속 시간과 공격 속도 증가율은 0보다 커야 합니다.", skill);
+            return false;
+        }
+
+        if (float.IsPositiveInfinity(radius)) radius = skill.Range;
+        GameObject field = skill.EffectPrefab != null
+            ? UnityEngine.Object.Instantiate(skill.EffectPrefab, castPosition, Quaternion.identity)
+            : new GameObject(skill.DisplayName + " Area");
+        field.transform.position = castPosition;
+        TowerHasteArea area = field.GetComponent<TowerHasteArea>();
+        if (area == null) area = field.AddComponent<TowerHasteArea>();
+        area.Initialize(skill, radius, bonus, duration);
+        return true;
+    }
+
     private static bool IsValidTarget(
         MonsterHealth monster,
         Vector3 center,
@@ -134,8 +158,13 @@ internal sealed class SkillEffectExecutor
         if (monster == null || monster.IsDead)
             return false;
 
+        return IsInRange(monster.transform.position, center, radius);
+    }
+
+    private static bool IsInRange(Vector3 position, Vector3 center, float radius)
+    {
         return float.IsPositiveInfinity(radius)
-            || ((Vector2)(monster.transform.position - center)).sqrMagnitude <= radius * radius;
+            || ((Vector2)(position - center)).sqrMagnitude <= radius * radius;
     }
 
     private static void ConfigureEffectRenderer(GameObject effect)

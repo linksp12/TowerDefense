@@ -86,6 +86,62 @@ public sealed class ResearchViewFactory
     public void Rule(string name, Transform parent, Color color, Vector2 min, Vector2 max)
         => Place(Panel(name, parent, color), min, max);
 
+    /// <summary>카드 크기를 유지하는 세로 목록입니다. 내용이 넘칠 때만 스크롤바가 표시됩니다.</summary>
+    public RectTransform ScrollList(string name, Transform parent, Vector2 min, Vector2 max, Color accent)
+    {
+        RectTransform root = Panel(name, parent, Color.clear);
+        Place(root, min, max);
+        ScrollRect scroll = root.gameObject.AddComponent<ScrollRect>();
+
+        RectTransform viewport = Panel("Viewport", root, Color.clear);
+        Place(viewport, Vector2.zero, Vector2.one);
+        viewport.GetComponent<Image>().raycastTarget = true;
+        viewport.gameObject.AddComponent<RectMask2D>();
+
+        RectTransform content = Panel("Content", viewport, Color.clear);
+        content.anchorMin = new Vector2(0f, 1f);
+        content.anchorMax = Vector2.one;
+        content.pivot = new Vector2(0.5f, 1f);
+        content.anchoredPosition = Vector2.zero;
+        content.sizeDelta = Vector2.zero;
+        VerticalLayoutGroup layout = content.gameObject.AddComponent<VerticalLayoutGroup>();
+        layout.padding = new RectOffset(8, 8, 8, 8);
+        layout.spacing = 20f;
+        layout.childControlWidth = true;
+        layout.childControlHeight = true;
+        layout.childForceExpandWidth = true;
+        layout.childForceExpandHeight = false;
+        ContentSizeFitter fitter = content.gameObject.AddComponent<ContentSizeFitter>();
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+        RectTransform bar = Panel("Scrollbar", root, new Color(0.04f, 0.065f, 0.08f, 0.8f));
+        bar.anchorMin = new Vector2(1f, 0f);
+        bar.anchorMax = Vector2.one;
+        bar.pivot = new Vector2(1f, 0.5f);
+        bar.sizeDelta = new Vector2(10f, 0f);
+        bar.anchoredPosition = Vector2.zero;
+        bar.GetComponent<Image>().raycastTarget = true;
+        RectTransform handle = Panel("Handle", bar, accent);
+        Place(handle, Vector2.zero, Vector2.one);
+        handle.GetComponent<Image>().raycastTarget = true;
+        Scrollbar scrollbar = bar.gameObject.AddComponent<Scrollbar>();
+        scrollbar.handleRect = handle;
+        scrollbar.targetGraphic = handle.GetComponent<Image>();
+        scrollbar.direction = Scrollbar.Direction.BottomToTop;
+        scrollbar.navigation = new Navigation { mode = Navigation.Mode.None };
+
+        scroll.content = content;
+        scroll.viewport = viewport;
+        scroll.horizontal = false;
+        scroll.vertical = true;
+        scroll.movementType = ScrollRect.MovementType.Clamped;
+        scroll.scrollSensitivity = 40f;
+        scroll.verticalScrollbar = scrollbar;
+        scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHideAndExpandViewport;
+        scroll.verticalScrollbarSpacing = 12f;
+        return content;
+    }
+
     public static void Place(RectTransform rect, Vector2 min, Vector2 max)
     {
         rect.anchorMin = min;

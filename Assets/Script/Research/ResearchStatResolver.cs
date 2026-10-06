@@ -52,6 +52,12 @@ public static class ResearchStatResolver
             ResearchTargetType.Skill, skill.SkillId, ResearchModifierType.DurationFlat));
     }
 
+    public static float GetSkillAttackSpeedBonus(SkillData skill)
+    {
+        return skill == null ? 0f : Mathf.Max(0f, skill.AttackSpeedBonus + GetTotalValue(
+            ResearchTargetType.Skill, skill.SkillId, ResearchModifierType.AttackSpeedBonusFlat) / 100f);
+    }
+
     public static float GetTotalPercent(
         ResearchTargetType targetType,
         string targetId,
@@ -135,6 +141,8 @@ public static class ResearchStatResolver
             return Mathf.Max(0.05f, baseValue * (1f - percent / 100f));
         if (research.ModifierType == ResearchModifierType.DurationFlat)
             return Mathf.Max(0f, baseValue + percent);
+        if (research.ModifierType == ResearchModifierType.AttackSpeedBonusFlat)
+            return Mathf.Max(0f, baseValue + percent);
 
         float value = baseValue * (1f + percent / 100f);
         return research.ModifierType == ResearchModifierType.PeriodicDamagePercent
@@ -161,6 +169,7 @@ public static class ResearchStatResolver
             {
                 case ResearchModifierType.PeriodicDamagePercent: return research.SkillTarget.PeriodicDamage;
                 case ResearchModifierType.DurationFlat: return research.SkillTarget.Duration;
+                case ResearchModifierType.AttackSpeedBonusFlat: return research.SkillTarget.AttackSpeedBonus * 100f;
                 default: return research.SkillTarget.Damage;
             }
         }

@@ -189,17 +189,18 @@ public sealed class ResearchSceneController : MonoBehaviour
             return;
         }
 
-        float top = 0.75f;
-        float height = Mathf.Min(0.185f, (0.61f - 0.035f * (filtered.Count - 1)) / filtered.Count);
+        RectTransform content = view.ScrollList("TargetList", panel,
+            new Vector2(0.05f, 0.11f), new Vector2(0.95f, 0.75f), accent);
         for (int index = 0; index < filtered.Count; index++)
         {
             UnityEngine.Object target = filtered[index];
             TowerData tower = target as TowerData;
             SkillData skill = target as SkillData;
-            float yMax = top - index * (height + 0.035f);
-            float yMin = yMax - height;
-            Button button = CreateButton("Target_" + target.name, panel, string.Empty,
-                CardColor, new Vector2(0.07f, yMin), new Vector2(0.93f, yMax));
+            Button button = CreateButton("Target_" + target.name, content, string.Empty,
+                CardColor, Vector2.zero, Vector2.one);
+            LayoutElement cardLayout = button.gameObject.AddComponent<LayoutElement>();
+            cardLayout.preferredHeight = 136f;
+            cardLayout.minHeight = 136f;
             button.onClick.AddListener(() => SelectTarget(tower, skill));
             view.Frame("IconWell", button.transform, new Color(0.055f, 0.085f, 0.11f), EdgeColor,
                 new Vector2(0.04f, 0.15f), new Vector2(0.32f, 0.85f));
@@ -447,6 +448,7 @@ public sealed class ResearchSceneController : MonoBehaviour
             case ResearchModifierType.AttackRangePercent: return "사거리";
             case ResearchModifierType.PeriodicDamagePercent: return "지속 피해";
             case ResearchModifierType.DurationFlat: return "지속 시간";
+            case ResearchModifierType.AttackSpeedBonusFlat: return "공격 속도";
             default: return research.TargetType == ResearchTargetType.Tower ? "공격력" : "피해량";
         }
     }
@@ -463,6 +465,7 @@ public sealed class ResearchSceneController : MonoBehaviour
             case ResearchModifierType.AttackRangePercent: return $"사거리 +{value}%";
             case ResearchModifierType.PeriodicDamagePercent: return $"지속 피해 +{value}%";
             case ResearchModifierType.DurationFlat: return $"지속 시간 +{value}초";
+            case ResearchModifierType.AttackSpeedBonusFlat: return $"공격 속도 +{value}%p";
             default: return $"수치 +{value}";
         }
     }
@@ -471,6 +474,8 @@ public sealed class ResearchSceneController : MonoBehaviour
     {
         string unit = research.ModifierType == ResearchModifierType.AttackCooldownPercent ||
             research.ModifierType == ResearchModifierType.DurationFlat ? "초" : "";
+        if (research.ModifierType == ResearchModifierType.AttackSpeedBonusFlat)
+            return $"+{value:0.##}%";
         return $"{value:0.##}{unit}";
     }
 
@@ -487,6 +492,9 @@ public sealed class ResearchSceneController : MonoBehaviour
         else if (selectedSkill != null)
         {
             SkillData data = selectedSkill;
+            if (data.EffectType == SkillEffectType.TowerHaste)
+                SetStatRow(index++, "공격 속도", $"+{data.AttackSpeedBonus * 100f:0.#}%",
+                    $"+{ResearchStatResolver.GetSkillAttackSpeedBonus(data) * 100f:0.#}%");
             if (data.Damage > 0) SetStatRow(index++, "피해량", data.Damage.ToString(), ResearchStatResolver.GetSkillDamage(data).ToString());
             if (data.PeriodicDamage > 0) SetStatRow(index++, "지속 피해", $"{data.PeriodicDamage} / {data.PeriodicInterval:0.##}초", $"{ResearchStatResolver.GetSkillPeriodicDamage(data)} / {data.PeriodicInterval:0.##}초");
             SetStatRow(index++, "범위", $"{data.Range:0.##}", $"{data.Range:0.##}");
