@@ -33,7 +33,6 @@ public class QuestUI : MonoBehaviour
         {
             foreach (var kvp in manager.saveData.questStates)
             {
-                // Rewarded 상태가 아닌 퀘스트만 동적 생성
                 if (kvp.Value != QuestState.Rewarded)
                 {
                     GameObject slotObj = Instantiate(questSlotPrefab, questSlotParent);
