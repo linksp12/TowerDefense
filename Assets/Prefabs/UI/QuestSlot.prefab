@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 539692149488706188}
   - component: {fileID: 8380088683991108355}
   - component: {fileID: 5072853336354729081}
+  - component: {fileID: -1233080445360845560}
   m_Layer: 5
   m_Name: QuestSlot
   m_TagString: Untagged
@@ -214,6 +215,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-1233080445360845560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135442130239418335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4332989891ab3b42b256e9ff974a10a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestSlotUI
+  descriptionText: {fileID: 2785154475018519328}
 --- !u!1 &7151156312917559856
 GameObject:
   m_ObjectHideFlags: 0
