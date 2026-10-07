@@ -126,22 +126,24 @@ public class ResultSceneManager : MonoBehaviour
 
     public void OnClickRestart()
     {
-        if (Application.CanStreamedLevelBeLoaded(restartSceneName))
-        {
-            SceneManager.LoadScene(restartSceneName);
-        }
-        else
+        if (SceneLoadingScreen.IsLoading)
+            return;
+        string sceneName = restartSceneName;
+        if (!Application.CanStreamedLevelBeLoaded(sceneName))
         {
             Debug.LogWarning(
                 $"재시작할 씬을 찾을 수 없습니다: {restartSceneName}. Stage1Scene으로 이동합니다."
             );
 
-            SceneManager.LoadScene("Stage1Scene");
+            sceneName = "Stage1Scene";
         }
+        SceneLoadingScreen.TryLoad(sceneName, "전장을 다시 준비하고 있습니다");
     }
 
     public void OnClickMainMenu()
     {
+        if (SceneLoadingScreen.IsLoading)
+            return;
         SceneManager.LoadScene("MainScene");
     }
 }

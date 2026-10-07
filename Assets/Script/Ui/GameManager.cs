@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     private bool isGameEnded = false;
     private bool isSceneTransitioning = false;
+    private LastOfTheTower.Progression.BattleSession battleSession;
+    private LastOfTheTower.Progression.StageProgressService stageProgress;
 
     private void Awake()
     {
@@ -47,6 +49,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        string stageId = LastOfTheTower.Progression.StageIds.FromSceneName(gameObject.scene.name);
+        if (stageId != null)
+        {
+            battleSession = new LastOfTheTower.Progression.BattleSession(stageId);
+            stageProgress = new LastOfTheTower.Progression.StageProgressService(
+                new LastOfTheTower.Progression.PlayerPrefsStageProgressStorage());
+            stageProgress.Load();
+        }
+
         Time.timeScale = testTimeScale;
 
         currentMoney = startingMoney;
@@ -191,6 +202,27 @@ public class GameManager : MonoBehaviour
         isGameEnded = true;
         isSceneTransitioning = true;
 
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string nextSceneName = GetNextStageSceneName(currentSceneName);
+        string nextStageId = LastOfTheTower.Progression.StageIds.FromSceneName(nextSceneName);
+        bool newlyUnlocked = false;
+        bool progressSaveFailed = false;
+
+        if (battleSession != null && battleSession.TryComplete(victory, currentPlayerHp, out var result))
+        {
+            // 최신 기록을 읽고 승리만 저장한다. 패배/중복 종료는 클리어를 지우지 않는다.
+            stageProgress.Load();
+            bool wasUnlocked = LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
+            var status = stageProgress.RecordResult(result);
+            progressSaveFailed = victory &&
+                (status == LastOfTheTower.Progression.StageClearRecordStatus.LoadRequired ||
+                 status == LastOfTheTower.Progression.StageClearRecordStatus.WriteFailed);
+            newlyUnlocked = status == LastOfTheTower.Progression.StageClearRecordStatus.SaveRequested &&
+                !wasUnlocked && LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
+            if (progressSaveFailed)
+                Debug.LogError($"스테이지 클리어 기록 저장 실패: {stageProgress.LastError}", this);
+        }
+
         Debug.Log(victory ? "게임 클리어" : "게임 오버");
 
         Time.timeScale = 1f;
@@ -202,8 +234,6 @@ public class GameManager : MonoBehaviour
 
         PrepareGameUiForResult();
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
         // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
         if (victory && currentSceneName == "Stage4Scene")
         {
@@ -213,10 +243,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        string nextSceneName = GetNextStageSceneName(currentSceneName);
-
         // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
-        StageResultUI.Show(victory, currentSceneName, nextSceneName);
+        StageResultUI.Show(victory, currentSceneName, currentPlayerHp, maxPlayerHp,
+            newlyUnlocked ? nextSceneName : null, progressSaveFailed);
         Time.timeScale = 0f;
     }
 

@@ -13,7 +13,8 @@ public class StageResultUI : MonoBehaviour
     private TMP_FontAsset displayFont;
     private bool hasClickedButton;
 
-    public static void Show(bool victory, string currentSceneName, string nextSceneName)
+    public static void Show(bool victory, string currentSceneName, int remainingBaseHealth,
+        int maxBaseHealth, string unlockedSceneName, bool progressSaveFailed)
     {
         if (instance != null)
             return;
@@ -23,14 +24,15 @@ public class StageResultUI : MonoBehaviour
             typeof(RectTransform),
             typeof(Canvas),
             typeof(CanvasScaler),
-            typeof(GraphicRaycaster),
+            typeof(UnityEngine.UI.GraphicRaycaster),
             typeof(CanvasGroup),
             typeof(StageResultUI)
         );
 
         instance = root.GetComponent<StageResultUI>();
         instance.displayFont = FindKoreanFont();
-        instance.Build(victory, currentSceneName, nextSceneName);
+        instance.Build(victory, currentSceneName, remainingBaseHealth, maxBaseHealth,
+            unlockedSceneName, progressSaveFailed);
     }
 
     private static TMP_FontAsset FindKoreanFont()
@@ -53,13 +55,15 @@ public class StageResultUI : MonoBehaviour
         return TMP_Settings.defaultFontAsset;
     }
 
-    private void Build(bool victory, string currentSceneName, string nextSceneName)
+    private void Build(bool victory, string currentSceneName, int remainingBaseHealth,
+        int maxBaseHealth, string unlockedSceneName, bool progressSaveFailed)
     {
         gameObject.layer = LayerMask.NameToLayer("UI");
 
         Canvas canvas = GetComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = short.MaxValue;
+        // 최상위 한 단계는 씬 전환 로딩 화면에 남겨 둔다.
+        canvas.sortingOrder = short.MaxValue - 1;
 
         CanvasScaler scaler = GetComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -75,14 +79,14 @@ public class StageResultUI : MonoBehaviour
         RectTransform rootRect = GetComponent<RectTransform>();
         Stretch(rootRect);
 
-        Image dimmedBackground = CreateImage(
+        UnityEngine.UI.Image dimmedBackground = CreateImage(
             "DimmedBackground",
             transform,
             new Color(0f, 0f, 0f, 0.68f)
         );
         Stretch(dimmedBackground.rectTransform);
 
-        Image panel = CreateImage(
+        UnityEngine.UI.Image panel = CreateImage(
             "ResultPanel",
             transform,
             new Color(0.055f, 0.075f, 0.11f, 0.98f)
@@ -94,7 +98,7 @@ public class StageResultUI : MonoBehaviour
         panelRect.anchoredPosition = Vector2.zero;
         panelRect.sizeDelta = new Vector2(900f, 520f);
 
-        Image topLine = CreateImage(
+        UnityEngine.UI.Image topLine = CreateImage(
             "TopLine",
             panel.transform,
             victory
@@ -111,10 +115,10 @@ public class StageResultUI : MonoBehaviour
         CreateText(
             "ResultTitle",
             panel.transform,
-            victory ? "스테이지 클리어!" : "전투 실패",
+            victory ? GetStageLabel(currentSceneName) + " 클리어!" : "전투 실패",
             new Vector2(0f, 145f),
             new Vector2(760f, 90f),
-            58f,
+            54f,
             victory
                 ? new Color(1f, 0.78f, 0.25f, 1f)
                 : new Color(1f, 0.35f, 0.3f, 1f)
@@ -126,34 +130,61 @@ public class StageResultUI : MonoBehaviour
             victory
                 ? "모든 웨이브를 막아냈습니다."
                 : "왕국이 무너졌습니다. 다시 도전해 보세요.",
-            new Vector2(0f, 52f),
-            new Vector2(760f, 60f),
+            new Vector2(0f, 70f),
+            new Vector2(760f, 50f),
             29f,
             new Color(0.9f, 0.92f, 0.96f, 1f)
         );
+
+        CreateText(
+            "RemainingBaseHealth",
+            panel.transform,
+            $"남은 기지 체력  {remainingBaseHealth} / {maxBaseHealth}",
+            new Vector2(0f, 10f),
+            new Vector2(760f, 45f),
+            28f,
+            new Color(0.9f, 0.92f, 0.96f, 1f)
+        );
+
+        if (victory && (progressSaveFailed || !string.IsNullOrEmpty(unlockedSceneName)))
+        {
+            CreateText(
+                "ProgressNotice",
+                panel.transform,
+                progressSaveFailed
+                    ? "클리어 기록을 저장하지 못했습니다. 스테이지 해금을 확인해 주세요."
+                    : GetStageLabel(unlockedSceneName) + "가 해금되었습니다!",
+                new Vector2(0f, -55f),
+                new Vector2(800f, 45f),
+                progressSaveFailed ? 23f : 27f,
+                progressSaveFailed
+                    ? new Color(1f, 0.55f, 0.4f, 1f)
+                    : new Color(1f, 0.78f, 0.25f, 1f)
+            );
+        }
 
         if (victory)
         {
             CreateButton(
                 panel.transform,
-                "메인으로",
-                new Vector2(-270f, -150f),
-                new Vector2(230f, 74f),
-                () => LoadScene("MainScene")
-            );
-            CreateButton(
-                panel.transform,
                 "다시하기",
-                new Vector2(0f, -150f),
+                new Vector2(-270f, -150f),
                 new Vector2(230f, 74f),
                 () => LoadScene(currentSceneName)
             );
             CreateButton(
                 panel.transform,
-                "다음 스테이지",
+                "스테이지 선택",
+                new Vector2(0f, -150f),
+                new Vector2(230f, 74f),
+                () => LoadScene("StageSelectionScene")
+            );
+            CreateButton(
+                panel.transform,
+                "광장으로",
                 new Vector2(270f, -150f),
                 new Vector2(230f, 74f),
-                () => LoadScene(nextSceneName),
+                () => LoadScene("PlazaScene"),
                 true
             );
         }
@@ -161,23 +192,35 @@ public class StageResultUI : MonoBehaviour
         {
             CreateButton(
                 panel.transform,
-                "메인으로",
+                "다시하기",
                 new Vector2(-135f, -150f),
                 new Vector2(230f, 74f),
-                () => LoadScene("MainScene")
+                () => LoadScene(currentSceneName)
             );
             CreateButton(
                 panel.transform,
-                "다시하기",
+                "광장으로",
                 new Vector2(135f, -150f),
                 new Vector2(230f, 74f),
-                () => LoadScene(currentSceneName),
+                () => LoadScene("PlazaScene"),
                 true
             );
         }
 
         panelRect.localScale = Vector3.one * 0.92f;
         StartCoroutine(AnimateIn());
+    }
+
+    private static string GetStageLabel(string sceneName)
+    {
+        switch (LastOfTheTower.Progression.StageIds.FromSceneName(sceneName))
+        {
+            case LastOfTheTower.Progression.StageIds.StageOne: return "1스테이지";
+            case LastOfTheTower.Progression.StageIds.StageTwo: return "2스테이지";
+            case LastOfTheTower.Progression.StageIds.StageThree: return "3스테이지";
+            case LastOfTheTower.Progression.StageIds.StageFour: return "4스테이지";
+            default: return "스테이지";
+        }
     }
 
     private System.Collections.IEnumerator AnimateIn()
@@ -202,7 +245,7 @@ public class StageResultUI : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        if (hasClickedButton)
+        if (hasClickedButton || SceneLoadingScreen.IsLoading)
             return;
 
         if (string.IsNullOrWhiteSpace(sceneName) ||
@@ -213,8 +256,20 @@ public class StageResultUI : MonoBehaviour
         }
 
         hasClickedButton = true;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneName);
+        canvasGroup.interactable = false;
+        string message = sceneName == "PlazaScene" ? "광장으로 이동 중" :
+            sceneName == "StageSelectionScene" ? "스테이지 선택 화면을 준비하고 있습니다" :
+            "전장을 다시 준비하고 있습니다";
+        if (!SceneLoadingScreen.TryLoad(sceneName, message, RestoreAfterLoadFailure))
+            RestoreAfterLoadFailure();
+    }
+
+    private void RestoreAfterLoadFailure()
+    {
+        if (this == null)
+            return;
+        hasClickedButton = false;
+        canvasGroup.interactable = true;
     }
 
     private void CreateButton(
@@ -226,7 +281,7 @@ public class StageResultUI : MonoBehaviour
         bool highlighted = false
     )
     {
-        Image buttonImage = CreateImage(
+        UnityEngine.UI.Image buttonImage = CreateImage(
             label + "Button",
             parent,
             highlighted
@@ -241,10 +296,10 @@ public class StageResultUI : MonoBehaviour
         buttonRect.anchoredPosition = position;
         buttonRect.sizeDelta = size;
 
-        Button button = buttonImage.gameObject.AddComponent<Button>();
+        UnityEngine.UI.Button button = buttonImage.gameObject.AddComponent<UnityEngine.UI.Button>();
         button.targetGraphic = buttonImage;
 
-        ColorBlock colors = button.colors;
+        UnityEngine.UI.ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
         colors.highlightedColor = new Color(1.12f, 1.12f, 1.12f, 1f);
         colors.pressedColor = new Color(0.78f, 0.78f, 0.78f, 1f);
@@ -309,17 +364,17 @@ public class StageResultUI : MonoBehaviour
         return text;
     }
 
-    private Image CreateImage(string objectName, Transform parent, Color color)
+    private UnityEngine.UI.Image CreateImage(string objectName, Transform parent, Color color)
     {
         GameObject imageObject = new GameObject(
             objectName,
             typeof(RectTransform),
-            typeof(Image)
+            typeof(UnityEngine.UI.Image)
         );
         imageObject.layer = gameObject.layer;
         imageObject.transform.SetParent(parent, false);
 
-        Image image = imageObject.GetComponent<Image>();
+        UnityEngine.UI.Image image = imageObject.GetComponent<UnityEngine.UI.Image>();
         image.color = color;
         return image;
     }
