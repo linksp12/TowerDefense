@@ -1,0 +1,1079 @@
+fileFormatVersion: 2
+guid: 851b7d4f7b696c1479665030a86248d2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3238940770204884047
+    second: pixcel plaza_0
+  - first:
+      213: -203832038448676515
+    second: pixcel plaza_1
+  - first:
+      213: -4177471180470073901
+    second: pixcel plaza_2
+  - first:
+      213: -7560785131128664841
+    second: pixcel plaza_3
+  - first:
+      213: 4672468504005113492
+    second: pixcel plaza_4
+  - first:
+      213: 8118960703965742272
+    second: pixcel plaza_5
+  - first:
+      213: -1827690837537973592
+    second: pixcel plaza_6
+  - first:
+      213: 4303391061576365968
+    second: pixcel plaza_7
+  - first:
+      213: 3212235829245790569
+    second: pixcel plaza_8
+  - first:
+      213: 943962247212125991
+    second: pixcel plaza_9
+  - first:
+      213: 2461493428655613624
+    second: pixcel plaza_10
+  - first:
+      213: 101684893097627749
+    second: pixcel plaza_11
+  - first:
+      213: -2291787537090482266
+    second: pixcel plaza_12
+  - first:
+      213: -6882557635942392401
+    second: pixcel plaza_13
+  - first:
+      213: 1982138097302114518
+    second: pixcel plaza_14
+  - first:
+      213: 7882591908084241146
+    second: pixcel plaza_15
+  - first:
+      213: 5146952561861729304
+    second: pixcel plaza_16
+  - first:
+      213: -2082944546900552987
+    second: pixcel plaza_17
+  - first:
+      213: 8309131125592238425
+    second: pixcel plaza_18
+  - first:
+      213: -1469333965546559954
+    second: pixcel plaza_19
+  - first:
+      213: 1122117698753483253
+    second: pixcel plaza_20
+  - first:
+      213: -6932562525899413129
+    second: pixcel plaza_21
+  - first:
+      213: -6715080852285108177
+    second: pixcel plaza_22
+  - first:
+      213: -268429475441918530
+    second: pixcel plaza_23
+  - first:
+      213: -4865010630510267750
+    second: pixcel plaza_24
+  - first:
+      213: 8847013232002714837
+    second: pixcel plaza_25
+  - first:
+      213: -8669289127076137327
+    second: pixcel plaza_26
+  - first:
+      213: 8665418094056666888
+    second: pixcel plaza_27
+  - first:
+      213: -8089361600105487805
+    second: pixcel plaza_28
+  - first:
+      213: -5904867171181310305
+    second: pixcel plaza_29
+  - first:
+      213: -5627109133241839451
+    second: pixcel plaza_30
+  - first:
+      213: 1783241893536197385
+    second: pixcel plaza_31
+  - first:
+      213: 5540008631359449296
+    second: pixcel plaza_32
+  - first:
+      213: 1559369339221581309
+    second: pixcel plaza_33
+  - first:
+      213: -5016823351744352344
+    second: pixcel plaza_34
+  - first:
+      213: 4788063108033837580
+    second: pixcel plaza_35
+  - first:
+      213: -7560283856554110955
+    second: pixcel plaza_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pixcel plaza_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 549
+        width: 356
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c9798487703fc20800000000000000
+      internalID: 3238940770204884047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_1
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 705
+        width: 164
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d514c6a47d7db2df0800000000000000
+      internalID: -203832038448676515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_2
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 669
+        width: 207
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d546a43814a606c0800000000000000
+      internalID: -4177471180470073901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_3
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 759
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fc45046bf1b21790800000000000000
+      internalID: -7560785131128664841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_4
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 693
+        width: 236
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 496fc6d3951f7d040800000000000000
+      internalID: 4672468504005113492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_5
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 693
+        width: 229
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c4cb318eb75ca070800000000000000
+      internalID: 8118960703965742272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_6
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 711
+        width: 279
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aa1055eddcb2a6e0800000000000000
+      internalID: -1827690837537973592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_7
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 345
+        width: 202
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 097b9d2ce57b8bb30800000000000000
+      internalID: 4303391061576365968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_8
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 673
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9694af0b777249c20800000000000000
+      internalID: 3212235829245790569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_9
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 671
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f457a99a0a91d00800000000000000
+      internalID: 943962247212125991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_10
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 519
+        width: 185
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b6e9f75b3bf82220800000000000000
+      internalID: 2461493428655613624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_11
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 497
+        width: 324
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5609b1c1fd1496100800000000000000
+      internalID: 101684893097627749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_12
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 483
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6afed0f906fe130e0800000000000000
+      internalID: -2291787537090482266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_13
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 203
+        width: 404
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad5083ab4e3c70a0800000000000000
+      internalID: -6882557635942392401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_14
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 503
+        width: 355
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d016710918f18b10800000000000000
+      internalID: 1982138097302114518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_15
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 329
+        width: 281
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af2dabe9397946d60800000000000000
+      internalID: 7882591908084241146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 259
+        width: 469
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81c1e85d516ad6740800000000000000
+      internalID: 5146952561861729304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_17
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 331
+        width: 90
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e2d72378f4e713e0800000000000000
+      internalID: -2082944546900552987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_18
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 363
+        width: 137
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 959211d2cb6ff4370800000000000000
+      internalID: 8309131125592238425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_19
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 367
+        width: 76
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e266e2f0b80eb9be0800000000000000
+      internalID: -1469333965546559954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_20
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 235
+        width: 135
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1516e0a10929f00800000000000000
+      internalID: 1122117698753483253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_21
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 298
+        width: 93
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 779a49cec179acf90800000000000000
+      internalID: -6932562525899413129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_22
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 436
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f20d489fa8d3fc2a0800000000000000
+      internalID: -6715080852285108177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_23
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 237
+        width: 91
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebd3a0570d8564cf0800000000000000
+      internalID: -268429475441918530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_24
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 62
+        width: 81
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a92bfe38b920c7cb0800000000000000
+      internalID: -4865010630510267750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_25
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 246
+        width: 152
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dcc3b839a7e6ca70800000000000000
+      internalID: 8847013232002714837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_26
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 239
+        width: 74
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1967875887f70b780800000000000000
+      internalID: -8669289127076137327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_27
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 234
+        width: 139
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8077d7e58dfb14870800000000000000
+      internalID: 8665418094056666888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_28
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 59
+        width: 53
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342e606eb70dcbf80800000000000000
+      internalID: -8089361600105487805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_29
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 231
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9e4fd7d792bd0ea0800000000000000
+      internalID: -5904867171181310305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_30
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 67
+        width: 155
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a093c89e0e78e1b0800000000000000
+      internalID: -5627109133241839451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_31
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 47
+        width: 63
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90be1dcdd095fb810800000000000000
+      internalID: 1783241893536197385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_32
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 23
+        width: 81
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d827cc7f7012ec40800000000000000
+      internalID: 5540008631359449296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_33
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 29
+        width: 53
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd10f1f62ef3a510800000000000000
+      internalID: 1559369339221581309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_34
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 16
+        width: 41
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8afa46aedb9a06ab0800000000000000
+      internalID: -5016823351744352344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_35
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 55
+        width: 75
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0a728c470e927240800000000000000
+      internalID: 4788063108033837580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixcel plaza_36
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 25
+        width: 379
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510d8f873e9741790800000000000000
+      internalID: -7560283856554110955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pixcel plaza_0: 3238940770204884047
+      pixcel plaza_1: -203832038448676515
+      pixcel plaza_10: 2461493428655613624
+      pixcel plaza_11: 101684893097627749
+      pixcel plaza_12: -2291787537090482266
+      pixcel plaza_13: -6882557635942392401
+      pixcel plaza_14: 1982138097302114518
+      pixcel plaza_15: 7882591908084241146
+      pixcel plaza_16: 5146952561861729304
+      pixcel plaza_17: -2082944546900552987
+      pixcel plaza_18: 8309131125592238425
+      pixcel plaza_19: -1469333965546559954
+      pixcel plaza_2: -4177471180470073901
+      pixcel plaza_20: 1122117698753483253
+      pixcel plaza_21: -6932562525899413129
+      pixcel plaza_22: -6715080852285108177
+      pixcel plaza_23: -268429475441918530
+      pixcel plaza_24: -4865010630510267750
+      pixcel plaza_25: 8847013232002714837
+      pixcel plaza_26: -8669289127076137327
+      pixcel plaza_27: 8665418094056666888
+      pixcel plaza_28: -8089361600105487805
+      pixcel plaza_29: -5904867171181310305
+      pixcel plaza_3: -7560785131128664841
+      pixcel plaza_30: -5627109133241839451
+      pixcel plaza_31: 1783241893536197385
+      pixcel plaza_32: 5540008631359449296
+      pixcel plaza_33: 1559369339221581309
+      pixcel plaza_34: -5016823351744352344
+      pixcel plaza_35: 4788063108033837580
+      pixcel plaza_36: -7560283856554110955
+      pixcel plaza_4: 4672468504005113492
+      pixcel plaza_5: 8118960703965742272
+      pixcel plaza_6: -1827690837537973592
+      pixcel plaza_7: 4303391061576365968
+      pixcel plaza_8: 3212235829245790569
+      pixcel plaza_9: 943962247212125991
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

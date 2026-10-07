@@ -1,0 +1,1365 @@
+fileFormatVersion: 2
+guid: d99bbbfea722e854c9f0c38ea6bf4c84
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2561712766202313958
+    second: RPG_Plaza_Unity_Pack_0
+  - first:
+      213: -8231521350236984322
+    second: RPG_Plaza_Unity_Pack_1
+  - first:
+      213: 8378130559169222613
+    second: RPG_Plaza_Unity_Pack_2
+  - first:
+      213: 1855546260083087275
+    second: RPG_Plaza_Unity_Pack_3
+  - first:
+      213: 2915107057315264603
+    second: RPG_Plaza_Unity_Pack_4
+  - first:
+      213: -6707695903676644392
+    second: RPG_Plaza_Unity_Pack_5
+  - first:
+      213: 2333692840191802780
+    second: RPG_Plaza_Unity_Pack_6
+  - first:
+      213: -2308594504688512029
+    second: RPG_Plaza_Unity_Pack_7
+  - first:
+      213: -6575458339574453283
+    second: RPG_Plaza_Unity_Pack_8
+  - first:
+      213: 2851693935942713095
+    second: RPG_Plaza_Unity_Pack_9
+  - first:
+      213: -387968093112111137
+    second: RPG_Plaza_Unity_Pack_10
+  - first:
+      213: 3981675169516057534
+    second: RPG_Plaza_Unity_Pack_11
+  - first:
+      213: -4358485827008501324
+    second: RPG_Plaza_Unity_Pack_12
+  - first:
+      213: 5232575791012221986
+    second: RPG_Plaza_Unity_Pack_13
+  - first:
+      213: -8847394596539190194
+    second: RPG_Plaza_Unity_Pack_14
+  - first:
+      213: 6189396207528176465
+    second: RPG_Plaza_Unity_Pack_15
+  - first:
+      213: 4272832464389878827
+    second: RPG_Plaza_Unity_Pack_16
+  - first:
+      213: -2720299357882843985
+    second: RPG_Plaza_Unity_Pack_17
+  - first:
+      213: -3586007728409674604
+    second: RPG_Plaza_Unity_Pack_18
+  - first:
+      213: -6313599904171706196
+    second: RPG_Plaza_Unity_Pack_19
+  - first:
+      213: -1760131886731857701
+    second: RPG_Plaza_Unity_Pack_20
+  - first:
+      213: -7936630244969983094
+    second: RPG_Plaza_Unity_Pack_21
+  - first:
+      213: -2936073845520365236
+    second: RPG_Plaza_Unity_Pack_22
+  - first:
+      213: 6177704075282688895
+    second: RPG_Plaza_Unity_Pack_23
+  - first:
+      213: -3177745101412524343
+    second: RPG_Plaza_Unity_Pack_24
+  - first:
+      213: -4905190436250434243
+    second: RPG_Plaza_Unity_Pack_25
+  - first:
+      213: -1216621226234864415
+    second: RPG_Plaza_Unity_Pack_26
+  - first:
+      213: 2635463850082468414
+    second: RPG_Plaza_Unity_Pack_27
+  - first:
+      213: -282241103929655810
+    second: RPG_Plaza_Unity_Pack_28
+  - first:
+      213: -2628869584970507714
+    second: RPG_Plaza_Unity_Pack_29
+  - first:
+      213: -1945741637353910497
+    second: RPG_Plaza_Unity_Pack_30
+  - first:
+      213: 1579941384970932337
+    second: RPG_Plaza_Unity_Pack_31
+  - first:
+      213: -4981845266757060312
+    second: RPG_Plaza_Unity_Pack_32
+  - first:
+      213: 235597823005733
+    second: RPG_Plaza_Unity_Pack_33
+  - first:
+      213: 8437686983345576023
+    second: RPG_Plaza_Unity_Pack_34
+  - first:
+      213: 7836593744497917441
+    second: RPG_Plaza_Unity_Pack_35
+  - first:
+      213: 4723494147644709915
+    second: RPG_Plaza_Unity_Pack_36
+  - first:
+      213: -6416134996348726427
+    second: RPG_Plaza_Unity_Pack_37
+  - first:
+      213: 8057889722399388669
+    second: RPG_Plaza_Unity_Pack_38
+  - first:
+      213: -3759233783916673485
+    second: RPG_Plaza_Unity_Pack_39
+  - first:
+      213: -1497931047306258447
+    second: RPG_Plaza_Unity_Pack_40
+  - first:
+      213: -2723902642397806772
+    second: RPG_Plaza_Unity_Pack_41
+  - first:
+      213: 4566546568158949782
+    second: RPG_Plaza_Unity_Pack_42
+  - first:
+      213: -6548361713065933392
+    second: RPG_Plaza_Unity_Pack_43
+  - first:
+      213: 9182218476986391699
+    second: RPG_Plaza_Unity_Pack_44
+  - first:
+      213: -865960790802376029
+    second: RPG_Plaza_Unity_Pack_45
+  - first:
+      213: -4755852913206741241
+    second: RPG_Plaza_Unity_Pack_46
+  - first:
+      213: -2976705271850505009
+    second: RPG_Plaza_Unity_Pack_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1832
+        width: 176
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a138de9cfc7f27cd0800000000000000
+      internalID: -2561712766202313958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_1
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 1832
+        width: 132
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efba416c1f2c3cd80800000000000000
+      internalID: -8231521350236984322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_2
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 1981
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d75025ba59154470800000000000000
+      internalID: 8378130559169222613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_3
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 1832
+        width: 124
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba79e801e7930c910800000000000000
+      internalID: 1855546260083087275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_4
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 1832
+        width: 136
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58b2897c6a847820800000000000000
+      internalID: 2915107057315264603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_5
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 1833
+        width: 149
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3c2005d1a79e2a0800000000000000
+      internalID: -6707695903676644392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_6
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 1833
+        width: 120
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9d31821641f26020800000000000000
+      internalID: 2333692840191802780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_7
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1577
+        width: 117
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e35f99878936ffd0800000000000000
+      internalID: -2308594504688512029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_8
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1594
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddbe84a7a774fb4a0800000000000000
+      internalID: -6575458339574453283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_9
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 1628
+        width: 135
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f300c9680439720800000000000000
+      internalID: 2851693935942713095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_10
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1630
+        width: 124
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdfedd92319ad9af0800000000000000
+      internalID: -387968093112111137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_11
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1626
+        width: 113
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb37ff98870c14730800000000000000
+      internalID: 3981675169516057534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_12
+      rect:
+        serializedVersion: 2
+        x: 1321
+        y: 1632
+        width: 174
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b9659a8b3c8383c0800000000000000
+      internalID: -4358485827008501324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_13
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 1328
+        width: 40
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224979365f7dd9840800000000000000
+      internalID: 5232575791012221986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_14
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 1332
+        width: 72
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e44329d6d7db73580800000000000000
+      internalID: -8847394596539190194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_15
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 1339
+        width: 98
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15bedd3de0725e550800000000000000
+      internalID: 6189396207528176465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_16
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 1348
+        width: 139
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2437b8ec762c4b30800000000000000
+      internalID: 4272832464389878827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_17
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 1362
+        width: 66
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fac7ba2952e8f3ad0800000000000000
+      internalID: -2720299357882843985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_18
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1370
+        width: 55
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49cf55278f0fb3ec0800000000000000
+      internalID: -3586007728409674604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_19
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1066
+        width: 155
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca8b7e986569168a0800000000000000
+      internalID: -6313599904171706196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_20
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 1073
+        width: 97
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd07285ef51c297e0800000000000000
+      internalID: -1760131886731857701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_21
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1104
+        width: 128
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8351fe97dc6bd190800000000000000
+      internalID: -7936630244969983094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_22
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 1107
+        width: 134
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49817bb468f047d0800000000000000
+      internalID: -2936073845520365236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_23
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 1104
+        width: 160
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7b25b6202d9bb550800000000000000
+      internalID: 6177704075282688895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_24
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 1075
+        width: 165
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce919baaa166e3d0800000000000000
+      internalID: -3177745101412524343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_25
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 841
+        width: 172
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3546ab79434debb0800000000000000
+      internalID: -4905190436250434243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_26
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 834
+        width: 174
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec1210d071bd1fe0800000000000000
+      internalID: -1216621226234864415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_27
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 836
+        width: 137
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e328c8a886c039420800000000000000
+      internalID: 2635463850082468414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_28
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 837
+        width: 130
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efd324b1637451cf0800000000000000
+      internalID: -282241103929655810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_29
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 839
+        width: 130
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a11037a01648bd0800000000000000
+      internalID: -2628869584970507714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_30
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 839
+        width: 134
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1f45d03a465ff4e0800000000000000
+      internalID: -1945741637353910497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_31
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 585
+        width: 172
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 170912991541de510800000000000000
+      internalID: 1579941384970932337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_32
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 587
+        width: 174
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 829fbf4ff1eecdab0800000000000000
+      internalID: -4981845266757060312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_33
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 608
+        width: 172
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 524dc846646d00000800000000000000
+      internalID: 235597823005733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_34
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 570
+        width: 79
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75810484b9fa81570800000000000000
+      internalID: 8437686983345576023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_35
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 574
+        width: 141
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10eb8d59d7c21cc60800000000000000
+      internalID: 7836593744497917441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_36
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 576
+        width: 111
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1cdff0b6e83d8140800000000000000
+      internalID: 4723494147644709915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_37
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 318
+        width: 109
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5639ea7073f45f6a0800000000000000
+      internalID: -6416134996348726427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_38
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 316
+        width: 69
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df3f2ee820063df60800000000000000
+      internalID: 8057889722399388669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_39
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 320
+        width: 60
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 336cff17ac484dbc0800000000000000
+      internalID: -3759233783916673485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_40
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 320
+        width: 59
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7184b16a7463be0800000000000000
+      internalID: -1497931047306258447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_41
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 336
+        width: 87
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f71258af0c23ad0800000000000000
+      internalID: -2723902642397806772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_42
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 342
+        width: 136
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691b46db8e1af5f30800000000000000
+      internalID: 4566546568158949782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_43
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 334
+        width: 53
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b5cfe777bb8f15a0800000000000000
+      internalID: -6548361713065933392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_44
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 68
+        width: 73
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c5dca2e0bcd6f70800000000000000
+      internalID: 9182218476986391699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_45
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 75
+        width: 8
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aadec2bf3d7bf3f0800000000000000
+      internalID: -865960790802376029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_46
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 74
+        width: 62
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7073e4819f0dffdb0800000000000000
+      internalID: -4755852913206741241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG_Plaza_Unity_Pack_47
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 91
+        width: 70
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc6156935e90b6d0800000000000000
+      internalID: -2976705271850505009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RPG_Plaza_Unity_Pack_0: -2561712766202313958
+      RPG_Plaza_Unity_Pack_1: -8231521350236984322
+      RPG_Plaza_Unity_Pack_10: -387968093112111137
+      RPG_Plaza_Unity_Pack_11: 3981675169516057534
+      RPG_Plaza_Unity_Pack_12: -4358485827008501324
+      RPG_Plaza_Unity_Pack_13: 5232575791012221986
+      RPG_Plaza_Unity_Pack_14: -8847394596539190194
+      RPG_Plaza_Unity_Pack_15: 6189396207528176465
+      RPG_Plaza_Unity_Pack_16: 4272832464389878827
+      RPG_Plaza_Unity_Pack_17: -2720299357882843985
+      RPG_Plaza_Unity_Pack_18: -3586007728409674604
+      RPG_Plaza_Unity_Pack_19: -6313599904171706196
+      RPG_Plaza_Unity_Pack_2: 8378130559169222613
+      RPG_Plaza_Unity_Pack_20: -1760131886731857701
+      RPG_Plaza_Unity_Pack_21: -7936630244969983094
+      RPG_Plaza_Unity_Pack_22: -2936073845520365236
+      RPG_Plaza_Unity_Pack_23: 6177704075282688895
+      RPG_Plaza_Unity_Pack_24: -3177745101412524343
+      RPG_Plaza_Unity_Pack_25: -4905190436250434243
+      RPG_Plaza_Unity_Pack_26: -1216621226234864415
+      RPG_Plaza_Unity_Pack_27: 2635463850082468414
+      RPG_Plaza_Unity_Pack_28: -282241103929655810
+      RPG_Plaza_Unity_Pack_29: -2628869584970507714
+      RPG_Plaza_Unity_Pack_3: 1855546260083087275
+      RPG_Plaza_Unity_Pack_30: -1945741637353910497
+      RPG_Plaza_Unity_Pack_31: 1579941384970932337
+      RPG_Plaza_Unity_Pack_32: -4981845266757060312
+      RPG_Plaza_Unity_Pack_33: 235597823005733
+      RPG_Plaza_Unity_Pack_34: 8437686983345576023
+      RPG_Plaza_Unity_Pack_35: 7836593744497917441
+      RPG_Plaza_Unity_Pack_36: 4723494147644709915
+      RPG_Plaza_Unity_Pack_37: -6416134996348726427
+      RPG_Plaza_Unity_Pack_38: 8057889722399388669
+      RPG_Plaza_Unity_Pack_39: -3759233783916673485
+      RPG_Plaza_Unity_Pack_4: 2915107057315264603
+      RPG_Plaza_Unity_Pack_40: -1497931047306258447
+      RPG_Plaza_Unity_Pack_41: -2723902642397806772
+      RPG_Plaza_Unity_Pack_42: 4566546568158949782
+      RPG_Plaza_Unity_Pack_43: -6548361713065933392
+      RPG_Plaza_Unity_Pack_44: 9182218476986391699
+      RPG_Plaza_Unity_Pack_45: -865960790802376029
+      RPG_Plaza_Unity_Pack_46: -4755852913206741241
+      RPG_Plaza_Unity_Pack_47: -2976705271850505009
+      RPG_Plaza_Unity_Pack_5: -6707695903676644392
+      RPG_Plaza_Unity_Pack_6: 2333692840191802780
+      RPG_Plaza_Unity_Pack_7: -2308594504688512029
+      RPG_Plaza_Unity_Pack_8: -6575458339574453283
+      RPG_Plaza_Unity_Pack_9: 2851693935942713095
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
