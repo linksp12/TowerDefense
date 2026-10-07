@@ -16,6 +16,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     private bool hovered;
     private bool progressKnown = true;
     private bool cleared;
+    private bool unlocked = true;
+    private string lockMessage = "잠김";
     private StageSelectionDetailsUI details;
     public bool IsSelected { get; private set; }
 
@@ -51,6 +53,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void Select()
     {
+        if (!unlocked || !button.IsInteractable())
+            return;
         IsSelected = true;
         Refresh();
         if (details != null)
@@ -79,16 +83,29 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
         Refresh();
     }
 
+    public void SetAvailability(bool isUnlocked, string message)
+    {
+        unlocked = isUnlocked;
+        lockMessage = message;
+        button.interactable = unlocked;
+        if (!unlocked)
+        {
+            hovered = false;
+            IsSelected = false;
+        }
+        Refresh();
+    }
+
     private void Refresh()
     {
-        bool highlighted = hovered || IsSelected;
+        bool highlighted = unlocked && (hovered || IsSelected);
         frame.color = highlighted
             ? new Color32(255, 217, 126, 255)
-            : new Color32(163, 121, 57, 255);
+            : unlocked ? new Color32(163, 121, 57, 255) : new Color32(89, 95, 100, 255);
         surface.color = highlighted
             ? new Color32(29, 45, 58, 250)
             : new Color32(14, 26, 37, 245);
-        statusText.text = IsSelected ? "선택됨" : hovered ? "클릭하여 선택" :
+        statusText.text = !unlocked ? lockMessage : IsSelected ? "선택됨" : hovered ? "클릭하여 선택" :
             previewOnly ? "상세 보기" : !progressKnown ? "기록 확인 불가" :
             cleared ? "다시 도전 가능" : "도전 가능";
         statusText.color = highlighted

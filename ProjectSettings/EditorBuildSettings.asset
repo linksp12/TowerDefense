@@ -26,5 +26,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ResultScene.unity
     guid: 58c8a28ed86bfbf4bbb5656aa9e6a8fd
+  - enabled: 1
+    path: Assets/Scenes/StageSelectionScene.unity
+    guid: 67fe96d95ee62ed4f97058a9fe8399b4
+  - enabled: 1
+    path: Assets/Scenes/PlazaScene.unity
+    guid: 226390941065ee74580efeda559da4a4
+  - enabled: 1
+    path: Assets/Scenes/ResearchScene.unity
+    guid: 1d1f603dc96bbf141a943cd680e989f2
+  - enabled: 1
+    path: Assets/Scenes/Quest.unity
+    guid: 1204bfe520101584c989c8fc53d40d73
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

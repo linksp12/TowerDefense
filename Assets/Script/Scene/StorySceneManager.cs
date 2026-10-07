@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
@@ -49,6 +48,7 @@ public class StorySceneManager : MonoBehaviour
 
     private int currentIndex = 0;
     private Coroutine autoAdvanceCoroutine;
+    private bool isTransitioning;
 
     // ───────── 초기화 ─────────
     private void Start()
@@ -95,17 +95,23 @@ public class StorySceneManager : MonoBehaviour
     // ───────── 다음 스토리 ─────────
     private void AdvanceStory()
     {
+        if (isTransitioning || SceneLoadingScreen.IsLoading)
+            return;
+
         int nextIndex = currentIndex + 1;
 
         if (nextIndex < stories.Length)
             ShowStory(nextIndex);
         else
-            LoadStage1Scene();
+            LoadPlazaScene();
     }
 
     // ───────── 버튼 콜백 ─────────
     public void OnNextButtonClicked()
     {
+        if (isTransitioning || SceneLoadingScreen.IsLoading)
+            return;
+
         if (autoAdvanceCoroutine != null)
             StopCoroutine(autoAdvanceCoroutine);
 
@@ -114,15 +120,41 @@ public class StorySceneManager : MonoBehaviour
 
     public void OnSkipButtonClicked()
     {
+        if (isTransitioning || SceneLoadingScreen.IsLoading)
+            return;
+
         if (autoAdvanceCoroutine != null)
             StopCoroutine(autoAdvanceCoroutine);
 
-        LoadStage1Scene();
+        LoadPlazaScene();
     }
 
-    // ───────── 게임씬 전환 ─────────
-    private void LoadStage1Scene()
+    // ───────── 광장씬 전환 ─────────
+    private void LoadPlazaScene()
     {
-        SceneManager.LoadScene("Stage1Scene");
+        if (isTransitioning || SceneLoadingScreen.IsLoading)
+            return;
+
+        isTransitioning = true;
+        if (autoAdvanceCoroutine != null)
+        {
+            StopCoroutine(autoAdvanceCoroutine);
+            autoAdvanceCoroutine = null;
+        }
+        nextButton.interactable = false;
+        skipButton.interactable = false;
+
+        if (!SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중", RestoreAfterLoadFailure))
+            RestoreAfterLoadFailure();
+    }
+
+    private void RestoreAfterLoadFailure()
+    {
+        if (this == null)
+            return;
+
+        isTransitioning = false;
+        nextButton.interactable = true;
+        skipButton.interactable = true;
     }
 }

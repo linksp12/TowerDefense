@@ -6,6 +6,8 @@ public class DialogueUI : MonoBehaviour
 {
     public static DialogueUI Instance;
 
+    public event System.Action<PlazaNPC.NPCType> ActionRequested;
+
     [Header("기본 UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private Image portrait;
@@ -146,33 +148,15 @@ public class DialogueUI : MonoBehaviour
 
     /// <summary>
     /// 마지막 대화의 기능 버튼을 눌렀을 때 실행된다.
-    /// 현재는 테스트용 로그만 출력한다.
+    /// NPC 기능 연결을 요청한다. 씬 이동은 외부 연결 컴포넌트가 담당한다.
     /// </summary>
     private void OnActionButtonClicked()
     {
-        switch (currentNpcType)
-        {
-            case PlazaNPC.NPCType.Skill:
+        if (!dialoguePanel.activeSelf || currentLines == null ||
+            currentIndex != currentLines.Length - 1)
+            return;
 
-                Debug.Log("업그레이드 버튼 클릭");
-
-                // 나중에 실제 업그레이드 패널 연결
-                break;
-
-            case PlazaNPC.NPCType.Quest:
-
-                Debug.Log("퀘스트 받기 버튼 클릭");
-
-                // 나중에 실제 퀘스트 시스템 연결
-                break;
-
-            case PlazaNPC.NPCType.Stage:
-
-                Debug.Log("스테이지 진입하기 버튼 클릭");
-
-                // 나중에 실제 스테이지 진입 시스템 연결
-                break;
-        }
+        ActionRequested?.Invoke(currentNpcType);
     }
 
     /// <summary>

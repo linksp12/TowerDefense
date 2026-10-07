@@ -1,10 +1,10 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using LastOfTheTower.Progression;
 
-// 개인 테스트씬에만 연결한다. 빌드 목록을 바꾸지 않고 Editor에서 출전 흐름을 검증한다.
+// 기존 컴포넌트/Inspector 연결을 유지하며 선택한 전장으로 런타임 출전한다.
 public class StageSelectionTestDeployment : MonoBehaviour
 {
     [SerializeField] private StageSelectionMarker marker;
@@ -13,6 +13,17 @@ public class StageSelectionTestDeployment : MonoBehaviour
     [SerializeField] private TextMeshProUGUI deployLabel;
     [SerializeField] private TextMeshProUGUI statusLabel;
     [SerializeField] private string battleScenePath;
+    [SerializeField] private string stageId = StageIds.StageOne;
+    [SerializeField] private StageSelectionNavigation navigation;
+
+    private bool unlocked = true;
+    private IStageProgressStorage progressStorage;
+
+    // 기존 저장 키를 건드리지 않는 검증과 명시적 저장소 연결에 사용한다.
+    public void UseStorage(IStageProgressStorage storage)
+    {
+        progressStorage = storage ?? throw new ArgumentNullException(nameof(storage));
+    }
 
     public bool IsDeploying { get; private set; }
 
@@ -28,15 +39,9 @@ public class StageSelectionTestDeployment : MonoBehaviour
         }
 
         deployButton.onClick.AddListener(OnDeployClicked);
-#if UNITY_EDITOR
-        deployButton.interactable = true;
-        deployLabel.text = "출전";
-        statusLabel.text = "준비가 되었다면 전장으로 출전하세요.";
-#else
-        deployButton.interactable = false;
-        deployLabel.text = "출전 준비 중";
-        statusLabel.text = "출전 테스트는 Unity Editor에서 진행할 수 있습니다.";
-#endif
+        var progress = new StageProgressService(progressStorage ?? new PlayerPrefsStageProgressStorage());
+        progress.Load();
+        SetAvailability(StageIds.IsUnlocked(progress, stageId));
     }
 
     private void OnDisable()
@@ -50,67 +55,65 @@ public class StageSelectionTestDeployment : MonoBehaviour
         TryDeploy();
     }
 
+    public void SetAvailability(bool value)
+    {
+        unlocked = value;
+        if (deployButton == null || deployLabel == null || statusLabel == null)
+            return;
+        deployButton.interactable = unlocked && !IsDeploying;
+        deployLabel.text = IsDeploying ? "입장 중..." : unlocked ? "출전" : "잠김";
+        statusLabel.text = IsDeploying ? "전장을 준비하고 있습니다." : unlocked ?
+            "준비가 되었다면 전장으로 출전하세요." : "이전 스테이지를 먼저 클리어하세요.";
+    }
+
     public bool TryDeploy()
     {
-        if (!Application.isPlaying || IsDeploying || deployButton == null ||
+        if (!Application.isPlaying || IsDeploying || SceneLoadingScreen.IsLoading || !unlocked || deployButton == null ||
+            deployLabel == null || statusLabel == null ||
             !deployButton.IsInteractable() || marker == null || !marker.IsSelected ||
             details == null || !details.gameObject.activeInHierarchy || details.IsAnimating)
             return false;
 
-#if UNITY_EDITOR
-        if (UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(battleScenePath) == null)
+        // 클릭 직전에도 저장 기록을 다시 확인해 표시 상태만으로 잠금을 우회하지 못하게 한다.
+        var progress = new StageProgressService(progressStorage ?? new PlayerPrefsStageProgressStorage());
+        progress.Load();
+        if (!StageIds.IsUnlocked(progress, stageId))
+        {
+            SetAvailability(false);
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(battleScenePath) ||
+            !Application.CanStreamedLevelBeLoaded(battleScenePath))
         {
             statusLabel.text = "전장을 찾을 수 없습니다. 씬 연결을 확인해주세요.";
             return false;
         }
+
+        if (navigation != null && !navigation.TryBeginTransition())
+            return false;
 
         IsDeploying = true;
         details.SetTransitioning(true);
         deployButton.interactable = false;
         deployLabel.text = "입장 중...";
         statusLabel.text = "전장을 준비하고 있습니다.";
-        StartCoroutine(LoadBattleScene());
-        return true;
-#else
+        if (SceneLoadingScreen.TryLoad(battleScenePath, "전장을 준비하고 있습니다", RestoreAfterLoadFailure))
+            return true;
+        RestoreAfterLoadFailure();
         return false;
-#endif
     }
 
-#if UNITY_EDITOR
-    private IEnumerator LoadBattleScene()
+    private void RestoreAfterLoadFailure()
     {
-        // 한 프레임 동안 입장 표시를 그린다. 이후 버튼/ESC/배경 닫기는 잠겨 있다.
-        yield return null;
-
-        float previousTimeScale = Time.timeScale;
-        bool previousAudioPause = AudioListener.pause;
-        AsyncOperation operation = null;
-        try
-        {
-            Time.timeScale = 1f;
-            AudioListener.pause = false;
-            operation = UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
-                battleScenePath, new LoadSceneParameters(LoadSceneMode.Single));
-        }
-        catch (Exception exception)
-        {
-            Debug.LogException(exception, this);
-        }
-
-        if (operation == null)
-        {
-            Time.timeScale = previousTimeScale;
-            AudioListener.pause = previousAudioPause;
-            IsDeploying = false;
-            details.SetTransitioning(false);
-            deployButton.interactable = true;
-            deployLabel.text = "출전";
-            statusLabel.text = "전장에 입장하지 못했습니다. 다시 시도해주세요.";
-            yield break;
-        }
-
-        while (!operation.isDone)
-            yield return null;
+        if (this == null)
+            return;
+        IsDeploying = false;
+        if (navigation != null)
+            navigation.CancelTransition();
+        details.SetTransitioning(false);
+        deployButton.interactable = unlocked;
+        deployLabel.text = "출전";
+        statusLabel.text = "전장에 입장하지 못했습니다. 다시 시도해주세요.";
     }
-#endif
 }

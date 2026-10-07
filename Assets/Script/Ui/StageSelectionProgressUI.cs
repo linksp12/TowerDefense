@@ -11,6 +11,8 @@ public class StageSelectionProgressUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI detailStatus;
     [SerializeField] private UnityEngine.UI.Image detailStatusSurface;
     [SerializeField] private UnityEngine.UI.Image detailStatusIcon;
+    [SerializeField] private StageSelectionTestDeployment deployment;
+    [SerializeField] private string lockedMessage = "이전 스테이지 클리어 필요";
 
     private void OnEnable()
     {
@@ -35,9 +37,13 @@ public class StageSelectionProgressUI : MonoBehaviour
 
         bool known = progress != null && progress.CanWrite && StageIds.IsValid(stageId);
         bool cleared = known && progress.IsCleared(stageId);
+        bool unlocked = StageIds.IsUnlocked(progress, stageId);
         marker.SetProgressState(known, cleared);
+        marker.SetAvailability(unlocked, known ? lockedMessage : "기록 확인 불가");
+        if (deployment != null)
+            deployment.SetAvailability(unlocked);
         clearBadge.SetActive(cleared);
-        detailStatus.text = !known ? "기록 확인 불가" : cleared ? "클리어 완료" : "미클리어";
+        detailStatus.text = !known ? "기록 확인 불가" : !unlocked ? "잠김" : cleared ? "클리어 완료" : "미클리어";
         detailStatus.color = !known
             ? new Color32(255, 209, 133, 255)
             : cleared ? new Color32(172, 233, 193, 255) : new Color32(193, 203, 217, 255);

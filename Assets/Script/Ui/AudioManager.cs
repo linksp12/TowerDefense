@@ -152,6 +152,11 @@ public class AudioManager : MonoBehaviour
                 PlayBGM(storyBGM);
                 break;
 
+            case "PlazaScene":
+                // 광장에서는 이전 씬의 BGM을 이어서 재생하지 않는다.
+                StopBGM();
+                break;
+
             case "Stage1Scene":
             case "Stage2Scene":
             case "Stage3Scene":
