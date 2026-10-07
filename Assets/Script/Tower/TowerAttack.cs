@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerAttack : MonoBehaviour
@@ -28,11 +29,106 @@ public class TowerAttack : MonoBehaviour
 
     private float attackTimer = 0f;
 
+    // 스킬 등 외부 효과가 거는 공격 속도 배율입니다. 쿨타임 값(연구 보정 포함)은 그대로 두고
+    // 타이머가 흐르는 속도만 바꾸므로 능력치 UI와 연구 보정에 영향을 주지 않습니다.
+    private static readonly List<TowerAttack> activeTowers = new List<TowerAttack>();
+    public static IReadOnlyList<TowerAttack> ActiveTowers => activeTowers;
+    private readonly TowerAttackSpeedBuffs speedBuffs = new TowerAttackSpeedBuffs();
+    private readonly Dictionary<string, GameObject> buffMarkers = new Dictionary<string, GameObject>();
+    private readonly List<string> expiredMarkers = new List<string>();
+    public float CurrentAttackSpeedMultiplier => speedBuffs.Tick(Time.time);
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetTowerRegistry() => activeTowers.Clear();
+
+    private void OnEnable()
+    {
+        if (!activeTowers.Contains(this)) activeTowers.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        activeTowers.Remove(this);
+        speedBuffs.Clear();
+        foreach (GameObject marker in buffMarkers.Values)
+            if (marker != null) Destroy(marker);
+        buffMarkers.Clear();
+    }
+
+    // Different IDs add their bonuses; sources of the same ID share one non-stacking group.
+    public void ApplyAttackSpeedBuff(string buffId, object source, float bonus, float duration,
+        GameObject markerPrefab = null, float markerHeight = 0.8f)
+    {
+        if (!isActiveAndEnabled || string.IsNullOrWhiteSpace(buffId) || source == null ||
+            duration <= 0f || bonus <= 0f || float.IsNaN(bonus) || float.IsInfinity(bonus)) return;
+        speedBuffs.Set(buffId, source, bonus, Time.time + duration, Time.time);
+        if (!speedBuffs.ContainsGroup(buffId) || markerPrefab == null) return;
+        if (buffMarkers.TryGetValue(buffId, out GameObject existing) && existing != null) return;
+        GameObject marker = Instantiate(markerPrefab, transform);
+        Vector3 scale = transform.lossyScale;
+        Vector3 prefabScale = markerPrefab.transform.localScale;
+        marker.transform.localScale = new Vector3(
+            prefabScale.x / Mathf.Max(0.0001f, Mathf.Abs(scale.x)),
+            prefabScale.y / Mathf.Max(0.0001f, Mathf.Abs(scale.y)), prefabScale.z);
+        marker.transform.position = transform.position + Vector3.up * markerHeight;
+        marker.transform.rotation = Quaternion.identity;
+        SpriteRenderer renderer = marker.GetComponentInChildren<SpriteRenderer>();
+        if (renderer != null)
+        {
+            renderer.sortingLayerID = SortingLayer.NameToID("Effects");
+            renderer.sortingOrder = 100;
+        }
+        buffMarkers[buffId] = marker;
+    }
+
+    public void RemoveAttackSpeedBuff(object source)
+    {
+        speedBuffs.Remove(source);
+        RefreshBuffMarkers();
+    }
+
+    private void RefreshBuffMarkers()
+    {
+        expiredMarkers.Clear();
+        foreach (var entry in buffMarkers)
+            if (!speedBuffs.ContainsGroup(entry.Key)) expiredMarkers.Add(entry.Key);
+        foreach (string key in expiredMarkers)
+        {
+            if (buffMarkers[key] != null) Destroy(buffMarkers[key]);
+            buffMarkers.Remove(key);
+        }
+    }
+
+    // Compatibility entry point: one legacy group, independent of named skill buffs.
+    public void ApplySpeedBuff(float multiplier, float duration, GameObject marker = null)
+    {
+        if (multiplier <= 0f || duration <= 0f)
+        {
+            if (marker != null)
+                Destroy(marker);
+            return;
+        }
+
+        ApplyAttackSpeedBuff("legacy_speed", this, multiplier - 1f, duration);
+        if (marker != null)
+        {
+            if (buffMarkers.TryGetValue("legacy_speed", out GameObject previous) && previous != null)
+                Destroy(previous);
+            buffMarkers["legacy_speed"] = marker;
+        }
+    }
+
     // 프리팹을 직접 참조하는 UI/건설 코드도 데이터 에셋의 기본값을 사용할 수 있도록 제공합니다.
     public int BuildCost => towerData != null ? towerData.buildCost : 0;
-    public int BaseDamage => towerData != null ? towerData.baseStats.damage : damage;
-    public float BaseAttackCooldown => towerData != null ? towerData.baseStats.attackCooldown : attackCooldown;
-    public float BaseAttackRange => towerData != null ? towerData.baseStats.attackRange : attackRange;
+    public int BaseDamage => towerData != null
+        ? ResearchStatResolver.GetTowerDamage(towerData.id, towerData.baseStats.damage)
+        : damage;
+    public float BaseAttackCooldown => towerData != null
+        ? ResearchStatResolver.GetTowerAttackCooldown(towerData.id, towerData.baseStats.attackCooldown)
+        : attackCooldown;
+    public float BaseAttackRange => towerData != null
+        ? ResearchStatResolver.GetTowerAttackRange(towerData.id, towerData.baseStats.attackRange)
+        : attackRange;
 
     public string UpgradeRouteSummary
     {
@@ -67,15 +163,17 @@ public class TowerAttack : MonoBehaviour
             return;
         }
 
-        damage = towerData.baseStats.damage;
-        attackCooldown = towerData.baseStats.attackCooldown;
-        attackRange = towerData.baseStats.attackRange;
+        ApplyGrowthToCombatStats(
+            towerData.baseStats.damage,
+            towerData.baseStats.attackCooldown,
+            towerData.baseStats.attackRange);
         projectileEffects = towerData.baseProjectileEffects;
     }
 
     private void Update()
     {
-        attackTimer += Time.deltaTime;
+        attackTimer += Time.deltaTime * CurrentAttackSpeedMultiplier;
+        RefreshBuffMarkers();
 
         GameObject target = FindNearestMonster();
 
@@ -232,9 +330,7 @@ public class TowerAttack : MonoBehaviour
         GameObject newArrowPrefab,
         TowerData.ProjectileEffectStats newProjectileEffects)
     {
-        damage = newDamage;
-        attackCooldown = newCooldown;
-        attackRange = newRange;
+        ApplyGrowthToCombatStats(newDamage, newCooldown, newRange);
         projectileEffects = newProjectileEffects;
 
         if (newArrowPrefab != null)
@@ -250,5 +346,13 @@ public class TowerAttack : MonoBehaviour
             " / 사거리: " +
             attackRange
         );
+    }
+
+    private void ApplyGrowthToCombatStats(int baseDamage, float baseCooldown, float baseRange)
+    {
+        string towerId = towerData != null ? towerData.id : string.Empty;
+        damage = ResearchStatResolver.GetTowerDamage(towerId, baseDamage);
+        attackCooldown = ResearchStatResolver.GetTowerAttackCooldown(towerId, baseCooldown);
+        attackRange = ResearchStatResolver.GetTowerAttackRange(towerId, baseRange);
     }
 }

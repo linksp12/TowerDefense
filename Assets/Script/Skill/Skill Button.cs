@@ -28,7 +28,6 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Range(0f, 1f)]
     public float skillSoundVolume = 0.35f;
 
-    private AudioSource audioSource;
 
     [Header("애니메이션")]
     public float punchScale = 1.2f;
@@ -61,1367 +60,173 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Min(0f)]
     public float tooltipDelay = 0.15f;
 
-    private bool wasOnCooldown = false;
-
-    private Transform animatedTransform;
-    private Vector3 originalScale;
-    private Coroutine scaleAnimation;
-
+    private bool wasOnCooldown;
+    private bool pointerInside;
     private Coroutine tooltipShowCoroutine;
-    private bool pointerInside = false;
-
-    // 중앙 쿨타임 안내
-    private static TextMeshProUGUI centralCooldownMessage;
-    private static Coroutine centralMessageCoroutine;
-    private static SkillButton centralMessageOwner;
-
-    // 공용 툴팁
-    private static GameObject tooltipObject;
-    private static RectTransform tooltipRect;
-    private static TextMeshProUGUI tooltipText;
-    private static CanvasGroup tooltipCanvasGroup;
-    private static SkillButton tooltipOwner;
-
     private RectTransform rectTransform;
     private Canvas parentCanvas;
-
-
-    // =========================================================
-    // Awake
-    // =========================================================
+    private SkillData displayedSkill;
+    private SkillTooltipView tooltip;
+    private SkillButtonFeedback feedback;
 
     private void Awake()
     {
-        animatedTransform =
-            iconImage != null
-                ? iconImage.transform
-                : transform;
-
-        originalScale =
-            animatedTransform.localScale;
-
-        rectTransform =
-            GetComponent<RectTransform>();
-
-        parentCanvas =
-            GetComponentInParent<Canvas>();
+        rectTransform = GetComponent<RectTransform>();
+        parentCanvas = GetComponentInParent<Canvas>();
+        feedback = new SkillButtonFeedback(this, iconImage != null ? iconImage.transform : transform);
     }
-
-
-    // =========================================================
-    // Start
-    // =========================================================
 
     private void Start()
     {
-        audioSource =
-            GetComponent<AudioSource>();
-
-        if (audioSource == null)
-        {
-            audioSource =
-                gameObject.AddComponent<AudioSource>();
-        }
-
-        audioSource.playOnAwake = false;
-
-        // -----------------------------------------------------
-        // 클릭 방해 방지
-        // -----------------------------------------------------
-
-        if (iconImage != null)
-            iconImage.raycastTarget = false;
-
+        if (iconImage != null) iconImage.raycastTarget = false;
         if (cooldownOverlay != null)
+        {
             cooldownOverlay.raycastTarget = false;
-
-        if (cooldownText != null)
-            cooldownText.raycastTarget = false;
-
-
-        // -----------------------------------------------------
-        // Button 자동 연결
-        // -----------------------------------------------------
-
-        if (button == null)
-        {
-            button =
-                GetComponent<Button>();
-        }
-
-        if (button != null)
-        {
-            button.onClick.AddListener(
-                OnSkillButtonClick
-            );
-        }
-        else
-        {
-            Debug.LogWarning(
-                gameObject.name +
-                " : Button 컴포넌트를 찾을 수 없습니다."
-            );
-        }
-
-
-        // -----------------------------------------------------
-        // 쿨타임 UI
-        // -----------------------------------------------------
-
-        if (cooldownOverlay != null)
-        {
             cooldownOverlay.fillAmount = 0f;
         }
-
         if (cooldownText != null)
         {
-            cooldownText.gameObject.SetActive(
-                false
-            );
+            cooldownText.raycastTarget = false;
+            cooldownText.gameObject.SetActive(false);
         }
-
-
-        // -----------------------------------------------------
-        // 스킬 아이콘 적용
-        // -----------------------------------------------------
-
-        ApplySkillIcon();
-
-
-        // 시작할 때 툴팁 강제 숨김
-        HideTooltip();
+        if (button == null) button = GetComponent<Button>();
+        if (button != null) button.onClick.AddListener(OnSkillButtonClick);
+        else Debug.LogWarning($"{name}: Button 컴포넌트를 찾을 수 없습니다.", this);
+        ApplySkillIcon(ResolveSkillData());
     }
-
-
-    // =========================================================
-    // Update
-    // =========================================================
 
     private void Update()
     {
-        UpdateCooldownUI();
-
-        ApplySkillIcon();
+        SkillData skill = ResolveSkillData();
+        if (skill == null) return;
+        if (displayedSkill != skill) ApplySkillIcon(skill);
+        UpdateCooldownUI(skill);
     }
 
-
-    // =========================================================
-    // Pointer Enter
-    // =========================================================
-
-    public void OnPointerEnter(
-        PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!useTooltip)
-            return;
-
+        if (!useTooltip) return;
         pointerInside = true;
-
-        if (tooltipShowCoroutine != null)
-        {
-            StopCoroutine(
-                tooltipShowCoroutine
-            );
-        }
-
-        tooltipShowCoroutine =
-            StartCoroutine(
-                ShowTooltipDelayed()
-            );
+        CancelTooltipDelay();
+        if (tooltipDelay <= 0f) ShowTooltip();
+        else tooltipShowCoroutine = StartCoroutine(ShowTooltipDelayed());
     }
 
-
-    // =========================================================
-    // Pointer Exit
-    // =========================================================
-
-    public void OnPointerExit(
-        PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
         pointerInside = false;
-
-        if (tooltipShowCoroutine != null)
-        {
-            StopCoroutine(
-                tooltipShowCoroutine
-            );
-
-            tooltipShowCoroutine = null;
-        }
-
-        HideTooltip();
+        CancelTooltipDelay();
+        tooltip?.Hide(this);
     }
-
-
-    // =========================================================
-    // 툴팁 표시 지연
-    // =========================================================
 
     private IEnumerator ShowTooltipDelayed()
     {
-        if (tooltipDelay > 0f)
-        {
-            yield return new WaitForSecondsRealtime(
-                tooltipDelay
-            );
-        }
-
+        yield return new WaitForSecondsRealtime(tooltipDelay);
         tooltipShowCoroutine = null;
-
-        if (!pointerInside)
-            yield break;
-
-        ShowTooltip();
+        if (pointerInside && useTooltip) ShowTooltip();
     }
 
-
-    // =========================================================
-    // ★ 스킬 버튼 클릭
-    // =========================================================
-    // 버튼을 누르면 바로 스킬을 발동하지 않고
-    // 마법진 조준을 시작합니다.
-    // =========================================================
+    private void CancelTooltipDelay()
+    {
+        if (tooltipShowCoroutine != null) StopCoroutine(tooltipShowCoroutine);
+        tooltipShowCoroutine = null;
+    }
 
     private void OnSkillButtonClick()
     {
-        if (SkillManager.Instance == null)
-            return;
-
-        SkillData resolvedSkill = ResolveSkillData();
-        if (resolvedSkill == null)
-            return;
-
-
-        if (SkillAimController.Instance == null)
-        {
-            Debug.LogWarning(
-                "SkillAimController를 찾을 수 없습니다."
-            );
-
-            return;
-        }
-
-
-        // -----------------------------------------------------
-        // 쿨타임 확인
-        // -----------------------------------------------------
-
-        if (!SkillManager.Instance.CanUseSkill(
-                resolvedSkill.SkillId))
-        {
-            ShowCentralCooldownMessage();
-            return;
-        }
-
-        if (
-            SkillAimController.Instance.IsAiming() &&
-            SkillAimController.Instance.GetSelectedSkillName() == resolvedSkill.SkillId
-        )
-        {
-            SkillAimController.Instance.CancelAiming();
-            HideTooltip();
-            return;
-        }
-
-
-        // -----------------------------------------------------
-        // 마법진 조준 시작
-        // -----------------------------------------------------
-
-        SkillAimController.Instance.StartAiming(
-            resolvedSkill.SkillId
-        );
-
-
-        // -----------------------------------------------------
-        // 버튼 애니메이션
-        // -----------------------------------------------------
-
-        PlayScaleAnimation(
-            PunchAnim()
-        );
-
-
-        // -----------------------------------------------------
-        // 툴팁 숨김
-        // -----------------------------------------------------
-
-        HideTooltip();
-
-
-        Debug.Log(
-            "스킬 선택됨 : " +
-            skillName
-        );
-    }
-
-
-    // =========================================================
-    // 스킬 아이콘 적용
-    // =========================================================
-
-    private void ApplySkillIcon()
-    {
-        if (iconImage == null)
-            return;
-
+        SkillManager manager = SkillManager.Instance;
+        SkillAimController aim = SkillAimController.Instance;
         SkillData skill = ResolveSkillData();
-        if (skill == null)
-            return;
-
-
-        if (
-            skill.Icon != null &&
-            iconImage.sprite != skill.Icon
-        )
+        if (manager == null || skill == null) return;
+        if (aim == null)
         {
-            iconImage.sprite =
-                skill.Icon;
+            Debug.LogWarning("SkillAimController를 찾을 수 없습니다.", this);
+            return;
         }
+        if (!manager.CanUseSkill(skill.SkillId))
+        {
+            feedback.ShowCooldown(parentCanvas, cooldownMessageFont);
+            return;
+        }
+        if (aim.IsAiming() && aim.GetSelectedSkillName() == skill.SkillId) aim.CancelAiming();
+        else
+        {
+            aim.StartAiming(skill.SkillId);
+            feedback.Punch(punchScale, punchDuration);
+        }
+        CancelTooltipDelay();
+        tooltip?.Hide(this);
     }
 
     private SkillData ResolveSkillData()
     {
-        if (skillData != null)
-            return skillData;
-
-        if (SkillManager.Instance == null)
-            return null;
-
-        SkillManager.Instance.TryGetSkill(skillName, out skillData);
+        if (skillData != null) return skillData;
+        SkillManager manager = SkillManager.Instance;
+        if (manager != null) manager.TryGetSkill(skillName, out skillData);
         return skillData;
     }
 
-
-    // =========================================================
-    // 쿨타임 UI
-    // =========================================================
-
-    private void UpdateCooldownUI()
+    private void ApplySkillIcon(SkillData skill)
     {
-        if (SkillManager.Instance == null)
-            return;
+        if (skill == null) return;
+        displayedSkill = skill;
+        if (iconImage != null && skill.Icon != null && iconImage.sprite != skill.Icon)
+            iconImage.sprite = skill.Icon;
+    }
 
-        SkillData resolvedSkill = ResolveSkillData();
-        if (resolvedSkill == null)
-            return;
-
-
-        bool onCooldown =
-            !SkillManager.Instance.CanUseSkill(
-                resolvedSkill.SkillId
-            );
-
-
-        float remaining =
-            SkillManager.Instance.GetCooldownRemaining(
-                resolvedSkill.SkillId
-            );
-
-
-        float normalized =
-            SkillManager.Instance.GetCooldownNormalized(
-                resolvedSkill.SkillId
-            );
-
-
+    private void UpdateCooldownUI(SkillData skill)
+    {
+        SkillManager manager = SkillManager.Instance;
+        if (manager == null) return;
+        // 남은 시간을 한 번 조회하여 쿨타임 여부와 진행률을 함께 계산합니다.
+        float remaining = manager.GetCooldownRemaining(skill.SkillId);
+        bool onCooldown = remaining > 0f;
         if (cooldownOverlay != null)
+            cooldownOverlay.fillAmount = skill.Cooldown > 0f ? Mathf.Clamp01(remaining / skill.Cooldown) : 0f;
+        if (cooldownText != null)
         {
-            cooldownOverlay.fillAmount =
-                normalized;
-        }
-
-
-        if (onCooldown)
-        {
-            if (cooldownText != null)
+            if (cooldownText.gameObject.activeSelf != onCooldown) cooldownText.gameObject.SetActive(onCooldown);
+            if (onCooldown)
             {
-                cooldownText.text =
-                    remaining > 1f
-                        ? Mathf.CeilToInt(
-                            remaining
-                        ).ToString()
-                        : remaining.ToString(
-                            "F1"
-                        );
-
-
-                cooldownText.gameObject.SetActive(
-                    true
-                );
-            }
-
-
-            wasOnCooldown = true;
-        }
-        else
-        {
-            if (wasOnCooldown)
-            {
-                wasOnCooldown = false;
-
-                PlayScaleAnimation(
-                    ReadyAnim()
-                );
-            }
-
-
-            if (cooldownOverlay != null)
-            {
-                cooldownOverlay.fillAmount =
-                    0f;
-            }
-
-
-            if (cooldownText != null)
-            {
-                cooldownText.gameObject.SetActive(
-                    false
-                );
+                string label = remaining > 1f ? Mathf.CeilToInt(remaining).ToString() : remaining.ToString("F1");
+                if (cooldownText.text != label) cooldownText.text = label;
             }
         }
+        if (wasOnCooldown && !onCooldown) feedback.Ready();
+        wasOnCooldown = onCooldown;
     }
-
-
-    // =========================================================
-    // 클릭 애니메이션
-    // =========================================================
-
-    private IEnumerator PunchAnim()
-    {
-        if (animatedTransform == null)
-            yield break;
-
-
-        Vector3 big =
-            originalScale *
-            punchScale;
-
-
-        float half =
-            Mathf.Max(
-                0.001f,
-                punchDuration * 0.5f
-            );
-
-
-        for (
-            float t = 0f;
-            t < half;
-            t += Time.deltaTime
-        )
-        {
-            animatedTransform.localScale =
-                Vector3.Lerp(
-                    originalScale,
-                    big,
-                    t / half
-                );
-
-            yield return null;
-        }
-
-
-        for (
-            float t = 0f;
-            t < half;
-            t += Time.deltaTime
-        )
-        {
-            animatedTransform.localScale =
-                Vector3.Lerp(
-                    big,
-                    originalScale,
-                    t / half
-                );
-
-            yield return null;
-        }
-
-
-        animatedTransform.localScale =
-            originalScale;
-
-        scaleAnimation = null;
-    }
-
-
-    // =========================================================
-    // 쿨타임 종료 애니메이션
-    // =========================================================
-
-    private IEnumerator ReadyAnim()
-    {
-        if (animatedTransform == null)
-            yield break;
-
-
-        Vector3 big =
-            originalScale * 1.15f;
-
-
-        float dur = 0.2f;
-
-
-        for (
-            float t = 0f;
-            t < dur;
-            t += Time.deltaTime
-        )
-        {
-            animatedTransform.localScale =
-                Vector3.Lerp(
-                    originalScale,
-                    big,
-                    t / dur
-                );
-
-            yield return null;
-        }
-
-
-        for (
-            float t = 0f;
-            t < dur;
-            t += Time.deltaTime
-        )
-        {
-            animatedTransform.localScale =
-                Vector3.Lerp(
-                    big,
-                    originalScale,
-                    t / dur
-                );
-
-            yield return null;
-        }
-
-
-        animatedTransform.localScale =
-            originalScale;
-
-        scaleAnimation = null;
-    }
-
-
-    private void PlayScaleAnimation(
-        IEnumerator animation
-    )
-    {
-        if (animatedTransform == null)
-            return;
-
-
-        if (scaleAnimation != null)
-        {
-            StopCoroutine(
-                scaleAnimation
-            );
-        }
-
-
-        animatedTransform.localScale =
-            originalScale;
-
-
-        scaleAnimation =
-            StartCoroutine(animation);
-    }
-
-
-    // =========================================================
-    // 중앙 쿨타임 안내
-    // =========================================================
-
-    private void ShowCentralCooldownMessage()
-    {
-        EnsureCentralCooldownMessage();
-
-
-        if (centralCooldownMessage == null)
-            return;
-
-
-        if (
-            centralMessageOwner != null &&
-            centralMessageCoroutine != null
-        )
-        {
-            centralMessageOwner.StopCoroutine(
-                centralMessageCoroutine
-            );
-        }
-
-
-        centralCooldownMessage.text =
-            "스킬 쿨타임입니다";
-
-
-        centralCooldownMessage.gameObject.SetActive(
-            true
-        );
-
-
-        centralCooldownMessage.transform.SetAsLastSibling();
-
-
-        centralMessageOwner =
-            this;
-
-
-        centralMessageCoroutine =
-            StartCoroutine(
-                HideCentralCooldownMessage()
-            );
-    }
-
-
-    private void EnsureCentralCooldownMessage()
-    {
-        if (centralCooldownMessage != null)
-            return;
-
-
-        Canvas canvas =
-            GetComponentInParent<Canvas>();
-
-
-        if (canvas == null)
-            return;
-
-
-        GameObject messageObject =
-            new GameObject(
-                "SkillCooldownMessage",
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(TextMeshProUGUI)
-            );
-
-
-        messageObject.transform.SetParent(
-            canvas.transform,
-            false
-        );
-
-
-        RectTransform messageRect =
-            messageObject.GetComponent<RectTransform>();
-
-
-        messageRect.anchorMin =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        messageRect.anchorMax =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        messageRect.pivot =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        messageRect.anchoredPosition =
-            Vector2.zero;
-
-
-        messageRect.sizeDelta =
-            new Vector2(
-                700f,
-                100f
-            );
-
-
-        centralCooldownMessage =
-            messageObject.GetComponent<
-                TextMeshProUGUI
-            >();
-
-
-        centralCooldownMessage.font =
-            cooldownMessageFont != null
-                ? cooldownMessageFont
-                : TMP_Settings.defaultFontAsset;
-
-
-        centralCooldownMessage.fontSize =
-            42f;
-
-
-        centralCooldownMessage.alignment =
-            TextAlignmentOptions.Center;
-
-
-        centralCooldownMessage.color =
-            new Color(
-                1f,
-                0.82f,
-                0.25f,
-                1f
-            );
-
-
-        centralCooldownMessage.outlineColor =
-            Color.black;
-
-
-        centralCooldownMessage.outlineWidth =
-            0.22f;
-
-
-        centralCooldownMessage.overflowMode =
-            TextOverflowModes.Overflow;
-
-
-        centralCooldownMessage.raycastTarget =
-            false;
-
-
-        centralCooldownMessage.gameObject.SetActive(
-            false
-        );
-    }
-
-
-    private IEnumerator HideCentralCooldownMessage()
-    {
-        yield return new WaitForSecondsRealtime(
-            1.1f
-        );
-
-
-        if (centralCooldownMessage != null)
-        {
-            centralCooldownMessage.gameObject.SetActive(
-                false
-            );
-        }
-
-
-        centralMessageCoroutine = null;
-        centralMessageOwner = null;
-    }
-
-
-    // =========================================================
-    // 툴팁 생성
-    // =========================================================
-
-    private void EnsureTooltip()
-    {
-        if (tooltipObject != null)
-        {
-            if (
-                parentCanvas != null &&
-                tooltipObject.transform.parent !=
-                parentCanvas.transform
-            )
-            {
-                Destroy(
-                    tooltipObject
-                );
-
-                tooltipObject = null;
-                tooltipRect = null;
-                tooltipText = null;
-                tooltipCanvasGroup = null;
-                tooltipOwner = null;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-
-        if (parentCanvas == null)
-        {
-            parentCanvas =
-                GetComponentInParent<Canvas>();
-        }
-
-
-        if (parentCanvas == null)
-        {
-            Debug.LogWarning(
-                gameObject.name +
-                " : Canvas를 찾을 수 없습니다."
-            );
-
-            return;
-        }
-
-
-        tooltipObject =
-            new GameObject(
-                "SkillTooltip",
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(Image),
-                typeof(CanvasGroup)
-            );
-
-
-        tooltipObject.transform.SetParent(
-            parentCanvas.transform,
-            false
-        );
-
-
-        tooltipRect =
-            tooltipObject.GetComponent<
-                RectTransform
-            >();
-
-
-        tooltipRect.anchorMin =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        tooltipRect.anchorMax =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        tooltipRect.pivot =
-            new Vector2(
-                0.5f,
-                0.5f
-            );
-
-
-        tooltipRect.sizeDelta =
-            tooltipSize;
-
-
-        Image background =
-            tooltipObject.GetComponent<Image>();
-
-
-        background.color =
-            tooltipBackgroundColor;
-
-
-        background.raycastTarget =
-            false;
-
-
-        if (tooltipBackground != null)
-        {
-            background.sprite =
-                tooltipBackground;
-
-
-            background.type =
-                Image.Type.Sliced;
-        }
-
-
-        tooltipCanvasGroup =
-            tooltipObject.GetComponent<
-                CanvasGroup
-            >();
-
-
-        tooltipCanvasGroup.alpha = 1f;
-        tooltipCanvasGroup.interactable = false;
-        tooltipCanvasGroup.blocksRaycasts = false;
-
-
-        GameObject textObject =
-            new GameObject(
-                "TooltipText",
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(TextMeshProUGUI)
-            );
-
-
-        textObject.transform.SetParent(
-            tooltipObject.transform,
-            false
-        );
-
-
-        RectTransform textRect =
-            textObject.GetComponent<
-                RectTransform
-            >();
-
-
-        textRect.anchorMin =
-            Vector2.zero;
-
-
-        textRect.anchorMax =
-            Vector2.one;
-
-
-        textRect.offsetMin =
-            new Vector2(
-                20f,
-                16f
-            );
-
-
-        textRect.offsetMax =
-            new Vector2(
-                -20f,
-                -16f
-            );
-
-
-        tooltipText =
-            textObject.GetComponent<
-                TextMeshProUGUI
-            >();
-
-
-        tooltipText.font = ResolveTooltipFont();
-
-
-        tooltipText.fontSize =
-            tooltipFontSize;
-
-
-        tooltipText.color =
-            tooltipTextColor;
-
-
-        tooltipText.alignment =
-            TextAlignmentOptions.TopLeft;
-
-
-        tooltipText.enableWordWrapping =
-            true;
-
-
-        tooltipText.enableAutoSizing =
-            false;
-
-
-        tooltipText.overflowMode =
-            TextOverflowModes.Overflow;
-
-
-        tooltipText.raycastTarget =
-            false;
-
-
-        tooltipText.alpha =
-            1f;
-
-
-        tooltipObject.SetActive(
-            false
-        );
-    }
-
-
-    // =========================================================
-    // 툴팁 표시
-    // =========================================================
 
     private void ShowTooltip()
     {
-        if (!useTooltip)
-            return;
-
-
-        if (SkillManager.Instance == null)
-            return;
-
-
+        if (!useTooltip || SkillManager.Instance == null) return;
         SkillData skill = ResolveSkillData();
-
-
-        if (skill == null)
+        if (skill == null) return;
+        if (parentCanvas == null) parentCanvas = GetComponentInParent<Canvas>();
+        tooltip = SkillTooltipView.Get(parentCanvas);
+        tooltip?.Show(this, rectTransform, SkillDescriptionFormatter.Format(skill), new SkillTooltipStyle
         {
-            Debug.LogWarning(
-                gameObject.name +
-                " : SkillData를 찾을 수 없습니다. " +
-                "skillName = " +
-                skillName
-            );
-
-            return;
-        }
-
-
-        EnsureTooltip();
-
-
-        if (
-            tooltipObject == null ||
-            tooltipRect == null ||
-            tooltipText == null
-        )
-        {
-            return;
-        }
-
-
-        tooltipText.text =
-            BuildTooltipText(skill);
-
-        // 공용 툴팁을 다른 스킬 버튼이 재사용해도 현재 버튼의 한글 글꼴을 적용한다.
-        tooltipText.font = ResolveTooltipFont();
-
-
-        tooltipText.color =
-            tooltipTextColor;
-
-
-        tooltipText.fontSize =
-            tooltipFontSize;
-
-
-        tooltipText.alpha =
-            1f;
-
-
-        tooltipRect.sizeDelta =
-            tooltipSize;
-
-
-        tooltipOwner =
-            this;
-
-
-        tooltipObject.SetActive(
-            true
-        );
-
-
-        tooltipObject.transform.SetAsLastSibling();
-
-
-        PositionTooltip();
+            Font = tooltipFont != null ? tooltipFont : cooldownMessageFont,
+            Background = tooltipBackground,
+            BackgroundColor = tooltipBackgroundColor,
+            TextColor = tooltipTextColor,
+            FontSize = tooltipFontSize,
+            Size = tooltipSize,
+            Margin = tooltipMargin
+        });
     }
-
-    private TMP_FontAsset ResolveTooltipFont()
-    {
-        if (tooltipFont != null)
-            return tooltipFont;
-
-        if (cooldownMessageFont != null)
-            return cooldownMessageFont;
-
-        return TMP_Settings.defaultFontAsset;
-    }
-
-
-    // =========================================================
-    // 툴팁 내용
-    // =========================================================
-
-    private string BuildTooltipText(
-        SkillData skill
-    )
-    {
-        string title =
-            skill.DisplayName;
-
-        string description = string.IsNullOrWhiteSpace(skill.Description)
-            ? "스킬 설명이 설정되지 않았습니다."
-            : skill.Description;
-
-        string details =
-            $"범위: {skill.Range:0.##}\n" +
-            $"재사용 대기시간: {skill.Cooldown:0.##}초";
-
-        if (skill.Damage > 0)
-            details = $"피해량: {skill.Damage}\n" + details;
-
-        if (skill.Duration > 0f)
-            details += $"\n지속 시간: {skill.Duration:0.##}초";
-
-        if (skill.MaxTargets > 0)
-            details += $"\n최대 대상 수: {skill.MaxTargets}";
-
-        if (skill.PeriodicDamage > 0)
-        {
-            details +=
-                $"\n지속 피해: {skill.PeriodicDamage}" +
-                $" / {skill.PeriodicInterval:0.##}초";
-        }
-
-        return
-            $"<size=28><b>{title}</b></size>\n\n" +
-            $"효과: {description}\n" +
-            details;
-    }
-
-
-    // =========================================================
-    // 툴팁 위치
-    // =========================================================
-
-    private void PositionTooltip()
-    {
-        if (
-            parentCanvas == null ||
-            tooltipRect == null ||
-            rectTransform == null
-        )
-        {
-            return;
-        }
-
-
-        RectTransform canvasRect =
-            parentCanvas.GetComponent<
-                RectTransform
-            >();
-
-
-        if (canvasRect == null)
-            return;
-
-
-        Camera uiCamera =
-            parentCanvas.renderMode ==
-            RenderMode.ScreenSpaceOverlay
-                ? null
-                : parentCanvas.worldCamera;
-
-
-        Vector3[] corners =
-            new Vector3[4];
-
-
-        rectTransform.GetWorldCorners(
-            corners
-        );
-
-
-        Vector3 topCenter =
-            (corners[1] + corners[2]) *
-            0.5f;
-
-
-        Vector3 bottomCenter =
-            (corners[0] + corners[3]) *
-            0.5f;
-
-
-        Vector2 topScreen =
-            RectTransformUtility.WorldToScreenPoint(
-                uiCamera,
-                topCenter
-            );
-
-
-        Vector2 bottomScreen =
-            RectTransformUtility.WorldToScreenPoint(
-                uiCamera,
-                bottomCenter
-            );
-
-
-        float tooltipWidth =
-            tooltipRect.rect.width;
-
-
-        float tooltipHeight =
-            tooltipRect.rect.height;
-
-
-        float screenX =
-            topScreen.x;
-
-
-        float screenY =
-            topScreen.y +
-            tooltipHeight * 0.5f +
-            tooltipMargin;
-
-
-        if (
-            topScreen.y +
-            tooltipHeight +
-            tooltipMargin >
-            Screen.height
-        )
-        {
-            screenY =
-                bottomScreen.y -
-                tooltipHeight * 0.5f -
-                tooltipMargin;
-        }
-
-
-        float halfWidth =
-            tooltipWidth * 0.5f;
-
-
-        screenX =
-            Mathf.Clamp(
-                screenX,
-                halfWidth +
-                tooltipMargin,
-                Screen.width -
-                halfWidth -
-                tooltipMargin
-            );
-
-
-        float halfHeight =
-            tooltipHeight * 0.5f;
-
-
-        screenY =
-            Mathf.Clamp(
-                screenY,
-                halfHeight +
-                tooltipMargin,
-                Screen.height -
-                halfHeight -
-                tooltipMargin
-            );
-
-
-        Vector2 finalScreenPoint =
-            new Vector2(
-                screenX,
-                screenY
-            );
-
-
-        if (
-            RectTransformUtility
-            .ScreenPointToLocalPointInRectangle(
-                canvasRect,
-                finalScreenPoint,
-                uiCamera,
-                out Vector2 localPoint
-            )
-        )
-        {
-            tooltipRect.anchoredPosition =
-                localPoint;
-        }
-    }
-
-
-    // =========================================================
-    // 툴팁 숨김
-    // =========================================================
-
-    private void HideTooltip()
-    {
-        if (
-            tooltipOwner != null &&
-            tooltipOwner != this
-        )
-        {
-            return;
-        }
-
-
-        if (tooltipObject != null)
-        {
-            tooltipObject.SetActive(
-                false
-            );
-        }
-
-
-        tooltipOwner = null;
-    }
-
-
-    // =========================================================
-    // Disable
-    // =========================================================
 
     private void OnDisable()
     {
         pointerInside = false;
-
-
-        if (tooltipShowCoroutine != null)
-        {
-            StopCoroutine(
-                tooltipShowCoroutine
-            );
-
-            tooltipShowCoroutine = null;
-        }
-
-
-        if (scaleAnimation != null)
-        {
-            StopCoroutine(
-                scaleAnimation
-            );
-        }
-
-
-        if (animatedTransform != null)
-        {
-            animatedTransform.localScale =
-                originalScale;
-        }
-
-
-        scaleAnimation = null;
-
-
-        HideTooltip();
-
-
-        if (centralMessageOwner == this)
-        {
-            if (centralCooldownMessage != null)
-            {
-                centralCooldownMessage.gameObject.SetActive(
-                    false
-                );
-            }
-
-
-            centralMessageCoroutine = null;
-            centralMessageOwner = null;
-        }
+        CancelTooltipDelay();
+        tooltip?.Hide(this);
+        feedback?.Cancel();
     }
-
-
-    // =========================================================
-    // Destroy
-    // =========================================================
 
     private void OnDestroy()
     {
-        if (tooltipOwner == this)
-        {
-            if (tooltipObject != null)
-            {
-                Destroy(
-                    tooltipObject
-                );
-            }
-
-
-            tooltipObject = null;
-            tooltipRect = null;
-            tooltipText = null;
-            tooltipCanvasGroup = null;
-            tooltipOwner = null;
-        }
+        if (button != null) button.onClick.RemoveListener(OnSkillButtonClick);
+        tooltip?.Hide(this);
+        feedback?.Cancel();
     }
 }

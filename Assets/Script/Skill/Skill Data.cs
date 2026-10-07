@@ -7,7 +7,9 @@ public enum SkillEffectType
     [InspectorName("얼음")]
     Ice,
     [InspectorName("번개")]
-    Lightning
+    Lightning,
+    [InspectorName("타워 가속")]
+    TowerHaste
 }
 
 [CreateAssetMenu(
@@ -53,6 +55,22 @@ public sealed class SkillData : ScriptableObject
     [Min(0.05f)]
     [SerializeField] private float periodicInterval = 0.5f;
 
+    [Header("타워 강화 (타워 가속 전용)")]
+    [InspectorName("공격 속도 증가율")]
+    [Tooltip("0.3이면 범위 안 타워의 공격 속도가 30% 빨라집니다. 지속 시간은 위의 '지속 시간'을 사용합니다.")]
+    [Min(0f)]
+    [SerializeField] private float attackSpeedBonus = 0.3f;
+    [InspectorName("타워 버프 표시 프리팹")]
+    [SerializeField] private GameObject buffMarkerPrefab;
+    [InspectorName("버프 표시 높이")]
+    [Tooltip("타워 중심에서 버프 표시까지의 높이(월드 단위)입니다.")]
+    [SerializeField] private float buffMarkerHeight = 0.8f;
+
+    [Tooltip("조준 이미지에서 실제 원 테두리 반경 / 이미지 반경입니다. 여백을 제외하고 범위를 맞춥니다.")]
+    [Range(0.1f, 1f)] [SerializeField] private float magicCircleRadiusFraction = 1f;
+    [Tooltip("지속 장판 이미지의 실제 원 테두리 반경 / 이미지 반경입니다.")]
+    [Range(0.1f, 1f)] [SerializeField] private float effectRadiusFraction = 1f;
+
     [Header("연출 및 사운드")]
     [InspectorName("마법진 이미지")]
     [SerializeField] private Sprite magicCircle;
@@ -79,6 +97,11 @@ public sealed class SkillData : ScriptableObject
     public int MaxTargets => maxTargets;
     public int PeriodicDamage => periodicDamage;
     public float PeriodicInterval => periodicInterval;
+    public float AttackSpeedBonus => attackSpeedBonus;
+    public GameObject BuffMarkerPrefab => buffMarkerPrefab;
+    public float BuffMarkerHeight => buffMarkerHeight;
+    public float MagicCircleRadiusFraction => magicCircleRadiusFraction;
+    public float EffectRadiusFraction => effectRadiusFraction;
     public Sprite MagicCircle => magicCircle;
     public GameObject EffectPrefab => effectPrefab;
     public float EffectScale => effectScale;
@@ -102,6 +125,9 @@ public sealed class SkillData : ScriptableObject
         cooldown = Mathf.Max(0f, cooldown);
         duration = Mathf.Max(0f, duration);
         periodicInterval = Mathf.Max(0.05f, periodicInterval);
+        attackSpeedBonus = Mathf.Max(0f, attackSpeedBonus);
+        magicCircleRadiusFraction = Mathf.Clamp(magicCircleRadiusFraction, 0.1f, 1f);
+        effectRadiusFraction = Mathf.Clamp(effectRadiusFraction, 0.1f, 1f);
         effectScale = Mathf.Max(0.01f, effectScale);
     }
 }
