@@ -2414,7 +2414,9 @@ MonoBehaviour:
   storyBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
+  plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}
   buttonClickSFX: {fileID: 8300000, guid: 4ef8efbd9f8a035419e614c08b3d90d8, type: 3}
+  npcInteractionSFX: {fileID: 8300000, guid: c213995af28bf00439531e525e85583a, type: 3}
 --- !u!4 &601917150
 Transform:
   m_ObjectHideFlags: 0
