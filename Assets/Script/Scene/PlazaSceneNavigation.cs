@@ -8,6 +8,7 @@ public class PlazaSceneNavigation : MonoBehaviour
     [SerializeField] private string stageSelectionScenePath = "Assets/Scenes/StageSelectionScene.unity";
     [SerializeField] private string researchScenePath = "Assets/Scenes/ResearchScene.unity";
     [SerializeField] private string questScenePath = "Assets/Scenes/Quest.unity";
+    [SerializeField] private QuestManager questManager;
 
     public bool IsTransitioning { get; private set; }
 
@@ -43,8 +44,8 @@ public class PlazaSceneNavigation : MonoBehaviour
                 scenePath = researchScenePath;
                 break;
             case PlazaNPC.NPCType.Quest:
-                scenePath = questScenePath;
-                break;
+                questManager.AcceptQuest("1"); //하드코딩
+                return;
             default:
                 return;
         }

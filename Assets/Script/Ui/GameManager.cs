@@ -191,6 +191,15 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
+        /*
+        switch (스테이지 ID)
+        {
+            case 1스테이지:
+                questManager.OnStageClear("1");
+            이하생략
+        }
+        
+        */
         BeginResultTransition(true);
     }
 
