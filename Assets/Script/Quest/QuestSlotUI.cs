@@ -13,24 +13,33 @@ public class QuestSlotUI : MonoBehaviour
     {
         currentQuestId = questId;
 
-        if (descriptionText != null && buttonText != null)
+        if (descriptionText != null)
         {
-            descriptionText.text = $"{description}";
-            buttonText.text = $"{state}";
+            descriptionText.text = description;
         }
 
-        if (rewardButton != null)
+        if (rewardButton != null && buttonText != null)
         {
-            rewardButton.gameObject.SetActive(state == QuestState.Completed);
+            if (state == QuestState.InProgress)
+            {
+                rewardButton.gameObject.SetActive(true);
+                rewardButton.interactable = false; 
+                buttonText.text = "진행중";
+            }
+            else if (state == QuestState.Completed)
+            {
+                rewardButton.gameObject.SetActive(true);
+                rewardButton.interactable = true;
+                buttonText.text = "보상받기";
+            }
         }
     }
 
     public void OnClickRewardButton()
     {
-        QuestManager manager = FindFirstObjectByType<QuestManager>();
-        if (manager != null)
+        if (QuestManager.Instance != null)
         {
-            manager.ClaimReward(currentQuestId);
+            QuestManager.Instance.ClaimReward(currentQuestId);
         }
     }
 }

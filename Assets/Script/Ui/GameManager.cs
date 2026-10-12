@@ -191,15 +191,18 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
-        /*
-        switch (스테이지 ID)
+        if (isGameEnded || isSceneTransitioning)
+            return;
+
+        string stageId =
+            LastOfTheTower.Progression.StageIds.FromSceneName(
+                gameObject.scene.name);
+
+        if (QuestManager.Instance != null)
         {
-            case 1스테이지:
-                questManager.OnStageClear("1");
-            이하생략
+            QuestManager.Instance.OnStageClear(stageId);
         }
-        
-        */
+
         BeginResultTransition(true);
     }
 

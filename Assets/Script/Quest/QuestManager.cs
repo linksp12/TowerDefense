@@ -2,8 +2,23 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager Instance { get; private set; }
+
     [SerializeField] private QuestData[] allQuestDatas;
     public QuestSaveData saveData = new QuestSaveData();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void AcceptQuest(string questId) //TODO: 퀘스트 수락 버튼과 연결, 매개변수: 퀘스트 ID
     {
