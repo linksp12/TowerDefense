@@ -27,6 +27,7 @@ public class ButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [Header("사운드")]
     public bool playClickSound = true;
     public AudioClip customClickSound;       // 비어있으면 AudioManager 기본 사운드 사용
+    public AudioSource fallbackAudioSource;  // AudioManager가 없는 씬에서만 사용하는 UI 소스
 
     private Vector3 originalScale;
     private Coroutine currentAnimation;
@@ -57,6 +58,11 @@ public class ButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                     AudioManager.Instance.PlayUISound(customClickSound);
                 else
                     AudioManager.Instance.PlayButtonClick();
+            }
+            else if (fallbackAudioSource != null)
+            {
+                AudioClip clip = customClickSound != null ? customClickSound : fallbackAudioSource.clip;
+                AudioManager.PlayUISoundOn(fallbackAudioSource, clip);
             }
         }
     }

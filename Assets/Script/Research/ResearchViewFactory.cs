@@ -6,8 +6,13 @@ using UnityEngine.UI;
 public sealed class ResearchViewFactory
 {
     private readonly TMP_FontAsset font;
+    private readonly AudioSource fallbackAudioSource;
 
-    public ResearchViewFactory(TMP_FontAsset font) => this.font = font;
+    public ResearchViewFactory(TMP_FontAsset font, AudioSource fallbackAudioSource = null)
+    {
+        this.font = font;
+        this.fallbackAudioSource = fallbackAudioSource;
+    }
 
     public RectTransform Panel(string name, Transform parent, Color color)
     {
@@ -42,6 +47,9 @@ public sealed class ResearchViewFactory
         image.raycastTarget = true;
         Button button = root.gameObject.AddComponent<Button>();
         button.targetGraphic = image;
+        // 메인 메뉴 버튼과 같은 클릭 소리/통통 효과를 모든 연구소 버튼에 적용한다.
+        ButtonEffect effect = root.gameObject.AddComponent<ButtonEffect>();
+        effect.fallbackAudioSource = fallbackAudioSource;
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
         colors.highlightedColor = new Color(1.15f, 1.15f, 1.15f);

@@ -17,6 +17,8 @@ public sealed class ResearchSceneController : MonoBehaviour
     [SerializeField] private SkillData[] skills = Array.Empty<SkillData>();
     [SerializeField] private Sprite workshopBackground;
     [SerializeField] private Sprite skillPointIcon;
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] private AudioClip purchaseSound;
 
     private readonly Dictionary<ResearchData, Button> researchButtons = new Dictionary<ResearchData, Button>();
     private TextMeshProUGUI skillPointText;
@@ -62,7 +64,14 @@ public sealed class ResearchSceneController : MonoBehaviour
 
     private void BuildScreen()
     {
-        view = new ResearchViewFactory(koreanFont);
+        // 연구소를 직접 실행해도 소리가 나도록 모든 버튼이 UI 소스 하나를 공유한다.
+        // 메인에서 진입한 경우 ButtonEffect가 기존 AudioManager를 우선 사용한다.
+        AudioSource buttonAudio = gameObject.AddComponent<AudioSource>();
+        buttonAudio.playOnAwake = false;
+        buttonAudio.loop = false;
+        buttonAudio.spatialBlend = 0f;
+        buttonAudio.clip = buttonClickSound;
+        view = new ResearchViewFactory(koreanFont, buttonAudio);
         Canvas canvas = gameObject.GetComponent<Canvas>();
         if (canvas == null)
             canvas = gameObject.AddComponent<Canvas>();
@@ -101,11 +110,14 @@ public sealed class ResearchSceneController : MonoBehaviour
         CreateText("SceneGuide", background, "전투를 준비하는 영구 연구", 23,
             TextAlignmentOptions.Left, MutedColor, new Vector2(0.066f, 0.88f), new Vector2(0.47f, 0.918f));
         RectTransform points = view.Frame("PointWallet", background, new Color(0.035f, 0.075f, 0.095f),
-            new Color(0.32f, 0.55f, 0.64f), new Vector2(0.745f, 0.887f), new Vector2(0.935f, 0.958f));
+            new Color(0.32f, 0.55f, 0.64f), new Vector2(0.585f, 0.887f), new Vector2(0.775f, 0.958f));
         CreateIcon("SkillPointIcon", points, skillPointIcon,
             new Vector2(0.025f, 0.12f), new Vector2(0.185f, 0.88f));
         skillPointText = CreateText("SkillPoints", points, string.Empty, 30,
             TextAlignmentOptions.Right, new Color(0.86f, 0.95f, 1f), new Vector2(0.20f, 0.05f), new Vector2(0.93f, 0.95f));
+        Button backButton = view.Button("BackToPlaza", background, "나가기", CardColor, EdgeColor,
+            new Vector2(0.795f, 0.887f), new Vector2(0.935f, 0.958f), 27f);
+        backButton.onClick.AddListener(ReturnToPlaza);
 
         RectTransform towerPanel = view.Frame("TowerResearch", background, PanelColor, EdgeColor,
             new Vector2(0.045f, 0.145f), new Vector2(0.28f, 0.835f));
@@ -271,6 +283,9 @@ public sealed class ResearchSceneController : MonoBehaviour
             new Vector2(0.075f, 0.037f), new Vector2(0.925f, 0.124f), 31, new Color(0.16f, 0.12f, 0.075f));
         purchaseButtonLabel = purchaseButton.GetComponentInChildren<TextMeshProUGUI>();
         purchaseButton.onClick.AddListener(TryPurchaseSelected);
+        ButtonEffect purchaseEffect = purchaseButton.GetComponent<ButtonEffect>();
+        if (purchaseEffect != null && purchaseSound != null)
+            purchaseEffect.customClickSound = purchaseSound;
         BuildResearchOptions();
     }
 
@@ -513,6 +528,13 @@ public sealed class ResearchSceneController : MonoBehaviour
         row.Base.text = baseValue;
         row.Current.text = currentValue;
         row.Current.color = baseValue == currentValue ? new Color(0.9f, 0.91f, 0.89f) : AccentColor;
+    }
+
+    private void ReturnToPlaza()
+    {
+        if (SceneLoadingScreen.IsLoading)
+            return;
+        SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중");
     }
 
     private void SetNotice(string message)
