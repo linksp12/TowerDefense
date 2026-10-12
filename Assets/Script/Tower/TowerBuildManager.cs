@@ -48,8 +48,8 @@ public class TowerBuildManager : MonoBehaviour
         if (towerBuildPanelShake == null && towerBuildPanel != null)
             towerBuildPanelShake = towerBuildPanel.GetComponent<PanelShake>();
 
-        if (canvas == null)
-            canvas = FindFirstObjectByType<Canvas>();
+        if (canvas == null && towerBuildPanelRect != null)
+            canvas = towerBuildPanelRect.GetComponentInParent<Canvas>(true);
     }
 
     private void Start()
