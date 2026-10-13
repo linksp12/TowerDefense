@@ -27,15 +27,17 @@ public class GameSpeedController : MonoBehaviour
         buttonObject.transform.SetParent(parentCanvas.transform, false);
         buttonObject.transform.SetAsLastSibling();
 
+        // 오른쪽 위 일시정지·재생 버튼과 같은 줄에 픽셀 버튼으로 놓는다.
         RectTransform buttonRect = buttonObject.GetComponent<RectTransform>();
         buttonRect.anchorMin = new Vector2(1f, 1f);
         buttonRect.anchorMax = new Vector2(1f, 1f);
-        buttonRect.pivot = new Vector2(1f, 1f);
-        buttonRect.anchoredPosition = new Vector2(-120f, -0f);
-        buttonRect.sizeDelta = new Vector2(92f, 50f);
+        buttonRect.pivot = new Vector2(0.5f, 0.5f);
+        buttonRect.anchoredPosition = new Vector2(-170f, -44f);
+        buttonRect.sizeDelta = new Vector2(68f, 52f);
 
         Image buttonImage = buttonObject.GetComponent<Image>();
         buttonImage.color = Color.clear;
+        BattleUiSkin.Skin(buttonImage, BattleUiSkin.DarkButton, BattleUiSkin.PixelScale);
 
         Button button = buttonObject.GetComponent<Button>();
         button.targetGraphic = buttonImage;
@@ -49,10 +51,10 @@ public class GameSpeedController : MonoBehaviour
         }
 
         ColorBlock colors = button.colors;
-        colors.normalColor = Color.white;
-        colors.highlightedColor = new Color(1.15f, 1.15f, 1.15f, 1f);
+        colors.normalColor = new Color(0.93f, 0.93f, 0.93f, 1f);
+        colors.highlightedColor = Color.white;
         colors.pressedColor = new Color(0.75f, 0.75f, 0.75f, 1f);
-        colors.selectedColor = colors.highlightedColor;
+        colors.selectedColor = colors.normalColor;
         colors.fadeDuration = 0.08f;
         button.colors = colors;
 
@@ -85,7 +87,7 @@ public class GameSpeedController : MonoBehaviour
 
         speedText = textObject.GetComponent<TextMeshProUGUI>();
         speedText.font = FindMaplestoryFont();
-        speedText.fontSize = 27f;
+        speedText.fontSize = 25f;
         speedText.fontStyle = FontStyles.Bold;
         speedText.color = new Color(1f, 0.74f, 0.2f, 1f);
         speedText.alignment = TextAlignmentOptions.Center;

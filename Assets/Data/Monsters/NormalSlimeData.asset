@@ -24,3 +24,8 @@ MonoBehaviour:
   magicResistance: 0
   bossPortrait: {fileID: 0}
   bossName: 
+  displayName: "\uC77C\uBC18 \uC2AC\uB77C\uC784"
+  description: "\uB9D0\uB791\uD558\uC9C0\uB9CC \uC81C\uBC95 \uB2E8\uB2E8\uD55C \uCD08\uB85D
+    \uC2AC\uB77C\uC784\uC785\uB2C8\uB2E4.\n\uC2AC\uB77C\uC784\uBCF4\uB2E4 \uCCB4\uB825\uC774
+    \uB192\uC544\n\uAFB8\uC900\uD55C \uD654\uB825\uC774 \uD544\uC694\uD569\uB2C8\uB2E4."
+  icon: {fileID: -2620475467820581989, guid: 1ae3debed002daa45ab399f40d61f8f2, type: 3}

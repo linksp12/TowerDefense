@@ -130,46 +130,44 @@ public class BossInfoUI : MonoBehaviour
         panelRect.anchorMin = new Vector2(0.5f, 1f);
         panelRect.anchorMax = new Vector2(0.5f, 1f);
         panelRect.pivot = new Vector2(0.5f, 1f);
-        panelRect.anchoredPosition = new Vector2(0f, 20f);
-        panelRect.sizeDelta = new Vector2(620f, 96f);
+        panelRect.anchoredPosition = new Vector2(0f, -8f);
+        panelRect.sizeDelta = new Vector2(640f, 112f);
         panelRect.localScale = Vector3.one;
 
-        SetTopBarRect(
-            bossInfoPanel.transform.Find("Background") as RectTransform,
-            new Vector2(0f, -48f),
-            new Vector2(620f, 96f)
-        );
+        // 자식은 패널 위쪽 기준 아래로 56(패널 중앙)에 맞춰 배치한다.
+        RectTransform background = bossInfoPanel.transform.Find("Background") as RectTransform;
+        SetTopBarRect(background, new Vector2(0f, -56f), new Vector2(640f, 112f));
         SetTopBarRect(
             portraitImage != null ? portraitImage.rectTransform : null,
-            new Vector2(-265f, -48f),
-            new Vector2(78f, 78f)
-        );
-        SetTopBarRect(
-            hpSlider != null ? hpSlider.GetComponent<RectTransform>() : null,
-            new Vector2(25f, -30f),
-            new Vector2(480f, 22f)
-        );
-        SetTopBarRect(
-            hpText != null ? hpText.rectTransform : null,
-            new Vector2(25f, -30f),
-            new Vector2(250f, 22f)
+            new Vector2(-262f, -56f),
+            new Vector2(72f, 72f)
         );
         SetTopBarRect(
             bossNameText != null ? bossNameText.rectTransform : null,
-            new Vector2(-95f, -67f),
-            new Vector2(260f, 25f)
+            new Vector2(40f, -30f),
+            new Vector2(460f, 30f)
+        );
+        SetTopBarRect(
+            hpSlider != null ? hpSlider.GetComponent<RectTransform>() : null,
+            new Vector2(40f, -60f),
+            new Vector2(460f, 28f)
+        );
+        SetTopBarRect(
+            hpText != null ? hpText.rectTransform : null,
+            new Vector2(40f, -60f),
+            new Vector2(300f, 26f)
         );
         SetTopBarRect(
             defenseText != null ? defenseText.rectTransform : null,
-            new Vector2(95f, -67f),
-            new Vector2(115f, 22f)
+            new Vector2(-110f, -88f),
+            new Vector2(160f, 22f)
         );
         SetTopBarRect(
             magicResistanceText != null
                 ? magicResistanceText.rectTransform
                 : null,
-            new Vector2(225f, -67f),
-            new Vector2(135f, 22f)
+            new Vector2(60f, -88f),
+            new Vector2(180f, 22f)
         );
 
         TMP_FontAsset maplestoryFont =
@@ -183,6 +181,77 @@ public class BossInfoUI : MonoBehaviour
             if (hpText != null)
                 hpText.font = maplestoryFont;
         }
+
+        ApplyPixelSkin(background);
+    }
+
+    // 전투 화면 공통 픽셀 스타일: 금테 패널, 초상화 홈, 픽셀 체력바, 글자 정리.
+    private void ApplyPixelSkin(RectTransform background)
+    {
+        Image backgroundImage = background != null ? background.GetComponent<Image>() : null;
+        if (!BattleUiSkin.Skin(backgroundImage, BattleUiSkin.Frame, BattleUiSkin.PixelScale))
+            return;
+
+        if (portraitImage != null)
+        {
+            portraitImage.preserveAspect = true;
+            var well = new GameObject("PortraitWell", typeof(RectTransform), typeof(Image));
+            well.layer = portraitImage.gameObject.layer;
+            well.transform.SetParent(portraitImage.transform.parent, false);
+            well.transform.SetSiblingIndex(portraitImage.transform.GetSiblingIndex());
+            SetTopBarRect(well.GetComponent<RectTransform>(), new Vector2(-262f, -56f), new Vector2(84f, 84f));
+            var wellImage = well.GetComponent<Image>();
+            BattleUiSkin.Skin(wellImage, BattleUiSkin.Inset, BattleUiSkin.PixelScale);
+            wellImage.raycastTarget = false;
+        }
+
+        if (hpSlider != null)
+        {
+            Image barBackground = hpSlider.transform.Find("Background")?.GetComponent<Image>();
+            Image fill = hpSlider.fillRect != null ? hpSlider.fillRect.GetComponent<Image>() : null;
+            BattleUiSkin.Skin(barBackground, BattleUiSkin.HpFrame, 2f);
+            if (BattleUiSkin.Skin(fill, BattleUiSkin.HpFill, 2f))
+                fill.color = new Color32(216, 64, 47, 255);
+            // 기본 Slider는 높이의 가운데 절반만 쓰므로 막대 전체 높이를 쓰게 맞춘다.
+            if (barBackground != null)
+            {
+                RectTransform backgroundRect = barBackground.rectTransform;
+                backgroundRect.anchorMin = Vector2.zero;
+                backgroundRect.anchorMax = Vector2.one;
+                backgroundRect.offsetMin = backgroundRect.offsetMax = Vector2.zero;
+            }
+            if (hpSlider.fillRect != null && hpSlider.fillRect.parent is RectTransform fillArea)
+            {
+                fillArea.anchorMin = Vector2.zero;
+                fillArea.anchorMax = Vector2.one;
+                fillArea.offsetMin = new Vector2(4f, 4f);
+                fillArea.offsetMax = new Vector2(-4f, -4f);
+                hpSlider.fillRect.sizeDelta = Vector2.zero;
+                hpSlider.fillRect.anchoredPosition = Vector2.zero;
+            }
+            // 보스 체력바는 표시 전용이므로 손잡이를 숨긴다.
+            if (hpSlider.handleRect != null)
+                hpSlider.handleRect.parent.gameObject.SetActive(false);
+            hpSlider.interactable = false;
+        }
+
+        StyleText(bossNameText, 24f, new Color32(247, 214, 126, 255), TextAlignmentOptions.MidlineLeft);
+        StyleText(hpText, 17f, Color.white, TextAlignmentOptions.Center);
+        StyleText(defenseText, 17f, new Color32(191, 169, 130, 255), TextAlignmentOptions.MidlineLeft);
+        StyleText(magicResistanceText, 17f, new Color32(191, 169, 130, 255), TextAlignmentOptions.MidlineLeft);
+    }
+
+    private static void StyleText(TMP_Text text, float size, Color color, TextAlignmentOptions alignment)
+    {
+        if (text == null)
+            return;
+        text.fontSize = size;
+        text.enableAutoSizing = false;
+        text.color = color;
+        text.alignment = alignment;
+        text.textWrappingMode = TextWrappingModes.NoWrap;
+        text.outlineColor = new Color32(20, 10, 6, 255);
+        text.outlineWidth = 0.16f;
     }
 
     private static void SetTopBarRect(
@@ -429,17 +498,25 @@ public class BossInfoUI : MonoBehaviour
         if (bossInfoPanel != null && !isSuppressedByTowerPanel)
             bossInfoPanel.SetActive(true);
 
+        string displayName = string.IsNullOrWhiteSpace(boss.bossName)
+            ? "BOSS"
+            : boss.bossName.ToUpperInvariant();
+
         if (bossNameText != null)
         {
-            string displayName = string.IsNullOrWhiteSpace(boss.bossName)
-                ? "BOSS"
-                : boss.bossName.ToUpperInvariant();
-
             bossNameText.text =
-                "보스 : " + displayName +
+                "<color=#FF8A6A>BOSS</color>  " + displayName +
                 (registeredBosses.Count > 1
                     ? " × " + registeredBosses.Count
                     : string.Empty);
+        }
+
+        // 첫 보스가 나타날 때 웨이브와 같은 리본 배너로 알린다.
+        if (registeredBosses.Count == 1)
+        {
+            UIManager waveUi = FindAnyObjectByType<UIManager>();
+            if (waveUi != null)
+                waveUi.ShowBossBanner(displayName);
         }
 
         if (portraitImage != null && portraitImage.sprite == null)

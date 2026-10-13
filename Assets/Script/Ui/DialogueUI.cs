@@ -25,7 +25,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private TMP_Text nextButtonText;
 
-    [Header("마지막 대화 버튼")]
+    [Header("대화 중 기능 버튼")]
     [SerializeField] private GameObject lastButtons;
     [SerializeField] private Button stopButton;
     [SerializeField] private TMP_Text stopButtonText;
@@ -51,7 +51,7 @@ public class DialogueUI : MonoBehaviour
             nextButton.onClick.AddListener(NextLine);
 
         if (stopButton != null)
-            stopButton.onClick.AddListener(CloseDialogue);
+            stopButton.onClick.AddListener(CloseDialogueWithSound);
 
         if (actionButton != null)
             actionButton.onClick.AddListener(OnActionButtonClicked);
@@ -71,7 +71,7 @@ public class DialogueUI : MonoBehaviour
             nextButton.onClick.RemoveListener(NextLine);
 
         if (stopButton != null)
-            stopButton.onClick.RemoveListener(CloseDialogue);
+            stopButton.onClick.RemoveListener(CloseDialogueWithSound);
 
         if (actionButton != null)
             actionButton.onClick.RemoveListener(OnActionButtonClicked);
@@ -129,13 +129,13 @@ public class DialogueUI : MonoBehaviour
             nextButton.gameObject.SetActive(!isLastLine);
 
         if (lastButtons != null)
-            lastButtons.SetActive(isLastLine);
+            lastButtons.SetActive(true);
 
         if (nextButtonText != null)
             nextButtonText.text = "다음";
 
         if (stopButtonText != null)
-            stopButtonText.text = "대화그만하기";
+            stopButtonText.text = "닫기";
 
         if (actionButtonText != null)
             actionButtonText.text = GetActionButtonText();
@@ -149,6 +149,8 @@ public class DialogueUI : MonoBehaviour
         if (currentIndex >= currentLines.Length - 1)
             return;
 
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
         currentIndex++;
         ShowCurrentLine();
     }
@@ -164,7 +166,7 @@ public class DialogueUI : MonoBehaviour
                 return "퀘스트 받기";
 
             case PlazaNPC.NPCType.Stage:
-                return "스테이지 진입하기";
+                return "출전하기";
 
             default:
                 return "";
@@ -174,11 +176,13 @@ public class DialogueUI : MonoBehaviour
     private void OnActionButtonClicked()
     {
         if (!IsOpen ||
-            currentLines == null ||
-            currentIndex != currentLines.Length - 1)
+            currentLines == null)
             return;
 
         PlazaNPC.NPCType requestedType = currentNpcType;
+        // 퀘스트 버튼은 게시판 Open에서 같은 클릭음을 재생하므로 중복 호출하지 않는다.
+        if (requestedType != PlazaNPC.NPCType.Quest && AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
 
         // 기능 실행 전에 대화창을 닫아 다음 UI와 겹치지 않게 한다.
         CloseDialogue();
@@ -190,6 +194,15 @@ public class DialogueUI : MonoBehaviour
     public void CloseDialogue()
     {
         ResetDialogueState();
+    }
+
+    private void CloseDialogueWithSound()
+    {
+        if (!IsOpen)
+            return;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
+        CloseDialogue();
     }
 
     private void ResetDialogueState()
@@ -221,6 +234,6 @@ public class DialogueUI : MonoBehaviour
     private void Update()
     {
         if (IsOpen && Input.GetKeyDown(KeyCode.Escape))
-            CloseDialogue();
+            CloseDialogueWithSound();
     }
 }

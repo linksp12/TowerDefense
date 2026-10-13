@@ -98,6 +98,7 @@ public class MonsterHealth : MonoBehaviour
     {
         if (monsterHpSlider != null)
         {
+            BattleUiSkin.ApplyMonsterHpBar(monsterHpSlider);
             monsterHpSlider.maxValue = maxHp;
             monsterHpSlider.value = currentHp;
         }

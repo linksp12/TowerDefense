@@ -19,3 +19,13 @@ MonoBehaviour:
   goldReward: 45
   maxShield: 0
   baseDamage: 1
+  isBoss: 0
+  defense: 0
+  magicResistance: 0
+  bossPortrait: {fileID: 0}
+  bossName: 
+  displayName: "\uD0B9 \uC2AC\uB77C\uC784"
+  description: "\uC655\uAD00\uC744 \uC4F4 \uC2AC\uB77C\uC784\uB4E4\uC758 \uC6B0\uB450\uBA38\uB9AC\uC785\uB2C8\uB2E4.\n\uC5C4\uCCAD\uB09C
+    \uCCB4\uB825\uC744 \uC9C0\uB154\uC73C\uB2C8\n\uD654\uB825\uC744 \uD55C\uACF3\uC5D0
+    \uBAA8\uC544 \uC4F0\uB7EC\uB728\uB9AC\uC138\uC694."
+  icon: {fileID: -8105978246849763698, guid: 30428390e1cbcc14d95f8ce07e9faef3, type: 3}

@@ -21,6 +21,7 @@ public class QuestUI : MonoBehaviour
     private QuestManager subscribedManager;
     private AudioClip previousBgm;
     private bool previousBgmWasPlaying;
+    private float previousBgmTime;
     private Coroutine fade;
     private bool closing;
 
@@ -138,7 +139,7 @@ public class QuestUI : MonoBehaviour
         }
     }
 
-    // 게시판 BGM을 틀기 전 상태를 기억했다가 닫을 때 되돌린다. (광장은 원래 무음)
+    // 게시판 BGM을 틀기 전 상태를 기억했다가 닫을 때 되돌린다.
     private void PlayBoardBgm(AudioManager audio)
     {
         if (boardBgm == null || audio.bgmSource == null)
@@ -146,6 +147,7 @@ public class QuestUI : MonoBehaviour
 
         previousBgm = audio.bgmSource.clip;
         previousBgmWasPlaying = audio.bgmSource.isPlaying && previousBgm != boardBgm;
+        previousBgmTime = audio.bgmSource.time;
         audio.PlayBGM(boardBgm);
     }
 
@@ -155,12 +157,17 @@ public class QuestUI : MonoBehaviour
             return;
 
         if (previousBgmWasPlaying && previousBgm != null)
+        {
             audio.PlayBGM(previousBgm);
+            audio.bgmSource.time = Mathf.Clamp(previousBgmTime, 0f,
+                Mathf.Max(0f, previousBgm.length - 0.01f));
+        }
         else
             audio.StopBGM();
 
         previousBgm = null;
         previousBgmWasPlaying = false;
+        previousBgmTime = 0f;
     }
 
     // 두루마리 아이콘·닫기 버튼에 연결된 기존 함수

@@ -9,6 +9,7 @@ public sealed class ResearchSceneController : MonoBehaviour
     [SerializeField] private TowerData[] towers = Array.Empty<TowerData>();
     [SerializeField] private SkillData[] skills = Array.Empty<SkillData>();
     [SerializeField] private ResearchSceneView view;
+    [SerializeField] private TMPro.TMP_FontAsset loadingFont;
 
     private readonly Dictionary<ResearchData, ResearchOptionButtonView> researchButtons = new Dictionary<ResearchData, ResearchOptionButtonView>();
     private readonly Dictionary<UnityEngine.Object, TargetBinding> targets = new Dictionary<UnityEngine.Object, TargetBinding>();
@@ -270,7 +271,7 @@ public sealed class ResearchSceneController : MonoBehaviour
     private void ReturnToPlaza()
     {
         if (SceneLoadingScreen.IsLoading) return;
-        SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중");
+        SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중", font: loadingFont);
     }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD

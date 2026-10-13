@@ -106,6 +106,15 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    // 튜토리얼처럼 연습으로 쓴 골드를 되돌릴 때 사용한다. 설치된 타워는 건드리지 않는다.
+    public void RestoreStartingMoney()
+    {
+        if (isGameEnded) return;
+
+        currentMoney = startingMoney;
+        UpdateMoneyUI();
+    }
+
     public bool CanAfford(int amount)
     {
         return currentMoney >= amount;

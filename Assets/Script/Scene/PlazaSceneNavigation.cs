@@ -7,6 +7,7 @@ public class PlazaSceneNavigation : MonoBehaviour
     [SerializeField] private DialogueUI dialogue;
     [SerializeField] private string stageSelectionScenePath = "Assets/Scenes/StageSelectionScene.unity";
     [SerializeField] private string researchScenePath = "Assets/Scenes/ResearchScene.unity";
+    [SerializeField] private string mainScenePath = "Assets/Scenes/MainScene.unity";
     [SerializeField] private QuestUI questBoard;
 
     public bool IsTransitioning { get; private set; }
@@ -30,7 +31,7 @@ public class PlazaSceneNavigation : MonoBehaviour
 
     private void OnActionRequested(PlazaNPC.NPCType npcType)
     {
-        if (!Application.isPlaying || IsTransitioning)
+        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen)
             return;
 
         string scenePath;
@@ -61,26 +62,41 @@ public class PlazaSceneNavigation : MonoBehaviour
             return;
         }
 
-        float previousTimeScale = Time.timeScale;
-        bool previousAudioPause = AudioListener.pause;
         IsTransitioning = true;
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-
-        try
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Single);
-            if (operation == null)
-                throw new System.InvalidOperationException("씬 로드 요청을 생성하지 못했습니다.");
-
+        string message = npcType == PlazaNPC.NPCType.Stage
+            ? "스테이지 선택 화면으로 이동 중"
+            : "업그레이드 화면으로 이동 중";
+        if (SceneLoadingScreen.TryLoad(scenePath, message, RestoreAfterLoadFailure))
             dialogue.CloseDialogue();
-        }
-        catch (System.Exception exception)
-        {
+        else
+            RestoreAfterLoadFailure();
+    }
+
+    private void RestoreAfterLoadFailure()
+    {
+        if (this != null)
             IsTransitioning = false;
-            Time.timeScale = previousTimeScale;
-            AudioListener.pause = previousAudioPause;
-            Debug.LogError($"광장 씬 이동 실패: {scenePath}\n{exception}", this);
+    }
+
+    public void OpenSaveSlots()
+    {
+        if (IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen) return;
+        dialogue?.CloseDialogue();
+        if (questBoard != null && questBoard.IsOpen) questBoard.Close();
+        SaveSlotWindow.Show(true);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen)
+            return;
+        IsTransitioning = true;
+        if (SceneLoadingScreen.TryLoad(mainScenePath, "메인 화면으로 이동 중", RestoreAfterLoadFailure))
+        {
+            dialogue?.CloseDialogue();
+            AudioManager.Instance?.PlayButtonClick();
         }
+        else
+            RestoreAfterLoadFailure();
     }
 }

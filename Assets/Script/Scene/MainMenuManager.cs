@@ -27,7 +27,7 @@ public class MainMenuManager : MonoBehaviour
     public static int EasterEggPlayerHpOverride { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetEasterEggBonus()
+    internal static void ResetEasterEggBonus()
     {
         EasterEggPlayerHpOverride = 0;
     }
@@ -65,7 +65,7 @@ public class MainMenuManager : MonoBehaviour
     private bool IsPointerOverTitleT()
     {
         if (mainMenuCanvas == null ||
-            (SettingsPopup.Instance != null && SettingsPopup.Instance.IsOpen))
+            SaveSlotWindow.IsOpen || (SettingsPopup.Instance != null && SettingsPopup.Instance.IsOpen))
         {
             return false;
         }
@@ -255,29 +255,42 @@ public class MainMenuManager : MonoBehaviour
     // ──────── 시작 버튼 ────────
     public void OnStartButtonClicked()
     {
+        if (SaveSlotWindow.IsOpen || SceneLoadingScreen.IsLoading) return;
+        if (SettingsPopup.Instance != null && SettingsPopup.Instance.IsOpen) return;
+        if (!Application.CanStreamedLevelBeLoaded("StoryScene")) return;
+
+        // 지워질 진행 기록이 있을 때만 확인한다. 저장 슬롯은 유지된다.
+        if (LastOfTheTower.Progression.GameProgressReset.HasProgress())
+        {
+            SaveSlotWindow.ShowNewGameConfirmation(StartNewGame);
+            return;
+        }
+
+        string error = StartNewGame();
+        if (error != null)
+            ShowMainMenuMessage(error, new Color32(232, 164, 146, 255));
+    }
+
+    // 현재 진행을 초기화하고 스토리로 이동한다. 실패하면 안내 문구를 돌려준다.
+    private string StartNewGame()
+    {
+        if (!LastOfTheTower.Progression.GameProgressReset.TryReset(out string error, false))
+            return error;
         SceneManager.LoadScene("StoryScene");
+        return null;
     }
 
     // ──────── 이어하기 버튼 ────────
     public void OnContinueButtonClicked()
     {
-        if (!GameUIManager.TryGetSavedStageScene(out string savedStageScene))
-        {
-            ShowMainMenuMessage(
-                "저장 데이터가 없습니다.",
-                new Color32(255, 205, 75, 255)
-            );
-            Debug.Log("이어하기 - 저장 데이터 없음");
-            return;
-        }
-
-        Debug.Log($"이어하기 - {savedStageScene}으로 이동");
-        SceneManager.LoadScene(savedStageScene);
+        if (SettingsPopup.Instance != null && SettingsPopup.Instance.IsOpen) return;
+        SaveSlotWindow.Show(false);
     }
 
     // ──────── 설정 버튼 ────────
     public void OnSettingsButtonClicked()
     {
+        if (SaveSlotWindow.IsOpen || SceneLoadingScreen.IsLoading) return;
         if (SettingsPopup.Instance != null)
         {
             if (SettingsPopup.Instance.IsOpen)

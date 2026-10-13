@@ -12,6 +12,8 @@ public class NPCSpeechBubble : MonoBehaviour
     [SerializeField] private Canvas screenSpaceCanvas;
     [SerializeField] private GameObject bubbleRoot;
     [SerializeField] private TMP_Text bubbleText;
+    [SerializeField] private RectTransform functionTag;
+    [SerializeField] private Vector2 functionTagOffset = new Vector2(0f, 8f);
 
     [Header("위치 설정")]
     [SerializeField] private Vector3 worldOffset = new Vector3(0f, 0.4f, 0f);
@@ -137,7 +139,7 @@ public class NPCSpeechBubble : MonoBehaviour
         if (worldCamera == null)
             return;
 
-        // NPC 위치에 월드 오프셋 적용
+        // 지정된 NPC 기준점에 월드 오프셋 적용
         Vector3 worldPosition =
             targetTransform.position + worldOffset;
 
@@ -148,9 +150,6 @@ public class NPCSpeechBubble : MonoBehaviour
         // NPC가 카메라 뒤에 있으면 위치 갱신하지 않음
         if (screenPosition.z <= 0f)
             return;
-
-        // 화면 기준 추가 오프셋
-        screenPosition += (Vector3)screenOffset;
 
         // Canvas 종류에 맞는 이벤트 카메라 설정
         Camera eventCamera =
@@ -167,7 +166,10 @@ public class NPCSpeechBubble : MonoBehaviour
             eventCamera,
             out Vector2 localPosition))
         {
-            bubbleRect.anchoredPosition = localPosition;
+            // Canvas 기준 오프셋으로 해상도가 바뀌어도 NPC와의 간격을 유지한다.
+            bubbleRect.anchoredPosition = localPosition + screenOffset;
+            if (functionTag != null)
+                functionTag.anchoredPosition = localPosition + functionTagOffset;
         }
     }
 

@@ -1305,6 +1305,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &207309909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,9 +2416,9 @@ MonoBehaviour:
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   stageSelectionBGM: {fileID: 8300000, guid: 984238510a85af9408fbfa8ea6b8856c, type: 3}
+  plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}
   buttonClickSFX: {fileID: 8300000, guid: 4ef8efbd9f8a035419e614c08b3d90d8, type: 3}
   stageDeploymentSFX: {fileID: 8300000, guid: 78a2af7ad331cd24f8fac906273c862d, type: 3}
-  plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}
   npcInteractionSFX: {fileID: 8300000, guid: c213995af28bf00439531e525e85583a, type: 3}
 --- !u!4 &601917150
 Transform:
@@ -2587,8 +2588,9 @@ MonoBehaviour:
   useHoverEffect: 1
   hoverScale: 1.05
   hoverDuration: 0.1
-  playClickSound: 1
+  playClickSound: 0
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &716974294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2746,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &753736234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,6 +5968,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &1826140998
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,6 +6487,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &2111436370
 GameObject:
   m_ObjectHideFlags: 0

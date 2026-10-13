@@ -18,7 +18,7 @@ public class SceneLoadingScreen : MonoBehaviour
     private float previousTimeScale;
     private bool previousAudioPause;
 
-    public static bool TryLoad(string scenePath, string message, Action onFailure = null)
+    public static bool TryLoad(string scenePath, string message, Action onFailure = null, TMP_FontAsset font = null)
     {
         if (!Application.isPlaying || IsLoading)
             return false;
@@ -37,7 +37,7 @@ public class SceneLoadingScreen : MonoBehaviour
         DontDestroyOnLoad(root);
         try
         {
-            instance.Build(string.IsNullOrWhiteSpace(message) ? "화면을 준비하고 있습니다" : message);
+            instance.Build(string.IsNullOrWhiteSpace(message) ? "화면을 준비하고 있습니다" : message, font);
             instance.StartCoroutine(instance.Load(scenePath, onFailure));
             return true;
         }
@@ -139,7 +139,7 @@ public class SceneLoadingScreen : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Build(string content)
+    private void Build(string content, TMP_FontAsset font)
     {
         message = content;
         gameObject.layer = LayerMask.NameToLayer("UI");
@@ -165,13 +165,19 @@ public class SceneLoadingScreen : MonoBehaviour
         Place(ornament, new Vector2(0f, 172f), new Vector2(16f, 16f));
         ornament.localRotation = Quaternion.Euler(0f, 0f, 45f);
 
-        TMP_FontAsset font = TMP_Settings.defaultFontAsset;
-        foreach (var text in FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include))
-            if (text.font != null && text.font.name == "Maplestory Bold SDF")
+        if (font == null)
+        {
+            foreach (var text in FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include))
             {
-                font = text.font;
-                break;
+                if (text.font != null && text.font.name == "Maplestory Bold SDF")
+                {
+                    font = text.font;
+                    break;
+                }
             }
+        }
+        if (font == null)
+            font = TMP_Settings.defaultFontAsset;
         Text("GameTitle", "Last of the Tower", new Vector2(0f, 80f), new Vector2(1000f, 100f), 64f, gold, font);
         loadingLabel = Text("LoadingMessage", message + "...", new Vector2(0f, -60f),
             new Vector2(1000f, 60f), 30f, new Color(0.9f, 0.92f, 0.9f, 1f), font);
