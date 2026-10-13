@@ -191,6 +191,9 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
+        if (isGameEnded || isSceneTransitioning)
+            return;
+
         BeginResultTransition(true);
     }
 
@@ -221,6 +224,10 @@ public class GameManager : MonoBehaviour
                 !wasUnlocked && LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
             if (progressSaveFailed)
                 Debug.LogError($"스테이지 클리어 기록 저장 실패: {stageProgress.LastError}", this);
+
+            // 같은 확정 결과(스테이지·승패·남은 체력)를 퀘스트 판정에 한 번만 전달한다.
+            if (QuestManager.Instance != null)
+                QuestManager.Instance.OnBattleResult(result);
         }
 
         Debug.Log(victory ? "게임 클리어" : "게임 오버");

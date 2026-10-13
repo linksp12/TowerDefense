@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f37b9aedf477604aa911c3f8d811fed, type: 3}
   m_Name: 02_quest
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  questId: 2
-  questDescription: "2 \uC2A4\uD14C\uC774\uC9C0\uB97C \uD074\uB9AC\uC5B4\uD558\uC138\uC694"
-  targetStageId: 2
-  rewardAmount: 200
+  questId: stage_one_hp10
+  questTitle: "\uCCA0\uBCBD \uBC29\uC5B4"
+  questDescription: "1\uC2A4\uD14C\uC774\uC9C0\uB97C \uAE30\uC9C0 \uCCB4\uB825 10
+    \uC774\uC0C1 \uB0A8\uAE30\uACE0 \uD074\uB9AC\uC5B4\uD558\uC138\uC694"
+  targetStageId: stage_one
+  minRemainingBaseHealth: 10
+  rewardAmount: 1
