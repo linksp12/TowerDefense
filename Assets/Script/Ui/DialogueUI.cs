@@ -1,12 +1,19 @@
+
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
-    public static DialogueUI Instance;
+    public static DialogueUI Instance { get; private set; }
 
-    public event System.Action<PlazaNPC.NPCType> ActionRequested;
+    public static bool IsOpen =>
+        Instance != null &&
+        Instance.dialoguePanel != null &&
+        Instance.dialoguePanel.activeSelf;
+
+    public event Action<PlazaNPC.NPCType> ActionRequested;
 
     [Header("기본 UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -20,47 +27,72 @@ public class DialogueUI : MonoBehaviour
 
     [Header("마지막 대화 버튼")]
     [SerializeField] private GameObject lastButtons;
-
     [SerializeField] private Button stopButton;
     [SerializeField] private TMP_Text stopButtonText;
-
     [SerializeField] private Button actionButton;
     [SerializeField] private TMP_Text actionButtonText;
 
     private string[] currentLines;
     private int currentIndex;
-
     private PlazaNPC.NPCType currentNpcType;
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogError("DialogueUI가 중복으로 존재합니다.", this);
+            enabled = false;
+            return;
+        }
+
         Instance = this;
 
-        // 게임 시작 시 대화창 닫기
-        dialoguePanel.SetActive(false);
+        if (nextButton != null)
+            nextButton.onClick.AddListener(NextLine);
 
-        // 마지막 버튼도 숨기기
-        lastButtons.SetActive(false);
+        if (stopButton != null)
+            stopButton.onClick.AddListener(CloseDialogue);
 
-        // 버튼 이벤트 연결
-        nextButton.onClick.AddListener(NextLine);
-        stopButton.onClick.AddListener(CloseDialogue);
-        actionButton.onClick.AddListener(OnActionButtonClicked);
+        if (actionButton != null)
+            actionButton.onClick.AddListener(OnActionButtonClicked);
+
+        ResetDialogueState();
     }
 
-    /// <summary>
-    /// NPC 대화를 시작한다.
-    /// </summary>
+    private void OnEnable()
+    {
+        if (Instance == this)
+            ResetDialogueState();
+    }
+
+    private void OnDestroy()
+    {
+        if (nextButton != null)
+            nextButton.onClick.RemoveListener(NextLine);
+
+        if (stopButton != null)
+            stopButton.onClick.RemoveListener(CloseDialogue);
+
+        if (actionButton != null)
+            actionButton.onClick.RemoveListener(OnActionButtonClicked);
+
+        if (Instance == this)
+            Instance = null;
+    }
+
     public void StartDialogue(
         PlazaNPC.NPCType npcType,
         string npcName,
         Sprite npcPortrait,
         string[] lines)
     {
-        // 대사가 없으면 실행하지 않음
+        // 이미 대화 중이면 새 대화를 시작하지 않는다.
+        if (IsOpen)
+            return;
+
         if (lines == null || lines.Length == 0)
         {
-            Debug.LogWarning("대사가 없습니다.");
+            Debug.LogWarning($"{npcName}: 대사가 없습니다.");
             return;
         }
 
@@ -68,66 +100,59 @@ public class DialogueUI : MonoBehaviour
         currentLines = lines;
         currentIndex = 0;
 
-        // UI 표시
+        // 클릭으로 확대된 NPC가 있다면 원래 크기로 복구
+        PlazaNPC.ResetAllHoverScales();
+
+        if (nameText != null)
+            nameText.text = npcName;
+
+        if (portrait != null)
+            portrait.sprite = npcPortrait;
+
         dialoguePanel.SetActive(true);
-
-        // NPC 정보 표시
-        nameText.text = npcName;
-        portrait.sprite = npcPortrait;
-
-        // 첫 대사 표시
         ShowCurrentLine();
     }
 
-    /// <summary>
-    /// 현재 대사를 화면에 표시한다.
-    /// </summary>
     private void ShowCurrentLine()
     {
-        dialogueText.text = currentLines[currentIndex];
-
-        bool isLastLine =
-            currentIndex == currentLines.Length - 1;
-
-        // 마지막 대사가 아니면 "다음"
-        if (!isLastLine)
-        {
-            nextButton.gameObject.SetActive(true);
-            lastButtons.SetActive(false);
-
-            nextButtonText.text = "다음";
-        }
-        // 마지막 대사면 두 개의 버튼 표시
-        else
-        {
-            nextButton.gameObject.SetActive(false);
-            lastButtons.SetActive(true);
-
-            stopButtonText.text = "대화 그만하기";
-            actionButtonText.text = GetActionButtonText();
-        }
-    }
-
-    /// <summary>
-    /// 다음 대사로 이동한다.
-    /// </summary>
-    private void NextLine()
-    {
-        if (currentLines == null || currentLines.Length == 0)
+        if (currentLines == null ||
+            currentIndex < 0 ||
+            currentIndex >= currentLines.Length)
             return;
 
-        // 마지막이면 더 이상 다음으로 가지 않음
+        if (dialogueText != null)
+            dialogueText.text = currentLines[currentIndex];
+
+        bool isLastLine = currentIndex == currentLines.Length - 1;
+
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(!isLastLine);
+
+        if (lastButtons != null)
+            lastButtons.SetActive(isLastLine);
+
+        if (nextButtonText != null)
+            nextButtonText.text = "다음";
+
+        if (stopButtonText != null)
+            stopButtonText.text = "대화그만하기";
+
+        if (actionButtonText != null)
+            actionButtonText.text = GetActionButtonText();
+    }
+
+    private void NextLine()
+    {
+        if (!IsOpen || currentLines == null)
+            return;
+
         if (currentIndex >= currentLines.Length - 1)
             return;
 
         currentIndex++;
-
         ShowCurrentLine();
     }
 
-    /// <summary>
-    /// NPC 종류에 따라 마지막 기능 버튼 이름을 반환한다.
-    /// </summary>
     private string GetActionButtonText()
     {
         switch (currentNpcType)
@@ -146,39 +171,56 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 마지막 대화의 기능 버튼을 눌렀을 때 실행된다.
-    /// NPC 기능 연결을 요청한다. 씬 이동은 외부 연결 컴포넌트가 담당한다.
-    /// </summary>
     private void OnActionButtonClicked()
     {
-        if (!dialoguePanel.activeSelf || currentLines == null ||
+        if (!IsOpen ||
+            currentLines == null ||
             currentIndex != currentLines.Length - 1)
             return;
 
-        ActionRequested?.Invoke(currentNpcType);
+        PlazaNPC.NPCType requestedType = currentNpcType;
+
+        // 기능 실행 전에 대화창을 닫아 다음 UI와 겹치지 않게 한다.
+        CloseDialogue();
+
+        // 업그레이드, 퀘스트, 스테이지 기능은 외부 연결 코드가 처리한다.
+        ActionRequested?.Invoke(requestedType);
     }
 
-    /// <summary>
-    /// 대화를 닫는다.
-    /// </summary>
     public void CloseDialogue()
     {
-        dialoguePanel.SetActive(false);
-        lastButtons.SetActive(false);
-        nextButton.gameObject.SetActive(true);
+        ResetDialogueState();
+    }
 
+    private void ResetDialogueState()
+    {
         currentLines = null;
         currentIndex = 0;
+
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+
+        if (lastButtons != null)
+            lastButtons.SetActive(false);
+
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(true);
+
+        if (nameText != null)
+            nameText.text = "";
+
+        if (dialogueText != null)
+            dialogueText.text = "";
+
+        if (portrait != null)
+            portrait.sprite = null;
+
+        PlazaNPC.ResetAllHoverScales();
     }
 
     private void Update()
     {
-        // ESC로 대화 종료
-        if (dialoguePanel.activeSelf &&
-            Input.GetKeyDown(KeyCode.Escape))
-        {
+        if (IsOpen && Input.GetKeyDown(KeyCode.Escape))
             CloseDialogue();
-        }
     }
 }
