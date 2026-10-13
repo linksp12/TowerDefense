@@ -7,6 +7,19 @@ namespace LastOfTheTower.Progression
     // 게임 진행만 초기화한다. 화면·음량 설정과 SO 정의는 보존한다.
     public static class GameProgressReset
     {
+        private static readonly string[] ProgressStringKeys =
+            { QuestManager.SaveKey, PlayerPrefsStageProgressStorage.DefaultKey, GameUIManager.SavedStageKey };
+
+        // 새 게임이 지울 현재 진행 기록(슬롯·옵션 제외)이 하나라도 있는지 확인한다.
+        public static bool HasProgress()
+        {
+            foreach (string key in ProgressStringKeys)
+                if (PlayerPrefs.HasKey(key)) return true;
+            foreach (string key in ProgressIntKeys())
+                if (PlayerPrefs.HasKey(key)) return true;
+            return false;
+        }
+
         public static bool TryReset(out string error, bool includeSaveSlots = true)
         {
             error = null;
@@ -14,19 +27,13 @@ namespace LastOfTheTower.Progression
             var integers = new Dictionary<string, int>();
             try
             {
-                CaptureString(strings, QuestManager.SaveKey);
-                CaptureString(strings, PlayerPrefsStageProgressStorage.DefaultKey);
-                CaptureString(strings, GameUIManager.SavedStageKey);
+                foreach (string key in ProgressStringKeys)
+                    CaptureString(strings, key);
                 if (includeSaveSlots)
                     for (int slot = 0; slot < GameSaveSlotStore.SlotCount; slot++)
                         CaptureString(strings, GameSaveSlotStore.SlotKey(slot));
-                CaptureInt(integers, "SavedWave");
-                CaptureInt(integers, ResearchProgressStore.SkillPointKey);
-                foreach (ResearchData data in Resources.LoadAll<ResearchData>(string.Empty))
-                {
-                    if (!string.IsNullOrWhiteSpace(data.ResearchId))
-                        CaptureInt(integers, ResearchProgressStore.ResearchLevelKeyPrefix + data.ResearchId);
-                }
+                foreach (string key in ProgressIntKeys())
+                    CaptureInt(integers, key);
                 foreach (string key in strings.Keys) PlayerPrefs.DeleteKey(key);
                 foreach (string key in integers.Keys) PlayerPrefs.DeleteKey(key);
                 PlayerPrefs.Save();
@@ -55,6 +62,17 @@ namespace LastOfTheTower.Progression
             ResultSceneManager.isVictory = false;
             ResultSceneManager.restartSceneName = "Stage1Scene";
             return true;
+        }
+
+        private static IEnumerable<string> ProgressIntKeys()
+        {
+            yield return "SavedWave";
+            yield return ResearchProgressStore.SkillPointKey;
+            foreach (ResearchData data in Resources.LoadAll<ResearchData>(string.Empty))
+            {
+                if (!string.IsNullOrWhiteSpace(data.ResearchId))
+                    yield return ResearchProgressStore.ResearchLevelKeyPrefix + data.ResearchId;
+            }
         }
 
         private static void CaptureString(Dictionary<string, string> values, string key)

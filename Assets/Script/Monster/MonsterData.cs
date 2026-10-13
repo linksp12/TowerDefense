@@ -31,4 +31,11 @@ public class MonsterData : ScriptableObject
     public int magicResistance;
     public Sprite bossPortrait;
     public string bossName;
+
+    [Header("도감 정보")]
+    [Tooltip("도감 등 화면에 표시할 한글 이름")]
+    public string displayName;
+    [TextArea(2, 4)] public string description;
+    [Tooltip("도감 초상화에 쓸 스프라이트 (보통 이동 애니메이션 첫 프레임)")]
+    public Sprite icon;
 }

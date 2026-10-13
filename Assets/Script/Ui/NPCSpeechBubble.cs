@@ -12,6 +12,8 @@ public class NPCSpeechBubble : MonoBehaviour
     [SerializeField] private Canvas screenSpaceCanvas;
     [SerializeField] private GameObject bubbleRoot;
     [SerializeField] private TMP_Text bubbleText;
+    [SerializeField] private RectTransform functionTag;
+    [SerializeField] private Vector2 functionTagOffset = new Vector2(0f, 8f);
 
     [Header("위치 설정")]
     [SerializeField] private Vector3 worldOffset = new Vector3(0f, 0.4f, 0f);
@@ -166,6 +168,8 @@ public class NPCSpeechBubble : MonoBehaviour
         {
             // Canvas 기준 오프셋으로 해상도가 바뀌어도 NPC와의 간격을 유지한다.
             bubbleRect.anchoredPosition = localPosition + screenOffset;
+            if (functionTag != null)
+                functionTag.anchoredPosition = localPosition + functionTagOffset;
         }
     }
 

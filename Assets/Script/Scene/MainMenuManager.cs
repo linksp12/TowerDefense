@@ -258,12 +258,26 @@ public class MainMenuManager : MonoBehaviour
         if (SaveSlotWindow.IsOpen || SceneLoadingScreen.IsLoading) return;
         if (SettingsPopup.Instance != null && SettingsPopup.Instance.IsOpen) return;
         if (!Application.CanStreamedLevelBeLoaded("StoryScene")) return;
-        if (!LastOfTheTower.Progression.GameProgressReset.TryReset(out string error, false))
+
+        // 지워질 진행 기록이 있을 때만 확인한다. 저장 슬롯은 유지된다.
+        if (LastOfTheTower.Progression.GameProgressReset.HasProgress())
         {
-            ShowMainMenuMessage(error, new Color32(232, 164, 146, 255));
+            SaveSlotWindow.ShowNewGameConfirmation(StartNewGame);
             return;
         }
+
+        string error = StartNewGame();
+        if (error != null)
+            ShowMainMenuMessage(error, new Color32(232, 164, 146, 255));
+    }
+
+    // 현재 진행을 초기화하고 스토리로 이동한다. 실패하면 안내 문구를 돌려준다.
+    private string StartNewGame()
+    {
+        if (!LastOfTheTower.Progression.GameProgressReset.TryReset(out string error, false))
+            return error;
         SceneManager.LoadScene("StoryScene");
+        return null;
     }
 
     // ──────── 이어하기 버튼 ────────
