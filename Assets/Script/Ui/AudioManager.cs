@@ -22,9 +22,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip storyBGM;       // 스토리 씬 BGM
     public AudioClip gameBGM;        // 게임 씬 BGM
     public AudioClip resultBGM;      // 결과 화면 BGM
+    public AudioClip stageSelectionBGM; // 스테이지 선택 BGM
 
     [Header("UI Clips")]
     public AudioClip buttonClickSFX; // 버튼 클릭 사운드
+    public AudioClip stageDeploymentSFX; // 출전 확정 사운드
 
     private float masterVolume = 1f;
     private float bgmVolume = 1f;
@@ -157,6 +159,10 @@ public class AudioManager : MonoBehaviour
                 StopBGM();
                 break;
 
+            case "StageSelectionScene":
+                PlayBGM(stageSelectionBGM);
+                break;
+
             case "Stage1Scene":
             case "Stage2Scene":
             case "Stage3Scene":
@@ -272,6 +278,11 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClick()
     {
         PlayUISound(buttonClickSFX);
+    }
+
+    public void PlayStageDeploymentSound()
+    {
+        PlayUISound(stageDeploymentSFX);
     }
 
     public void PlayStageResultSound()

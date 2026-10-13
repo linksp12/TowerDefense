@@ -99,7 +99,11 @@ public class StageSelectionTestDeployment : MonoBehaviour
         deployLabel.text = "입장 중...";
         statusLabel.text = "전장을 준비하고 있습니다.";
         if (SceneLoadingScreen.TryLoad(battleScenePath, "전장을 준비하고 있습니다", RestoreAfterLoadFailure))
+        {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayStageDeploymentSound();
             return true;
+        }
         RestoreAfterLoadFailure();
         return false;
     }

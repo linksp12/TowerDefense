@@ -97,6 +97,8 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
     {
         if (transitioning)
             return;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
         if (animation != null)
             StopCoroutine(animation);
         closing = false;
@@ -112,6 +114,8 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
     {
         if (closing || transitioning)
             return;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
         closing = true;
         if (animation != null)
             StopCoroutine(animation);
