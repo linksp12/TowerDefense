@@ -496,6 +496,9 @@ public class Stage1TutorialManager : MonoBehaviour
             TowerUpgradeUI.Instance.CloseInstantly();
         if (BossInfoUI.Instance != null)
             BossInfoUI.Instance.SetSuppressedByTowerPanel(false);
+        // 연습 중 설치·강화에 쓴 골드는 실제 1웨이브 전에 시작 골드로 되돌린다. (타워는 유지)
+        if (GameManager.Instance != null)
+            GameManager.Instance.RestoreStartingMoney();
         tutorialRoot.SetActive(false);
         waveManager.StartWaves();
     }
