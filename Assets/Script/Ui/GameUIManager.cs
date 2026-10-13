@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    private const string SavedStageKey = "SavedStageScene";
+    internal const string SavedStageKey = "SavedStageScene";
     private const string SaveIconPath = "UI/SaveIcon";
 
     public PauseManager pauseManager;

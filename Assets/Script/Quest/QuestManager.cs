@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    private const string SaveKey = "quest.states";
+    internal const string SaveKey = "quest.states";
     private const int SaveVersion = 1;
 
     public static QuestManager Instance { get; private set; }
@@ -115,6 +115,12 @@ public class QuestManager : MonoBehaviour
                 return data;
         }
         return null;
+    }
+
+    internal void ReloadProgress()
+    {
+        Load();
+        StatesChanged?.Invoke();
     }
 
     private void Load()

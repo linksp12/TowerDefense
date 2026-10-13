@@ -57,7 +57,12 @@ public class StageSelectionNavigation : MonoBehaviour
 
         if (returnLabel != null)
             returnLabel.text = "이동 중...";
-        if (!SceneLoadingScreen.TryLoad(plazaScenePath, "광장으로 이동 중", RestoreAfterLoadFailure))
+        if (SceneLoadingScreen.TryLoad(plazaScenePath, "광장으로 이동 중", RestoreAfterLoadFailure))
+        {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayButtonClick();
+        }
+        else
             RestoreAfterLoadFailure();
     }
 

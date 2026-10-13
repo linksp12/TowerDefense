@@ -30,7 +30,7 @@ public class PlazaSceneNavigation : MonoBehaviour
 
     private void OnActionRequested(PlazaNPC.NPCType npcType)
     {
-        if (!Application.isPlaying || IsTransitioning)
+        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading)
             return;
 
         string scenePath;
@@ -61,26 +61,19 @@ public class PlazaSceneNavigation : MonoBehaviour
             return;
         }
 
-        float previousTimeScale = Time.timeScale;
-        bool previousAudioPause = AudioListener.pause;
         IsTransitioning = true;
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-
-        try
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Single);
-            if (operation == null)
-                throw new System.InvalidOperationException("씬 로드 요청을 생성하지 못했습니다.");
-
+        string message = npcType == PlazaNPC.NPCType.Stage
+            ? "스테이지 선택 화면으로 이동 중"
+            : "업그레이드 화면으로 이동 중";
+        if (SceneLoadingScreen.TryLoad(scenePath, message, RestoreAfterLoadFailure))
             dialogue.CloseDialogue();
-        }
-        catch (System.Exception exception)
-        {
+        else
+            RestoreAfterLoadFailure();
+    }
+
+    private void RestoreAfterLoadFailure()
+    {
+        if (this != null)
             IsTransitioning = false;
-            Time.timeScale = previousTimeScale;
-            AudioListener.pause = previousAudioPause;
-            Debug.LogError($"광장 씬 이동 실패: {scenePath}\n{exception}", this);
-        }
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine;
 /// </summary>
 public static class ResearchProgressStore
 {
-    private const string SkillPointKey = "research.skill_points";
-    private const string ResearchLevelKeyPrefix = "research.level.";
+    internal const string SkillPointKey = "research.skill_points";
+    internal const string ResearchLevelKeyPrefix = "research.level.";
 
     public static int SkillPoints => Mathf.Max(0, PlayerPrefs.GetInt(SkillPointKey, 0));
 

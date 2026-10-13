@@ -27,7 +27,7 @@ public class MainMenuManager : MonoBehaviour
     public static int EasterEggPlayerHpOverride { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetEasterEggBonus()
+    internal static void ResetEasterEggBonus()
     {
         EasterEggPlayerHpOverride = 0;
     }

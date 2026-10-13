@@ -67,6 +67,10 @@ public class SettingsPopup : MonoBehaviour
     private Button defaultsButton;
     private Button saveButton;
     private Button cancelButton;
+    private Button resetDataButton;
+    private GameObject resetConfirmation;
+    private TMP_Text resetConfirmationText;
+    private bool isResetting;
     private readonly List<Resolution> availableResolutions = new List<Resolution>();
     private RectTransform settingsRect;
     private RectTransform settingsParentRect;
@@ -230,6 +234,9 @@ public class SettingsPopup : MonoBehaviour
         if (cancelButton != null)
             cancelButton.onClick.AddListener(CancelAndClose);
 
+        if (resetDataButton != null)
+            resetDataButton.onClick.AddListener(OpenResetConfirmation);
+
         if (saveAndExitButton != null)
             saveAndExitButton.onClick.AddListener(OnSaveAndExit);
     }
@@ -350,6 +357,13 @@ public class SettingsPopup : MonoBehaviour
             "CancelButton", "취소", new Vector2(210f, -345f),
             new Color(0.40f, 0.22f, 0.24f, 1f));
 
+        resetDataButton = CreateActionButton(
+            "ResetDataButton", "데이터 초기화", new Vector2(0f, -282f),
+            new Color(0.48f, 0.20f, 0.20f, 1f));
+        resetDataButton.GetComponent<RectTransform>().sizeDelta = new Vector2(260f, 42f);
+        resetDataButton.GetComponentInChildren<TMP_Text>().fontSize = 23f;
+        BuildResetConfirmation();
+
         if (closeButton != null)
         {
             RectTransform closeRect = closeButton.GetComponent<RectTransform>();
@@ -403,9 +417,10 @@ public class SettingsPopup : MonoBehaviour
         closeText.fontStyle = FontStyles.Bold;
     }
 
-    private Button CreateActionButton(string objectName, string label, Vector2 position, Color color)
+    private Button CreateActionButton(string objectName, string label, Vector2 position, Color color, Transform parent = null)
     {
-        Transform existing = settingsPanel.transform.Find(objectName);
+        if (parent == null) parent = settingsPanel.transform;
+        Transform existing = parent.Find(objectName);
         if (existing != null)
             return existing.GetComponent<Button>();
 
@@ -415,7 +430,7 @@ public class SettingsPopup : MonoBehaviour
             typeof(CanvasRenderer),
             typeof(Image),
             typeof(Button));
-        buttonObject.transform.SetParent(settingsPanel.transform, false);
+        buttonObject.transform.SetParent(parent, false);
 
         RectTransform buttonRect = buttonObject.GetComponent<RectTransform>();
         buttonRect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -455,6 +470,94 @@ public class SettingsPopup : MonoBehaviour
         ApplyFont(text, Color.white);
 
         return button;
+    }
+
+    private void BuildResetConfirmation()
+    {
+        resetConfirmation = new GameObject("ResetConfirmation", typeof(RectTransform), typeof(Image));
+        resetConfirmation.transform.SetParent(settingsPanel.transform, false);
+        RectTransform backdropRect = resetConfirmation.GetComponent<RectTransform>();
+        backdropRect.anchorMin = Vector2.zero;
+        backdropRect.anchorMax = Vector2.one;
+        backdropRect.offsetMin = backdropRect.offsetMax = Vector2.zero;
+        resetConfirmation.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.8f);
+
+        var card = new GameObject("WarningPanel", typeof(RectTransform), typeof(Image), typeof(Outline));
+        card.transform.SetParent(resetConfirmation.transform, false);
+        var rect = card.GetComponent<RectTransform>();
+        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.sizeDelta = new Vector2(620f, 340f);
+        card.GetComponent<Image>().color = new Color(0.055f, 0.075f, 0.1f, 1f);
+        var outline = card.GetComponent<Outline>();
+        outline.effectColor = new Color(0.8f, 0.6f, 0.28f, 1f);
+        outline.effectDistance = new Vector2(2f, -2f);
+
+        CreateResetText(card.transform, "Title", "데이터 초기화", 115f, 32f, new Color(1f, 0.76f, 0.34f));
+        resetConfirmationText = CreateResetText(card.transform, "Warning",
+            "게임의 모든데이터가 초기화 됩니다\n초기화 하시겠습니까?", 28f, 27f, Color.white);
+        CreateResetText(card.transform, "Hint", "초기화 후 메인 화면으로 이동합니다.", -45f, 20f,
+            new Color(0.7f, 0.73f, 0.76f));
+        CreateActionButton("YesButton", "네", new Vector2(-110f, -112f),
+            new Color(0.6f, 0.23f, 0.2f), card.transform).onClick.AddListener(ConfirmResetData);
+        CreateActionButton("NoButton", "아니요", new Vector2(110f, -112f),
+            new Color(0.26f, 0.3f, 0.38f), card.transform).onClick.AddListener(CancelResetConfirmation);
+        resetConfirmation.SetActive(false);
+    }
+
+    private TMP_Text CreateResetText(Transform parent, string objectName, string content, float y, float size, Color color)
+    {
+        var child = new GameObject(objectName, typeof(RectTransform), typeof(TextMeshProUGUI));
+        child.transform.SetParent(parent, false);
+        var text = child.GetComponent<TextMeshProUGUI>();
+        text.rectTransform.anchorMin = text.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        text.rectTransform.anchoredPosition = new Vector2(0f, y);
+        text.rectTransform.sizeDelta = new Vector2(560f, objectName == "Warning" ? 100f : 48f);
+        text.text = content;
+        text.fontSize = size;
+        text.alignment = TextAlignmentOptions.Center;
+        text.raycastTarget = false;
+        ApplyFont(text, color);
+        return text;
+    }
+
+    private void OpenResetConfirmation()
+    {
+        if (!isOpen || isFading || isResetting || SceneLoadingScreen.IsLoading) return;
+        AudioManager.Instance?.PlayButtonClick();
+        resetConfirmationText.text = "게임의 모든데이터가 초기화 됩니다\n초기화 하시겠습니까?";
+        resetConfirmation.SetActive(true);
+        resetConfirmation.transform.SetAsLastSibling();
+        var noButton = resetConfirmation.transform.Find("WarningPanel/NoButton").GetComponent<Button>();
+        noButton.Select();
+    }
+
+    private void CancelResetConfirmation()
+    {
+        if (isResetting) return;
+        AudioManager.Instance?.PlayButtonClick();
+        resetConfirmation.SetActive(false);
+        resetDataButton.Select();
+    }
+
+    private void ConfirmResetData()
+    {
+        if (isResetting || !resetConfirmation.activeSelf || SceneLoadingScreen.IsLoading) return;
+        AudioManager.Instance?.PlayButtonClick();
+        if (!Application.CanStreamedLevelBeLoaded("MainScene"))
+        {
+            resetConfirmationText.text = "메인 화면을 찾을 수 없어\n초기화를 진행하지 못했습니다.";
+            return;
+        }
+        isResetting = true;
+        if (!LastOfTheTower.Progression.GameProgressReset.TryReset(out string error))
+        {
+            isResetting = false;
+            resetConfirmationText.text = error;
+            return;
+        }
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 
     private void ApplyOptionFonts()
@@ -682,12 +785,17 @@ public class SettingsPopup : MonoBehaviour
 
     public void Close()
     {
+        if (resetConfirmation != null && resetConfirmation.activeSelf)
+        {
+            CancelResetConfirmation();
+            return;
+        }
         CancelAndClose();
     }
 
     private void SaveAndClose()
     {
-        if (!isOpen || isFading) return;
+        if (!isOpen || isFading || resetConfirmation.activeSelf) return;
 
         SaveSettings();
         hasOpeningSnapshot = false;
@@ -696,7 +804,7 @@ public class SettingsPopup : MonoBehaviour
 
     private void CancelAndClose()
     {
-        if (!isOpen || isFading) return;
+        if (!isOpen || isFading || resetConfirmation.activeSelf) return;
 
         if (hasOpeningSnapshot)
             ApplySnapshot(openingSnapshot);
