@@ -86,6 +86,11 @@ public class TowerUpgradeUI : MonoBehaviour
         if (panelShake == null && panel != null)
             panelShake = panel.GetComponent<PanelShake>();
 
+        // 씬 로딩 화면의 Canvas를 잘못 잡으면 로딩 종료 후 파괴되어 위치 이동이 멈춘다.
+        // 패널이 속한 Canvas를 우선 사용한다. (TowerBuildManager와 같은 방식)
+        if (canvas == null && panel != null)
+            canvas = panel.GetComponentInParent<Canvas>(true);
+
         if (canvas == null)
             canvas = FindFirstObjectByType<Canvas>();
 
@@ -188,6 +193,9 @@ public class TowerUpgradeUI : MonoBehaviour
     {
         if (selectedTower == null)
             return;
+
+        if (canvas == null && panel != null)
+            canvas = panel.GetComponentInParent<Canvas>(true);
 
         if (panelRect == null || canvas == null || Camera.main == null)
         {

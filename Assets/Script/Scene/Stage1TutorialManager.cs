@@ -120,10 +120,17 @@ public class Stage1TutorialManager : MonoBehaviour
 
         Image panelImage = introPanel.GetComponent<Image>();
         if (panelImage != null)
+        {
             panelImage.color = new Color(0.06f, 0.08f, 0.13f, 0.95f);
+            BattleUiSkin.Skin(panelImage, BattleUiSkin.Frame, BattleUiSkin.PixelScale);
+        }
 
         primaryButtonLabel = CreateButtonLabel(startButton, "시작하기");
         CreateButtonLabel(skipButton, "건너뛰기");
+        // 광장·전투 UI와 같은 픽셀 버튼: 진행은 금색, 건너뛰기는 어두운 버튼
+        if (BattleUiSkin.Skin(startButton.image, BattleUiSkin.GoldButton, BattleUiSkin.PixelScale))
+            primaryButtonLabel.color = new Color32(58, 31, 11, 255);
+        BattleUiSkin.Skin(skipButton.image, BattleUiSkin.DarkButton, BattleUiSkin.PixelScale);
 
         startButton.onClick.AddListener(AdvanceTutorial);
         skipButton.onClick.AddListener(SkipTutorial);
