@@ -70,6 +70,9 @@ public sealed class SkillData : ScriptableObject
     [Range(0.1f, 1f)] [SerializeField] private float magicCircleRadiusFraction = 1f;
     [Tooltip("지속 장판 이미지의 실제 원 테두리 반경 / 이미지 반경입니다.")]
     [Range(0.1f, 1f)] [SerializeField] private float effectRadiusFraction = 1f;
+    [InspectorName("장판 회전 속도")]
+    [Tooltip("지속 장판 이미지가 초당 도는 각도입니다. 0이면 회전하지 않고, 음수면 반대 방향으로 돕니다.")]
+    [SerializeField] private float effectRotationSpeed;
 
     [Header("연출 및 사운드")]
     [InspectorName("마법진 이미지")]
@@ -102,6 +105,7 @@ public sealed class SkillData : ScriptableObject
     public float BuffMarkerHeight => buffMarkerHeight;
     public float MagicCircleRadiusFraction => magicCircleRadiusFraction;
     public float EffectRadiusFraction => effectRadiusFraction;
+    public float EffectRotationSpeed => effectRotationSpeed;
     public Sprite MagicCircle => magicCircle;
     public GameObject EffectPrefab => effectPrefab;
     public float EffectScale => effectScale;

@@ -30,6 +30,7 @@ MonoBehaviour:
   buffMarkerHeight: 0.8
   magicCircleRadiusFraction: 0.74
   effectRadiusFraction: 0.9
+  effectRotationSpeed: 15
   magicCircle: {fileID: 21300000, guid: 157a7690234d4e4ba3cc34eb9ca34ca5, type: 3}
   effectPrefab: {fileID: 384101174970139236, guid: 6cd47450b93e4f4aa67eb1f4b12f5cf2, type: 3}
   effectScale: 1.7
