@@ -7,6 +7,7 @@ public class PlazaSceneNavigation : MonoBehaviour
     [SerializeField] private DialogueUI dialogue;
     [SerializeField] private string stageSelectionScenePath = "Assets/Scenes/StageSelectionScene.unity";
     [SerializeField] private string researchScenePath = "Assets/Scenes/ResearchScene.unity";
+    [SerializeField] private string mainScenePath = "Assets/Scenes/MainScene.unity";
     [SerializeField] private QuestUI questBoard;
 
     public bool IsTransitioning { get; private set; }
@@ -30,7 +31,7 @@ public class PlazaSceneNavigation : MonoBehaviour
 
     private void OnActionRequested(PlazaNPC.NPCType npcType)
     {
-        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading)
+        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen)
             return;
 
         string scenePath;
@@ -75,5 +76,27 @@ public class PlazaSceneNavigation : MonoBehaviour
     {
         if (this != null)
             IsTransitioning = false;
+    }
+
+    public void OpenSaveSlots()
+    {
+        if (IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen) return;
+        dialogue?.CloseDialogue();
+        if (questBoard != null && questBoard.IsOpen) questBoard.Close();
+        SaveSlotWindow.Show(true);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        if (!Application.isPlaying || IsTransitioning || SceneLoadingScreen.IsLoading || SaveSlotWindow.IsOpen)
+            return;
+        IsTransitioning = true;
+        if (SceneLoadingScreen.TryLoad(mainScenePath, "메인 화면으로 이동 중", RestoreAfterLoadFailure))
+        {
+            dialogue?.CloseDialogue();
+            AudioManager.Instance?.PlayButtonClick();
+        }
+        else
+            RestoreAfterLoadFailure();
     }
 }

@@ -134,20 +134,9 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        QuestSaveData save = null;
-        try
+        if (!TryReadSave(PlayerPrefs.GetString(SaveKey), out QuestSaveData save, out string error))
         {
-            save = JsonUtility.FromJson<QuestSaveData>(PlayerPrefs.GetString(SaveKey));
-        }
-        catch (Exception exception)
-        {
-            Debug.LogError($"퀘스트 기록을 읽지 못했습니다. 기존 기록을 보존합니다: {exception.Message}", this);
-            return;
-        }
-
-        if (save == null || save.version != SaveVersion || save.quests == null)
-        {
-            Debug.LogError("퀘스트 기록 형식이 올바르지 않습니다. 기존 기록을 보존합니다.", this);
+            Debug.LogError(error, this);
             return;
         }
 
@@ -164,6 +153,37 @@ public class QuestManager : MonoBehaviour
         }
 
         CanSave = true;
+    }
+
+    internal static bool TryReadSave(string json, out QuestSaveData save, out string error)
+    {
+        save = null;
+        error = null;
+        if (json == null) { save = new QuestSaveData(); return true; }
+        try
+        {
+            var root = Newtonsoft.Json.Linq.JObject.Parse(json, new Newtonsoft.Json.Linq.JsonLoadSettings
+            { DuplicatePropertyNameHandling = Newtonsoft.Json.Linq.DuplicatePropertyNameHandling.Error });
+            if (root["version"]?.Type != Newtonsoft.Json.Linq.JTokenType.Integer ||
+                (int)root["version"] != SaveVersion || root["quests"] is not Newtonsoft.Json.Linq.JArray quests)
+                throw new FormatException("퀘스트 저장 형식이 올바르지 않습니다.");
+            var ids = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var quest in quests)
+            {
+                if (quest["questId"]?.Type != Newtonsoft.Json.Linq.JTokenType.String ||
+                    quest["state"]?.Type != Newtonsoft.Json.Linq.JTokenType.Integer ||
+                    string.IsNullOrWhiteSpace((string)quest["questId"]) || !ids.Add((string)quest["questId"]) ||
+                    !Enum.IsDefined(typeof(QuestState), (int)quest["state"]))
+                    throw new FormatException("퀘스트 항목이 올바르지 않습니다.");
+            }
+            save = JsonUtility.FromJson<QuestSaveData>(json);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            error = "퀘스트 기록을 읽을 수 없습니다: " + exception.Message;
+            return false;
+        }
     }
 
     private bool WriteStates(bool flush)

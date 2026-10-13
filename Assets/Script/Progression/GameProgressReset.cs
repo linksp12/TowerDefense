@@ -7,7 +7,7 @@ namespace LastOfTheTower.Progression
     // 게임 진행만 초기화한다. 화면·음량 설정과 SO 정의는 보존한다.
     public static class GameProgressReset
     {
-        public static bool TryReset(out string error)
+        public static bool TryReset(out string error, bool includeSaveSlots = true)
         {
             error = null;
             var strings = new Dictionary<string, string>();
@@ -17,6 +17,9 @@ namespace LastOfTheTower.Progression
                 CaptureString(strings, QuestManager.SaveKey);
                 CaptureString(strings, PlayerPrefsStageProgressStorage.DefaultKey);
                 CaptureString(strings, GameUIManager.SavedStageKey);
+                if (includeSaveSlots)
+                    for (int slot = 0; slot < GameSaveSlotStore.SlotCount; slot++)
+                        CaptureString(strings, GameSaveSlotStore.SlotKey(slot));
                 CaptureInt(integers, "SavedWave");
                 CaptureInt(integers, ResearchProgressStore.SkillPointKey);
                 foreach (ResearchData data in Resources.LoadAll<ResearchData>(string.Empty))

@@ -154,7 +154,7 @@ public class SettingsPopup : MonoBehaviour
     private void Update()
     {
         // ESC 키로 설정창 토글
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !SaveSlotWindow.IsOpen && !SceneLoadingScreen.IsLoading)
         {
             if (isOpen)
                 Close();
@@ -769,7 +769,7 @@ public class SettingsPopup : MonoBehaviour
 
     public void Open()
     {
-        if (isOpen || isFading) return;
+        if (isOpen || isFading || SaveSlotWindow.IsOpen || SceneLoadingScreen.IsLoading) return;
 
         // UI 값 갱신
         RefreshUIValues();
@@ -1232,15 +1232,6 @@ public class SettingsPopup : MonoBehaviour
     private void OnSaveAndExit()
     {
         SaveSettings();
-
-        // 현재 웨이브 번호 저장 (이어하기용)
-        if (FindFirstObjectByType<WaveManager>() != null)
-        {
-            WaveManager wm = FindFirstObjectByType<WaveManager>();
-            PlayerPrefs.SetInt("SavedWave", wm.CurrentWave);
-            PlayerPrefs.Save();
-            Debug.Log("웨이브 저장: " + wm.CurrentWave);
-        }
 
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
