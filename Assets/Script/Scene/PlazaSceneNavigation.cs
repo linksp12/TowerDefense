@@ -7,8 +7,7 @@ public class PlazaSceneNavigation : MonoBehaviour
     [SerializeField] private DialogueUI dialogue;
     [SerializeField] private string stageSelectionScenePath = "Assets/Scenes/StageSelectionScene.unity";
     [SerializeField] private string researchScenePath = "Assets/Scenes/ResearchScene.unity";
-    [SerializeField] private string questScenePath = "Assets/Scenes/Quest.unity";
-    [SerializeField] private QuestManager questManager;
+    [SerializeField] private QuestUI questBoard;
 
     public bool IsTransitioning { get; private set; }
 
@@ -44,7 +43,12 @@ public class PlazaSceneNavigation : MonoBehaviour
                 scenePath = researchScenePath;
                 break;
             case PlazaNPC.NPCType.Quest:
-                questManager.AcceptQuest("1"); //하드코딩
+                // 퀘스트 받기: 대화를 닫고 게시판에서 원하는 퀘스트를 고르게 한다.
+                dialogue.CloseDialogue();
+                if (questBoard != null)
+                    questBoard.Open();
+                else
+                    Debug.LogError("광장 퀘스트 게시판 연결이 필요합니다.", this);
                 return;
             default:
                 return;

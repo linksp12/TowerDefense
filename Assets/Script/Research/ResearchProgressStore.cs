@@ -48,6 +48,17 @@ public static class ResearchProgressStore
         return true;
     }
 
+    // 퀘스트 등 보상 지급용 공개 API입니다. 저장까지 처리합니다.
+    public static bool AddSkillPoints(int amount)
+    {
+        if (amount <= 0)
+            return false;
+
+        PlayerPrefs.SetInt(SkillPointKey, SkillPoints + amount);
+        PlayerPrefs.Save();
+        return true;
+    }
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
     // ResearchScene에서만 쓰는 독립 검증 수단입니다. 보상 시스템 연결 시에는 호출하지 않습니다.
     public static void AddTestSkillPoints(int amount)
