@@ -288,6 +288,8 @@ public class TowerAttack : MonoBehaviour
         ArrowProjectile projectile =
             arrow.GetComponent<ArrowProjectile>();
 
+        TowerData.AttackFeel feel = towerData != null ? towerData.attackFeel : TowerData.AttackFeel.Arrow;
+
         if (projectile != null)
         {
             projectile.SetTarget(
@@ -298,6 +300,7 @@ public class TowerAttack : MonoBehaviour
                 criticalDamageMultiplier
             );
             projectile.ApplyEffectStats(projectileEffects);
+            projectile.SetFeel(feel);
         }
         else
         {
@@ -305,6 +308,9 @@ public class TowerAttack : MonoBehaviour
                 "Arrow Prefab에 ArrowProjectile이 없습니다."
             );
         }
+
+        // 발사음과 발사 연출 (타워 데이터의 공격 연출 종류 기준)
+        CombatFeedback.TowerFired(feel, spawnPosition);
     }
 
     // =========================================================

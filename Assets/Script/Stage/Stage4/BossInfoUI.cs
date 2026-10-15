@@ -517,6 +517,7 @@ public class BossInfoUI : MonoBehaviour
             UIManager waveUi = FindAnyObjectByType<UIManager>();
             if (waveUi != null)
                 waveUi.ShowBossBanner(displayName);
+            CombatFeedback.BossAppeared();
         }
 
         if (portraitImage != null && portraitImage.sprite == null)

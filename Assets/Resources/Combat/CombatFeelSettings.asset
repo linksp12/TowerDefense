@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8156d07a462c3e0458cad3219658bf32, type: 3}
+  m_Name: CombatFeelSettings
+  m_EditorClassIdentifier: Assembly-CSharp::CombatFeelSettings
+  arrowShot:
+    clip: {fileID: 8300000, guid: 72ddc9b0d50a4234bb9e95b810d2f472, type: 3}
+    volume: 0.5
+    minInterval: 0.05
+    pitchJitter: 0.06
+  cannonShot:
+    clip: {fileID: 8300000, guid: 58265f36c3ea0124ab55c3c5e9297f0b, type: 3}
+    volume: 0.8
+    minInterval: 0.06
+    pitchJitter: 0.06
+  magicShot:
+    clip: {fileID: 8300000, guid: ef3ffd722e779014f8842b225f93d432, type: 3}
+    volume: 0.5
+    minInterval: 0.05
+    pitchJitter: 0.06
+  arrowHit:
+    clip: {fileID: 8300000, guid: 13faa426e331ec84ca41d44649767976, type: 3}
+    volume: 0.9
+    minInterval: 0.04
+    pitchJitter: 0.06
+  cannonExplode:
+    clip: {fileID: 8300000, guid: 7908c2ef2150a0f4eba6aa3a86986d61, type: 3}
+    volume: 0.95
+    minInterval: 0.08
+    pitchJitter: 0.08
+  magicHit:
+    clip: {fileID: 8300000, guid: 22902d48dd93b654c9811d183964e9df, type: 3}
+    volume: 0.85
+    minInterval: 0.05
+    pitchJitter: 0.06
+  fireHit:
+    clip: {fileID: 8300000, guid: f669472a7f81de448b3dba2d546efe41, type: 3}
+    volume: 0.9
+    minInterval: 0.06
+    pitchJitter: 0.06
+  frostHit:
+    clip: {fileID: 8300000, guid: e0954d9d44602594c9414f76c91403fa, type: 3}
+    volume: 0.9
+    minInterval: 0.06
+    pitchJitter: 0.06
+  critical:
+    clip: {fileID: 8300000, guid: ddec29168ce04754786224f928a87ecb, type: 3}
+    volume: 0.75
+    minInterval: 0.06
+    pitchJitter: 0.04
+  killPop:
+    clip: {fileID: 8300000, guid: 698dcb4ba3feff34eb2c5052a9a68dbd, type: 3}
+    volume: 0.8
+    minInterval: 0.04
+    pitchJitter: 0.1
+  coin:
+    clip: {fileID: 8300000, guid: 5cd1708a12dc5ba42a6821707131d20b, type: 3}
+    volume: 0.5
+    minInterval: 0.07
+    pitchJitter: 0.03
+  bossRoar:
+    clip: {fileID: 8300000, guid: a2a5754147f1de546995ae156e962454, type: 3}
+    volume: 1
+    minInterval: 1
+    pitchJitter: 0
+  arrowHitFx:
+    frames:
+    - {fileID: -8242387648675400503, guid: 7e2087f3a7f6bc042b612c4267949877, type: 3}
+    - {fileID: -8204755904484235852, guid: 7e2087f3a7f6bc042b612c4267949877, type: 3}
+    - {fileID: 8722295671057905350, guid: 7e2087f3a7f6bc042b612c4267949877, type: 3}
+    - {fileID: -72610689, guid: 7e2087f3a7f6bc042b612c4267949877, type: 3}
+    - {fileID: 20707311, guid: 7e2087f3a7f6bc042b612c4267949877, type: 3}
+    fps: 24
+    scale: 1.25
+  magicHitFx:
+    frames:
+    - {fileID: -7954115024839238957, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    - {fileID: -8317101502026974875, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    - {fileID: -4218176109252045846, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    - {fileID: 321166787860237770, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    - {fileID: -4262886177144494110, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    - {fileID: 2610938051409233054, guid: 1835e070d14d5c249b601eadabdb70e8, type: 3}
+    fps: 20
+    scale: 1
+  fireHitFx:
+    frames:
+    - {fileID: -6990091473884089588, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    - {fileID: 2456121204580701566, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    - {fileID: 3331666234206182246, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    - {fileID: -5287457233909130317, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    - {fileID: 6762133928506422822, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    - {fileID: -280545586, guid: cf43938f1c3a34f43bbc2f65fdb13faa, type: 3}
+    fps: 16
+    scale: 1
+  frostHitFx:
+    frames:
+    - {fileID: -8349568254665588572, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    - {fileID: 6481022356700267183, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    - {fileID: -947301329944910840, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    - {fileID: -2492705581875516976, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    - {fileID: 3739701105554207424, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    - {fileID: 8328579978003986722, guid: ff5f1b44426cec94aaaba50c34953594, type: 3}
+    fps: 20
+    scale: 1
+  explosionFx:
+    frames:
+    - {fileID: -3374386822094675814, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: -4886962310830628408, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: -2583550513521173832, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: 5569436001695930908, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: 228512524152782516, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: -1627363009740932813, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: -1419266858, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    - {fileID: -1446651385, guid: 3a0b5ca5eee61424bab82c4cc4496e6f, type: 3}
+    fps: 18
+    scale: 1
+  muzzleSmokeFx:
+    frames:
+    - {fileID: -6457141246187141598, guid: 32ae2ff78ed03764fab6822ac2ab7b8b, type: 3}
+    - {fileID: 2653115211029999839, guid: 32ae2ff78ed03764fab6822ac2ab7b8b, type: 3}
+    - {fileID: -8068506168902447471, guid: 32ae2ff78ed03764fab6822ac2ab7b8b, type: 3}
+    - {fileID: -300201302, guid: 32ae2ff78ed03764fab6822ac2ab7b8b, type: 3}
+    - {fileID: 162090632, guid: 32ae2ff78ed03764fab6822ac2ab7b8b, type: 3}
+    fps: 18
+    scale: 1
+  deathPuffFx:
+    frames:
+    - {fileID: -7485866301255556928, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    - {fileID: 596966041064229511, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    - {fileID: 7295448078782879179, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    - {fileID: -8072268541515516768, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    - {fileID: 1415608638058004597, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    - {fileID: 1987326670, guid: 4201d1478d5e6b847aaa826bddf32124, type: 3}
+    fps: 16
+    scale: 1.5
+  explosionShake: 0.18
+  baseHitShake: 0.35
+  bossAppearShake: 0.55
+  bossDeathShake: 0.7
+  maxShakeOffset: 0.5
+  baseHit:
+    clip: {fileID: 8300000, guid: 63af947c55cd7e74bb9ad79c66d3b6cd, type: 3}
+    volume: 0.95
+    minInterval: 0.08
+    pitchJitter: 0.05
+  baseCrack:
+    clip: {fileID: 8300000, guid: f5d1207ccdeb00347b7b7d97ed774ab7, type: 3}
+    volume: 0.95
+    minInterval: 0.3
+    pitchJitter: 0.03
+  baseShockwaveFx:
+    frames:
+    - {fileID: -2944612086875864578, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    - {fileID: 8997490202448943448, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    - {fileID: -7537922916193317066, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    - {fileID: 4232068985273836291, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    - {fileID: 7449807456470577883, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    - {fileID: -6289557620837584828, guid: a2fd6a49c006e374cae381721a53d457, type: 3}
+    fps: 18
+    scale: 1.3
+  baseDebrisFx:
+    frames:
+    - {fileID: 846088872661803004, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: -5110097894343538834, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: 5975926534030286121, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: -723121992482046620, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: 9131959506426069072, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: 3903759362927546066, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    - {fileID: 499970263, guid: 199b137424251614c8d8b725f4f77720, type: 3}
+    fps: 14
+    scale: 1
+  baseAura: {fileID: 21300000, guid: 7d236ac14d0ae8d43b31496c4240cb7f, type: 3}
+  auraHealthy: {r: 0.5, g: 0.82, b: 1, a: 0.8}
+  auraDamaged: {r: 1, g: 0.82, b: 0.35, a: 0.8}
+  auraCritical: {r: 1, g: 0.32, b: 0.26, a: 0.9}
+  baseCrackShake: 0.55
+  coinIcon: {fileID: 21300000, guid: 715d7c0498d11bb44848b79dfa91c901, type: 3}
+  maxFlyingCoins: 12
+  maxVoices: 10

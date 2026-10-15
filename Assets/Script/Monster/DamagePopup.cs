@@ -39,6 +39,12 @@ public class DamagePopup : MonoBehaviour
             Spawn(hitPosition, damage.ToString(), GetDamageColor(damage), 32f, 0.7f, 46f, 1.45f, false);
     }
 
+    // 처치 보상: 피해 숫자보다 조금 위에 금색 '+골드'를 띄운다.
+    public static void ShowGold(Vector3 position, int amount)
+    {
+        Spawn(position + Vector3.up * 0.75f, $"+{amount}", new Color32(255, 214, 92, 255), 26f, 0.8f, 44f, 1.35f, false);
+    }
+
     public static void ShowShield(Vector3 hitPosition)
     {
         Spawn(hitPosition, "막힘", new Color32(159, 216, 255, 255), 26f, 0.65f, 38f, 1.3f, false);

@@ -164,6 +164,7 @@ public class MonsterHealth : MonoBehaviour
                 );
 
                 isCritical = true;
+                CombatFeedback.CriticalHit();
             }
 
             currentHp -= finalDamage;
@@ -341,7 +342,8 @@ public class MonsterHealth : MonoBehaviour
         }
 
         // 연습 몬스터는 실제 웨이브 처치 수와 골드를 변경하지 않는다.
-        if (GetComponent<TutorialPracticeMonster>() == null)
+        bool practice = GetComponent<TutorialPracticeMonster>() != null;
+        if (!practice)
         {
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
             if (waveManager != null)
@@ -350,6 +352,9 @@ public class MonsterHealth : MonoBehaviour
             if (GameManager.Instance != null)
                 GameManager.Instance.AddMoney(goldReward);
         }
+
+        // 처치 연출: 연기·처치음, 실제 보상이 있을 때만 골드 숫자와 날아가는 동전
+        CombatFeedback.MonsterKilled(transform.position, practice ? 0 : goldReward, isBoss);
 
         // =====================================================
         // 죽음 애니메이션

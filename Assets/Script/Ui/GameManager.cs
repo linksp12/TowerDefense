@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public Sprite shieldCritical;
 
     private bool isGameEnded = false;
+    private int shieldState;
+    private Vector3? pendingHitPosition;
     private bool isSceneTransitioning = false;
     private LastOfTheTower.Progression.BattleSession battleSession;
     private LastOfTheTower.Progression.StageProgressService stageProgress;
@@ -66,6 +68,8 @@ public class GameManager : MonoBehaviour
         currentPlayerHp = maxPlayerHp;
 
         UpdateHpText();
+        // 'Shield' 태그 기지마다 보호막·체력바 연출을 붙인다. (4스테이지처럼 기지가 여럿이어도 같이 갱신)
+        DefenseBase.AttachAll();
         UpdateShieldVisual();
 
         Canvas gameCanvas = moneyText != null
@@ -131,6 +135,14 @@ public class GameManager : MonoBehaviour
             moneyText.text = $" {currentMoney}";
     }
 
+    // 몬스터가 도착한 위치를 함께 받으면 가장 가까운 기지가 맞는 연출을 한다.
+    public void TakePlayerDamage(int damage, Vector3 hitPosition)
+    {
+        pendingHitPosition = hitPosition;
+        TakePlayerDamage(damage);
+        pendingHitPosition = null;
+    }
+
     public void TakePlayerDamage(int damage)
     {
         if (isGameEnded) return;
@@ -140,8 +152,10 @@ public class GameManager : MonoBehaviour
         if (currentPlayerHp < 0)
             currentPlayerHp = 0;
 
+        int previousShieldState = shieldState;
         UpdateHpText();
         UpdateShieldVisual();
+        DefenseBase.PlayHit(pendingHitPosition, shieldState > previousShieldState);
 
         if (hpText != null)
         {
@@ -174,23 +188,18 @@ public class GameManager : MonoBehaviour
 
     private void UpdateShieldVisual()
     {
-        if (shieldRenderer == null || maxPlayerHp <= 0)
+        if (maxPlayerHp <= 0)
             return;
 
         float hpRatio = (float)currentPlayerHp / maxPlayerHp;
 
-        if (hpRatio > 0.6f)
-        {
-            shieldRenderer.sprite = shieldHealthy;
-        }
-        else if (hpRatio > 0.2f)
-        {
-            shieldRenderer.sprite = shieldDamaged;
-        }
-        else
-        {
-            shieldRenderer.sprite = shieldCritical;
-        }
+        // 0: 온전, 1: 금 감, 2: 위험
+        shieldState = hpRatio > 0.6f ? 0 : hpRatio > 0.2f ? 1 : 2;
+        Sprite sprite = shieldState == 0 ? shieldHealthy : shieldState == 1 ? shieldDamaged : shieldCritical;
+
+        if (shieldRenderer != null)
+            shieldRenderer.sprite = sprite;
+        DefenseBase.UpdateAll(hpRatio, shieldState, sprite);
     }
 
     private void GameOver()
@@ -280,6 +289,7 @@ public class GameManager : MonoBehaviour
         }
 
         DamagePopup.HideAll();
+        CombatFeedback.ClearAll();
 
         UIManager uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
