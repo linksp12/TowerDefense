@@ -95,7 +95,7 @@ public class MonsterMove : MonoBehaviour
         if (GetComponent<TutorialPracticeMonster>() == null)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.TakePlayerDamage(baseDamage);
+                GameManager.Instance.TakePlayerDamage(baseDamage, transform.position);
 
             WaveManager waveManager = FindFirstObjectByType<WaveManager>();
             if (waveManager != null)

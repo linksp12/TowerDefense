@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ArrowTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: arrow_tower
+  attackFeel: 0
   towerName: "\uAE30\uBCF8 \uD654\uC0B4 \uD0C0\uC6CC"
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC274\uB4DC \uBAAC\uC2A4\uD130\uC5D0\uAC8C

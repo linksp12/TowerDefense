@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip mainMenuBGM;    // 메인 화면 BGM
     public AudioClip storyBGM;       // 스토리 씬 BGM
     public AudioClip gameBGM;        // 게임 씬 BGM
+    [Tooltip("전투 BGM 원음이 커서 효과음이 묻히지 않도록 전투 BGM만 이 배율로 줄인다. (설정 음량은 그대로 곱해짐)")]
+    [Range(0f, 1f)] public float battleBgmVolumeScale = 0.55f;
     public AudioClip resultBGM;      // 결과 화면 BGM
     public AudioClip stageSelectionBGM; // 스테이지 선택 BGM
     public AudioClip plazaBGM;       // 광장 BGM
@@ -151,7 +153,17 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
         bgmSource.clip = clip;
         bgmSource.loop = true;
+        ApplyBgmVolume();
         bgmSource.Play();
+    }
+
+    // 곡에 따라 배율이 달라지므로 곡을 바꿀 때와 음량 설정을 바꿀 때 모두 다시 계산한다.
+    private void ApplyBgmVolume()
+    {
+        if (bgmSource == null)
+            return;
+        float clipScale = gameBGM != null && bgmSource.clip == gameBGM ? battleBgmVolumeScale : 1f;
+        bgmSource.volume = bgmVolume * masterVolume * clipScale;
     }
 
     /// <summary>
@@ -268,6 +280,11 @@ public class AudioManager : MonoBehaviour
         PlayOn(source, clip, volumeScale, true);
     }
 
+    // 직접 AudioSource를 다루는 연출 코드가 설정 음량(마스터 × 효과음)을 따르도록 제공한다.
+    public static float SfxGroupVolume => Instance != null
+        ? Instance.masterVolume * Instance.sfxVolume
+        : GetSavedGroupVolume(false);
+
     public static void PlaySFXAtPoint(
         AudioClip clip,
         Vector3 position,
@@ -276,9 +293,7 @@ public class AudioManager : MonoBehaviour
         if (clip == null)
             return;
 
-        float groupVolume = Instance != null
-            ? Instance.masterVolume * Instance.sfxVolume
-            : GetSavedGroupVolume(false);
+        float groupVolume = SfxGroupVolume;
 
         AudioSource.PlayClipAtPoint(
             clip,
@@ -487,10 +502,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     private void ApplyVolumes()
     {
-        if (bgmSource != null)
-        {
-            bgmSource.volume = bgmVolume * masterVolume;
-        }
+        ApplyBgmVolume();
 
         if (sfxSource != null)
         {
