@@ -52,6 +52,9 @@ public sealed class TowerHasteArea : MonoBehaviour
             Color color = visualColor;
             color.a *= Mathf.Clamp01((EndTime - Time.time) / 0.35f);
             visual.color = color;
+            // 장판 그림만 천천히 회전한다. 효과 범위는 위치 기준이라 회전과 무관하다.
+            if (skill.EffectRotationSpeed != 0f)
+                visual.transform.Rotate(0f, 0f, -skill.EffectRotationSpeed * Time.deltaTime);
         }
     }
 
