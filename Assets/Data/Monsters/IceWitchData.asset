@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a5b4e642c4f22b560dd64100fb69a, type: 3}
+  m_Name: IceWitchData
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  id: ice_witch
+  monsterName: Ice Witch
+  maxHp: 20000
+  moveSpeed: 0.35
+  goldReward: 160
+  maxShield: 0
+  baseDamage: 1
+  isBoss: 1
+  defense: 60
+  magicResistance: 60
+  bossPortrait: {fileID: -901664524796784728, guid: b2ff893499d6ea146b2de84b5a6fef63, type: 3}
+  bossName: "\uC5BC\uC74C \uB9C8\uB140"
+  displayName: "\uC5BC\uC74C \uB9C8\uB140"
+  description: "\uC8FC\uBCC0 \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uC5BC\uC74C \uACB0\uACC4\uB97C
+    \uC50C\uC6CC \uC7A0\uC2DC \uBB34\uC801\uC73C\uB85C \uB9CC\uB4E0\uB2E4.\n\uCCB4\uB825\uC774
+    \uC808\uBC18\uC774 \uB418\uBA74 \uBD84\uC2E0\uC744 \uB0A8\uAE30\uACE0 \uC21C\uAC04\uC774\uB3D9\uD55C\uB2E4."
+  icon: {fileID: -901664524796784728, guid: b2ff893499d6ea146b2de84b5a6fef63, type: 3}

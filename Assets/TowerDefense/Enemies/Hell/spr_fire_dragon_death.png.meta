@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: 3c672c0b456427345afa6a746b38cf10
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -323586677524193287
+    second: spr_fire_dragon_death_0
+  - first:
+      213: -7534332020092377724
+    second: spr_fire_dragon_death_1
+  - first:
+      213: 7954646074207190482
+    second: spr_fire_dragon_death_2
+  - first:
+      213: -2395317395035488116
+    second: spr_fire_dragon_death_3
+  - first:
+      213: 7527412442543961523
+    second: spr_fire_dragon_death_4
+  - first:
+      213: 6658953192614692332
+    second: spr_fire_dragon_death_5
+  - first:
+      213: -1875967541611895200
+    second: spr_fire_dragon_death_6
+  - first:
+      213: 792279652000882798
+    second: spr_fire_dragon_death_7
+  - first:
+      213: -6053434399990160814
+    second: spr_fire_dragon_death_8
+  - first:
+      213: -4343571313250662694
+    second: spr_fire_dragon_death_9
+  - first:
+      213: 8688110769566911884
+    second: spr_fire_dragon_death_10
+  - first:
+      213: -504814030719457703
+    second: spr_fire_dragon_death_11
+  - first:
+      213: 1815211066043493408
+    second: spr_fire_dragon_death_12
+  - first:
+      213: -8597498069656188829
+    second: spr_fire_dragon_death_13
+  - first:
+      213: 4235875064441818131
+    second: spr_fire_dragon_death_14
+  - first:
+      213: -6392966410851158881
+    second: spr_fire_dragon_death_15
+  - first:
+      213: -259372736789283128
+    second: spr_fire_dragon_death_16
+  - first:
+      213: -4445637487135497295
+    second: spr_fire_dragon_death_17
+  - first:
+      213: -5692165165725578948
+    second: spr_fire_dragon_death_18
+  - first:
+      213: 3854524858968566832
+    second: spr_fire_dragon_death_19
+  - first:
+      213: 7454819147466107413
+    second: spr_fire_dragon_death_20
+  - first:
+      213: -7743571480019594055
+    second: spr_fire_dragon_death_21
+  - first:
+      213: 9117619852819476051
+    second: spr_fire_dragon_death_22
+  - first:
+      213: 5603487960824114626
+    second: spr_fire_dragon_death_23
+  - first:
+      213: -4119238302974491682
+    second: spr_fire_dragon_death_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 80
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff1f1891a3628bf0800000000000000
+      internalID: -323586677524193287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_1
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 485ea8242fca07790800000000000000
+      internalID: -7534332020092377724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_2
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd331f7574946e60800000000000000
+      internalID: 7954646074207190482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c808898258f12ced0800000000000000
+      internalID: -2395317395035488116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_4
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b530bb0cbdb67860800000000000000
+      internalID: 7527412442543961523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_fire_dragon_death_5
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 0
+        width: 343
+        height: 200
+      alignment: 9
+      pivot: {x: 0.3877551, y: 0.035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce580c5e5aa596c50800000000000000
+      internalID: 6658953192614692332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spr_fire_dragon_death_0: -323586677524193287
+      spr_fire_dragon_death_1: -7534332020092377724
+      spr_fire_dragon_death_10: 8688110769566911884
+      spr_fire_dragon_death_11: -504814030719457703
+      spr_fire_dragon_death_12: 1815211066043493408
+      spr_fire_dragon_death_13: -8597498069656188829
+      spr_fire_dragon_death_14: 4235875064441818131
+      spr_fire_dragon_death_15: -6392966410851158881
+      spr_fire_dragon_death_16: -259372736789283128
+      spr_fire_dragon_death_17: -4445637487135497295
+      spr_fire_dragon_death_18: -5692165165725578948
+      spr_fire_dragon_death_19: 3854524858968566832
+      spr_fire_dragon_death_2: 7954646074207190482
+      spr_fire_dragon_death_20: 7454819147466107413
+      spr_fire_dragon_death_21: -7743571480019594055
+      spr_fire_dragon_death_22: 9117619852819476051
+      spr_fire_dragon_death_23: 5603487960824114626
+      spr_fire_dragon_death_24: -4119238302974491682
+      spr_fire_dragon_death_3: -2395317395035488116
+      spr_fire_dragon_death_4: 7527412442543961523
+      spr_fire_dragon_death_5: 6658953192614692332
+      spr_fire_dragon_death_6: -1875967541611895200
+      spr_fire_dragon_death_7: 792279652000882798
+      spr_fire_dragon_death_8: -6053434399990160814
+      spr_fire_dragon_death_9: -4343571313250662694
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

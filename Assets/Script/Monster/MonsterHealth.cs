@@ -50,9 +50,14 @@ public class MonsterHealth : MonoBehaviour
     private Coroutine flashCoroutine;
     private Animator animator;
     private GolemRootSkill golemRootSkill;
+    private MonsterReviveOnce reviveOnce;
+    private MonsterSplitOnDeath splitOnDeath;
 
     public int CurrentHp => currentHp;
     public bool IsDead => isDead;
+
+    /// <summary>체력이 깎였고 아직 살아 있을 때 호출됩니다. (몬스터, 받은 피해)</summary>
+    public event System.Action<MonsterHealth, int> Damaged;
 
     private void Awake()
     {
@@ -73,6 +78,8 @@ public class MonsterHealth : MonoBehaviour
 
         animator = GetComponent<Animator>();
         golemRootSkill = GetComponent<GolemRootSkill>();
+        reviveOnce = GetComponent<MonsterReviveOnce>();
+        splitOnDeath = GetComponent<MonsterSplitOnDeath>();
 
         currentHp = maxHp;
         currentShield = maxShield;
@@ -138,6 +145,10 @@ public class MonsterHealth : MonoBehaviour
         bool shieldBlocked =
             shieldFXObject != null && currentShield > 0;
 
+        // 얼음 수호·얼음 결계 등 외부 보호 (피해 감소 / 무적)
+        TryGetComponent(out MonsterWard ward);
+        bool wardBlocked = !shieldBlocked && ward != null && ward.IsInvulnerable;
+
         // =====================================================
         // 실드 처리
         // =====================================================
@@ -149,6 +160,10 @@ public class MonsterHealth : MonoBehaviour
             {
                 shieldFXObject.SetActive(false);
             }
+        }
+        else if (wardBlocked)
+        {
+            finalDamage = 0;
         }
         else
         {
@@ -167,6 +182,11 @@ public class MonsterHealth : MonoBehaviour
                 CombatFeedback.CriticalHit();
             }
 
+            if (ward != null)
+            {
+                finalDamage = ward.ModifyDamage(finalDamage);
+            }
+
             currentHp -= finalDamage;
             currentHp = Mathf.Max(currentHp, 0);
         }
@@ -174,7 +194,7 @@ public class MonsterHealth : MonoBehaviour
         // =====================================================
         // 데미지 팝업
         // =====================================================
-        if (shieldBlocked)
+        if (shieldBlocked || wardBlocked)
         {
             DamagePopup.ShowShield(transform.position);
         }
@@ -206,6 +226,12 @@ public class MonsterHealth : MonoBehaviour
         if (currentHp > 0 && golemRootSkill != null)
         {
             golemRootSkill.OnDamaged();
+        }
+
+        // 얼음 마녀·화염 드래곤 등 특수 능력
+        if (currentHp > 0 && !shieldBlocked && !wardBlocked)
+        {
+            Damaged?.Invoke(this, finalDamage);
         }
 
         // =====================================================
@@ -305,6 +331,12 @@ public class MonsterHealth : MonoBehaviour
             return;
         }
 
+        // 해골 병사: 첫 사망은 쓰러졌다가 다시 일어난다.
+        if (reviveOnce != null && reviveOnce.TryInterceptDeath())
+        {
+            return;
+        }
+
         isDead = true;
 
         Debug.Log(gameObject.name + " 몬스터 사망");
@@ -355,6 +387,12 @@ public class MonsterHealth : MonoBehaviour
 
         // 처치 연출: 연기·처치음, 실제 보상이 있을 때만 골드 숫자와 날아가는 동전
         CombatFeedback.MonsterKilled(transform.position, practice ? 0 : goldReward, isBoss);
+
+        // 마그마 슬라임: 작은 슬라임으로 분열
+        if (!practice && splitOnDeath != null)
+        {
+            splitOnDeath.Split();
+        }
 
         // =====================================================
         // 죽음 애니메이션
@@ -408,6 +446,42 @@ public class MonsterHealth : MonoBehaviour
                 statePath
             );
         }
+    }
+
+    // =========================================================
+    // 특수 능력용: 쓰러짐(공격 대상 제외)·체력 회복·기본 색
+    // =========================================================
+    public void SetDowned(bool downed)
+    {
+        isDead = downed;
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+            col.enabled = !downed;
+
+        MonsterMove move = GetComponent<MonsterMove>();
+        if (move != null)
+            move.enabled = !downed;
+
+        if (monsterHpSlider != null)
+            monsterHpSlider.gameObject.SetActive(!downed);
+    }
+
+    public void RestoreHpRatio(float ratio)
+    {
+        currentHp = Mathf.Clamp(Mathf.RoundToInt(maxHp * ratio), 1, maxHp);
+
+        if (monsterHpSlider != null)
+            monsterHpSlider.value = currentHp;
+    }
+
+    /// <summary>피격 깜빡임이 끝난 뒤 돌아갈 색을 바꿉니다. (분노 상태 붉은 빛 등)</summary>
+    public void SetBaseColor(Color color)
+    {
+        originalColor = color;
+
+        if (spriteRenderer != null && flashCoroutine == null)
+            spriteRenderer.color = color;
     }
 
     // =========================================================

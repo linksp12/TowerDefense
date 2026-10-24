@@ -197,6 +197,8 @@ public class ArrowProjectile : MonoBehaviour
             if (monster == null) continue;
             if (monster == mainTarget) continue;
             if (!CanHitMonster(monster)) continue;
+            // 폭발은 하늘을 나는 몬스터에게 닿지 않는다.
+            if (monster.GetComponent<FlyingMonster>() != null) continue;
 
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 

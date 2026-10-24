@@ -20,6 +20,55 @@ public class MonsterMove : MonoBehaviour
 
     private int baseDamage;
 
+    // 분열로 태어난 몬스터는 경로 처음이 아니라 부모 위치에서 이어 간다.
+    private bool continueFromCurrent = false;
+
+    public int CurrentWaypointIndex => currentWaypointIndex;
+
+    // 얼음 길 등 바깥에서 잠깐 주는 가속
+    private float boostMultiplier = 1f;
+    private float boostUntil;
+
+    public void ApplySpeedBoost(float multiplier, float duration)
+    {
+        if (Time.time >= boostUntil || multiplier >= boostMultiplier)
+            boostMultiplier = multiplier;
+        boostUntil = Mathf.Max(boostUntil, Time.time + duration);
+    }
+
+    private float CurrentBoost => Time.time < boostUntil ? boostMultiplier : 1f;
+
+    /// <summary>경로를 따라 distance만큼 앞으로 순간 이동합니다. 기지를 넘어가지는 않습니다.</summary>
+    public void AdvanceAlongPath(float distance)
+    {
+        if (waypoints == null)
+            return;
+
+        // 마지막 웨이포인트(기지 앞)는 건너뛰지 않는다.
+        while (distance > 0f && currentWaypointIndex < waypoints.Length - 1)
+        {
+            Vector3 target = waypoints[currentWaypointIndex].position;
+            float d = Vector3.Distance(transform.position, target);
+
+            if (d > distance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target, distance);
+                return;
+            }
+
+            transform.position = target;
+            distance -= d;
+            currentWaypointIndex++;
+        }
+    }
+
+    public void ContinueFrom(Transform[] path, int waypointIndex)
+    {
+        waypoints = path;
+        currentWaypointIndex = waypointIndex;
+        continueFromCurrent = true;
+    }
+
     void Awake()
     {
         ApplyStatsFromData();
@@ -32,6 +81,9 @@ public class MonsterMove : MonoBehaviour
 
     void Start()
     {
+        if (continueFromCurrent)
+            return;
+
         if (waypoints != null && waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -53,7 +105,7 @@ public class MonsterMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 target.position,
-                moveSpeed * Time.deltaTime
+                moveSpeed * CurrentBoost * Time.deltaTime
             );
 
             if (Vector3.Distance(transform.position, target.position) < 0.01f)

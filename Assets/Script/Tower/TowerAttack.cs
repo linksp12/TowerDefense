@@ -224,6 +224,13 @@ public class TowerAttack : MonoBehaviour
                 continue;
             }
 
+            // 폭발 공격(캐논)은 하늘을 나는 몬스터를 맞히지 못한다.
+            if (projectileEffects.canExplode &&
+                monster.GetComponent<FlyingMonster>() != null)
+            {
+                continue;
+            }
+
             // 거리 계산
             float distance =
                 Vector2.Distance(

@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: f63d4cbfff633b349bd9ad8150b661f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6646542278125501434
+    second: spr_ice_witch_death_0
+  - first:
+      213: 4342081168594047022
+    second: spr_ice_witch_death_1
+  - first:
+      213: -5111606968899981967
+    second: spr_ice_witch_death_2
+  - first:
+      213: -4871228132849999993
+    second: spr_ice_witch_death_3
+  - first:
+      213: -3500871586335353994
+    second: spr_ice_witch_death_4
+  - first:
+      213: 1444281524750534526
+    second: spr_ice_witch_death_5
+  - first:
+      213: 6844276916521019825
+    second: spr_ice_witch_death_6
+  - first:
+      213: -3198177086960650277
+    second: spr_ice_witch_death_7
+  - first:
+      213: 1868213791819374769
+    second: spr_ice_witch_death_8
+  - first:
+      213: 3081183023298974677
+    second: spr_ice_witch_death_9
+  - first:
+      213: 3819314383856611960
+    second: spr_ice_witch_death_10
+  - first:
+      213: -1440834195192115990
+    second: spr_ice_witch_death_11
+  - first:
+      213: 7153753409345822393
+    second: spr_ice_witch_death_12
+  - first:
+      213: -921247932826844566
+    second: spr_ice_witch_death_13
+  - first:
+      213: 1255041701867294702
+    second: spr_ice_witch_death_14
+  - first:
+      213: -7607228047554548078
+    second: spr_ice_witch_death_15
+  - first:
+      213: -3650259387930202706
+    second: spr_ice_witch_death_16
+  - first:
+      213: 6340272788461001958
+    second: spr_ice_witch_death_17
+  - first:
+      213: 266317117324867584
+    second: spr_ice_witch_death_18
+  - first:
+      213: -6248755028310034362
+    second: spr_ice_witch_death_19
+  - first:
+      213: 8701199442506933929
+    second: spr_ice_witch_death_20
+  - first:
+      213: 1305535726253653678
+    second: spr_ice_witch_death_21
+  - first:
+      213: 3132704144556464279
+    second: spr_ice_witch_death_22
+  - first:
+      213: -8049892393382120920
+    second: spr_ice_witch_death_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spr_ice_witch_death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 604c6bf430db2c3a0800000000000000
+      internalID: -6646542278125501434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ice_witch_death_1
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2016f741db224c30800000000000000
+      internalID: 4342081168594047022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ice_witch_death_2
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d2e435b8cef09b0800000000000000
+      internalID: -5111606968899981967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ice_witch_death_3
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78f169172dbe56cb0800000000000000
+      internalID: -4871228132849999993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ice_witch_death_4
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673193437d76a6fc0800000000000000
+      internalID: -3500871586335353994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ice_witch_death_5
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 0
+        width: 287
+        height: 300
+      alignment: 9
+      pivot: {x: 0.44947734, y: 0.02333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e774a66056e1b0410800000000000000
+      internalID: 1444281524750534526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spr_ice_witch_death_0: -6646542278125501434
+      spr_ice_witch_death_1: 4342081168594047022
+      spr_ice_witch_death_10: 3819314383856611960
+      spr_ice_witch_death_11: -1440834195192115990
+      spr_ice_witch_death_12: 7153753409345822393
+      spr_ice_witch_death_13: -921247932826844566
+      spr_ice_witch_death_14: 1255041701867294702
+      spr_ice_witch_death_15: -7607228047554548078
+      spr_ice_witch_death_16: -3650259387930202706
+      spr_ice_witch_death_17: 6340272788461001958
+      spr_ice_witch_death_18: 266317117324867584
+      spr_ice_witch_death_19: -6248755028310034362
+      spr_ice_witch_death_2: -5111606968899981967
+      spr_ice_witch_death_20: 8701199442506933929
+      spr_ice_witch_death_21: 1305535726253653678
+      spr_ice_witch_death_22: 3132704144556464279
+      spr_ice_witch_death_23: -8049892393382120920
+      spr_ice_witch_death_3: -4871228132849999993
+      spr_ice_witch_death_4: -3500871586335353994
+      spr_ice_witch_death_5: 1444281524750534526
+      spr_ice_witch_death_6: 6844276916521019825
+      spr_ice_witch_death_7: -3198177086960650277
+      spr_ice_witch_death_8: 1868213791819374769
+      spr_ice_witch_death_9: 3081183023298974677
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
