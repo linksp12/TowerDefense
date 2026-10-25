@@ -428,7 +428,7 @@ public class TowerUpgrade : MonoBehaviour
 
         return $"{featureText}\n\n" +
             $"<align=left>" +
-            $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{ResearchStatResolver.GetTowerDamage(data.id, lv2Stats.damage)}</color>\n" +
+            $"  공격력: <color=white>{towerAttack.GetDisplayDamage(towerAttack.damage)} → </color><color=#00FF00>{towerAttack.GetDisplayDamage(ResearchStatResolver.GetTowerDamage(data.id, lv2Stats.damage))}</color>\n" +
             $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackCooldown(data.id, lv2Stats.attackCooldown):0.##}</color>\n" +
             $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackRange(data.id, lv2Stats.attackRange):0.##}</color>" +
             $"</align>";
@@ -450,7 +450,7 @@ public class TowerUpgrade : MonoBehaviour
         return $"최종 단계로 업그레이드합니다.\n" +
            $"효과: {effectText}\n\n" +
            $"<align=left>" +
-           $"  공격력: <color=white>{towerAttack.damage} → </color><color=#00FF00>{ResearchStatResolver.GetTowerDamage(data.id, targetStats.damage)}</color>\n" +
+           $"  공격력: <color=white>{towerAttack.GetDisplayDamage(towerAttack.damage)} → </color><color=#00FF00>{towerAttack.GetDisplayDamage(ResearchStatResolver.GetTowerDamage(data.id, targetStats.damage))}</color>\n" +
            $"  공격속도(s): <color=white>{towerAttack.attackCooldown} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackCooldown(data.id, targetStats.attackCooldown):0.##}</color>\n" +
            $"  사거리: <color=white>{towerAttack.attackRange} → </color><color=#00FF00>{ResearchStatResolver.GetTowerAttackRange(data.id, targetStats.attackRange):0.##}</color>" +
            $"</align>";

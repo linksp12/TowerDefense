@@ -123,6 +123,14 @@ public class TowerAttack : MonoBehaviour
     public int BaseDamage => towerData != null
         ? ResearchStatResolver.GetTowerDamage(towerData.id, towerData.baseStats.damage)
         : damage;
+    
+    public ElementType Element => towerData != null ? towerData.element : ElementType.None;
+
+    // 툴팁 표시용: 실제 공격과 같은 환경 보정을 적용한 공격력
+    public int GetDisplayDamage(int damageValue)
+    {
+        return EnvironmentManager.ApplyToDamage(damageValue, Element);
+    }
     public float BaseAttackCooldown => towerData != null
         ? ResearchStatResolver.GetTowerAttackCooldown(towerData.id, towerData.baseStats.attackCooldown)
         : attackCooldown;
@@ -301,6 +309,7 @@ public class TowerAttack : MonoBehaviour
             );
             projectile.ApplyEffectStats(projectileEffects);
             projectile.SetFeel(feel);
+            projectile.SetElement(Element);
         }
         else
         {

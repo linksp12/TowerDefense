@@ -34,6 +34,13 @@ public class ArrowProjectile : MonoBehaviour
     // 타격음·타격 이펙트 종류. 발사한 타워의 TowerData에서 받는다.
     private TowerData.AttackFeel feel = TowerData.AttackFeel.Arrow;
 
+    private ElementType element = ElementType.None;
+
+    public void SetElement(ElementType attackElement)
+    {
+        element = attackElement;
+    }
+
     public void SetFeel(TowerData.AttackFeel attackFeel)
     {
         feel = attackFeel;
@@ -137,7 +144,7 @@ public class ArrowProjectile : MonoBehaviour
 
             // 타격음은 아래 전투 연출에서 공격 종류별로 재생하므로 공용 타격음은 끈다.
             monsterHealth.TakeDamage(
-                damage,
+                EnvironmentManager.ApplyToDamage(damage, element),
                 false,
                 criticalChance,
                 criticalDamageMultiplier
@@ -183,7 +190,8 @@ public class ArrowProjectile : MonoBehaviour
 
             if (monsterStatus != null)
             {
-                monsterStatus.ApplyDot(dotDamage, dotDuration, dotInterval);
+                monsterStatus.ApplyDot(
+    EnvironmentManager.ApplyToDamage(dotDamage, element), dotDuration, dotInterval);
             }
         }
     }
@@ -212,7 +220,8 @@ public class ArrowProjectile : MonoBehaviour
                         stealthMonster?.Reveal();
                     }
 
-                    int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
+                    int splashDamage = EnvironmentManager.ApplyToDamage(
+    Mathf.RoundToInt(damage * splashDamageRate), element);
                     monsterHealth.TakeDamage(
                         splashDamage,
                         false,
