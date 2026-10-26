@@ -1,0 +1,936 @@
+fileFormatVersion: 2
+guid: 29ad767c10b7b754985318507af62557
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3877640004680850649
+    second: TowerIcon_Sniper_0
+  - first:
+      213: -2081726399894526485
+    second: TowerIcon_Sniper_1
+  - first:
+      213: 5269235091812054341
+    second: TowerIcon_Sniper_2
+  - first:
+      213: -7242100176772406836
+    second: TowerIcon_Sniper_3
+  - first:
+      213: -3106500909003218397
+    second: TowerIcon_Sniper_4
+  - first:
+      213: -1099394774027627629
+    second: TowerIcon_Sniper_5
+  - first:
+      213: -521039157799241635
+    second: TowerIcon_Sniper_6
+  - first:
+      213: -723031590998969855
+    second: TowerIcon_Sniper_7
+  - first:
+      213: -1858800564571618972
+    second: TowerIcon_Sniper_8
+  - first:
+      213: 2549953817499997773
+    second: TowerIcon_Sniper_9
+  - first:
+      213: -4212607159799554902
+    second: TowerIcon_Sniper_10
+  - first:
+      213: -2636547864248922055
+    second: TowerIcon_Sniper_11
+  - first:
+      213: 1686869900082044307
+    second: TowerIcon_Sniper_12
+  - first:
+      213: 4317753287848627312
+    second: TowerIcon_Sniper_13
+  - first:
+      213: 2075719928864438015
+    second: TowerIcon_Sniper_14
+  - first:
+      213: -8115354771926348568
+    second: TowerIcon_Sniper_15
+  - first:
+      213: 7116711154425323826
+    second: TowerIcon_Sniper_16
+  - first:
+      213: -162369536298925046
+    second: TowerIcon_Sniper_17
+  - first:
+      213: 3253675275676618251
+    second: TowerIcon_Sniper_18
+  - first:
+      213: 3076262000374761378
+    second: TowerIcon_Sniper_19
+  - first:
+      213: -6065103232748793324
+    second: TowerIcon_Sniper_20
+  - first:
+      213: -7237459120485777327
+    second: TowerIcon_Sniper_21
+  - first:
+      213: 3904581597448835548
+    second: TowerIcon_Sniper_22
+  - first:
+      213: 3111834777485929967
+    second: TowerIcon_Sniper_23
+  - first:
+      213: -37050371788055010
+    second: TowerIcon_Sniper_24
+  - first:
+      213: -8677322589426230481
+    second: TowerIcon_Sniper_25
+  - first:
+      213: 2625018112332291515
+    second: TowerIcon_Sniper_26
+  - first:
+      213: 2641228452313361183
+    second: TowerIcon_Sniper_27
+  - first:
+      213: 6701470368658784992
+    second: TowerIcon_Sniper_28
+  - first:
+      213: 4474467076469330363
+    second: TowerIcon_Sniper_29
+  - first:
+      213: -3412178566722925362
+    second: TowerIcon_Sniper_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_0
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1249
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723672ad5fadf2ac0800000000000000
+      internalID: -3877640004680850649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_1
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 1215
+        width: 57
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5ebb66ed83c13e0800000000000000
+      internalID: -2081726399894526485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_2
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 1221
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 545fa7df565102940800000000000000
+      internalID: 5269235091812054341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_3
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 1189
+        width: 8
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1efaf6244ee7b90800000000000000
+      internalID: -7242100176772406836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_4
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1224
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3226f68d1ed73e4d0800000000000000
+      internalID: -3106500909003218397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1241
+        height: 1218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3939922274a2eb0f0800000000000000
+      internalID: -1099394774027627629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_6
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 1200
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d58be4585a5e4c8f0800000000000000
+      internalID: -521039157799241635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_7
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 1190
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102fe19499647f5f0800000000000000
+      internalID: -723031590998969855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_8
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 1190
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 461c9602cb63436e0800000000000000
+      internalID: -1858800564571618972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_9
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1191
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d461dbd9c71436320800000000000000
+      internalID: 2549953817499997773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_10
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 795
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aac51e58b10d985c0800000000000000
+      internalID: -4212607159799554902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_11
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 337
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 930d02ebfa9196bd0800000000000000
+      internalID: -2636547864248922055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_12
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 278
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39d50b89c37f86710800000000000000
+      internalID: 1686869900082044307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_13
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 87
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07c0ef52dbdbbeb30800000000000000
+      internalID: 4317753287848627312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_14
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 44
+        width: 48
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6f92517407ecc10800000000000000
+      internalID: 2075719928864438015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_15
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 49
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec0f09f4d7706f80800000000000000
+      internalID: -8115354771926348568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_16
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 49
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 231e498c613a3c260800000000000000
+      internalID: 7116711154425323826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_17
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 47
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a04ce8a54c52fbdf0800000000000000
+      internalID: -162369536298925046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_18
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 47
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e0d2dac60672d20800000000000000
+      internalID: 3253675275676618251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_19
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 47
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a7ce589df311ba20800000000000000
+      internalID: 3076262000374761378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_20
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 49
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4125fed7ebc64dba0800000000000000
+      internalID: -6065103232748793324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_21
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 49
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 150c80f86416f8b90800000000000000
+      internalID: -7237459120485777327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_22
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 49
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd11778864cdf2630800000000000000
+      internalID: 3904581597448835548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_23
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 47
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed61cf2e357f2b20800000000000000
+      internalID: 3111834777485929967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_24
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 49
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ed6c612ee5c7ff0800000000000000
+      internalID: -37050371788055010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_25
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 51
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2bd6cf4415f39780800000000000000
+      internalID: -8677322589426230481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_26
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 31
+        width: 50
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbd5882b010fd6420800000000000000
+      internalID: 2625018112332291515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 23
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1beac6984787a420800000000000000
+      internalID: 2641228452313361183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_28
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 37
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e286bc5bc7600d50800000000000000
+      internalID: 6701470368658784992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_29
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 25
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb1922c6910881e30800000000000000
+      internalID: 4474467076469330363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Sniper_30
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 13
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecc474c0ca185a0d0800000000000000
+      internalID: -3412178566722925362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TowerIcon_Sniper_0: -3877640004680850649
+      TowerIcon_Sniper_1: -2081726399894526485
+      TowerIcon_Sniper_10: -4212607159799554902
+      TowerIcon_Sniper_11: -2636547864248922055
+      TowerIcon_Sniper_12: 1686869900082044307
+      TowerIcon_Sniper_13: 4317753287848627312
+      TowerIcon_Sniper_14: 2075719928864438015
+      TowerIcon_Sniper_15: -8115354771926348568
+      TowerIcon_Sniper_16: 7116711154425323826
+      TowerIcon_Sniper_17: -162369536298925046
+      TowerIcon_Sniper_18: 3253675275676618251
+      TowerIcon_Sniper_19: 3076262000374761378
+      TowerIcon_Sniper_2: 5269235091812054341
+      TowerIcon_Sniper_20: -6065103232748793324
+      TowerIcon_Sniper_21: -7237459120485777327
+      TowerIcon_Sniper_22: 3904581597448835548
+      TowerIcon_Sniper_23: 3111834777485929967
+      TowerIcon_Sniper_24: -37050371788055010
+      TowerIcon_Sniper_25: -8677322589426230481
+      TowerIcon_Sniper_26: 2625018112332291515
+      TowerIcon_Sniper_27: 2641228452313361183
+      TowerIcon_Sniper_28: 6701470368658784992
+      TowerIcon_Sniper_29: 4474467076469330363
+      TowerIcon_Sniper_3: -7242100176772406836
+      TowerIcon_Sniper_30: -3412178566722925362
+      TowerIcon_Sniper_4: -3106500909003218397
+      TowerIcon_Sniper_5: -1099394774027627629
+      TowerIcon_Sniper_6: -521039157799241635
+      TowerIcon_Sniper_7: -723031590998969855
+      TowerIcon_Sniper_8: -1858800564571618972
+      TowerIcon_Sniper_9: 2549953817499997773
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

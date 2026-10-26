@@ -22,6 +22,8 @@ public class TowerBuildManager : MonoBehaviour
     public GameObject basicTowerPrefab;
     public GameObject cannonTowerPrefab;
     public GameObject magicTowerPrefab;
+    [SerializeField] private GameObject[] additionalTowerPrefabs = System.Array.Empty<GameObject>();
+    public System.Collections.Generic.IReadOnlyList<GameObject> AdditionalTowerPrefabs => additionalTowerPrefabs;
 
     [Header("Tower Costs")]
     public int basicTowerCost => GetConfiguredBuildCost(basicTowerPrefab);
@@ -32,12 +34,14 @@ public class TowerBuildManager : MonoBehaviour
     private BuildPoint selectedBuildPoint;
     private bool isOpen;
     private Coroutine closeCoroutine;
+    private TowerBuildPanelLayout buildPanelLayout;
 
     public bool IsOpen => isOpen;
 
     private void Awake()
     {
         Instance = this;
+        buildPanelLayout = GetComponent<TowerBuildPanelLayout>();
 
         if (towerBuildPanelAnimator == null && towerBuildPanel != null)
             towerBuildPanelAnimator = towerBuildPanel.GetComponent<PanelAnimator>();
@@ -109,6 +113,7 @@ public class TowerBuildManager : MonoBehaviour
             TowerUpgradeUI.Instance.Close();
 
         isOpen = true;
+        if (TowerInfoPanel.Instance != null) TowerInfoPanel.Instance.Hide();
 
         if (towerBuildPanel != null)
             towerBuildPanel.transform.SetAsLastSibling();
@@ -135,6 +140,12 @@ public class TowerBuildManager : MonoBehaviour
 
     private void MovePanelToBuildPoint(Vector3 worldPosition)
     {
+        if (buildPanelLayout != null)
+        {
+            buildPanelLayout.Place(worldPosition, panelOffset);
+            return;
+        }
+
         if (towerBuildPanelRect == null || canvas == null || Camera.main == null)
         {
             Debug.LogWarning("설치 패널 위치 이동에 필요한 값이 연결되지 않았습니다.");
@@ -228,6 +239,8 @@ public class TowerBuildManager : MonoBehaviour
         CloseBuildPanel(false);
     }
 
+    public void BuildConfiguredTower(GameObject towerPrefab) => BuildTower(towerPrefab);
+
     public void CloseBuildPanel()
     {
         CloseBuildPanel(true);
@@ -240,6 +253,7 @@ public class TowerBuildManager : MonoBehaviour
 
     public void CloseBuildPanelInstantly()
     {
+        if (TowerInfoPanel.Instance != null) TowerInfoPanel.Instance.Hide();
         if (closeCoroutine != null)
         {
             StopCoroutine(closeCoroutine);
@@ -257,6 +271,7 @@ public class TowerBuildManager : MonoBehaviour
 
     private void CloseBuildPanel(bool playSound)
     {
+        if (TowerInfoPanel.Instance != null) TowerInfoPanel.Instance.Hide();
         if (playSound && UISoundManager.Instance != null)
             UISoundManager.Instance.PlayClosePanel();
 
@@ -308,6 +323,8 @@ public class TowerBuildManager : MonoBehaviour
         TryUpdateCheapestCost(basicTowerPrefab, ref cheapest);
         TryUpdateCheapestCost(cannonTowerPrefab, ref cheapest);
         TryUpdateCheapestCost(magicTowerPrefab, ref cheapest);
+        foreach (var prefab in additionalTowerPrefabs)
+            TryUpdateCheapestCost(prefab, ref cheapest);
 
         return cheapest == int.MaxValue ? 0 : cheapest;
     }

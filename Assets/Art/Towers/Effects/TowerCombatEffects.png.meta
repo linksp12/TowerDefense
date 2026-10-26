@@ -1,0 +1,421 @@
+fileFormatVersion: 2
+guid: 8589f8abcee387f4991c50b4af96c1f4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6311524122334687379
+    second: TowerCombatEffects_0
+  - first:
+      213: 741630447405208964
+    second: TowerCombatEffects_1
+  - first:
+      213: -5396935494523812311
+    second: TowerCombatEffects_2
+  - first:
+      213: 8557674912092373710
+    second: TowerCombatEffects_3
+  - first:
+      213: -2816974411516021334
+    second: TowerCombatEffects_4
+  - first:
+      213: 8191803386162959508
+    second: TowerCombatEffects_5
+  - first:
+      213: -7230767673711510561
+    second: TowerCombatEffects_6
+  - first:
+      213: 1297912108545062713
+    second: TowerCombatEffects_7
+  - first:
+      213: 2067461634021883127
+    second: TowerCombatEffects_8
+  - first:
+      213: -1627697173002274602
+    second: TowerCombatEffects_9
+  - first:
+      213: 89897391380023726
+    second: TowerCombatEffects_10
+  - first:
+      213: -8610117110535945361
+    second: TowerCombatEffects_11
+  - first:
+      213: 1561852961240378253
+    second: TowerCombatEffects_12
+  - first:
+      213: -6320020901537259949
+    second: TowerCombatEffects_13
+  - first:
+      213: 3403693159899157135
+    second: TowerCombatEffects_14
+  - first:
+      213: 1339382255069261307
+    second: TowerCombatEffects_15
+  - first:
+      213: -4096883340037728689
+    second: TowerCombatEffects_16
+  - first:
+      213: 6098040587310088178
+    second: TowerCombatEffects_17
+  - first:
+      213: -1471101442795632363
+    second: TowerCombatEffects_18
+  - first:
+      213: -7092551443193235158
+    second: TowerCombatEffects_19
+  - first:
+      213: 885647332578772059
+    second: TowerCombatEffects_20
+  - first:
+      213: 7174057644899548840
+    second: TowerCombatEffects_21
+  - first:
+      213: -2742819965819747740
+    second: TowerCombatEffects_22
+  - first:
+      213: -4717031472834958989
+    second: TowerCombatEffects_23
+  - first:
+      213: -7782024377060931285
+    second: TowerCombatEffects_24
+  - first:
+      213: 269426182987516566
+    second: TowerCombatEffects_25
+  - first:
+      213: -4896769068618829937
+    second: TowerCombatEffects_26
+  - first:
+      213: 2173646499233346487
+    second: TowerCombatEffects_27
+  - first:
+      213: 1412701102039416172
+    second: TowerCombatEffects_28
+  - first:
+      213: -6884833013029572676
+    second: TowerCombatEffects_29
+  - first:
+      213: -1859242458445511831
+    second: TowerCombatEffects_30
+  - first:
+      213: 4635335075641855979
+    second: TowerCombatEffects_31
+  - first:
+      213: -7779714869299715892
+    second: TowerCombatEffects_32
+  - first:
+      213: 5931065221513874599
+    second: TowerCombatEffects_33
+  - first:
+      213: -2798911669048037158
+    second: TowerCombatEffects_34
+  - first:
+      213: 2067169748778383952
+    second: TowerCombatEffects_35
+  - first:
+      213: -3656240184985252950
+    second: TowerCombatEffects_36
+  - first:
+      213: -5711258118468209569
+    second: TowerCombatEffects_37
+  - first:
+      213: -4029237125801207452
+    second: TowerCombatEffects_38
+  - first:
+      213: 2673466726845171576
+    second: TowerCombatEffects_39
+  - first:
+      213: -6045173014860018995
+    second: TowerCombatEffects_40
+  - first:
+      213: 7403428515687717172
+    second: TowerCombatEffects_41
+  - first:
+      213: -1873278666519127668
+    second: TowerCombatEffects_42
+  - first:
+      213: -6432283349824907821
+    second: TowerCombatEffects_43
+  - first:
+      213: 6722962485829368492
+    second: TowerCombatEffects_44
+  - first:
+      213: 2343827549523119686
+    second: TowerCombatEffects_45
+  - first:
+      213: -2942574345966102138
+    second: TowerCombatEffects_46
+  - first:
+      213: -814582431184057821
+    second: TowerCombatEffects_47
+  - first:
+      213: -1087649137656519985
+    second: TowerCombatEffects_48
+  - first:
+      213: -357441174238475848
+    second: TowerCombatEffects_49
+  - first:
+      213: 6927643110151916499
+    second: TowerCombatEffects_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerEffect_0
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 512
+        width: 427
+        height: 309
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85ffcd7f18080024284db8a39b36ccd3
+      internalID: 941912130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerEffect_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 719
+        width: 370
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9f13f8c7579435449ce3dafe5d86cf7
+      internalID: 989037745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerEffect_2
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 710
+        width: 343
+        height: 134
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4768dce3e29af0f4a802fd67464f9a70
+      internalID: 695752524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerEffect_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 81
+        width: 461
+        height: 431
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d68391244657a46bf022afd0c01943
+      internalID: 763599129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerEffect_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 158
+        width: 465
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be8d431b38b13404ebab3b68a538022f
+      internalID: 137165568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerEffect_5
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 158
+        width: 223
+        height: 297
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be2228de6a77ad64d8c71b5a890cebd7
+      internalID: -314630592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d3ae2f6547cdab5499373301f1c4ea11
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TowerEffect_0: 941912130
+      TowerEffect_1: 989037745
+      TowerEffect_2: 695752524
+      TowerEffect_3: 763599129
+      TowerEffect_4: 137165568
+      TowerEffect_5: -314630592
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

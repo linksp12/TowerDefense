@@ -2578,8 +2578,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 193273385}
   m_HandleRect: {fileID: 193273384}
   m_Direction: 2
-  m_Value: 0.99999297
-  m_Size: 0.97032297
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5782,10 +5782,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5a31f3275a356741b4b11a364cd4a41, type: 2}
   - {fileID: 11400000, guid: a8aa5ead9730b46488c39f57372fd730, type: 2}
   - {fileID: 11400000, guid: cffd6a74588d7c849ae1ec7a38f0c97b, type: 2}
+  - {fileID: 11400000, guid: 9882f7b7f1db9cf41a66838d99a75e92, type: 2}
+  - {fileID: 11400000, guid: cd03536c7a76a0a49b30218126ee2416, type: 2}
+  - {fileID: 11400000, guid: 5f8a886889567fc4e9247d2b3dbcb017, type: 2}
   towers:
   - {fileID: 11400000, guid: b1ea6329c61c4ae39e429d6dd00d8a01, type: 2}
   - {fileID: 11400000, guid: 3a901ddec14146bca46055d5a59a1ab0, type: 2}
   - {fileID: 11400000, guid: cb05e2e1f92b409bb09227d69e1307a4, type: 2}
+  - {fileID: 11400000, guid: e50daa5984f39b446b3a97f9af1a404d, type: 2}
+  - {fileID: 11400000, guid: cb89f03e378206947bb3efe7fba5ac1e, type: 2}
+  - {fileID: 11400000, guid: 04af06492e9695b46a7fef414cfe2f4a, type: 2}
   skills:
   - {fileID: 11400000, guid: 95169902fd49a7f428b3db19aa3d5715, type: 2}
   - {fileID: 11400000, guid: d9a0fc34687604e4ea41440a590c2922, type: 2}
@@ -6135,7 +6141,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1117416507}
   m_HandleRect: {fileID: 1117416506}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8189,7 +8195,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 666148184}
   m_HandleRect: {fileID: 666148183}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9360,6 +9366,7 @@ MonoBehaviour:
   mainMenuBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   storyBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
+  battleBgmVolumeScale: 0.55
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   stageSelectionBGM: {fileID: 8300000, guid: 984238510a85af9408fbfa8ea6b8856c, type: 3}
   plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}

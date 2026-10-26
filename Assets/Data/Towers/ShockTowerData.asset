@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af3e7c0f9dc44cfa1b79e3b837438b1, type: 3}
+  m_Name: ShockTowerData
+  m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  id: shock_tower
+  attackFeel: 0
+  towerName: "\uAC10\uC804 \uD0C0\uC6CC"
+  description: "\uADFC\uC911\uAC70\uB9AC \xB7 \uC9E7\uC740 \uBC29\uC804\uC73C\uB85C
+    \uD53C\uD574\uC640 \uC774\uB3D9 \uC815\uC9C0 0.5\uCD08\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 126300f4270c5ce4bb775a01c77da4db, type: 3}
+  buildCost: 90
+  sellRate: 0.7
+  baseStats:
+    damage: 72
+    attackCooldown: 2
+    attackRange: 3.5
+  baseAttack:
+    mode: 2
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0.5
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathALv2Attack:
+    mode: 2
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 1
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathALv3Attack:
+    mode: 2
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 2
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathBLv2Attack:
+    mode: 2
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0.05
+    burnTicks: 5
+    burnInterval: 0.2
+    stunDuration: 0.5
+    slowReduction: 0.4
+    slowDuration: 1
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathBLv3Attack:
+    mode: 2
+    targets: 2
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0.05
+    burnTicks: 5
+    burnInterval: 0.2
+    stunDuration: 0.5
+    slowReduction: 0.4
+    slowDuration: 1
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  baseProjectileEffects:
+    canPierce: 0
+    maxHitCount: 0
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  level2Cost: 160
+  level3Cost: 300
+  pathALv2Stats:
+    damage: 130
+    attackCooldown: 2.8
+    attackRange: 3.8
+  pathALv3Stats:
+    damage: 200
+    attackCooldown: 3.5
+    attackRange: 4
+  pathALv2ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 0
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathALv3ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 0
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathBLv2Stats:
+    damage: 86
+    attackCooldown: 2.5
+    attackRange: 3.8
+  pathBLv3Stats:
+    damage: 86
+    attackCooldown: 2.5
+    attackRange: 4
+  pathBLv2ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 0
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathBLv3ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 0
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathA:
+    routeName: "\uBC88\uAC1C\xB7\uCC9C\uB465"
+    lv2Name: "\uBC88\uAC1C \uD0C0\uC6CC"
+    lv3Name: "\uCC9C\uB465 \uD0C0\uC6CC"
+    featureText: "\uD53C\uD574\uC640 \uAC10\uC804 \uC815\uC9C0 \uC2DC\uAC04\uC744
+      1\uCD08 \u2192 2\uCD08\uB85C \uAC15\uD654\uD569\uB2C8\uB2E4."
+    effectText: "\uD53C\uD574\uC640 \uAC10\uC804 \uC815\uC9C0 \uC2DC\uAC04\uC744
+      1\uCD08 \u2192 2\uCD08\uB85C \uAC15\uD654\uD569\uB2C8\uB2E4."
+  pathB:
+    routeName: "\uAC10\uC804 \uD654\uC5FC"
+    lv2Name: "\uAC10\uC804 \uD654\uC5FC \uD0C0\uC6CC"
+    lv3Name: "\uC774\uC911 \uAC10\uC804 \uD654\uC5FC \uD0C0\uC6CC"
+    featureText: "0.5\uCD08 \uC815\uC9C0 + 5% \uD654\uC0C1 5\uD68C + 40% \uB454\uD654.
+      \uCD5C\uC885 \uB2E8\uACC4\uB294 \uC11C\uB85C \uB2E4\uB978 2\uBA85 \uACF5\uACA9."
+    effectText: "0.5\uCD08 \uC815\uC9C0 + 5% \uD654\uC0C1 5\uD68C + 40% \uB454\uD654.
+      \uCD5C\uC885 \uB2E8\uACC4\uB294 \uC11C\uB85C \uB2E4\uB978 2\uBA85 \uACF5\uACA9."

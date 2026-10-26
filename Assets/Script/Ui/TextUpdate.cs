@@ -11,6 +11,12 @@ public class TextUpdate : MonoBehaviour
 
     void Start()
     {
+        Configure(targetTowerPrefab);
+    }
+
+    public void Configure(TowerAttack tower)
+    {
+        targetTowerPrefab = tower;
         if (text == null)
         {
             text = GetComponent<TextMeshProUGUI>();
@@ -18,7 +24,7 @@ public class TextUpdate : MonoBehaviour
 
         if (targetTowerPrefab != null)
         {
-            text.text = $"{targetTowerPrefab.BuildCost} 원";
+            text.text = $"{targetTowerPrefab.BuildCost} G";
         }
     }
 }

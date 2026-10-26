@@ -105,7 +105,7 @@ public sealed class ResearchSceneController : MonoBehaviour
         if (target == null || targets.ContainsKey(target)) return null;
         var binding = new TargetBinding { Tower = tower, Skill = skill, Card = view.CreateTargetCard(tower != null ? ResearchTargetType.Tower : ResearchTargetType.Skill) };
         binding.Card.name = "Target_" + target.name;
-        binding.Card.Initialize(tower != null ? (tower.towerName ?? tower.name).Replace("기본 ", "") : skill.DisplayName,
+        binding.Card.Initialize(tower != null ? (tower.towerName ?? tower.name) : skill.DisplayName,
             tower != null ? tower.icon : skill.Icon, tower != null ? view.Palette.Tower : view.Palette.Skill,
             view.Palette, view.ButtonAudio, () => SelectTarget(tower, skill));
         foreach (var research in orderedResearch)

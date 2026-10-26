@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: beeacf396420d2949ad9a2434f5cde78
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6927648639083534682
+    second: TowerIcon_Arrow_0
+  - first:
+      213: -986528504885607169
+    second: TowerIcon_Arrow_1
+  - first:
+      213: -242581085978515197
+    second: TowerIcon_Arrow_2
+  - first:
+      213: 8816185946660181025
+    second: TowerIcon_Arrow_3
+  - first:
+      213: -7660351596088493973
+    second: TowerIcon_Arrow_4
+  - first:
+      213: 3133167356310760015
+    second: TowerIcon_Arrow_5
+  - first:
+      213: -5316514577927671379
+    second: TowerIcon_Arrow_6
+  - first:
+      213: 3499340295304057776
+    second: TowerIcon_Arrow_7
+  - first:
+      213: 918492704543258595
+    second: TowerIcon_Arrow_8
+  - first:
+      213: -2844748930676798661
+    second: TowerIcon_Arrow_9
+  - first:
+      213: -122186951688218555
+    second: TowerIcon_Arrow_10
+  - first:
+      213: -8735794393135310490
+    second: TowerIcon_Arrow_11
+  - first:
+      213: -7523739229290478151
+    second: TowerIcon_Arrow_12
+  - first:
+      213: -4503590084495811131
+    second: TowerIcon_Arrow_13
+  - first:
+      213: -2722189376109851341
+    second: TowerIcon_Arrow_14
+  - first:
+      213: 6481870001630409271
+    second: TowerIcon_Arrow_15
+  - first:
+      213: 1003328688113004683
+    second: TowerIcon_Arrow_16
+  - first:
+      213: 7577713868738618231
+    second: TowerIcon_Arrow_17
+  - first:
+      213: 8758405146059023683
+    second: TowerIcon_Arrow_18
+  - first:
+      213: -2553518255192686323
+    second: TowerIcon_Arrow_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_0
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 1197
+        width: 105
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59da45abb3f32060800000000000000
+      internalID: 6927648639083534682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_1
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1213
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff40f793d852f42f0800000000000000
+      internalID: -986528504885607169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_2
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 1209
+        width: 92
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309a50d99cd22acf0800000000000000
+      internalID: -242581085978515197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_3
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 1189
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12498788862695a70800000000000000
+      internalID: 8816185946660181025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_4
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 1205
+        width: 100
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b687c844fc6f0b590800000000000000
+      internalID: -7660351596088493973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1189
+        width: 124
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4aa0ce3c1f3b7b20800000000000000
+      internalID: 3133167356310760015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_6
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 1175
+        width: 104
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da17f63d822f736b0800000000000000
+      internalID: -5316514577927671379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1254
+        height: 1158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b31fc15577209030800000000000000
+      internalID: 3499340295304057776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_8
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 980
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e7b6179f342fbc00800000000000000
+      internalID: 918492704543258595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_9
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 892
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b46df6beb6588d0800000000000000
+      internalID: -2844748930676798661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_10
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 730
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5489f646d97ed4ef0800000000000000
+      internalID: -122186951688218555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_11
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 714
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669125e984934c680800000000000000
+      internalID: -8735794393135310490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_12
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 282
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5487f880f469790800000000000000
+      internalID: -7523739229290478151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_13
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 256
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cdd7afdda80081c0800000000000000
+      internalID: -4503590084495811131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_14
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 83
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d41a96f27d83ad0800000000000000
+      internalID: -2722189376109851341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_15
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 85
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 732f07f8c6a34f950800000000000000
+      internalID: 6481870001630409271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_16
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 41
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b803fef302a8ced00800000000000000
+      internalID: 1003328688113004683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_17
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 29
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77367bb7d92792960800000000000000
+      internalID: 7577713868738618231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_18
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 41
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3452dc9831b1c8970800000000000000
+      internalID: 8758405146059023683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Arrow_19
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 17
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d01c3cf0da4109cd0800000000000000
+      internalID: -2553518255192686323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TowerIcon_Arrow_0: 6927648639083534682
+      TowerIcon_Arrow_1: -986528504885607169
+      TowerIcon_Arrow_10: -122186951688218555
+      TowerIcon_Arrow_11: -8735794393135310490
+      TowerIcon_Arrow_12: -7523739229290478151
+      TowerIcon_Arrow_13: -4503590084495811131
+      TowerIcon_Arrow_14: -2722189376109851341
+      TowerIcon_Arrow_15: 6481870001630409271
+      TowerIcon_Arrow_16: 1003328688113004683
+      TowerIcon_Arrow_17: 7577713868738618231
+      TowerIcon_Arrow_18: 8758405146059023683
+      TowerIcon_Arrow_19: -2553518255192686323
+      TowerIcon_Arrow_2: -242581085978515197
+      TowerIcon_Arrow_3: 8816185946660181025
+      TowerIcon_Arrow_4: -7660351596088493973
+      TowerIcon_Arrow_5: 3133167356310760015
+      TowerIcon_Arrow_6: -5316514577927671379
+      TowerIcon_Arrow_7: 3499340295304057776
+      TowerIcon_Arrow_8: 918492704543258595
+      TowerIcon_Arrow_9: -2844748930676798661
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

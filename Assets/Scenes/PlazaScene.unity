@@ -1082,6 +1082,7 @@ MonoBehaviour:
   mainMenuBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   storyBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
+  battleBgmVolumeScale: 0.55
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   stageSelectionBGM: {fileID: 8300000, guid: 984238510a85af9408fbfa8ea6b8856c, type: 3}
   plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}
@@ -1855,6 +1856,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1ea6329c61c4ae39e429d6dd00d8a01, type: 2}
   - {fileID: 11400000, guid: 3a901ddec14146bca46055d5a59a1ab0, type: 2}
   - {fileID: 11400000, guid: cb05e2e1f92b409bb09227d69e1307a4, type: 2}
+  - {fileID: 11400000, guid: e50daa5984f39b446b3a97f9af1a404d, type: 2}
+  - {fileID: 11400000, guid: cb89f03e378206947bb3efe7fba5ac1e, type: 2}
+  - {fileID: 11400000, guid: 04af06492e9695b46a7fef414cfe2f4a, type: 2}
   dialogue: {fileID: 1887422007}
   questBoard: {fileID: 1203370183}
   font: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}

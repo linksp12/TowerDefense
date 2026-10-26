@@ -275,11 +275,8 @@ public class TowerUpgradeUI : MonoBehaviour
         if (finalPathButton != null)
             finalPathButton.gameObject.SetActive(false);
 
-        if (pathAImage != null)
-            pathAImage.sprite = selectedTower.GetPathASprite();
-
-        if (pathBImage != null)
-            pathBImage.sprite = selectedTower.GetPathBSprite();
+        SetTowerPreview(pathAImage, selectedTower.GetPathASprite());
+        SetTowerPreview(pathBImage, selectedTower.GetPathBSprite());
 
         if (pathANameText != null)
             pathANameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
@@ -310,8 +307,7 @@ public class TowerUpgradeUI : MonoBehaviour
         if (finalPathButton != null)
             finalPathButton.gameObject.SetActive(true);
 
-        if (finalUpgradeImage != null)
-            finalUpgradeImage.sprite = selectedTower.GetFinalUpgradeSprite();
+        SetTowerPreview(finalUpgradeImage, selectedTower.GetFinalUpgradeSprite());
 
         if (finalUpgradeNameText != null)
             finalUpgradeNameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
@@ -349,6 +345,14 @@ public class TowerUpgradeUI : MonoBehaviour
             closeButton.gameObject.SetActive(true);
 
         ApplyButtonPositions(onePathSellPosition, onePathClosePosition);
+    }
+
+    private static void SetTowerPreview(Image image, Sprite sprite)
+    {
+        if (image == null) return;
+        image.sprite = sprite;
+        image.preserveAspect = true;
+        image.useSpriteMesh = true;
     }
 
     void ApplyButtonPositions(Vector2 sellPosition, Vector2 closePosition)

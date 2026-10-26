@@ -14,17 +14,212 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: arrow_tower
   attackFeel: 0
-  towerName: "\uAE30\uBCF8 \uD654\uC0B4 \uD0C0\uC6CC"
+  towerName: "\uD654\uC0B4 \uD0C0\uC6CC"
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
     \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC274\uB4DC \uBAAC\uC2A4\uD130\uC5D0\uAC8C
     \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
-  icon: {fileID: 21300000, guid: fd7d41e58cf47f54992e3081433a1c97, type: 3}
+  icon: {fileID: 21300000, guid: beeacf396420d2949ad9a2434f5cde78, type: 3}
   buildCost: 50
   sellRate: 0.7
   baseStats:
     damage: 24
     attackCooldown: 0.7
     attackRange: 5
+  baseAttack:
+    mode: 0
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathALv2Attack:
+    mode: 0
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathALv3Attack:
+    mode: 0
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathBLv2Attack:
+    mode: 0
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
+  pathBLv3Attack:
+    mode: 0
+    targets: 1
+    pierceCount: 3
+    pierceDamage:
+    - 1
+    - 0.7
+    - 0.4
+    fragments: 0
+    fragmentAngle: 90
+    fragmentDamage: 0.5
+    extraHitDamage: 0
+    burnDamage: 0
+    burnTicks: 5
+    burnInterval: 0.4
+    stunDuration: 0
+    slowReduction: 0
+    slowDuration: 0
+    projectileSpeed: 22
+    splashRadius: 0
+    splashDamage: 0.8
+    bossDamage: 0.5
+    laserDamageCap: 1000
+    laserRamp:
+    - 1
+    - 1.5
+    - 2.5
+    - 4
+    - 6.5
+    - 10.5
+    - 17
+    - 27.5
+    - 44.5
+    - 72
+    - 116.5
+    - 188.5
+    - 305
+    - 493.5
+    - 500
   baseProjectileEffects:
     canPierce: 0
     maxHitCount: 1
