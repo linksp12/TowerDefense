@@ -1,0 +1,282 @@
+fileFormatVersion: 2
+guid: 9ef8f0d1215451f49877573aeaa96ae6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8201408599993137757
+    second: npc_quest_0
+  - first:
+      213: 231985495487678578
+    second: npc_quest_1
+  - first:
+      213: 1064274597754215883
+    second: npc_quest_2
+  - first:
+      213: -6663222672837892811
+    second: npc_quest_3
+  - first:
+      213: -4591619693376027371
+    second: npc_quest_4
+  - first:
+      213: 2169705808286633593
+    second: npc_quest_5
+  - first:
+      213: 3375566343306112174
+    second: npc_quest_6
+  - first:
+      213: 926949549593226414
+    second: npc_quest_7
+  - first:
+      213: -3464011224709893351
+    second: npc_quest_8
+  - first:
+      213: -9196842450329106085
+    second: npc_quest_9
+  - first:
+      213: 2595215666224187592
+    second: npc_quest_10
+  - first:
+      213: -2988867184980931307
+    second: npc_quest_11
+  - first:
+      213: -1740765925999294731
+    second: npc_quest_12
+  - first:
+      213: 7369155488965840677
+    second: npc_quest_13
+  - first:
+      213: -5015660799475422370
+    second: npc_quest_14
+  - first:
+      213: -3335120586103219333
+    second: npc_quest_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: npc_quest_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 645
+        width: 417
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a5439bc45ebe2e80800000000000000
+      internalID: -8201408599993137757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_quest_1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 645
+        width: 417
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 278069b349d283300800000000000000
+      internalID: 231985495487678578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_quest_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 417
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcd9c9e9b1015ce00800000000000000
+      internalID: 1064274597754215883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_quest_3
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 0
+        width: 417
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5352b26484a7783a0800000000000000
+      internalID: -6663222672837892811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      npc_quest_0: -8201408599993137757
+      npc_quest_1: 231985495487678578
+      npc_quest_10: 2595215666224187592
+      npc_quest_11: -2988867184980931307
+      npc_quest_12: -1740765925999294731
+      npc_quest_13: 7369155488965840677
+      npc_quest_14: -5015660799475422370
+      npc_quest_15: -3335120586103219333
+      npc_quest_2: 1064274597754215883
+      npc_quest_3: -6663222672837892811
+      npc_quest_4: -4591619693376027371
+      npc_quest_5: 2169705808286633593
+      npc_quest_6: 3375566343306112174
+      npc_quest_7: 926949549593226414
+      npc_quest_8: -3464011224709893351
+      npc_quest_9: -9196842450329106085
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

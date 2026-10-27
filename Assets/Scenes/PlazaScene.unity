@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 26295184}
   - component: {fileID: 26295183}
+  - component: {fileID: 26295185}
   m_Layer: 0
   m_Name: street_lamp_0 (2)
   m_TagString: Untagged
@@ -185,7 +186,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1277496849123441335, guid: 432e9a7aed7540948b3261e1d26e8ee6, type: 3}
+  m_Sprite: {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,6 +211,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26295185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26295182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8891771450213074746, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: 3485894368399098820, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -2005249374146650597, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -5356206178205333015, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8657521767068276861, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  durations: []
+  defaultDuration: 0.13
+  randomStart: 1
 --- !u!1 &29574947
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +520,7 @@ GameObject:
   - component: {fileID: 53265154}
   - component: {fileID: 53265153}
   - component: {fileID: 53265155}
+  - component: {fileID: 53265156}
   m_Layer: 0
   m_Name: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_0"
   m_TagString: Untagged
@@ -553,7 +577,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1083596799075242011, guid: 3ae1bb991479c9745a5032af8454d68b, type: 3}
+  m_Sprite: {fileID: -3432430470609142218, guid: 40fff61a05173a342b6409eb15e592a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -638,7 +662,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 6.663252}
+    oldSize: {x: 5.12, y: 6.66}
     newSize: {x: 5.12, y: 6.663252}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -675,6 +699,30 @@ MonoBehaviour:
   initialDelay: 3
   popDuration: 0.12
   hiddenScale: 0.75
+--- !u!114 &53265156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53265150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -3432430470609142218, guid: 40fff61a05173a342b6409eb15e592a7, type: 3}
+  - {fileID: -5740276334584974632, guid: 40fff61a05173a342b6409eb15e592a7, type: 3}
+  - {fileID: -5044598752956986685, guid: 40fff61a05173a342b6409eb15e592a7, type: 3}
+  - {fileID: 7689546238607181437, guid: 40fff61a05173a342b6409eb15e592a7, type: 3}
+  durations:
+  - 0.6
+  - 0.32
+  - 0.55
+  - 0.32
+  defaultDuration: 0.4
+  randomStart: 1
 --- !u!1 &81323007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207336513}
   - component: {fileID: 207336512}
+  - component: {fileID: 207336514}
   m_Layer: 0
   m_Name: street_lamp_0 (3)
   m_TagString: Untagged
@@ -2134,7 +2183,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1277496849123441335, guid: 432e9a7aed7540948b3261e1d26e8ee6, type: 3}
+  m_Sprite: {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2159,6 +2208,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &207336514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207336511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8891771450213074746, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: 3485894368399098820, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -2005249374146650597, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -5356206178205333015, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8657521767068276861, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  durations: []
+  defaultDuration: 0.13
+  randomStart: 1
 --- !u!1 &253115146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3730,6 +3801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463692159}
   - component: {fileID: 463692158}
+  - component: {fileID: 463692160}
   m_Layer: 0
   m_Name: street_lamp_0 (1)
   m_TagString: Untagged
@@ -3786,7 +3858,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1277496849123441335, guid: 432e9a7aed7540948b3261e1d26e8ee6, type: 3}
+  m_Sprite: {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3811,6 +3883,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &463692160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463692157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8891771450213074746, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: 3485894368399098820, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -2005249374146650597, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -5356206178205333015, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8657521767068276861, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  durations: []
+  defaultDuration: 0.13
+  randomStart: 1
 --- !u!1 &467883859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,6 +4055,7 @@ GameObject:
   - component: {fileID: 473516792}
   - component: {fileID: 473516791}
   - component: {fileID: 473516793}
+  - component: {fileID: 473516794}
   m_Layer: 0
   m_Name: "\uD018\uC2A4\uD2B8 npc_2"
   m_TagString: Untagged
@@ -4017,7 +4112,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2850175323421730373, guid: 261b6e7b56a106c4695e30eea15c5eea, type: 3}
+  m_Sprite: {fileID: -8201408599993137757, guid: 9ef8f0d1215451f49877573aeaa96ae6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4102,7 +4197,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.17, y: 6.4531493}
+    oldSize: {x: 4.17, y: 6.45}
     newSize: {x: 5.38, y: 6.833335}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4139,6 +4234,30 @@ MonoBehaviour:
   initialDelay: 3
   popDuration: 0.12
   hiddenScale: 0.75
+--- !u!114 &473516794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473516788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -8201408599993137757, guid: 9ef8f0d1215451f49877573aeaa96ae6, type: 3}
+  - {fileID: 231985495487678578, guid: 9ef8f0d1215451f49877573aeaa96ae6, type: 3}
+  - {fileID: 1064274597754215883, guid: 9ef8f0d1215451f49877573aeaa96ae6, type: 3}
+  - {fileID: -6663222672837892811, guid: 9ef8f0d1215451f49877573aeaa96ae6, type: 3}
+  durations:
+  - 0.6
+  - 0.32
+  - 0.55
+  - 0.32
+  defaultDuration: 0.4
+  randomStart: 1
 --- !u!1 &484418859
 GameObject:
   m_ObjectHideFlags: 0
@@ -4978,6 +5097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553315206}
   - component: {fileID: 553315205}
+  - component: {fileID: 553315207}
   m_Layer: 0
   m_Name: house.pixcel_0
   m_TagString: Untagged
@@ -5034,7 +5154,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5233310941544532854, guid: 186b286beef669b4581d5f518e24e739, type: 3}
+  m_Sprite: {fileID: -4693623471802328945, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5059,6 +5179,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553315207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553315204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -4693623471802328945, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  - {fileID: 825256189955258108, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  - {fileID: 805400652778734643, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  - {fileID: 2921101970859256559, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  - {fileID: -8625595257194611656, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  - {fileID: 8006723893326850801, guid: 4026b77ce84cf444db0f9158cb943b59, type: 3}
+  durations: []
+  defaultDuration: 0.2
+  randomStart: 1
 --- !u!1 &564128058
 GameObject:
   m_ObjectHideFlags: 0
@@ -8472,6 +8614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299454712}
   - component: {fileID: 1299454711}
+  - component: {fileID: 1299454713}
   m_Layer: 0
   m_Name: street_lamp_0
   m_TagString: Untagged
@@ -8528,7 +8671,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1277496849123441335, guid: 432e9a7aed7540948b3261e1d26e8ee6, type: 3}
+  m_Sprite: {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8553,6 +8696,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299454713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299454710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -1277496849123441335, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8891771450213074746, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: 3485894368399098820, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -2005249374146650597, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -5356206178205333015, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  - {fileID: -8657521767068276861, guid: 8be89839ea272fd4ca9eea66436c66ec, type: 3}
+  durations: []
+  defaultDuration: 0.13
+  randomStart: 1
 --- !u!1 &1301366166
 GameObject:
   m_ObjectHideFlags: 0
@@ -8904,6 +9069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1434057253}
   - component: {fileID: 1434057252}
+  - component: {fileID: 1434057254}
   m_Layer: 0
   m_Name: RPG.pixcel_13 (1)
   m_TagString: Untagged
@@ -8960,7 +9126,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1893592592, guid: 82eed80a7902f5a449d792358681300b, type: 3}
+  m_Sprite: {fileID: 7772053563467876060, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8985,6 +9151,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434057254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434057251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: 7772053563467876060, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  - {fileID: 6017166387113642881, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  - {fileID: -5071872562740070876, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  - {fileID: -4383350608448915041, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  - {fileID: 2634342455120194285, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  - {fileID: -4886976709754540747, guid: 71dc65d210390b84682e976a5cac928c, type: 3}
+  durations: []
+  defaultDuration: 0.14
+  randomStart: 1
 --- !u!1 &1477360551
 GameObject:
   m_ObjectHideFlags: 0
@@ -9620,6 +9808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589276626}
   - component: {fileID: 1589276625}
+  - component: {fileID: 1589276627}
   m_Layer: 0
   m_Name: pixcel.RPG2_2
   m_TagString: Untagged
@@ -9676,7 +9865,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2012778772, guid: 300244428653d844c97abeadc45de127, type: 3}
+  m_Sprite: {fileID: 8036674452729983485, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9701,6 +9890,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1589276627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589276624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: 8036674452729983485, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  - {fileID: 1166297340754894913, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  - {fileID: -4242719723187426643, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  - {fileID: 6113867694995161055, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  - {fileID: 8805366293504714225, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  - {fileID: 5665221365263061874, guid: dac90aa0e2eaaf446b96477492f81041, type: 3}
+  durations: []
+  defaultDuration: 0.11
+  randomStart: 1
 --- !u!1 &1590347639
 GameObject:
   m_ObjectHideFlags: 0
@@ -10050,6 +10261,109 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618366998}
   m_CullTransparentMesh: 1
+--- !u!1 &1625215040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625215042}
+  - component: {fileID: 1625215041}
+  m_Layer: 0
+  m_Name: PlazaAmbience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1625215041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625215040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75ca7d0393ab66449057ee835446754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlazaAmbience
+  glows:
+  - position: {x: -8.63, y: 0.2}
+    color: {r: 1, g: 0.82, b: 0.45, a: 0.32}
+    size: 1.1
+    flicker: 0.25
+  - position: {x: -4.83, y: 0.25}
+    color: {r: 1, g: 0.82, b: 0.45, a: 0.32}
+    size: 1.1
+    flicker: 0.25
+  - position: {x: 4.82, y: 0.42}
+    color: {r: 1, g: 0.82, b: 0.45, a: 0.32}
+    size: 1.1
+    flicker: 0.25
+  - position: {x: 8.57, y: 0.44}
+    color: {r: 1, g: 0.82, b: 0.45, a: 0.32}
+    size: 1.1
+    flicker: 0.25
+  - position: {x: 6.71, y: 2.3}
+    color: {r: 1, g: 0.55, b: 0.18, a: 0.38}
+    size: 1.5
+    flicker: 0.45
+  - position: {x: 6.62, y: -3.58}
+    color: {r: 1, g: 0.55, b: 0.18, a: 0.28}
+    size: 1
+    flicker: 0.5
+  - position: {x: 6.02, y: -2.27}
+    color: {r: 1, g: 0.55, b: 0.18, a: 0.38}
+    size: 0.7
+    flicker: 0.45
+  - position: {x: 7.2, y: -2.27}
+    color: {r: 1, g: 0.55, b: 0.18, a: 0.38}
+    size: 0.7
+    flicker: 0.45
+  smoke:
+  - position: {x: -6.46, y: 4.85}
+    rate: 1.1
+  - position: {x: 6.85, y: 4.5}
+    rate: 1.3
+  - position: {x: 6.62, y: -3.35}
+    rate: 0.6
+  sparks:
+  - position: {x: 6.71, y: 2.3}
+    rate: 2.5
+  - position: {x: 6.62, y: -3.55}
+    rate: 3
+  fountainSpouts:
+  - position: {x: -0.03, y: 0.78}
+    rate: 9
+  cloudShadows: 3
+  birdInterval: {x: 10, y: 20}
+  butterflies:
+  - {x: -5.83, y: -0.6}
+  - {x: 0.6, y: -0.1}
+  area:
+    serializedVersion: 2
+    x: -9
+    y: -5
+    width: 18
+    height: 10
+--- !u!4 &1625215042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625215040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630571515
 GameObject:
   m_ObjectHideFlags: 0
@@ -10536,6 +10850,7 @@ GameObject:
   - component: {fileID: 1665480220}
   - component: {fileID: 1665480219}
   - component: {fileID: 1665480221}
+  - component: {fileID: 1665480222}
   m_Layer: 0
   m_Name: "\uCD9C\uC804 npc_0"
   m_TagString: Untagged
@@ -10592,7 +10907,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5443662408625833887, guid: d9448e2a1d28a504aa089eeba9cd0e56, type: 3}
+  m_Sprite: {fileID: 6087536668654900371, guid: 249fc87eb166c474e98b6d2d4c8b52ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10677,7 +10992,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.95, y: 6.773306}
+    oldSize: {x: 5.95, y: 6.77}
     newSize: {x: 5.95, y: 6.773306}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10714,6 +11029,30 @@ MonoBehaviour:
   initialDelay: 3
   popDuration: 0.12
   hiddenScale: 0.75
+--- !u!114 &1665480222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665480216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: 6087536668654900371, guid: 249fc87eb166c474e98b6d2d4c8b52ce, type: 3}
+  - {fileID: -3744545846079288611, guid: 249fc87eb166c474e98b6d2d4c8b52ce, type: 3}
+  - {fileID: 8055624687264717495, guid: 249fc87eb166c474e98b6d2d4c8b52ce, type: 3}
+  - {fileID: 4850147422684556967, guid: 249fc87eb166c474e98b6d2d4c8b52ce, type: 3}
+  durations:
+  - 0.6
+  - 0.32
+  - 0.55
+  - 0.32
+  defaultDuration: 0.4
+  randomStart: 1
 --- !u!1 &1778836741
 GameObject:
   m_ObjectHideFlags: 0
@@ -10724,6 +11063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778836743}
   - component: {fileID: 1778836742}
+  - component: {fileID: 1778836744}
   m_Layer: 0
   m_Name: house.pixcel_6
   m_TagString: Untagged
@@ -10780,7 +11120,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3186891635809602593, guid: 186b286beef669b4581d5f518e24e739, type: 3}
+  m_Sprite: {fileID: 7936398955963880015, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10805,6 +11145,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778836744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778836741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: 7936398955963880015, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  - {fileID: -599787463573478589, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  - {fileID: 2140921695403774015, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  - {fileID: 3832506279317684387, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  - {fileID: 5650160022383399329, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  - {fileID: 7981427590089257864, guid: 5bf754b8f1965b34fa992ae44b1e0979, type: 3}
+  durations: []
+  defaultDuration: 0.12
+  randomStart: 1
 --- !u!1 &1783583834
 GameObject:
   m_ObjectHideFlags: 0
@@ -11351,6 +11713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1882589543}
   - component: {fileID: 1882589542}
+  - component: {fileID: 1882589544}
   m_Layer: 0
   m_Name: pixcel.RPG2_0
   m_TagString: Untagged
@@ -11407,7 +11770,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1853737023951102884, guid: 300244428653d844c97abeadc45de127, type: 3}
+  m_Sprite: {fileID: -6084711936022183385, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11432,6 +11795,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1882589544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882589541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87cf43792b828b4ea21fad68b2fb15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFrameAnimator
+  frames:
+  - {fileID: -6084711936022183385, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  - {fileID: 4050951396788438689, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  - {fileID: -8012128868543324901, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  - {fileID: -6728550890335850352, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  - {fileID: -2383354562417264052, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  - {fileID: -7395204861083592545, guid: dfbf04c28ebb0ba4c95fb2ed53327474, type: 3}
+  durations: []
+  defaultDuration: 0.09
+  randomStart: 1
 --- !u!1 &1887422006
 GameObject:
   m_ObjectHideFlags: 0
@@ -12496,3 +12881,4 @@ SceneRoots:
   - {fileID: 1489420220}
   - {fileID: 97600643}
   - {fileID: 200878178}
+  - {fileID: 1625215042}

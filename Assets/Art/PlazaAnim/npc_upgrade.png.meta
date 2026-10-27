@@ -1,0 +1,330 @@
+fileFormatVersion: 2
+guid: 40fff61a05173a342b6409eb15e592a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3432430470609142218
+    second: npc_upgrade_0
+  - first:
+      213: -5740276334584974632
+    second: npc_upgrade_1
+  - first:
+      213: -5044598752956986685
+    second: npc_upgrade_2
+  - first:
+      213: 7689546238607181437
+    second: npc_upgrade_3
+  - first:
+      213: 6422438603567488634
+    second: npc_upgrade_4
+  - first:
+      213: -2553277547923746029
+    second: npc_upgrade_5
+  - first:
+      213: 1034703604288613589
+    second: npc_upgrade_6
+  - first:
+      213: -8337552162053441274
+    second: npc_upgrade_7
+  - first:
+      213: -754194648657682051
+    second: npc_upgrade_8
+  - first:
+      213: -2867465160825509253
+    second: npc_upgrade_9
+  - first:
+      213: -7217591920222966625
+    second: npc_upgrade_10
+  - first:
+      213: -3701585428107017850
+    second: npc_upgrade_11
+  - first:
+      213: -7864913263026140271
+    second: npc_upgrade_12
+  - first:
+      213: -5751814440577928453
+    second: npc_upgrade_13
+  - first:
+      213: -6727063164817748167
+    second: npc_upgrade_14
+  - first:
+      213: -4668012995538699680
+    second: npc_upgrade_15
+  - first:
+      213: 1230237650122584281
+    second: npc_upgrade_16
+  - first:
+      213: 8167163119243336557
+    second: npc_upgrade_17
+  - first:
+      213: 8558240287471120163
+    second: npc_upgrade_18
+  - first:
+      213: -4131293894721916401
+    second: npc_upgrade_19
+  - first:
+      213: 6227777686837887836
+    second: npc_upgrade_20
+  - first:
+      213: 8260015646409168892
+    second: npc_upgrade_21
+  - first:
+      213: -344368651775390585
+    second: npc_upgrade_22
+  - first:
+      213: -916155437163148030
+    second: npc_upgrade_23
+  - first:
+      213: -558110074453330478
+    second: npc_upgrade_24
+  - first:
+      213: -3665716556155879935
+    second: npc_upgrade_25
+  - first:
+      213: 6804553835985762321
+    second: npc_upgrade_26
+  - first:
+      213: -4863295687617761580
+    second: npc_upgrade_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: npc_upgrade_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 666
+        width: 512
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e7d1b3cae8d50d0800000000000000
+      internalID: -3432430470609142218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_upgrade_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 666
+        width: 512
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d23b7446117650b0800000000000000
+      internalID: -5740276334584974632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_upgrade_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cace9f592cfdf9b0800000000000000
+      internalID: -5044598752956986685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_upgrade_3
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d764f142091c6ba60800000000000000
+      internalID: 7689546238607181437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      npc_upgrade_0: -3432430470609142218
+      npc_upgrade_1: -5740276334584974632
+      npc_upgrade_10: -7217591920222966625
+      npc_upgrade_11: -3701585428107017850
+      npc_upgrade_12: -7864913263026140271
+      npc_upgrade_13: -5751814440577928453
+      npc_upgrade_14: -6727063164817748167
+      npc_upgrade_15: -4668012995538699680
+      npc_upgrade_16: 1230237650122584281
+      npc_upgrade_17: 8167163119243336557
+      npc_upgrade_18: 8558240287471120163
+      npc_upgrade_19: -4131293894721916401
+      npc_upgrade_2: -5044598752956986685
+      npc_upgrade_20: 6227777686837887836
+      npc_upgrade_21: 8260015646409168892
+      npc_upgrade_22: -344368651775390585
+      npc_upgrade_23: -916155437163148030
+      npc_upgrade_24: -558110074453330478
+      npc_upgrade_25: -3665716556155879935
+      npc_upgrade_26: 6804553835985762321
+      npc_upgrade_27: -4863295687617761580
+      npc_upgrade_3: 7689546238607181437
+      npc_upgrade_4: 6422438603567488634
+      npc_upgrade_5: -2553277547923746029
+      npc_upgrade_6: 1034703604288613589
+      npc_upgrade_7: -8337552162053441274
+      npc_upgrade_8: -754194648657682051
+      npc_upgrade_9: -2867465160825509253
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
