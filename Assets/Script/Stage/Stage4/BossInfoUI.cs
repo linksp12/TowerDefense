@@ -539,6 +539,7 @@ public class BossInfoUI : MonoBehaviour
 
         int totalMaxHp = 0;
         int totalCurrentHp = 0;
+        bool anyAlive = false;
 
         for (int i = 0; i < registeredBosses.Count; i++)
         {
@@ -546,7 +547,18 @@ public class BossInfoUI : MonoBehaviour
             totalMaxHp += entry.maxHp;
 
             if (entry.boss != null && !entry.boss.IsDead)
+            {
                 totalCurrentHp += Mathf.Max(0, entry.boss.CurrentHp);
+                anyAlive = true;
+            }
+        }
+
+        // 보스가 모두 쓰러지거나 기지에 닿아 사라지면 체력 패널을 닫는다.
+        if (!anyAlive)
+        {
+            if (bossInfoPanel != null && bossInfoPanel.activeSelf)
+                bossInfoPanel.SetActive(false);
+            return;
         }
 
         if (bossInfoPanel != null &&

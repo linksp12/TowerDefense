@@ -1852,6 +1852,54 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 711d2dd8be7748646b61140963e90768, type: 2}
     - {fileID: 11400000, guid: 0f048b720b234e54fa7bebaca0fdbacf, type: 2}
     - {fileID: 11400000, guid: ecd66c5be739db44d94b8fb2076eea59, type: 2}
+  - stageId: stage_five
+    waves:
+    - {fileID: 11400000, guid: 7030591ce42d11147865642b1d3fc529, type: 2}
+    - {fileID: 11400000, guid: 45c2d684501287340b30128f8820bf64, type: 2}
+    - {fileID: 11400000, guid: 49ccee7d7ee219543b7a4466e06bd612, type: 2}
+    - {fileID: 11400000, guid: c63e1e8b12acb3a4e9c22fc302891423, type: 2}
+  - stageId: stage_six
+    waves:
+    - {fileID: 11400000, guid: 4538b1b482a0c7941a44cc62f6f7f80a, type: 2}
+    - {fileID: 11400000, guid: c658ed42d1a74c345a62730bfcf3368e, type: 2}
+    - {fileID: 11400000, guid: a9448e16dab06a741b9b28dade8e733d, type: 2}
+    - {fileID: 11400000, guid: 99094dff4f754574c87639b398fee375, type: 2}
+  - stageId: stage_seven
+    waves:
+    - {fileID: 11400000, guid: 8e0c2686c6973f941bb23dbc0a4b6266, type: 2}
+    - {fileID: 11400000, guid: 94a7d59bc12a4534bbadb2fc286b0389, type: 2}
+    - {fileID: 11400000, guid: 129a7e38a07f2cf47a58c13e03d97894, type: 2}
+    - {fileID: 11400000, guid: 5b8961aa548165c40acac6e4275aca66, type: 2}
+  - stageId: stage_eight
+    waves:
+    - {fileID: 11400000, guid: 39d5daf0ce09e92419690d1bc14b5fa9, type: 2}
+    - {fileID: 11400000, guid: 9aca6b0cdce3d094390945b14b45b883, type: 2}
+    - {fileID: 11400000, guid: f19eadf7a05f21c4fb514542f8139b5d, type: 2}
+    - {fileID: 11400000, guid: 5079cd6d3fd6bd749a08d081dbeb64c0, type: 2}
+  - stageId: hardcore_one
+    waves:
+    - {fileID: 11400000, guid: 366879292394e5648b6b4e4cef2d0348, type: 2}
+    - {fileID: 11400000, guid: 445c787ecad0c7c4fa4919f6fa04c615, type: 2}
+    - {fileID: 11400000, guid: b94a86ce09b86ee4f84e3963445fb5a8, type: 2}
+    - {fileID: 11400000, guid: 1d8ac2911e4dcdd429eb190ef010b338, type: 2}
+  - stageId: hardcore_two
+    waves:
+    - {fileID: 11400000, guid: 557d2652b4faa5149a118ae410250037, type: 2}
+    - {fileID: 11400000, guid: 3d983894eb3a31d46803f5c5569ae5be, type: 2}
+    - {fileID: 11400000, guid: a40d3cacde347ee4399664c897dfcef9, type: 2}
+    - {fileID: 11400000, guid: 773818bb7c7a39e48b5e44c248c64ca9, type: 2}
+  - stageId: hardcore_three
+    waves:
+    - {fileID: 11400000, guid: 4f9d12ebf71499248bf1950f189550f5, type: 2}
+    - {fileID: 11400000, guid: eb194e7091d18d84b873735d020cf0c5, type: 2}
+    - {fileID: 11400000, guid: 40a439f32d925354aa62aff9656fc141, type: 2}
+    - {fileID: 11400000, guid: 9277f8e489399f3488ae9966fa1e8216, type: 2}
+  - stageId: hardcore_four
+    waves:
+    - {fileID: 11400000, guid: cd3c7947eac62b94abd4c52b5783a31e, type: 2}
+    - {fileID: 11400000, guid: c96aa63910227ca448dba660d95f609c, type: 2}
+    - {fileID: 11400000, guid: 69adf9322ca2a1b429ea8f7b259a417a, type: 2}
+    - {fileID: 11400000, guid: e32a34b69b610ed4ab2c7319a545a5e8, type: 2}
   towers:
   - {fileID: 11400000, guid: b1ea6329c61c4ae39e429d6dd00d8a01, type: 2}
   - {fileID: 11400000, guid: 3a901ddec14146bca46055d5a59a1ab0, type: 2}
@@ -4870,11 +4918,6 @@ MonoBehaviour:
   stageStatus: {fileID: 2068216026}
   skillPoints: {fileID: 47352608}
   questRewardAlert: {fileID: 691063264}
-  stageIds:
-  - stage_one
-  - stage_two
-  - stage_three
-  - stage_four
 --- !u!225 &552254374
 CanvasGroup:
   m_ObjectHideFlags: 0

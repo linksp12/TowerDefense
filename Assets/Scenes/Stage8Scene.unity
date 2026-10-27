@@ -2976,10 +2976,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   waves:
-  - {fileID: 11400000, guid: 6a8f0703ac929234ba3e75bf240e585e, type: 2}
-  - {fileID: 11400000, guid: 711d2dd8be7748646b61140963e90768, type: 2}
-  - {fileID: 11400000, guid: 0f048b720b234e54fa7bebaca0fdbacf, type: 2}
-  - {fileID: 11400000, guid: ecd66c5be739db44d94b8fb2076eea59, type: 2}
+  - {fileID: 11400000, guid: 39d5daf0ce09e92419690d1bc14b5fa9, type: 2}
+  - {fileID: 11400000, guid: 9aca6b0cdce3d094390945b14b45b883, type: 2}
+  - {fileID: 11400000, guid: f19eadf7a05f21c4fb514542f8139b5d, type: 2}
+  - {fileID: 11400000, guid: 5079cd6d3fd6bd749a08d081dbeb64c0, type: 2}
   spawner: {fileID: 858498215}
   timeBetweenWaves: 5
   onWaveStart:
@@ -18419,6 +18419,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978525237}
   m_CullTransparentMesh: 1
+--- !u!1 &1992384958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992384961}
+  - component: {fileID: 1992384960}
+  - component: {fileID: 1992384959}
+  m_Layer: 0
+  m_Name: EnvironmentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1992384959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992384958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7575b324e0b184681da9257efac80b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageEnvironment
+  environmentType: 2
+--- !u!114 &1992384960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992384958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc2a9c242d553647a5c637a3bff00db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
+  environments:
+  - {fileID: 11400000, guid: aa7422fa0e6ef1e4cac7f5b9a15a459d, type: 2}
+  - {fileID: 11400000, guid: 6225fe3a9aed14341ab5165a3f634fc4, type: 2}
+  - {fileID: 11400000, guid: c20e32c8817afeb4bb6e5c39710bc38b, type: 2}
+--- !u!4 &1992384961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992384958}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016481408
 GameObject:
   m_ObjectHideFlags: 0
@@ -20730,3 +20792,4 @@ SceneRoots:
   - {fileID: 531107362}
   - {fileID: 1735836814}
   - {fileID: 1394699189}
+  - {fileID: 1992384961}

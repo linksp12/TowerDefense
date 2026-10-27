@@ -93,7 +93,8 @@ public class ResultSceneManager : MonoBehaviour
         messageRect.sizeDelta = new Vector2(700f, 72f);
 
         TextMeshProUGUI messageText = messageObject.GetComponent<TextMeshProUGUI>();
-        messageText.text = "베타테스트가 끝났습니다.\n플레이해주셔서 감사합니다.";
+        // 본편 마지막 스테이지(8스테이지) 승리 시 표시되는 엔딩 문구
+        messageText.text = "모든 전장을 지켜냈습니다!\n하드코어 전장이 열렸습니다.";
         messageText.font = victoryTitle.font;
         messageText.fontSize = 25f;
         messageText.fontStyle = FontStyles.Bold;

@@ -36,6 +36,9 @@ internal sealed class TowerSpecialAttack
         return new Vector3(x, bounds.max.y - bounds.size.y * inset, tower.transform.position.z);
     }
 
+    // 특수 공격 피해에도 스테이지 환경의 속성 보정을 적용한다(일반 투사체와 같은 규칙).
+    private int EnvDamage(int damage) => EnvironmentManager.ApplyToDamage(damage, tower.Element);
+
     public void Reset()
     {
         foreach (var beam in beams)
@@ -66,14 +69,14 @@ internal sealed class TowerSpecialAttack
         else if (profile.mode == TowerAttackMode.Shock) FireShock();
         else if (profile.mode == TowerAttackMode.ChargedLaser)
         {
-            TowerEnergyShot.Fire(tower.ShotOrigin, target, tower.damage, profile, tower.canDetectStealth);
+            TowerEnergyShot.Fire(tower.ShotOrigin, target, EnvDamage(tower.damage), profile, tower.canDetectStealth);
             if (TowerVfx.Settings != null) TowerVfx.Play(TowerVfx.Settings.laserShot, tower.ShotOrigin);
         }
     }
 
     private void FireSniper(MonsterHealth target)
     {
-        int damage = tower.damage;
+        int damage = EnvDamage(tower.damage);
         if (Random.value < tower.criticalChance) damage = Mathf.RoundToInt(damage * tower.criticalDamageMultiplier);
         Vector2 direction = target.transform.position - tower.ShotOrigin;
         TowerPiercingShot.Fire(tower.ShotOrigin, direction, damage, profile, tower.attackRange + 2,
@@ -95,11 +98,12 @@ internal sealed class TowerSpecialAttack
             selected.Add(target);
             Vector3 origin = EmitterPosition(i, profile.targets);
             TowerVfx.Flash(origin, target.transform.position, TowerVfx.ElectricColor, true);
-            target.TakeDamage(tower.damage, false, tower.criticalChance, tower.criticalDamageMultiplier);
+            int damage = EnvDamage(tower.damage);
+            target.TakeDamage(damage, false, tower.criticalChance, tower.criticalDamageMultiplier);
             if (target.IsDead) continue;
             target.GetComponent<MonsterMove>()?.ApplyShock(profile.stunDuration,
                 profile.slowReduction, profile.slowDuration);
-            TowerBurnStack.Apply(target, Mathf.RoundToInt(tower.damage * profile.burnDamage),
+            TowerBurnStack.Apply(target, Mathf.RoundToInt(damage * profile.burnDamage),
                 profile.burnTicks, profile.burnInterval);
             if (TowerVfx.Settings != null)
                 TowerVfx.Burst(TowerVfx.Settings.shockImpact, target.transform.position, 0.4f, 0.12f);
@@ -152,7 +156,7 @@ internal sealed class TowerSpecialAttack
         int cap = ResearchStatResolver.GetTowerDamage(tower.towerData.id, profile.laserDamageCap);
         int damage = Mathf.Min(cap, Mathf.RoundToInt(tower.damage * multiplier));
         if (beam.Target.isBoss) damage = Mathf.RoundToInt(damage * profile.bossDamage);
-        beam.Target.TakeDamage(damage, false);
+        beam.Target.TakeDamage(EnvDamage(damage), false);
         if (TowerVfx.Settings != null)
             TowerVfx.Burst(TowerVfx.Settings.energyImpact, beam.Target.transform.position, 0.2f, 0.08f);
     }

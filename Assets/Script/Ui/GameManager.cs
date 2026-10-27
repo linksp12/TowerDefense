@@ -295,6 +295,10 @@ public class GameManager : MonoBehaviour
         UIManager uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
             uiManager.PrepareForGameResult();
+
+        PauseManager pauseManager = FindAnyObjectByType<PauseManager>();
+        if (pauseManager != null)
+            pauseManager.CloseForResult();
     }
 
     private IEnumerator LoadResultScene()

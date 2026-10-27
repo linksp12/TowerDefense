@@ -21,11 +21,11 @@ public sealed class PlazaCodexUI : MonoBehaviour
     private sealed class MonsterEntry
     {
         public MonsterData data;
-        public int stageNumber;
+        public string stageLabel;
         public string stageId;
         public bool stealth;
         public bool unlocked;
-        public readonly List<int> appearances = new List<int>();
+        public readonly List<string> appearances = new List<string>();
     }
 
     [Header("데이터")]
@@ -49,6 +49,8 @@ public sealed class PlazaCodexUI : MonoBehaviour
     private const float PixelScale = 4f / 3f;
     private const float PanelWidth = 1480f;
     private const float PanelHeight = 860f;
+    private const float ListViewWidth = 640f;
+    private const float ListViewHeight = 560f;
     private static readonly Color Gold = new Color32(247, 214, 126, 255);
     private static readonly Color Ivory = new Color32(243, 234, 208, 255);
     private static readonly Color Muted = new Color32(191, 169, 130, 255);
@@ -64,6 +66,7 @@ public sealed class PlazaCodexUI : MonoBehaviour
     private CanvasGroup group;
     private RectTransform panel;
     private RectTransform listArea;
+    private ScrollRect listScroll;
     private RectTransform detailArea;
     private TMP_Text countLabel;
     private Button monsterTab;
@@ -154,15 +157,15 @@ public sealed class PlazaCodexUI : MonoBehaviour
                         entry = new MonsterEntry
                         {
                             data = health.monsterData,
-                            stageNumber = i + 1,
+                            stageLabel = StageIds.GetLabel(stages[i].stageId) ?? $"{i + 1}스테이지",
                             stageId = stages[i].stageId,
                             stealth = spawn.monsterPrefab.GetComponent<StealthMonster>() != null
                         };
                         byData.Add(health.monsterData, entry);
                         monsters.Add(entry);
                     }
-                    if (!entry.appearances.Contains(i + 1))
-                        entry.appearances.Add(i + 1);
+                    if (!entry.appearances.Contains(stages[i].stageId))
+                        entry.appearances.Add(stages[i].stageId);
                 }
             }
         }
@@ -191,10 +194,14 @@ public sealed class PlazaCodexUI : MonoBehaviour
         cards.Clear();
 
         int count = towersTab ? (towers?.Length ?? 0) : monsters.Count;
+        // 목록이 보이는 칸(560)보다 길면 스크롤한다. 첫 줄 위치는 기존과 같다.
+        float height = Mathf.Max(ListViewHeight, (count + 1) / 2 * 132f + 32f);
+        listArea.sizeDelta = new Vector2(ListViewWidth, height);
+        listScroll.verticalNormalizedPosition = 1f;
         for (int i = 0; i < count; i++)
         {
             int index = i;
-            Vector2 position = new Vector2(i % 2 == 0 ? -162f : 162f, 196f - i / 2 * 132f);
+            Vector2 position = new Vector2(i % 2 == 0 ? -162f : 162f, height / 2f - 84f - i / 2 * 132f);
             cards.Add(towersTab ? MakeTowerCard(towers[i], position, () => Select(index, true))
                 : MakeMonsterCard(monsters[i], position, () => Select(index, true)));
         }
@@ -241,9 +248,9 @@ public sealed class PlazaCodexUI : MonoBehaviour
         if (!entry.unlocked)
         {
             DetailText("???", new Vector2(460f, 172f), new Vector2(420f, 56f), 40f, Muted, TextAlignmentOptions.Left);
-            DetailText($"{entry.stageNumber}스테이지에서 등장", new Vector2(460f, 122f), new Vector2(420f, 32f), 21f, Muted,
+            DetailText($"{entry.stageLabel}에서 등장", new Vector2(460f, 122f), new Vector2(420f, 32f), 21f, Muted,
                 TextAlignmentOptions.Left);
-            DetailText($"{entry.stageNumber}스테이지를 해금하면\n이 몬스터의 정보가 공개됩니다.", new Vector2(340f, -150f),
+            DetailText($"{entry.stageLabel} 해금 시\n이 몬스터의 정보가 공개됩니다.", new Vector2(340f, -150f),
                 new Vector2(640f, 110f), 26f, Muted, TextAlignmentOptions.Center);
             return;
         }
@@ -254,7 +261,7 @@ public sealed class PlazaCodexUI : MonoBehaviour
         if (data.maxShield > 0) tags.Add(("방어막", new Color(0.55f, 0.8f, 1f)));
         if (entry.stealth) tags.Add(("은신", new Color(0.78f, 0.62f, 1f)));
         Tags(tags, 122f);
-        DetailText($"등장 전장  ·  {string.Join(", ", entry.appearances)}스테이지", new Vector2(460f, tags.Count > 0 ? 78f : 122f),
+        DetailText($"등장 전장  ·  {AppearanceText(entry.appearances)}", new Vector2(460f, tags.Count > 0 ? 78f : 122f),
             new Vector2(420f, 30f), 20f, Muted, TextAlignmentOptions.Left);
         DetailText(data.description, new Vector2(340f, -48f), new Vector2(660f, 96f), 22f, Ivory, TextAlignmentOptions.TopLeft);
 
@@ -406,6 +413,32 @@ public sealed class PlazaCodexUI : MonoBehaviour
         return image;
     }
 
+    // "5·6스테이지, 하드코어 1·2"처럼 본편과 하드코어를 묶어 짧게 쓴다.
+    private static string AppearanceText(List<string> stageIds)
+    {
+        var main = new List<string>();
+        var hardcore = new List<string>();
+        foreach (string id in stageIds)
+        {
+            int mainIndex = IndexOf(StageIds.MainStageIds, id);
+            int hardIndex = IndexOf(StageIds.HardcoreStageIds, id);
+            if (mainIndex >= 0) main.Add((mainIndex + 1).ToString(CultureInfo.InvariantCulture));
+            else if (hardIndex >= 0) hardcore.Add((hardIndex + 1).ToString(CultureInfo.InvariantCulture));
+        }
+        var parts = new List<string>();
+        if (main.Count > 0) parts.Add(string.Join("·", main) + "스테이지");
+        if (hardcore.Count > 0) parts.Add("하드코어 " + string.Join("·", hardcore));
+        return string.Join(", ", parts);
+    }
+
+    private static int IndexOf(IReadOnlyList<string> ids, string id)
+    {
+        for (int i = 0; i < ids.Count; i++)
+            if (ids[i] == id)
+                return i;
+        return -1;
+    }
+
     private string MonsterName(MonsterData data)
     {
         if (!string.IsNullOrWhiteSpace(data.displayName)) return data.displayName;
@@ -417,7 +450,7 @@ public sealed class PlazaCodexUI : MonoBehaviour
 
     private Button MakeMonsterCard(MonsterEntry entry, Vector2 position, UnityEngine.Events.UnityAction clicked)
     {
-        string subtitle = entry.unlocked ? $"{entry.stageNumber}스테이지" : $"{entry.stageNumber}스테이지 해금 필요";
+        string subtitle = entry.unlocked ? entry.stageLabel : $"{entry.stageLabel} 해금 필요";
         return MakeCard(position, entry.data.icon, !entry.unlocked, entry.unlocked && entry.data.maxShield > 0,
             entry.unlocked ? MonsterName(entry.data) : "???", subtitle, entry.unlocked && entry.data.isBoss, clicked);
     }
@@ -497,9 +530,25 @@ public sealed class PlazaCodexUI : MonoBehaviour
         Place(MakeImage("Divider", panel, new Color32(140, 90, 30, 255)).rectTransform, new Vector2(0f, 262f),
             new Vector2(PanelWidth - 96f, 3f));
 
-        listArea = new GameObject("List", typeof(RectTransform)).GetComponent<RectTransform>();
-        listArea.SetParent(panel, false);
-        Place(listArea, new Vector2(-384f, -20f), new Vector2(640f, 560f));
+        // 목록: 보이는 칸(마스크) 안에서 카드 묶음(Content)을 위아래로 스크롤한다.
+        var viewport = new GameObject("List", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image),
+            typeof(RectMask2D), typeof(ScrollRect)).GetComponent<RectTransform>();
+        viewport.gameObject.layer = LayerMask.NameToLayer("UI");
+        viewport.SetParent(panel, false);
+        Place(viewport, new Vector2(-384f, -20f), new Vector2(ListViewWidth, ListViewHeight));
+        viewport.GetComponent<Image>().color = Color.clear; // 카드 사이 빈칸에서도 휠 스크롤을 받는다.
+        listArea = new GameObject("Content", typeof(RectTransform)).GetComponent<RectTransform>();
+        listArea.gameObject.layer = LayerMask.NameToLayer("UI");
+        listArea.SetParent(viewport, false);
+        listArea.anchorMin = listArea.anchorMax = listArea.pivot = new Vector2(0.5f, 1f);
+        listArea.anchoredPosition = Vector2.zero;
+        listArea.sizeDelta = new Vector2(ListViewWidth, ListViewHeight);
+        listScroll = viewport.GetComponent<ScrollRect>();
+        listScroll.content = listArea;
+        listScroll.viewport = viewport;
+        listScroll.horizontal = false;
+        listScroll.movementType = ScrollRect.MovementType.Clamped;
+        listScroll.scrollSensitivity = 40f;
 
         var detail = MakeImage("Detail", panel, Color.white);
         Skin(detail, insetSprite, PixelScale);
