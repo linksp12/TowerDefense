@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: magma_slime_mini
   monsterName: Mini Magma Slime
-  maxHp: 220
+  maxHp: 140
   moveSpeed: 2.6
   goldReward: 6
   maxShield: 0

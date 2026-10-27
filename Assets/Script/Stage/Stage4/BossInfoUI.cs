@@ -520,7 +520,8 @@ public class BossInfoUI : MonoBehaviour
             CombatFeedback.BossAppeared();
         }
 
-        if (portraitImage != null && portraitImage.sprite == null)
+        // 다른 씬에서 옮겨 온 패널에 이전 보스 그림이 남아 있을 수 있으므로 첫 보스로 덮어쓴다.
+        if (portraitImage != null && (registeredBosses.Count == 1 || portraitImage.sprite == null))
             portraitImage.sprite = boss.bossPortrait;
 
         if (defenseText != null)

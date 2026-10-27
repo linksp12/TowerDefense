@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: imp
   monsterName: Imp
-  maxHp: 420
+  maxHp: 280
   moveSpeed: 3
   goldReward: 28
   maxShield: 0

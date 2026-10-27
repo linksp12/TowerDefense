@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: frost_bat
   monsterName: Frost Bat
-  maxHp: 260
+  maxHp: 180
   moveSpeed: 4
   goldReward: 22
   maxShield: 0

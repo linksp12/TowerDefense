@@ -12510,6 +12510,7 @@ MonoBehaviour:
   resumeButton: {fileID: 0}
   restartButton: {fileID: 0}
   mainMenuButton: {fileID: 0}
+  plazaButton: {fileID: 0}
   pauseBackgroundSprite: {fileID: -5427546145974743593, guid: addc8862756e6734c9e6e1107e5d8fba, type: 3}
   pauseBoxSize: {x: 760, y: 430}
   backdropAlpha: 0.72

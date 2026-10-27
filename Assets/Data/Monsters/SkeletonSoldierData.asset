@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: skeleton_soldier
   monsterName: Skeleton Soldier
-  maxHp: 650
+  maxHp: 420
   moveSpeed: 1.7
   goldReward: 30
   maxShield: 0
