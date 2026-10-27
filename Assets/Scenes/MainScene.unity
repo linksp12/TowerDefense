@@ -2414,6 +2414,7 @@ MonoBehaviour:
   mainMenuBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   storyBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
+  battleBgmVolumeScale: 0.55
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   stageSelectionBGM: {fileID: 8300000, guid: 984238510a85af9408fbfa8ea6b8856c, type: 3}
   plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}

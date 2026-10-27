@@ -64,6 +64,8 @@ public class TowerData : ScriptableObject
     [Tooltip("카탈로그와 코드에서 사용하는 고유 ID (예: arrow_tower)")]
     public string id;
 
+    public ElementType element = ElementType.None;
+
     // 발사·타격 효과음과 이펙트 종류. 새 타워는 가장 가까운 공격 방식을 고른다.
     public enum AttackFeel { Arrow, Cannon, Magic }
 

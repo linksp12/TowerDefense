@@ -94,7 +94,7 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             if (targetTowerPrefab == null) return "정보 없음";
 
-            return $"<color=#FFF379>공격력:</color> <color=white>{targetTowerPrefab.BaseDamage}</color>\n" +
+            return $"<color=#FFF379>공격력:</color> <color=white>{targetTowerPrefab.GetDisplayDamage(targetTowerPrefab.BaseDamage)}</color>\n" +
                    $"<color=#FFF379>공격간격(s):</color> <color=white>{targetTowerPrefab.BaseAttackCooldown}</color>\n" +
                    $"<color=#FFF379>사거리:</color> <color=white>{targetTowerPrefab.BaseAttackRange}</color>\n" +
                    $"<color=#FFF379>업그레이드:</color> <color=white>{targetTowerPrefab.UpgradeRouteSummary}</color>";
