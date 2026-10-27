@@ -1,0 +1,3120 @@
+fileFormatVersion: 2
+guid: 057295875ecb8b0488ff90628607d4d2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6363875000962663233
+    second: HasteAim_0
+  - first:
+      213: 4825987724327438231
+    second: HasteAim_1
+  - first:
+      213: 3814456712406108792
+    second: HasteAim_2
+  - first:
+      213: -8263596466207683450
+    second: HasteAim_3
+  - first:
+      213: -3420535567945449580
+    second: HasteAim_4
+  - first:
+      213: 6375738753077597946
+    second: HasteAim_5
+  - first:
+      213: -3853689139198086402
+    second: HasteAim_6
+  - first:
+      213: -5356819125206844435
+    second: HasteAim_7
+  - first:
+      213: -540262049566646622
+    second: HasteAim_8
+  - first:
+      213: -5034004127308949669
+    second: HasteAim_9
+  - first:
+      213: 1288021132859234835
+    second: HasteAim_10
+  - first:
+      213: 7914514363382741251
+    second: HasteAim_11
+  - first:
+      213: -5413453471795176830
+    second: HasteAim_12
+  - first:
+      213: -8257982905009574541
+    second: HasteAim_13
+  - first:
+      213: 6730895741661255222
+    second: HasteAim_14
+  - first:
+      213: 9160705924631089999
+    second: HasteAim_15
+  - first:
+      213: -882304585264272390
+    second: HasteAim_16
+  - first:
+      213: 2121678794531838076
+    second: HasteAim_17
+  - first:
+      213: 4231151797826041324
+    second: HasteAim_18
+  - first:
+      213: -7132535287320723640
+    second: HasteAim_19
+  - first:
+      213: -340124064180517226
+    second: HasteAim_20
+  - first:
+      213: -8880349783789704359
+    second: HasteAim_21
+  - first:
+      213: -2630782327157560095
+    second: HasteAim_22
+  - first:
+      213: 6273788068410644022
+    second: HasteAim_23
+  - first:
+      213: 1087425402113666765
+    second: HasteAim_24
+  - first:
+      213: -2899839607091696557
+    second: HasteAim_25
+  - first:
+      213: -6220005610437646576
+    second: HasteAim_26
+  - first:
+      213: 83337844292640558
+    second: HasteAim_27
+  - first:
+      213: 3622153911287506214
+    second: HasteAim_28
+  - first:
+      213: -2656238016975985065
+    second: HasteAim_29
+  - first:
+      213: -8129819741679983920
+    second: HasteAim_30
+  - first:
+      213: -6299674484567055902
+    second: HasteAim_31
+  - first:
+      213: -4841959847251390529
+    second: HasteAim_32
+  - first:
+      213: 2219402079071877332
+    second: HasteAim_33
+  - first:
+      213: -7557616794998179546
+    second: HasteAim_34
+  - first:
+      213: -1906162911133725081
+    second: HasteAim_35
+  - first:
+      213: 7579503289321025461
+    second: HasteAim_36
+  - first:
+      213: -2639483482131716830
+    second: HasteAim_37
+  - first:
+      213: 826075428335893645
+    second: HasteAim_38
+  - first:
+      213: -817799300744897667
+    second: HasteAim_39
+  - first:
+      213: -4436258797854387814
+    second: HasteAim_40
+  - first:
+      213: 1400425664923590774
+    second: HasteAim_41
+  - first:
+      213: -5347016312625759456
+    second: HasteAim_42
+  - first:
+      213: -7985902522236853034
+    second: HasteAim_43
+  - first:
+      213: 6971668908939157839
+    second: HasteAim_44
+  - first:
+      213: 4745385018818415431
+    second: HasteAim_45
+  - first:
+      213: 8624612970574624205
+    second: HasteAim_46
+  - first:
+      213: 7374770883592356955
+    second: HasteAim_47
+  - first:
+      213: -7676412943208894855
+    second: HasteAim_48
+  - first:
+      213: 2543213644720948727
+    second: HasteAim_49
+  - first:
+      213: -3097449697489966888
+    second: HasteAim_50
+  - first:
+      213: -2134535837615233057
+    second: HasteAim_51
+  - first:
+      213: -2324533660440443614
+    second: HasteAim_52
+  - first:
+      213: -1101634762937795520
+    second: HasteAim_53
+  - first:
+      213: 5308639848575245439
+    second: HasteAim_54
+  - first:
+      213: 2697995926466394468
+    second: HasteAim_55
+  - first:
+      213: -7072178257788596292
+    second: HasteAim_56
+  - first:
+      213: 3955237203007641053
+    second: HasteAim_57
+  - first:
+      213: -6487666134286092747
+    second: HasteAim_58
+  - first:
+      213: -2529187676543417721
+    second: HasteAim_59
+  - first:
+      213: -2803468924276022487
+    second: HasteAim_60
+  - first:
+      213: -5752155406977522403
+    second: HasteAim_61
+  - first:
+      213: -2483879214641816997
+    second: HasteAim_62
+  - first:
+      213: 4214960597382810704
+    second: HasteAim_63
+  - first:
+      213: -108228136304980
+    second: HasteAim_64
+  - first:
+      213: -3486222109166181435
+    second: HasteAim_65
+  - first:
+      213: 1805545782110787366
+    second: HasteAim_66
+  - first:
+      213: -7395002312934155903
+    second: HasteAim_67
+  - first:
+      213: -9165319070986433104
+    second: HasteAim_68
+  - first:
+      213: 9005962716744590373
+    second: HasteAim_69
+  - first:
+      213: 8819836541878748927
+    second: HasteAim_70
+  - first:
+      213: 6132254091152281143
+    second: HasteAim_71
+  - first:
+      213: -813706418006528299
+    second: HasteAim_72
+  - first:
+      213: -6956804521286123070
+    second: HasteAim_73
+  - first:
+      213: 7435248411237291199
+    second: HasteAim_74
+  - first:
+      213: 7146044117017449101
+    second: HasteAim_75
+  - first:
+      213: 9181021171587415403
+    second: HasteAim_76
+  - first:
+      213: -8734880154144773653
+    second: HasteAim_77
+  - first:
+      213: 1797082061778481229
+    second: HasteAim_78
+  - first:
+      213: -6330346829701589551
+    second: HasteAim_79
+  - first:
+      213: 8363732445463895430
+    second: HasteAim_80
+  - first:
+      213: 5985983550498781327
+    second: HasteAim_81
+  - first:
+      213: -2145638348440992305
+    second: HasteAim_82
+  - first:
+      213: 2977233584939257042
+    second: HasteAim_83
+  - first:
+      213: -7241484362111037424
+    second: HasteAim_84
+  - first:
+      213: -3153568922795031238
+    second: HasteAim_85
+  - first:
+      213: -2485389231612814986
+    second: HasteAim_86
+  - first:
+      213: -3947472184888918922
+    second: HasteAim_87
+  - first:
+      213: -3851671254297985215
+    second: HasteAim_88
+  - first:
+      213: 7065697965600618676
+    second: HasteAim_89
+  - first:
+      213: -7936333067069356500
+    second: HasteAim_90
+  - first:
+      213: -2237542959377121673
+    second: HasteAim_91
+  - first:
+      213: -1752879267856235926
+    second: HasteAim_92
+  - first:
+      213: -161309988080059505
+    second: HasteAim_93
+  - first:
+      213: 2538945926175889052
+    second: HasteAim_94
+  - first:
+      213: 6630379430654539783
+    second: HasteAim_95
+  - first:
+      213: -7673606361423047010
+    second: HasteAim_96
+  - first:
+      213: -230251950315964081
+    second: HasteAim_97
+  - first:
+      213: 8661123501308525353
+    second: HasteAim_98
+  - first:
+      213: 593434531723619402
+    second: HasteAim_99
+  - first:
+      213: 8127160074901375724
+    second: HasteAim_100
+  - first:
+      213: -2418638363108456858
+    second: HasteAim_101
+  - first:
+      213: 684070930834501738
+    second: HasteAim_102
+  - first:
+      213: -6414766012077880161
+    second: HasteAim_103
+  - first:
+      213: 254835234863482622
+    second: HasteAim_104
+  - first:
+      213: 3201606696877363278
+    second: HasteAim_105
+  - first:
+      213: -6162150717799337800
+    second: HasteAim_106
+  - first:
+      213: 8770314098268233871
+    second: HasteAim_107
+  - first:
+      213: 2792057732504071037
+    second: HasteAim_108
+  - first:
+      213: -26134807938824477
+    second: HasteAim_109
+  - first:
+      213: 4582163825047924131
+    second: HasteAim_110
+  - first:
+      213: -5025038906920339643
+    second: HasteAim_111
+  - first:
+      213: -4709451711698796691
+    second: HasteAim_112
+  - first:
+      213: 6344356664775644876
+    second: HasteAim_113
+  - first:
+      213: -644820236081972590
+    second: HasteAim_114
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HasteAim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1245
+        height: 1238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbcb1a46769fea7a0800000000000000
+      internalID: -6363875000962663233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_1
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 1175
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 797ceee144a59f240800000000000000
+      internalID: 4825987724327438231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1173
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a021a8b2cafe430800000000000000
+      internalID: 3814456712406108792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_3
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 1171
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68c8480ebcec15d80800000000000000
+      internalID: -8263596466207683450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_4
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 1158
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49fb5031601d780d0800000000000000
+      internalID: -3420535567945449580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_5
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 1174
+        width: 27
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af6d1e5ad9c2b7850800000000000000
+      internalID: 6375738753077597946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_6
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 1164
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef231574522f48ac0800000000000000
+      internalID: -3853689139198086402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_7
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 1177
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debf6042361c8a5b0800000000000000
+      internalID: -5356819125206844435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_8
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 1167
+        width: 94
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ae94f1478a9088f0800000000000000
+      internalID: -540262049566646622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_9
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 1124
+        width: 21
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5756e1eaef932ab0800000000000000
+      internalID: -5034004127308949669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_10
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 1158
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31a55476568ffd110800000000000000
+      internalID: 1288021132859234835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_11
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 1129
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309b72f61e006dd60800000000000000
+      internalID: 7914514363382741251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_12
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 1116
+        width: 46
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a1b85cfbc8fd4b0800000000000000
+      internalID: -5413453471795176830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_13
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1048
+        width: 93
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37de7a1fc40c56d80800000000000000
+      internalID: -8257982905009574541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_14
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 1116
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63698e5e302f86d50800000000000000
+      internalID: 6730895741661255222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_15
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 1116
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f43d371c08d512f70800000000000000
+      internalID: 9160705924631089999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_16
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1076
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afbef9387ac61c3f0800000000000000
+      internalID: -882304585264272390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1035
+        width: 5
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c789c8b5f97b17d10800000000000000
+      internalID: 2121678794531838076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_18
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 947
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce53d2c742218ba30800000000000000
+      internalID: 4231151797826041324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_19
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 877
+        width: 89
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84f3f4b22f4240d90800000000000000
+      internalID: -7132535287320723640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_20
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 942
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69645f637f2a74bf0800000000000000
+      internalID: -340124064180517226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_21
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 931
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b6ff7fbe8a2c480800000000000000
+      internalID: -8880349783789704359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_22
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 923
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ece56479659d7bd0800000000000000
+      internalID: -2630782327157560095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_23
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 877
+        width: 52
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63653bd1209f01750800000000000000
+      internalID: 6273788068410644022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_24
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 905
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcea8bc44af471f00800000000000000
+      internalID: 1087425402113666765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_25
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 863
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35ce0b9cd33b1c7d0800000000000000
+      internalID: -2899839607091696557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_26
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 851
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0176de03ad91ea9a0800000000000000
+      internalID: -6220005610437646576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_27
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 853
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2fd86de353182100800000000000000
+      internalID: 83337844292640558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_28
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 855
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62565149ac9744230800000000000000
+      internalID: 3622153911287506214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_29
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 835
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756224fc895232bd0800000000000000
+      internalID: -2656238016975985065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_30
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 819
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2e431c4041d2f80800000000000000
+      internalID: -8129819741679983920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_31
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 712
+        width: 74
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e1e9c2fe6f0398a0800000000000000
+      internalID: -6299674484567055902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_32
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 821
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf40e73c27edccb0800000000000000
+      internalID: -4841959847251390529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_33
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 821
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d8b7d89e66ecce10800000000000000
+      internalID: 2219402079071877332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_34
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 726
+        width: 52
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6297b912193fd1790800000000000000
+      internalID: -7557616794998179546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_35
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 801
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76e89dd7ee2fb85e0800000000000000
+      internalID: -1906162911133725081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_36
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 761
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf62ed651ecf2960800000000000000
+      internalID: 7579503289321025461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_37
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 668
+        width: 56
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2252701f1cbae5bd0800000000000000
+      internalID: -2639483482131716830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_38
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 668
+        width: 80
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8cb3afa93fc67b00800000000000000
+      internalID: 826075428335893645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_39
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 724
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b998d6ed796a4f0800000000000000
+      internalID: -817799300744897667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_40
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 634
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a91103ea02e3f62c0800000000000000
+      internalID: -4436258797854387814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_41
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 616
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6706c14f8bf4f6310800000000000000
+      internalID: 1400425664923590774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_42
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 633
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02bf8bd4ef49bc5b0800000000000000
+      internalID: -5347016312625759456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_43
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 630
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d42d2797ff5c2190800000000000000
+      internalID: -7985902522236853034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_44
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 625
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4124f86fe750c060800000000000000
+      internalID: 6971668908939157839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_45
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 628
+        width: 52
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74bc121588efad140800000000000000
+      internalID: 4745385018818415431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_46
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 564
+        width: 41
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc5b3543dc7c0b770800000000000000
+      internalID: 8624612970574624205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_47
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 582
+        width: 28
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b548a60ab03785660800000000000000
+      internalID: 7374770883592356955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_48
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 570
+        width: 11
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ea2da7917e77590800000000000000
+      internalID: -7676412943208894855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_49
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 558
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5c489d55f4b4320800000000000000
+      internalID: 2543213644720948727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_50
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 558
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8287f39e5a305d0800000000000000
+      internalID: -3097449697489966888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_51
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 564
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd76a9607fa9062e0800000000000000
+      internalID: -2134535837615233057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_52
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 564
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2254205a3f89dbfd0800000000000000
+      internalID: -2324533660440443614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_53
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 563
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04cfed2150536b0f0800000000000000
+      internalID: -1101634762937795520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_54
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 562
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7c9fced0d31ca940800000000000000
+      internalID: 5308639848575245439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_55
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 544
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 469fa722005317520800000000000000
+      internalID: 2697995926466394468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_56
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 546
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf054438539add90800000000000000
+      internalID: -7072178257788596292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_57
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 550
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd51ea7c743d3e630800000000000000
+      internalID: 3955237203007641053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_58
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 548
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 536bb84260e27f5a0800000000000000
+      internalID: -6487666134286092747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_59
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 530
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7828559553586ecd0800000000000000
+      internalID: -2529187676543417721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_60
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 533
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9236ea5edd31819d0800000000000000
+      internalID: -2803468924276022487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_61
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 513
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d152342322d3c20b0800000000000000
+      internalID: -5752155406977522403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_62
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 524
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5a5c42b30d778dd0800000000000000
+      internalID: -2483879214641816997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_63
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 519
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05c454dd45c8e7a30800000000000000
+      internalID: 4214960597382810704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_64
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 517
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae716c219d9ffff0800000000000000
+      internalID: -108228136304980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_65
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 471
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3690766737e9fc0800000000000000
+      internalID: -3486222109166181435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_66
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 513
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6271b6892569e0910800000000000000
+      internalID: 1805545782110787366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_67
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 515
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1891e58a39caf5990800000000000000
+      internalID: -7395002312934155903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_68
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 482
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bd8db86dde3ec080800000000000000
+      internalID: -9165319070986433104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_69
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 487
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52429ff006b9bfc70800000000000000
+      internalID: 9005962716744590373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_70
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 478
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff641b7fa9a566a70800000000000000
+      internalID: 8819836541878748927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_71
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 479
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73e41971b942a1550800000000000000
+      internalID: 6132254091152281143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_72
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 483
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dee343f25225b4f0800000000000000
+      internalID: -813706418006528299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_73
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 483
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c1c8e88527747f90800000000000000
+      internalID: -6956804521286123070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_74
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 489
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb41690590f4f2760800000000000000
+      internalID: 7435248411237291199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_75
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 465
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8258185349db2360800000000000000
+      internalID: 7146044117017449101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_76
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 459
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6dfec7cc1a896f70800000000000000
+      internalID: 9181021171587415403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_77
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 461
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9679877c877c680800000000000000
+      internalID: -8734880154144773653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_78
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 459
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4078842d9480f810800000000000000
+      internalID: 1797082061778481229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_79
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 441
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d5dd9619171628a0800000000000000
+      internalID: -6330346829701589551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_80
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 417
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68dd840a852f11470800000000000000
+      internalID: 8363732445463895430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_81
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 403
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f88bfc6f25c721350800000000000000
+      internalID: 5985983550498781327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_82
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 361
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc508b84a492932e0800000000000000
+      internalID: -2145638348440992305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_83
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 359
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dccaa3eb22415920800000000000000
+      internalID: 2977233584939257042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_84
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 354
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01053d5f654118b90800000000000000
+      internalID: -7241484362111037424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_85
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 341
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a354716e5c54c34d0800000000000000
+      internalID: -3153568922795031238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_86
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 349
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 679132979af128dd0800000000000000
+      internalID: -2485389231612814986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_87
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 234
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67cf5f266f2c739c0800000000000000
+      internalID: -3947472184888918922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_88
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 101
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14f3cf7b66d1c8ac0800000000000000
+      internalID: -3851671254297985215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_89
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 93
+        width: 11
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b833d13dd66e0260800000000000000
+      internalID: 7065697965600618676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_90
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 87
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c26052ebf1b7cd190800000000000000
+      internalID: -7936333067069356500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_91
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 97
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e76a09886a2f0e0800000000000000
+      internalID: -2237542959377121673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_92
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 100
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a624841d7958ca7e0800000000000000
+      internalID: -1752879267856235926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_93
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 99
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8bf3c5ab69e2cdf0800000000000000
+      internalID: -161309988080059505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_94
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 94
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9693a13ed52c3320800000000000000
+      internalID: 2538945926175889052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_95
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 95
+        width: 7
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 708783286f6d30c50800000000000000
+      internalID: 6630379430654539783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_96
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 99
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e969339bbafd18590800000000000000
+      internalID: -7673606361423047010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_97
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 87
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f497394321bfdccf0800000000000000
+      internalID: -230251950315964081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_98
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 87
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b38439fed723870800000000000000
+      internalID: 8661123501308525353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_99
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 94
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4c26dcff8d4c3800800000000000000
+      internalID: 593434531723619402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_100
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 81
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceacb31570979c070800000000000000
+      internalID: 8127160074901375724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_101
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 50
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 666c9c629354f6ed0800000000000000
+      internalID: -2418638363108456858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_102
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 63
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a60bf8123ee4e7900800000000000000
+      internalID: 684070930834501738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_103
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 75
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9c49d48c4c2af6a0800000000000000
+      internalID: -6414766012077880161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_104
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 75
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef68a42cb4b598300800000000000000
+      internalID: 254835234863482622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_105
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 79
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4013e5f3546e6c20800000000000000
+      internalID: 3201606696877363278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_106
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 65
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0f6251294ab7aa0800000000000000
+      internalID: -6162150717799337800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_107
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 67
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80e0eb843a66b970800000000000000
+      internalID: 8770314098268233871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_108
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 61
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7ba94af6b16fb620800000000000000
+      internalID: 2792057732504071037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_109
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 46
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e68888d78623aff0800000000000000
+      internalID: -26134807938824477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_110
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 57
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad60a6b8bd179f30800000000000000
+      internalID: 4582163825047924131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_111
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 54
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547fe7aecb9734ab0800000000000000
+      internalID: -5025038906920339643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_112
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 15
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6f7655be9aa4aeb0800000000000000
+      internalID: -4709451711698796691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_113
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 23
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc69554d5ceab0850800000000000000
+      internalID: 6344356664775644876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteAim_114
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 29
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29ab95469632d07f0800000000000000
+      internalID: -644820236081972590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HasteAim_0: -6363875000962663233
+      HasteAim_1: 4825987724327438231
+      HasteAim_10: 1288021132859234835
+      HasteAim_100: 8127160074901375724
+      HasteAim_101: -2418638363108456858
+      HasteAim_102: 684070930834501738
+      HasteAim_103: -6414766012077880161
+      HasteAim_104: 254835234863482622
+      HasteAim_105: 3201606696877363278
+      HasteAim_106: -6162150717799337800
+      HasteAim_107: 8770314098268233871
+      HasteAim_108: 2792057732504071037
+      HasteAim_109: -26134807938824477
+      HasteAim_11: 7914514363382741251
+      HasteAim_110: 4582163825047924131
+      HasteAim_111: -5025038906920339643
+      HasteAim_112: -4709451711698796691
+      HasteAim_113: 6344356664775644876
+      HasteAim_114: -644820236081972590
+      HasteAim_12: -5413453471795176830
+      HasteAim_13: -8257982905009574541
+      HasteAim_14: 6730895741661255222
+      HasteAim_15: 9160705924631089999
+      HasteAim_16: -882304585264272390
+      HasteAim_17: 2121678794531838076
+      HasteAim_18: 4231151797826041324
+      HasteAim_19: -7132535287320723640
+      HasteAim_2: 3814456712406108792
+      HasteAim_20: -340124064180517226
+      HasteAim_21: -8880349783789704359
+      HasteAim_22: -2630782327157560095
+      HasteAim_23: 6273788068410644022
+      HasteAim_24: 1087425402113666765
+      HasteAim_25: -2899839607091696557
+      HasteAim_26: -6220005610437646576
+      HasteAim_27: 83337844292640558
+      HasteAim_28: 3622153911287506214
+      HasteAim_29: -2656238016975985065
+      HasteAim_3: -8263596466207683450
+      HasteAim_30: -8129819741679983920
+      HasteAim_31: -6299674484567055902
+      HasteAim_32: -4841959847251390529
+      HasteAim_33: 2219402079071877332
+      HasteAim_34: -7557616794998179546
+      HasteAim_35: -1906162911133725081
+      HasteAim_36: 7579503289321025461
+      HasteAim_37: -2639483482131716830
+      HasteAim_38: 826075428335893645
+      HasteAim_39: -817799300744897667
+      HasteAim_4: -3420535567945449580
+      HasteAim_40: -4436258797854387814
+      HasteAim_41: 1400425664923590774
+      HasteAim_42: -5347016312625759456
+      HasteAim_43: -7985902522236853034
+      HasteAim_44: 6971668908939157839
+      HasteAim_45: 4745385018818415431
+      HasteAim_46: 8624612970574624205
+      HasteAim_47: 7374770883592356955
+      HasteAim_48: -7676412943208894855
+      HasteAim_49: 2543213644720948727
+      HasteAim_5: 6375738753077597946
+      HasteAim_50: -3097449697489966888
+      HasteAim_51: -2134535837615233057
+      HasteAim_52: -2324533660440443614
+      HasteAim_53: -1101634762937795520
+      HasteAim_54: 5308639848575245439
+      HasteAim_55: 2697995926466394468
+      HasteAim_56: -7072178257788596292
+      HasteAim_57: 3955237203007641053
+      HasteAim_58: -6487666134286092747
+      HasteAim_59: -2529187676543417721
+      HasteAim_6: -3853689139198086402
+      HasteAim_60: -2803468924276022487
+      HasteAim_61: -5752155406977522403
+      HasteAim_62: -2483879214641816997
+      HasteAim_63: 4214960597382810704
+      HasteAim_64: -108228136304980
+      HasteAim_65: -3486222109166181435
+      HasteAim_66: 1805545782110787366
+      HasteAim_67: -7395002312934155903
+      HasteAim_68: -9165319070986433104
+      HasteAim_69: 9005962716744590373
+      HasteAim_7: -5356819125206844435
+      HasteAim_70: 8819836541878748927
+      HasteAim_71: 6132254091152281143
+      HasteAim_72: -813706418006528299
+      HasteAim_73: -6956804521286123070
+      HasteAim_74: 7435248411237291199
+      HasteAim_75: 7146044117017449101
+      HasteAim_76: 9181021171587415403
+      HasteAim_77: -8734880154144773653
+      HasteAim_78: 1797082061778481229
+      HasteAim_79: -6330346829701589551
+      HasteAim_8: -540262049566646622
+      HasteAim_80: 8363732445463895430
+      HasteAim_81: 5985983550498781327
+      HasteAim_82: -2145638348440992305
+      HasteAim_83: 2977233584939257042
+      HasteAim_84: -7241484362111037424
+      HasteAim_85: -3153568922795031238
+      HasteAim_86: -2485389231612814986
+      HasteAim_87: -3947472184888918922
+      HasteAim_88: -3851671254297985215
+      HasteAim_89: 7065697965600618676
+      HasteAim_9: -5034004127308949669
+      HasteAim_90: -7936333067069356500
+      HasteAim_91: -2237542959377121673
+      HasteAim_92: -1752879267856235926
+      HasteAim_93: -161309988080059505
+      HasteAim_94: 2538945926175889052
+      HasteAim_95: 6630379430654539783
+      HasteAim_96: -7673606361423047010
+      HasteAim_97: -230251950315964081
+      HasteAim_98: 8661123501308525353
+      HasteAim_99: 593434531723619402
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

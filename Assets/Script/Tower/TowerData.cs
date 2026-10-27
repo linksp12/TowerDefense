@@ -83,6 +83,21 @@ public class TowerData : ScriptableObject
     [Header("기본 능력치")]
     public CombatStats baseStats;
 
+    [Header("공격 방식 (기존 타워는 Projectile 유지)")]
+    public TowerAttackProfile baseAttack = new TowerAttackProfile();
+    public TowerAttackProfile pathALv2Attack = new TowerAttackProfile();
+    public TowerAttackProfile pathALv3Attack = new TowerAttackProfile();
+    public TowerAttackProfile pathBLv2Attack = new TowerAttackProfile();
+    public TowerAttackProfile pathBLv3Attack = new TowerAttackProfile();
+
+    public TowerAttackProfile GetAttackProfile(TowerUpgrade.UpgradePath path, int level)
+    {
+        if (level <= 1 || path == TowerUpgrade.UpgradePath.None) return baseAttack;
+        if (path == TowerUpgrade.UpgradePath.PathA)
+            return level == 2 ? pathALv2Attack : pathALv3Attack;
+        return level == 2 ? pathBLv2Attack : pathBLv3Attack;
+    }
+
     [Header("기본 투사체 효과")]
     public ProjectileEffectStats baseProjectileEffects;
 

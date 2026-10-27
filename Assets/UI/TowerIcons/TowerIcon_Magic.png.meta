@@ -1,0 +1,1404 @@
+fileFormatVersion: 2
+guid: 5327e83ee82774b4da284f7f8cbe06e6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1917645494253980861
+    second: TowerIcon_Magic_0
+  - first:
+      213: -4852461283984519499
+    second: TowerIcon_Magic_1
+  - first:
+      213: -6482383610361951721
+    second: TowerIcon_Magic_2
+  - first:
+      213: 6495682614333608191
+    second: TowerIcon_Magic_3
+  - first:
+      213: 5714195489853549805
+    second: TowerIcon_Magic_4
+  - first:
+      213: -4053055580737186056
+    second: TowerIcon_Magic_5
+  - first:
+      213: -174449443480454080
+    second: TowerIcon_Magic_6
+  - first:
+      213: 2765546728090833033
+    second: TowerIcon_Magic_7
+  - first:
+      213: -7442743689134744642
+    second: TowerIcon_Magic_8
+  - first:
+      213: 2083078834320672957
+    second: TowerIcon_Magic_9
+  - first:
+      213: 721510470337977032
+    second: TowerIcon_Magic_10
+  - first:
+      213: -8999341705696091276
+    second: TowerIcon_Magic_11
+  - first:
+      213: 5656564484264104433
+    second: TowerIcon_Magic_12
+  - first:
+      213: 2052764460331401469
+    second: TowerIcon_Magic_13
+  - first:
+      213: 2391193835669735666
+    second: TowerIcon_Magic_14
+  - first:
+      213: -8760545467490746387
+    second: TowerIcon_Magic_15
+  - first:
+      213: 4666538673925870597
+    second: TowerIcon_Magic_16
+  - first:
+      213: -7312027862316335575
+    second: TowerIcon_Magic_17
+  - first:
+      213: 7258979132980975485
+    second: TowerIcon_Magic_18
+  - first:
+      213: 4825022524602115082
+    second: TowerIcon_Magic_19
+  - first:
+      213: 4029855838424197945
+    second: TowerIcon_Magic_20
+  - first:
+      213: 3488769660008015083
+    second: TowerIcon_Magic_21
+  - first:
+      213: 4165964620562303682
+    second: TowerIcon_Magic_22
+  - first:
+      213: -4212067083847735344
+    second: TowerIcon_Magic_23
+  - first:
+      213: 2184038957304156784
+    second: TowerIcon_Magic_24
+  - first:
+      213: 3537378741023707927
+    second: TowerIcon_Magic_25
+  - first:
+      213: 8189250350617535913
+    second: TowerIcon_Magic_26
+  - first:
+      213: 4156942091621066585
+    second: TowerIcon_Magic_27
+  - first:
+      213: -6654167026555066081
+    second: TowerIcon_Magic_28
+  - first:
+      213: 8106904684859717638
+    second: TowerIcon_Magic_29
+  - first:
+      213: -7852048538983170339
+    second: TowerIcon_Magic_30
+  - first:
+      213: 6153841887768155410
+    second: TowerIcon_Magic_31
+  - first:
+      213: -5229819035397690262
+    second: TowerIcon_Magic_32
+  - first:
+      213: -7104914968895449249
+    second: TowerIcon_Magic_33
+  - first:
+      213: -1623970820171514457
+    second: TowerIcon_Magic_34
+  - first:
+      213: -3940981032487029235
+    second: TowerIcon_Magic_35
+  - first:
+      213: -4876768318915913299
+    second: TowerIcon_Magic_36
+  - first:
+      213: -7742570496760579527
+    second: TowerIcon_Magic_37
+  - first:
+      213: -8764885290904566893
+    second: TowerIcon_Magic_38
+  - first:
+      213: -5489257499524257186
+    second: TowerIcon_Magic_39
+  - first:
+      213: 2897842179182939902
+    second: TowerIcon_Magic_40
+  - first:
+      213: -3389912869743021390
+    second: TowerIcon_Magic_41
+  - first:
+      213: 5296273709188807079
+    second: TowerIcon_Magic_42
+  - first:
+      213: -6218946334263571660
+    second: TowerIcon_Magic_43
+  - first:
+      213: 7224814959124420924
+    second: TowerIcon_Magic_44
+  - first:
+      213: 4021256141441269465
+    second: TowerIcon_Magic_45
+  - first:
+      213: 5632448289880436925
+    second: TowerIcon_Magic_46
+  - first:
+      213: 1707456324439452116
+    second: TowerIcon_Magic_47
+  - first:
+      213: -5560913027255476757
+    second: TowerIcon_Magic_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerIcon_Magic_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1203
+        width: 106
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbc032aba68dc9a10800000000000000
+      internalID: 1917645494253980861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_1
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1191
+        width: 130
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be44c1fb2898acb0800000000000000
+      internalID: -4852461283984519499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_2
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1247
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71acf869372f906a0800000000000000
+      internalID: -6482383610361951721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_3
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 1243
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff019011cec452a50800000000000000
+      internalID: 6495682614333608191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_4
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 1239
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dec2cddd586ec4f40800000000000000
+      internalID: 5714195489853549805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_5
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 1245
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f6de3f5c67a0c7c0800000000000000
+      internalID: -4053055580737186056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_6
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 1203
+        width: 35
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c351ac72b349df0800000000000000
+      internalID: -174449443480454080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_7
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 1192
+        width: 47
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9801991c812316620800000000000000
+      internalID: 2765546728090833033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_8
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 1190
+        width: 42
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebbd7de4c0016b890800000000000000
+      internalID: -7442743689134744642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_9
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 1207
+        width: 38
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db881d6c92598ec10800000000000000
+      internalID: 2083078834320672957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_10
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 1221
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ca583633f1530a00800000000000000
+      internalID: 721510470337977032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_11
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 1211
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47360a3366aeb1380800000000000000
+      internalID: -8999341705696091276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_12
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 1195
+        width: 28
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f117adbd67208e40800000000000000
+      internalID: 5656564484264104433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_13
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1190
+        width: 77
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df089919662ec7c10800000000000000
+      internalID: 2052764460331401469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_14
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 1175
+        width: 17
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8c23cdf1a3f2120800000000000000
+      internalID: 2391193835669735666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_15
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 1221
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def3e8b005a4c6680800000000000000
+      internalID: -8760545467490746387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_16
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 1169
+        width: 89
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50459f51330e2c040800000000000000
+      internalID: 4666538673925870597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_17
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 1162
+        width: 15
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92e30e66665768a90800000000000000
+      internalID: -7312027862316335575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_18
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 1173
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d77dd4dcf031db460800000000000000
+      internalID: 7258979132980975485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_19
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 1182
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a04ea2c0c6ce5f240800000000000000
+      internalID: 4825022524602115082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_20
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1181
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93bee41b88cece730800000000000000
+      internalID: 4029855838424197945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_21
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1148
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be420ff75899a6030800000000000000
+      internalID: 3488769660008015083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_22
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 1164
+        width: 45
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca067b00ca70d930800000000000000
+      internalID: 4165964620562303682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_23
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1175
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d7e321cd4bbb85c0800000000000000
+      internalID: -4212067083847735344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_24
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 1190
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0729ab13cd34f4e10800000000000000
+      internalID: 2184038957304156784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_25
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 1156
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7139cbe193b471130800000000000000
+      internalID: 3537378741023707927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_26
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1179
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a52d4d2ecf06a170800000000000000
+      internalID: 8189250350617535913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_27
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 1141
+        height: 1158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95761f2decc60b930800000000000000
+      internalID: 4156942091621066585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_28
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1131
+        width: 968
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f19611a3856a7a3a0800000000000000
+      internalID: -6654167026555066081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 122
+        width: 117
+        height: 983
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6087301dbd2818070800000000000000
+      internalID: 8106904684859717638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_30
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1084
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde78caa47be70390800000000000000
+      internalID: -7852048538983170339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 853
+        width: 49
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 215175ca796d66550800000000000000
+      internalID: 6153841887768155410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_32
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 843
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6c6b8bcb43fb67b0800000000000000
+      internalID: -5229819035397690262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_33
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 853
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5791afaa75466d90800000000000000
+      internalID: -7104914968895449249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_34
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 835
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7adb31aa42f7679e0800000000000000
+      internalID: -1623970820171514457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_35
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 684
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d06fe0491a2de49c0800000000000000
+      internalID: -3940981032487029235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_36
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 580
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da9532b5d0d325cb0800000000000000
+      internalID: -4876768318915913299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_37
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 449
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93a7a24b72ddc8490800000000000000
+      internalID: -7742570496760579527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_38
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 404
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 393469a244fdc5680800000000000000
+      internalID: -8764885290904566893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_39
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 417
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a2534336d32d3b0800000000000000
+      internalID: -5489257499524257186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_40
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 405
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efec759cb14373820800000000000000
+      internalID: 2897842179182939902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_41
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 401
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b2317b943c94f0d0800000000000000
+      internalID: -3389912869743021390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_42
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 377
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a9707da0e4208940800000000000000
+      internalID: 5296273709188807079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_43
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 292
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43b8005224dd1b9a0800000000000000
+      internalID: -6218946334263571660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_44
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 29
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c391a863de2b34460800000000000000
+      internalID: 7224814959124420924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_45
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 46
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9def675b72f5ec730800000000000000
+      internalID: 4021256141441269465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_46
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 35
+        width: 48
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0741ea0e97a2e40800000000000000
+      internalID: 5632448289880436925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_47
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 34
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d925b70b7a12b710800000000000000
+      internalID: 1707456324439452116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Magic_48
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 0
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed589f801ba3d2b0800000000000000
+      internalID: -5560913027255476757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TowerIcon_Magic_0: 1917645494253980861
+      TowerIcon_Magic_1: -4852461283984519499
+      TowerIcon_Magic_10: 721510470337977032
+      TowerIcon_Magic_11: -8999341705696091276
+      TowerIcon_Magic_12: 5656564484264104433
+      TowerIcon_Magic_13: 2052764460331401469
+      TowerIcon_Magic_14: 2391193835669735666
+      TowerIcon_Magic_15: -8760545467490746387
+      TowerIcon_Magic_16: 4666538673925870597
+      TowerIcon_Magic_17: -7312027862316335575
+      TowerIcon_Magic_18: 7258979132980975485
+      TowerIcon_Magic_19: 4825022524602115082
+      TowerIcon_Magic_2: -6482383610361951721
+      TowerIcon_Magic_20: 4029855838424197945
+      TowerIcon_Magic_21: 3488769660008015083
+      TowerIcon_Magic_22: 4165964620562303682
+      TowerIcon_Magic_23: -4212067083847735344
+      TowerIcon_Magic_24: 2184038957304156784
+      TowerIcon_Magic_25: 3537378741023707927
+      TowerIcon_Magic_26: 8189250350617535913
+      TowerIcon_Magic_27: 4156942091621066585
+      TowerIcon_Magic_28: -6654167026555066081
+      TowerIcon_Magic_29: 8106904684859717638
+      TowerIcon_Magic_3: 6495682614333608191
+      TowerIcon_Magic_30: -7852048538983170339
+      TowerIcon_Magic_31: 6153841887768155410
+      TowerIcon_Magic_32: -5229819035397690262
+      TowerIcon_Magic_33: -7104914968895449249
+      TowerIcon_Magic_34: -1623970820171514457
+      TowerIcon_Magic_35: -3940981032487029235
+      TowerIcon_Magic_36: -4876768318915913299
+      TowerIcon_Magic_37: -7742570496760579527
+      TowerIcon_Magic_38: -8764885290904566893
+      TowerIcon_Magic_39: -5489257499524257186
+      TowerIcon_Magic_4: 5714195489853549805
+      TowerIcon_Magic_40: 2897842179182939902
+      TowerIcon_Magic_41: -3389912869743021390
+      TowerIcon_Magic_42: 5296273709188807079
+      TowerIcon_Magic_43: -6218946334263571660
+      TowerIcon_Magic_44: 7224814959124420924
+      TowerIcon_Magic_45: 4021256141441269465
+      TowerIcon_Magic_46: 5632448289880436925
+      TowerIcon_Magic_47: 1707456324439452116
+      TowerIcon_Magic_48: -5560913027255476757
+      TowerIcon_Magic_5: -4053055580737186056
+      TowerIcon_Magic_6: -174449443480454080
+      TowerIcon_Magic_7: 2765546728090833033
+      TowerIcon_Magic_8: -7442743689134744642
+      TowerIcon_Magic_9: 2083078834320672957
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

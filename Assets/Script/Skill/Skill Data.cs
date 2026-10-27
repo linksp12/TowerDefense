@@ -75,6 +75,8 @@ public sealed class SkillData : ScriptableObject
     [SerializeField] private float effectRotationSpeed;
 
     [Header("연출 및 사운드")]
+    [Tooltip("표시 전용 프레임과 색상. 비우면 기존 이펙트 프리팹을 사용합니다.")]
+    [SerializeField] private SkillVisualProfile visualProfile;
     [InspectorName("마법진 이미지")]
     [SerializeField] private Sprite magicCircle;
     [InspectorName("이펙트 프리팹")]
@@ -107,6 +109,7 @@ public sealed class SkillData : ScriptableObject
     public float EffectRadiusFraction => effectRadiusFraction;
     public float EffectRotationSpeed => effectRotationSpeed;
     public Sprite MagicCircle => magicCircle;
+    public SkillVisualProfile VisualProfile => visualProfile;
     public GameObject EffectPrefab => effectPrefab;
     public float EffectScale => effectScale;
     public AudioClip Sound => sound;

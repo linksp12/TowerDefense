@@ -277,6 +277,12 @@ public sealed class PlazaCodexUI : MonoBehaviour
         DetailText(data.towerName, new Vector2(460f, 172f), new Vector2(420f, 56f), 38f, Gold, TextAlignmentOptions.Left);
         var effects = data.baseProjectileEffects;
         var tags = new List<(string, Color)>();
+        if (data.baseAttack != null)
+        {
+            if (data.baseAttack.mode == TowerAttackMode.Laser) tags.Add(("대상 고정", new Color(1f, 0.45f, 0.4f)));
+            if (data.baseAttack.mode == TowerAttackMode.Sniper) tags.Add(("직선 관통", new Color(0.9f, 0.9f, 0.75f)));
+            if (data.baseAttack.mode == TowerAttackMode.Shock) tags.Add(("감전", new Color(0.55f, 0.8f, 1f)));
+        }
         if (effects.canExplode) tags.Add(("폭발", new Color(1f, 0.62f, 0.4f)));
         if (effects.canPierce) tags.Add(("관통", new Color(0.9f, 0.9f, 0.75f)));
         if (effects.canSlow) tags.Add(("둔화", new Color(0.55f, 0.8f, 1f)));

@@ -1,0 +1,1092 @@
+fileFormatVersion: 2
+guid: 2848761dda3969d4fb1ab19ffac50cab
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 964668009611725754
+    second: LightningAim_0
+  - first:
+      213: -1936685557954825961
+    second: LightningAim_1
+  - first:
+      213: -7675719908617249988
+    second: LightningAim_2
+  - first:
+      213: -8089634494766570048
+    second: LightningAim_3
+  - first:
+      213: -5569068199864330375
+    second: LightningAim_4
+  - first:
+      213: -3401720746799231499
+    second: LightningAim_5
+  - first:
+      213: 1670052329406008183
+    second: LightningAim_6
+  - first:
+      213: -7750252961680614772
+    second: LightningAim_7
+  - first:
+      213: 3826073364314554231
+    second: LightningAim_8
+  - first:
+      213: -3231689658993988612
+    second: LightningAim_9
+  - first:
+      213: -6510412048987398723
+    second: LightningAim_10
+  - first:
+      213: 8899072657269467425
+    second: LightningAim_11
+  - first:
+      213: 3647192862523264560
+    second: LightningAim_12
+  - first:
+      213: 8455386866669690736
+    second: LightningAim_13
+  - first:
+      213: 2267933848801919401
+    second: LightningAim_14
+  - first:
+      213: -6924677198075236877
+    second: LightningAim_15
+  - first:
+      213: 2448486903601819717
+    second: LightningAim_16
+  - first:
+      213: 2567196818077293101
+    second: LightningAim_17
+  - first:
+      213: -3143596347198892410
+    second: LightningAim_18
+  - first:
+      213: -8184578516079910751
+    second: LightningAim_19
+  - first:
+      213: 2679984019374702093
+    second: LightningAim_20
+  - first:
+      213: 5357060878207119508
+    second: LightningAim_21
+  - first:
+      213: -2178997767666462471
+    second: LightningAim_22
+  - first:
+      213: 2413329075461914182
+    second: LightningAim_23
+  - first:
+      213: 1025912812781566674
+    second: LightningAim_24
+  - first:
+      213: -1892526984182499409
+    second: LightningAim_25
+  - first:
+      213: -8680164330941489525
+    second: LightningAim_26
+  - first:
+      213: -8785674983213986122
+    second: LightningAim_27
+  - first:
+      213: -1151729790915289929
+    second: LightningAim_28
+  - first:
+      213: -7328571286606196808
+    second: LightningAim_29
+  - first:
+      213: 699127195084921616
+    second: LightningAim_30
+  - first:
+      213: -8324946357815431689
+    second: LightningAim_31
+  - first:
+      213: 3895435473718269055
+    second: LightningAim_32
+  - first:
+      213: -6812772680930065237
+    second: LightningAim_33
+  - first:
+      213: 1184624729354467696
+    second: LightningAim_34
+  - first:
+      213: 1757161240603996184
+    second: LightningAim_35
+  - first:
+      213: 5534135178206087275
+    second: LightningAim_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LightningAim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1249
+        height: 1246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb07179170336d00800000000000000
+      internalID: 964668009611725754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_1
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1221
+        width: 18
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711397cfeb28f15e0800000000000000
+      internalID: -1936685557954825961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_2
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1237
+        width: 52
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3b997b296d5a7590800000000000000
+      internalID: -7675719908617249988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_3
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 1242
+        width: 28
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c521b8a948dbbf80800000000000000
+      internalID: -8089634494766570048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_4
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1213
+        width: 13
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97799297af1b6b2b0800000000000000
+      internalID: -5569068199864330375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_5
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 1158
+        width: 124
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fd84fdf009aac0d0800000000000000
+      internalID: -3401720746799231499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_6
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 1219
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77b0f8aceb73d2710800000000000000
+      internalID: 1670052329406008183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 761
+        width: 60
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8a9b937ef1917490800000000000000
+      internalID: -7750252961680614772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_8
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 832
+        width: 180
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77f7d841471f81530800000000000000
+      internalID: 3826073364314554231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_9
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 817
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfb2c5b906bb623d0800000000000000
+      internalID: -3231689658993988612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_10
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 799
+        width: 40
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbddeae2cbe56a5a0800000000000000
+      internalID: -6510412048987398723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_11
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 638
+        width: 93
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12920f6be6bdf7b70800000000000000
+      internalID: 8899072657269467425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_12
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 473
+        width: 76
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e0a06b59e6d9230800000000000000
+      internalID: 3647192862523264560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_13
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 576
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07f99528e81975570800000000000000
+      internalID: 8455386866669690736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_14
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 359
+        width: 102
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a14ce7c1d1597f10800000000000000
+      internalID: 2267933848801919401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_15
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 484
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd6a70e6ca96ef90800000000000000
+      internalID: -6924677198075236877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_16
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 183
+        width: 154
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 540f16ebdd5caf120800000000000000
+      internalID: 2448486903601819717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_17
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 342
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2a920a87e380a320800000000000000
+      internalID: 2567196818077293101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_18
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 324
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6869ef717c3bf54d0800000000000000
+      internalID: -3143596347198892410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_19
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 211
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a063c014398a6e80800000000000000
+      internalID: -8184578516079910751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_20
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 128
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0e7d863447313520800000000000000
+      internalID: 2679984019374702093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_21
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 23
+        width: 47
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4907dad5c7a185a40800000000000000
+      internalID: 5357060878207119508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_22
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 31
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f01fdb3315a2c1e0800000000000000
+      internalID: -2178997767666462471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_23
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 22
+        width: 76
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e770df10edd7120800000000000000
+      internalID: 2413329075461914182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_24
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 25
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dafd588446cc3e00800000000000000
+      internalID: 1025912812781566674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_25
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 33
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa7f5f32cb46cb5e0800000000000000
+      internalID: -1892526984182499409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_26
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 27
+        width: 61
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e573ec78cd98780800000000000000
+      internalID: -8680164330941489525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_27
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 12
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be8e79b623031680800000000000000
+      internalID: -8785674983213986122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_28
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 20
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc52477bdb3400f0800000000000000
+      internalID: -1151729790915289929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_29
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 31
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bfc5b64e3fab4a90800000000000000
+      internalID: -7328571286606196808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_30
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 39
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01b1ad3da7cc3b900800000000000000
+      internalID: 699127195084921616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_31
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 15
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdaa302569d77c80800000000000000
+      internalID: -8324946357815431689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_32
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 23
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f74de68aced5f0630800000000000000
+      internalID: 3895435473718269055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_33
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 15
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba48da1a75b2471a0800000000000000
+      internalID: -6812772680930065237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_34
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 079f0593ae1a07010800000000000000
+      internalID: 1184624729354467696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_35
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8103947a6d0b26810800000000000000
+      internalID: 1757161240603996184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningAim_36
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 9
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6887fb9f923dcc40800000000000000
+      internalID: 5534135178206087275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LightningAim_0: 964668009611725754
+      LightningAim_1: -1936685557954825961
+      LightningAim_10: -6510412048987398723
+      LightningAim_11: 8899072657269467425
+      LightningAim_12: 3647192862523264560
+      LightningAim_13: 8455386866669690736
+      LightningAim_14: 2267933848801919401
+      LightningAim_15: -6924677198075236877
+      LightningAim_16: 2448486903601819717
+      LightningAim_17: 2567196818077293101
+      LightningAim_18: -3143596347198892410
+      LightningAim_19: -8184578516079910751
+      LightningAim_2: -7675719908617249988
+      LightningAim_20: 2679984019374702093
+      LightningAim_21: 5357060878207119508
+      LightningAim_22: -2178997767666462471
+      LightningAim_23: 2413329075461914182
+      LightningAim_24: 1025912812781566674
+      LightningAim_25: -1892526984182499409
+      LightningAim_26: -8680164330941489525
+      LightningAim_27: -8785674983213986122
+      LightningAim_28: -1151729790915289929
+      LightningAim_29: -7328571286606196808
+      LightningAim_3: -8089634494766570048
+      LightningAim_30: 699127195084921616
+      LightningAim_31: -8324946357815431689
+      LightningAim_32: 3895435473718269055
+      LightningAim_33: -6812772680930065237
+      LightningAim_34: 1184624729354467696
+      LightningAim_35: 1757161240603996184
+      LightningAim_36: 5534135178206087275
+      LightningAim_4: -5569068199864330375
+      LightningAim_5: -3401720746799231499
+      LightningAim_6: 1670052329406008183
+      LightningAim_7: -7750252961680614772
+      LightningAim_8: 3826073364314554231
+      LightningAim_9: -3231689658993988612
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

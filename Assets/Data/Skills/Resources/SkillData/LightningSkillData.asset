@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Lightning
   description: "\uC9C0\uC815\uD55C \uBC94\uC704\uC5D0\uC11C \uAC00\uAE4C\uC6B4 \uBAAC\uC2A4\uD130\uB97C
     \uCD5C\uB300 5\uB9C8\uB9AC\uAE4C\uC9C0 \uACF5\uACA9\uD569\uB2C8\uB2E4."
-  icon: {fileID: 21300000, guid: acb43d362f712fa4ea5fc825e270b1e4, type: 3}
+  icon: {fileID: 66717049, guid: 9856aea0177ac6047be58e29640d14c7, type: 3}
   effectType: 2
   damage: 100
   range: 3.1
@@ -25,7 +25,14 @@ MonoBehaviour:
   maxTargets: 5
   periodicDamage: 0
   periodicInterval: 0.5
-  magicCircle: {fileID: 21300000, guid: d88e224a006413d4caa00bffb1afa42a, type: 3}
+  attackSpeedBonus: 0.3
+  buffMarkerPrefab: {fileID: 0}
+  buffMarkerHeight: 0.8
+  magicCircleRadiusFraction: 0.72
+  effectRadiusFraction: 1
+  effectRotationSpeed: 0
+  visualProfile: {fileID: 11400000, guid: 313133eb4efc7d44391f7ca65e670483, type: 2}
+  magicCircle: {fileID: 21300000, guid: 2848761dda3969d4fb1ab19ffac50cab, type: 3}
   effectPrefab: {fileID: 7826854605276991285, guid: 8db6d75d0ef6ba24785d757e1b46878c, type: 3}
   effectScale: 1
   sound: {fileID: 8300000, guid: d689eafb4bbbc694e91486167f8a4e53, type: 3}

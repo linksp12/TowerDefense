@@ -37,13 +37,13 @@ internal sealed class SkillButtonFeedback
     private IEnumerator Pulse(float scale, float duration)
     {
         Vector3 large = originalScale * scale;
-        for (float elapsed = 0f; elapsed < duration; elapsed += Time.deltaTime)
+        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
         {
             if (animatedTransform == null) yield break;
             animatedTransform.localScale = Vector3.Lerp(originalScale, large, elapsed / duration);
             yield return null;
         }
-        for (float elapsed = 0f; elapsed < duration; elapsed += Time.deltaTime)
+        for (float elapsed = 0f; elapsed < duration; elapsed += Time.unscaledDeltaTime)
         {
             if (animatedTransform == null) yield break;
             animatedTransform.localScale = Vector3.Lerp(large, originalScale, elapsed / duration);
@@ -96,9 +96,11 @@ internal sealed class SkillButtonFeedback
             RectTransform rect = root.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = Vector2.zero;
-            rect.sizeDelta = new Vector2(700f, 100f);
+            rect.sizeDelta = new Vector2(Mathf.Min(480f, ((RectTransform)canvas.transform).rect.width - 24f), 64f);
             Text = root.GetComponent<TextMeshProUGUI>();
-            Text.fontSize = 42f;
+            Text.enableAutoSizing = true;
+            Text.fontSizeMin = 16f; Text.fontSizeMax = 30f;
+            Text.fontSize = 30f;
             Text.alignment = TextAlignmentOptions.Center;
             Text.color = new Color(1f, 0.82f, 0.25f, 1f);
             Text.outlineColor = Color.black;

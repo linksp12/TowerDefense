@@ -19,6 +19,18 @@ public class MonsterMove : MonoBehaviour
     private bool isFrozen = false;
 
     private int baseDamage;
+    private readonly MonsterControlEffects controlEffects = new MonsterControlEffects();
+
+    public bool IsShockStunned => controlEffects.IsStunned;
+    public float EffectiveMoveSpeed => controlEffects.GetSpeed(moveSpeed,
+        monsterData != null ? monsterData.moveSpeed : moveSpeed);
+
+    public void ApplyShock(float stopDuration, float slowReduction, float slowDuration)
+    {
+        controlEffects.Apply(stopDuration, slowReduction, slowDuration);
+    }
+
+    private void OnDisable() => controlEffects.Clear();
 
     void Awake()
     {
@@ -42,7 +54,7 @@ public class MonsterMove : MonoBehaviour
     void Update()
     {
         // 빙결 중이면 이동 정지
-        if (isFrozen) return;
+        if (isFrozen || controlEffects.IsStunned) return;
 
         if (waypoints == null || waypoints.Length == 0) return;
 
@@ -53,7 +65,7 @@ public class MonsterMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 target.position,
-                moveSpeed * Time.deltaTime
+                EffectiveMoveSpeed * Time.deltaTime
             );
 
             if (Vector3.Distance(transform.position, target.position) < 0.01f)
@@ -129,6 +141,8 @@ public class MonsterMove : MonoBehaviour
     }
 
     // 스킬용 빙결 기능
+    public bool IsFrozen => isFrozen;
+
     public void Freeze(float duration)
     {
         if (freezeCoroutine != null)

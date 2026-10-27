@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8b638e2b28f0542987d326fb2d9898, type: 3}
+  m_Name: IceSkillVisuals
+  m_EditorClassIdentifier: Assembly-CSharp::SkillVisualProfile
+  castFrames:
+  - {fileID: -1671079977, guid: 0debd2505b647914b93d168f0e4efc10, type: 3}
+  - {fileID: -1604104252, guid: 0debd2505b647914b93d168f0e4efc10, type: 3}
+  - {fileID: 1641262192, guid: 0debd2505b647914b93d168f0e4efc10, type: 3}
+  - {fileID: -1440898144, guid: 0debd2505b647914b93d168f0e4efc10, type: 3}
+  statusFrames:
+  - {fileID: 973787270, guid: 10044ad77cf380941a75dd6b711b15a8, type: 3}
+  targetFrames:
+  - {fileID: 1629455343, guid: 0debd2505b647914b93d168f0e4efc10, type: 3}
+  targetWidthMultiplier: 1.15
+  targetHeadMarker: {fileID: -1774496916, guid: ad574082d6aae2543abeb22667994322, type: 3}
+  targetHeadWidthMultiplier: 0.45
+  targetHeadGap: 0.15
+  castDuration: 0.5
+  statusFps: 7
+  targetFps: 6
+  castDiameterMultiplier: 0.9
+  accent: {r: 0.3, g: 0.85, b: 1, a: 1}
+  silhouetteMaterial: {fileID: 2100000, guid: 7073730d9e4e7824bbf0ee6fe444ca56, type: 2}

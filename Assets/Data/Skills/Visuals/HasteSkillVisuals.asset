@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8b638e2b28f0542987d326fb2d9898, type: 3}
+  m_Name: HasteSkillVisuals
+  m_EditorClassIdentifier: Assembly-CSharp::SkillVisualProfile
+  castFrames:
+  - {fileID: -1696059565, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: 430654871, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: 604397830, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: 63970254, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  statusFrames:
+  - {fileID: -1485687751, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: -1097213382, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: 405246854, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: -1958892632, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  targetFrames:
+  - {fileID: 2071944138, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: -398277590, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: 1527577173, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  - {fileID: -850812807, guid: 90f21812090cd094fad888b473de3224, type: 3}
+  targetWidthMultiplier: 1.35
+  targetHeadMarker: {fileID: 0}
+  targetHeadWidthMultiplier: 0.45
+  targetHeadGap: 0.15
+  castDuration: 0.45
+  statusFps: 7
+  targetFps: 6
+  castDiameterMultiplier: 0.9
+  accent: {r: 0.6, g: 1, b: 0.2, a: 1}
+  silhouetteMaterial: {fileID: 2100000, guid: 7073730d9e4e7824bbf0ee6fe444ca56, type: 2}

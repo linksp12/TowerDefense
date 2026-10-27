@@ -1,0 +1,408 @@
+fileFormatVersion: 2
+guid: afb2ca0b66ebe7c46bd230b2b356e768
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1544717205597063225
+    second: Sniper_TowerSheet_0
+  - first:
+      213: -584085616862722373
+    second: Sniper_TowerSheet_1
+  - first:
+      213: -4999611940940337623
+    second: Sniper_TowerSheet_2
+  - first:
+      213: 2418415926056913510
+    second: Sniper_TowerSheet_3
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 279.04764
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sniper_Base
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 60
+        width: 439
+        height: 586
+      alignment: 9
+      pivot: {x: 0.44191343, y: 0.25714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -217.5, y: -173}
+        - {x: -199.5, y: 192}
+        - {x: -197.5, y: 196}
+        - {x: -191.5, y: 202}
+        - {x: -60.5, y: 277}
+        - {x: -37.5, y: 289}
+        - {x: -32.5, y: 291}
+        - {x: -27.5, y: 291}
+        - {x: -23.5, y: 290}
+        - {x: 205.5, y: 207}
+        - {x: 209.5, y: 204}
+        - {x: 213.5, y: 200}
+        - {x: 216.5, y: 195}
+        - {x: 217.5, y: 191}
+        - {x: 217.5, y: 181}
+        - {x: 178.5, y: -181}
+        - {x: 175.5, y: -185}
+        - {x: 168.5, y: -190}
+        - {x: 26.5, y: -270}
+        - {x: -6.5, y: -287}
+        - {x: -10.5, y: -289}
+        - {x: -15.5, y: -291}
+        - {x: -23.5, y: -291}
+        - {x: -28.5, y: -289}
+        - {x: -64.5, y: -271}
+        - {x: -160.5, y: -222}
+        - {x: -213.5, y: -193}
+        - {x: -216.5, y: -190}
+        - {x: -217.5, y: -187}
+      physicsShape: []
+      tessellationDetail: 1
+      bones: []
+      spriteID: f9f92bb547a7b934aa41d02f5bab6476
+      internalID: -1119105176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sniper_A1
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 60
+        width: 426
+        height: 586
+      alignment: 9
+      pivot: {x: 0.46244133, y: 0.25714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -211, y: -172}
+        - {x: -185, y: 192}
+        - {x: -184, y: 195}
+        - {x: -182, y: 198}
+        - {x: -178, y: 202}
+        - {x: -175, y: 204}
+        - {x: -43, y: 277}
+        - {x: -15, y: 291}
+        - {x: -5, y: 291}
+        - {x: -2, y: 290}
+        - {x: 200, y: 208}
+        - {x: 202, y: 207}
+        - {x: 208, y: 201}
+        - {x: 210, y: 197}
+        - {x: 211, y: 194}
+        - {x: 211, y: 180}
+        - {x: 190, y: -174}
+        - {x: 189, y: -181}
+        - {x: 188, y: -183}
+        - {x: 185, y: -186}
+        - {x: 179, y: -190}
+        - {x: 48, y: -268}
+        - {x: 18, y: -284}
+        - {x: 4, y: -291}
+        - {x: -5, y: -291}
+        - {x: -14, y: -287}
+        - {x: -139, y: -228}
+        - {x: -155, y: -220}
+        - {x: -208, y: -192}
+        - {x: -210, y: -189}
+        - {x: -211, y: -187}
+      physicsShape: []
+      tessellationDetail: 1
+      bones: []
+      spriteID: fc1aba811f0156841bead1a2f1e765c5
+      internalID: -1443225056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sniper_A2
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 60
+        width: 431
+        height: 587
+      alignment: 9
+      pivot: {x: 0.4709977, y: 0.2567048}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -213.5, y: -167.5}
+        - {x: -192.5, y: 194.5}
+        - {x: -190.5, y: 198.5}
+        - {x: -185.5, y: 203.5}
+        - {x: -45.5, y: 278.5}
+        - {x: -21.5, y: 290.5}
+        - {x: -18.5, y: 291.5}
+        - {x: -7.5, y: 291.5}
+        - {x: 202.5, y: 208.5}
+        - {x: 204.5, y: 207.5}
+        - {x: 209.5, y: 202.5}
+        - {x: 211.5, y: 199.5}
+        - {x: 213.5, y: 194.5}
+        - {x: 213.5, y: 180.5}
+        - {x: 192.5, y: -179.5}
+        - {x: 190.5, y: -183.5}
+        - {x: 187.5, y: -186.5}
+        - {x: 182.5, y: -190.5}
+        - {x: 39.5, y: -271.5}
+        - {x: 7.5, y: -288.5}
+        - {x: 5.5, y: -289.5}
+        - {x: 0.5, y: -291.5}
+        - {x: -5.5, y: -291.5}
+        - {x: -11.5, y: -289.5}
+        - {x: -16.5, y: -287.5}
+        - {x: -146.5, y: -224.5}
+        - {x: -150.5, y: -222.5}
+        - {x: -170.5, y: -211.5}
+        - {x: -205.5, y: -191.5}
+        - {x: -208.5, y: -189.5}
+        - {x: -211.5, y: -186.5}
+        - {x: -213.5, y: -182.5}
+      physicsShape: []
+      tessellationDetail: 1
+      bones: []
+      spriteID: 7585e4a9017a5054aa4f641e1565ef5c
+      internalID: 1386093376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sniper_B1
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 60
+        width: 417
+        height: 586
+      alignment: 9
+      pivot: {x: 0.46402878, y: 0.25714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -206.5, y: -172}
+        - {x: -186.5, y: 194}
+        - {x: -182.5, y: 201}
+        - {x: -178.5, y: 204}
+        - {x: -171.5, y: 208}
+        - {x: -46.5, y: 279}
+        - {x: -24.5, y: 290}
+        - {x: -20.5, y: 291}
+        - {x: -9.5, y: 291}
+        - {x: -6.5, y: 290}
+        - {x: 194.5, y: 210}
+        - {x: 196.5, y: 209}
+        - {x: 202.5, y: 203}
+        - {x: 204.5, y: 200}
+        - {x: 206.5, y: 196}
+        - {x: 206.5, y: 180}
+        - {x: 187.5, y: -180}
+        - {x: 185.5, y: -183}
+        - {x: 182.5, y: -186}
+        - {x: 176.5, y: -190}
+        - {x: 48.5, y: -267}
+        - {x: 17.5, y: -284}
+        - {x: 7.5, y: -289}
+        - {x: 2.5, y: -291}
+        - {x: -5.5, y: -291}
+        - {x: -135.5, y: -228}
+        - {x: -147.5, y: -222}
+        - {x: -203.5, y: -192}
+        - {x: -204.5, y: -191}
+        - {x: -206.5, y: -187}
+      physicsShape: []
+      tessellationDetail: 1
+      bones: []
+      spriteID: fb144e7ec650dcb43a1b57d0fabaef49
+      internalID: 222664095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sniper_B2
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 60
+        width: 409
+        height: 588
+      alignment: 9
+      pivot: {x: 0.49144253, y: 0.25626826}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: -202.5, y: -163}
+        - {x: -182.5, y: 195}
+        - {x: -180.5, y: 199}
+        - {x: -178.5, y: 201}
+        - {x: -175.5, y: 203}
+        - {x: -170.5, y: 206}
+        - {x: -51.5, y: 277}
+        - {x: -25.5, y: 290}
+        - {x: -20.5, y: 292}
+        - {x: -12.5, y: 292}
+        - {x: -7.5, y: 290}
+        - {x: 194.5, y: 208}
+        - {x: 197.5, y: 205}
+        - {x: 201.5, y: 199}
+        - {x: 202.5, y: 196}
+        - {x: 202.5, y: 180}
+        - {x: 196.5, y: -182}
+        - {x: 193.5, y: -186}
+        - {x: 39.5, y: -274}
+        - {x: 11.5, y: -289}
+        - {x: 4.5, y: -292}
+        - {x: -3.5, y: -292}
+        - {x: -17.5, y: -285}
+        - {x: -50.5, y: -268}
+        - {x: -137.5, y: -223}
+        - {x: -157.5, y: -212}
+        - {x: -195.5, y: -190}
+        - {x: -199.5, y: -186}
+        - {x: -202.5, y: -180}
+      physicsShape: []
+      tessellationDetail: 1
+      bones: []
+      spriteID: 5a3bf77e53f0062419d8994b8d8429ba
+      internalID: 436259593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dd7218da35ebd8d49b822aa365bfc9e1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sniper_A1: -1443225056
+      Sniper_A2: 1386093376
+      Sniper_B1: 222664095
+      Sniper_B2: 436259593
+      Sniper_Base: -1119105176
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

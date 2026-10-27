@@ -85,10 +85,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 621207422
-  m_SortingLayer: 0
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2f0b8ad7ef85a7f47b548e3278a8bde6, type: 3}
+  m_Sprite: {fileID: -1276010535, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   towerData: {fileID: 11400000, guid: 3a901ddec14146bca46055d5a59a1ab0, type: 2}
-  upgrade: "\uD3ED\uBC1C / \uACF5\uC131"
   canDetectStealth: 0
   criticalChance: 0.1
   criticalDamageMultiplier: 2
@@ -132,11 +131,11 @@ MonoBehaviour:
   level: 1
   maxLevel: 3
   path: 0
-  basicTowerSprite: {fileID: 21300000, guid: 2f0b8ad7ef85a7f47b548e3278a8bde6, type: 3}
-  pathALv2TowerSprite: {fileID: 21300000, guid: 4a2eae5691f11f646a8f134139db7b10, type: 3}
-  pathALv3TowerSprite: {fileID: 21300000, guid: 61ceca2000fef0f418d17f471f5dd2c0, type: 3}
-  pathBLv2TowerSprite: {fileID: 21300000, guid: 0a753a80ed5043845995a02e42f6d719, type: 3}
-  pathBLv3TowerSprite: {fileID: 21300000, guid: 005d70d694d06934d9d7618ef5d60a84, type: 3}
+  basicTowerSprite: {fileID: -1276010535, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
+  pathALv2TowerSprite: {fileID: 1167174718, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
+  pathALv3TowerSprite: {fileID: 1656938057, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
+  pathBLv2TowerSprite: {fileID: 725562848, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
+  pathBLv3TowerSprite: {fileID: -364803944, guid: 14029cfb8233a364189d7e183c7a4d68, type: 3}
   basicProjectilePrefab: {fileID: 7817520689033560513, guid: b1fa7695a2af1dc4d81d121a77f6e613, type: 3}
   pathALv2ProjectilePrefab: {fileID: 7817520689033560513, guid: 08d4b57c7c1f4cb49a96f3d5378e82c3, type: 3}
   pathALv3ProjectilePrefab: {fileID: 7817520689033560513, guid: 02a40868b11933444a4d0b780a0fea29, type: 3}
@@ -191,8 +190,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.7866666, y: 2.7866666}
+    pivot: {x: 0.50265956, y: 0.3}
+    oldSize: {x: 1.6962405, y: 1.8}
     newSize: {x: 0.18, y: 0.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

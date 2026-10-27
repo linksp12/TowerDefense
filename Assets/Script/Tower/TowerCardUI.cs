@@ -11,6 +11,29 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     [Header("UI")]
     [SerializeField] private Image towerIconImage;
+    [SerializeField] private bool buildOnClick;
+    private Button buildButton;
+
+    public void Configure(TowerAttack prefab)
+    {
+        targetTowerPrefab = prefab;
+        ApplyTowerIcon();
+        ApplyPrice();
+    }
+
+    private void ApplyPrice()
+    {
+        foreach (var price in GetComponentsInChildren<TextUpdate>(true))
+            price.Configure(targetTowerPrefab);
+        foreach (var label in GetComponentsInChildren<TMPro.TMP_Text>(true))
+            if (label.name == "cost" && Data != null) label.text = Data.buildCost + " G";
+    }
+
+    private void BuildSelectedTower()
+    {
+        if (targetTowerPrefab != null && TowerBuildManager.Instance != null)
+            TowerBuildManager.Instance.BuildConfiguredTower(targetTowerPrefab.gameObject);
+    }
 
     private TowerData Data => targetTowerPrefab != null ? targetTowerPrefab.towerData : null;
 
@@ -18,6 +41,17 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         FindTowerIconImage();
         ApplyTowerIcon();
+        ApplyPrice();
+        if (buildOnClick)
+        {
+            buildButton = GetComponentInChildren<Button>(true);
+            if (buildButton != null) buildButton.onClick.AddListener(BuildSelectedTower);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (buildButton != null) buildButton.onClick.RemoveListener(BuildSelectedTower);
     }
 
     private void FindTowerIconImage()
@@ -61,7 +95,7 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (targetTowerPrefab == null) return "정보 없음";
 
             return $"<color=#FFF379>공격력:</color> <color=white>{targetTowerPrefab.BaseDamage}</color>\n" +
-                   $"<color=#FFF379>공격속도(s):</color> <color=white>{targetTowerPrefab.BaseAttackCooldown}</color>\n" +
+                   $"<color=#FFF379>공격간격(s):</color> <color=white>{targetTowerPrefab.BaseAttackCooldown}</color>\n" +
                    $"<color=#FFF379>사거리:</color> <color=white>{targetTowerPrefab.BaseAttackRange}</color>\n" +
                    $"<color=#FFF379>업그레이드:</color> <color=white>{targetTowerPrefab.UpgradeRouteSummary}</color>";
         }
@@ -88,5 +122,10 @@ public class TowerCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             TowerInfoPanel.Instance.Hide();
         }
+    }
+
+    private void OnDisable()
+    {
+        if (TowerInfoPanel.Instance != null) TowerInfoPanel.Instance.Hide();
     }
 }

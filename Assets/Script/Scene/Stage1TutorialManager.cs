@@ -29,6 +29,8 @@ public class Stage1TutorialManager : MonoBehaviour
         FinishPrompt, Complete
     }
     private TutorialStep step;
+    public bool IsTowerChoiceRestricted => isActiveAndEnabled &&
+        (step == TutorialStep.BuildPoint || step == TutorialStep.BowCard);
     private enum CalloutSide { Right, Left, Below, Above }
 
     private RectTransform tutorialRect;

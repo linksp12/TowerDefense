@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "\uC9C0\uC815\uD55C \uBC94\uC704\uC5D0 \uC989\uC2DC \uD53C\uD574\uB97C
     \uC8FC\uACE0 \uC77C\uC815 \uC2DC\uAC04 \uB3D9\uC548 \uCD94\uAC00 \uD654\uC5FC
     \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
-  icon: {fileID: 21300000, guid: 3f4ed634430fc504fa19c6b408cd40c1, type: 3}
+  icon: {fileID: 409750105, guid: 9856aea0177ac6047be58e29640d14c7, type: 3}
   effectType: 0
   damage: 20
   range: 3.3
@@ -26,7 +26,14 @@ MonoBehaviour:
   maxTargets: 0
   periodicDamage: 5
   periodicInterval: 0.5
-  magicCircle: {fileID: 21300000, guid: cc6e38c3aa6f3784594fe4725e43da87, type: 3}
+  attackSpeedBonus: 0.3
+  buffMarkerPrefab: {fileID: 0}
+  buffMarkerHeight: 0.8
+  magicCircleRadiusFraction: 0.72
+  effectRadiusFraction: 1
+  effectRotationSpeed: 0
+  visualProfile: {fileID: 11400000, guid: 64a38eb13c485854f96353135783d82a, type: 2}
+  magicCircle: {fileID: 21300000, guid: 90b1f2340d123a947912a8b069a43b4b, type: 3}
   effectPrefab: {fileID: 8074580348689213501, guid: 777dfe4b18575e44180df0e85c182d58, type: 3}
   effectScale: 2
   sound: {fileID: 8300000, guid: faeaa59adbf954b48af7bb01d858b212, type: 3}

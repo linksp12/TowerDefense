@@ -136,7 +136,8 @@ public class TowerUpgrade : MonoBehaviour
             "공격력: " + towerAttack.damage + "\n" +
             "공격속도: " + towerAttack.attackCooldown + "초\n" +
             "사거리: " + towerAttack.attackRange + "\n" +
-            "판매가: " + GetSellPrice() + "G";
+            "판매가: " + GetSellPrice() + "G\n" +
+            TowerCombatDescription.Describe(towerAttack.CurrentAttackProfile);
     }
 
     public void SelectPathA()

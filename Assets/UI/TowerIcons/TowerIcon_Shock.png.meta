@@ -1,0 +1,1690 @@
+fileFormatVersion: 2
+guid: 126300f4270c5ce4bb775a01c77da4db
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4137549934898690190
+    second: TowerIcon_Shock_0
+  - first:
+      213: 3434151579052855160
+    second: TowerIcon_Shock_1
+  - first:
+      213: 4195251590573381361
+    second: TowerIcon_Shock_2
+  - first:
+      213: 7869745895197355281
+    second: TowerIcon_Shock_3
+  - first:
+      213: 7670321332674970210
+    second: TowerIcon_Shock_4
+  - first:
+      213: 3471631062728741435
+    second: TowerIcon_Shock_5
+  - first:
+      213: -324856456972439357
+    second: TowerIcon_Shock_6
+  - first:
+      213: 2316784350602546458
+    second: TowerIcon_Shock_7
+  - first:
+      213: 3003123391088780682
+    second: TowerIcon_Shock_8
+  - first:
+      213: 1206069864778707027
+    second: TowerIcon_Shock_9
+  - first:
+      213: 5517304646203149023
+    second: TowerIcon_Shock_10
+  - first:
+      213: -7445428099032504601
+    second: TowerIcon_Shock_11
+  - first:
+      213: -2834503931454300816
+    second: TowerIcon_Shock_12
+  - first:
+      213: -501891444755148356
+    second: TowerIcon_Shock_13
+  - first:
+      213: -2432005717900765625
+    second: TowerIcon_Shock_14
+  - first:
+      213: 1532164179958840377
+    second: TowerIcon_Shock_15
+  - first:
+      213: 141512150757234569
+    second: TowerIcon_Shock_16
+  - first:
+      213: 1467278004903297431
+    second: TowerIcon_Shock_17
+  - first:
+      213: 7144039071731525234
+    second: TowerIcon_Shock_18
+  - first:
+      213: -4390306235444137945
+    second: TowerIcon_Shock_19
+  - first:
+      213: 4131676754112981241
+    second: TowerIcon_Shock_20
+  - first:
+      213: -7395122266729053193
+    second: TowerIcon_Shock_21
+  - first:
+      213: -2457321655353774358
+    second: TowerIcon_Shock_22
+  - first:
+      213: 2638366490748343200
+    second: TowerIcon_Shock_23
+  - first:
+      213: 2395759319956459058
+    second: TowerIcon_Shock_24
+  - first:
+      213: -3667389236431537114
+    second: TowerIcon_Shock_25
+  - first:
+      213: -7544822633789101221
+    second: TowerIcon_Shock_26
+  - first:
+      213: 6986614094479649059
+    second: TowerIcon_Shock_27
+  - first:
+      213: -6155330231534577786
+    second: TowerIcon_Shock_28
+  - first:
+      213: -1413294410112840443
+    second: TowerIcon_Shock_29
+  - first:
+      213: 4691354419067724777
+    second: TowerIcon_Shock_30
+  - first:
+      213: 8115507084600833731
+    second: TowerIcon_Shock_31
+  - first:
+      213: -7078167854931989045
+    second: TowerIcon_Shock_32
+  - first:
+      213: 2294427726784112582
+    second: TowerIcon_Shock_33
+  - first:
+      213: -5261802454603812043
+    second: TowerIcon_Shock_34
+  - first:
+      213: 2076107731296888064
+    second: TowerIcon_Shock_35
+  - first:
+      213: 3980447128551325906
+    second: TowerIcon_Shock_36
+  - first:
+      213: 2443410723928736435
+    second: TowerIcon_Shock_37
+  - first:
+      213: -7021105363863016040
+    second: TowerIcon_Shock_38
+  - first:
+      213: 8850514071225223306
+    second: TowerIcon_Shock_39
+  - first:
+      213: 6438646272176833809
+    second: TowerIcon_Shock_40
+  - first:
+      213: -1958972687004440421
+    second: TowerIcon_Shock_41
+  - first:
+      213: -1556800000798750645
+    second: TowerIcon_Shock_42
+  - first:
+      213: 1871011024346410005
+    second: TowerIcon_Shock_43
+  - first:
+      213: 6312796458129092113
+    second: TowerIcon_Shock_44
+  - first:
+      213: 8899047425128299345
+    second: TowerIcon_Shock_45
+  - first:
+      213: -2448673299955145296
+    second: TowerIcon_Shock_46
+  - first:
+      213: 5111178159326877729
+    second: TowerIcon_Shock_47
+  - first:
+      213: 8668649722559161103
+    second: TowerIcon_Shock_48
+  - first:
+      213: 2504722352938394730
+    second: TowerIcon_Shock_49
+  - first:
+      213: 6645620036540034292
+    second: TowerIcon_Shock_50
+  - first:
+      213: -4086029238465387849
+    second: TowerIcon_Shock_51
+  - first:
+      213: 3396231625873625840
+    second: TowerIcon_Shock_52
+  - first:
+      213: 4369185230794303672
+    second: TowerIcon_Shock_53
+  - first:
+      213: 7075220035462327775
+    second: TowerIcon_Shock_54
+  - first:
+      213: 1306450019304670599
+    second: TowerIcon_Shock_55
+  - first:
+      213: -6734342007165302472
+    second: TowerIcon_Shock_56
+  - first:
+      213: 1815646182525794210
+    second: TowerIcon_Shock_57
+  - first:
+      213: -262999491858059784
+    second: TowerIcon_Shock_58
+  - first:
+      213: 7102224999222739842
+    second: TowerIcon_Shock_59
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerIcon_Shock_0
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 1233
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2774ce181487496c0800000000000000
+      internalID: -4137549934898690190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_1
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1245
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87fca4e8aae88af20800000000000000
+      internalID: 3434151579052855160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_2
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 1243
+        width: 25
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f6d48f1817883a30800000000000000
+      internalID: 4195251590573381361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1254
+        height: 1235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11da3db2234f63d60800000000000000
+      internalID: 7869745895197355281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_4
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 1225
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 262413bec94727a60800000000000000
+      internalID: 7670321332674970210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_5
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 1227
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b32982dde06bd2030800000000000000
+      internalID: 3471631062728741435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_6
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1221
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c07a2706c0ed7bf0800000000000000
+      internalID: -324856456972439357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_7
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 1230
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d49de871fd62020800000000000000
+      internalID: 2316784350602546458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_8
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 1205
+        width: 54
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a85638e10dc3da920800000000000000
+      internalID: 3003123391088780682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_9
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 1211
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3503078e622dcb010800000000000000
+      internalID: 1206069864778707027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_10
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 1221
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fda0d820857619c40800000000000000
+      internalID: 5517304646203149023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_11
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 1213
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6a47c67968ca890800000000000000
+      internalID: -7445428099032504601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_12
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1209
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07dd73331b1d9a8d0800000000000000
+      internalID: -2834503931454300816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_13
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 1205
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1df8fd36ce809f0800000000000000
+      internalID: -501891444755148356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_14
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 889
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7465ec45fa7cf3ed0800000000000000
+      internalID: -2432005717900765625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_15
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 779
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c36043437534510800000000000000
+      internalID: 1532164179958840377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_16
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 728
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98759452d80c6f100800000000000000
+      internalID: 141512150757234569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_17
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 682
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 791410d4291dc5410800000000000000
+      internalID: 1467278004903297431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_18
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 663
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 276a11c5fa9b42360800000000000000
+      internalID: 7144039071731525234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_19
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 625
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7207b2d5dbf7213c0800000000000000
+      internalID: -4390306235444137945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_20
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 610
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f8a4a70e1aa65930800000000000000
+      internalID: 4131676754112981241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_21
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 451
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3880dba7f3f5990800000000000000
+      internalID: -7395122266729053193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_22
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 439
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aee63c159f6d5edd0800000000000000
+      internalID: -2457321655353774358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_23
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 417
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a3595c385c5d9420800000000000000
+      internalID: 2638366490748343200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_24
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 416
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e065188627f3120800000000000000
+      internalID: 2395759319956459058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_25
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 42
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62c386d8be0da1dc0800000000000000
+      internalID: -3667389236431537114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_26
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 71
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5b6cabe9c76b4790800000000000000
+      internalID: -7544822633789101221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_27
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 15
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3296234908075f060800000000000000
+      internalID: 6986614094479649059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_28
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 39
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 687982a44cfd39aa0800000000000000
+      internalID: -6155330231534577786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_29
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 31
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50dcd22d838f26ce0800000000000000
+      internalID: -1413294410112840443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_30
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 45
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e3adfffcf90b1140800000000000000
+      internalID: 4691354419067724777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_31
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 45
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c67cc512b210a070800000000000000
+      internalID: 8115507084600833731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_32
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 49
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcda03276db45cd90800000000000000
+      internalID: -7078167854931989045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_33
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 33
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c726c17cd177df10800000000000000
+      internalID: 2294427726784112582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_34
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 49
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533bf07bb825af6b0800000000000000
+      internalID: -5261802454603812043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_35
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 45
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 005a46f5bf0dfcc10800000000000000
+      internalID: 2076107731296888064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_36
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 38
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d08688f2936d3730800000000000000
+      internalID: 3980447128551325906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_37
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b207209b1db8e120800000000000000
+      internalID: 2443410723928736435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_38
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 41
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89dea58fed5009e90800000000000000
+      internalID: -7021105363863016040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_39
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 43
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a88c9fed7a753da70800000000000000
+      internalID: 8850514071225223306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_40
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 41
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1154e7fcbaaaa5950800000000000000
+      internalID: 6438646272176833809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_41
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 33
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b98686268b450d4e0800000000000000
+      internalID: -1958972687004440421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_42
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 33
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b480016c5a2256ae0800000000000000
+      internalID: -1556800000798750645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_43
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 47
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51ce1051d9a27f910800000000000000
+      internalID: 1871011024346410005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_44
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 31
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ee02a9eee8b9750800000000000000
+      internalID: 6312796458129092113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_45
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 31
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15b7026eb74cf7b70800000000000000
+      internalID: 8899047425128299345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_46
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 37
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b5a0397b90940ed0800000000000000
+      internalID: -2448673299955145296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_47
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 33
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128d96aa47d8ee640800000000000000
+      internalID: 5111178159326877729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_48
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 34
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f036d638efa3d4870800000000000000
+      internalID: 8668649722559161103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_49
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 31
+        width: 27
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64afdb95bf82c220800000000000000
+      internalID: 2504722352938394730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_50
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 31
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fcef26963cf93c50800000000000000
+      internalID: 6645620036540034292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_51
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 33
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b2296b6e028b47c0800000000000000
+      internalID: -4086029238465387849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_52
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 31
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f215237ba6d12f20800000000000000
+      internalID: 3396231625873625840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_53
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 33
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b8a06781d672ac30800000000000000
+      internalID: 4369185230794303672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_54
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 29
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd6579d22b303260800000000000000
+      internalID: 7075220035462327775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_55
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 34
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7850575ee51712210800000000000000
+      internalID: 1306450019304670599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_56
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 34
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839cbe2ef9fca82a0800000000000000
+      internalID: -6734342007165302472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_57
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 33
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a77e335598723910800000000000000
+      internalID: 1815646182525794210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_58
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 29
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fd21b70b53a95cf0800000000000000
+      internalID: -262999491858059784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerIcon_Shock_59
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 0
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2830291f10c209260800000000000000
+      internalID: 7102224999222739842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TowerIcon_Shock_0: -4137549934898690190
+      TowerIcon_Shock_1: 3434151579052855160
+      TowerIcon_Shock_10: 5517304646203149023
+      TowerIcon_Shock_11: -7445428099032504601
+      TowerIcon_Shock_12: -2834503931454300816
+      TowerIcon_Shock_13: -501891444755148356
+      TowerIcon_Shock_14: -2432005717900765625
+      TowerIcon_Shock_15: 1532164179958840377
+      TowerIcon_Shock_16: 141512150757234569
+      TowerIcon_Shock_17: 1467278004903297431
+      TowerIcon_Shock_18: 7144039071731525234
+      TowerIcon_Shock_19: -4390306235444137945
+      TowerIcon_Shock_2: 4195251590573381361
+      TowerIcon_Shock_20: 4131676754112981241
+      TowerIcon_Shock_21: -7395122266729053193
+      TowerIcon_Shock_22: -2457321655353774358
+      TowerIcon_Shock_23: 2638366490748343200
+      TowerIcon_Shock_24: 2395759319956459058
+      TowerIcon_Shock_25: -3667389236431537114
+      TowerIcon_Shock_26: -7544822633789101221
+      TowerIcon_Shock_27: 6986614094479649059
+      TowerIcon_Shock_28: -6155330231534577786
+      TowerIcon_Shock_29: -1413294410112840443
+      TowerIcon_Shock_3: 7869745895197355281
+      TowerIcon_Shock_30: 4691354419067724777
+      TowerIcon_Shock_31: 8115507084600833731
+      TowerIcon_Shock_32: -7078167854931989045
+      TowerIcon_Shock_33: 2294427726784112582
+      TowerIcon_Shock_34: -5261802454603812043
+      TowerIcon_Shock_35: 2076107731296888064
+      TowerIcon_Shock_36: 3980447128551325906
+      TowerIcon_Shock_37: 2443410723928736435
+      TowerIcon_Shock_38: -7021105363863016040
+      TowerIcon_Shock_39: 8850514071225223306
+      TowerIcon_Shock_4: 7670321332674970210
+      TowerIcon_Shock_40: 6438646272176833809
+      TowerIcon_Shock_41: -1958972687004440421
+      TowerIcon_Shock_42: -1556800000798750645
+      TowerIcon_Shock_43: 1871011024346410005
+      TowerIcon_Shock_44: 6312796458129092113
+      TowerIcon_Shock_45: 8899047425128299345
+      TowerIcon_Shock_46: -2448673299955145296
+      TowerIcon_Shock_47: 5111178159326877729
+      TowerIcon_Shock_48: 8668649722559161103
+      TowerIcon_Shock_49: 2504722352938394730
+      TowerIcon_Shock_5: 3471631062728741435
+      TowerIcon_Shock_50: 6645620036540034292
+      TowerIcon_Shock_51: -4086029238465387849
+      TowerIcon_Shock_52: 3396231625873625840
+      TowerIcon_Shock_53: 4369185230794303672
+      TowerIcon_Shock_54: 7075220035462327775
+      TowerIcon_Shock_55: 1306450019304670599
+      TowerIcon_Shock_56: -6734342007165302472
+      TowerIcon_Shock_57: 1815646182525794210
+      TowerIcon_Shock_58: -262999491858059784
+      TowerIcon_Shock_59: 7102224999222739842
+      TowerIcon_Shock_6: -324856456972439357
+      TowerIcon_Shock_7: 2316784350602546458
+      TowerIcon_Shock_8: 3003123391088780682
+      TowerIcon_Shock_9: 1206069864778707027
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

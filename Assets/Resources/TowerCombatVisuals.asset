@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c0cf630607a1f4f96ea5b7bda4065c, type: 3}
+  m_Name: TowerCombatVisuals
+  m_EditorClassIdentifier: Assembly-CSharp::TowerCombatVisuals
+  piercingRound: {fileID: 941912130, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  fragment: {fileID: 989037745, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  energyBolt: {fileID: 695752524, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  energyImpact: {fileID: 763599129, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  shockImpact: {fileID: 137165568, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  burn: {fileID: -314630592, guid: 8589f8abcee387f4991c50b4af96c1f4, type: 3}
+  sniperShot: {fileID: 8300000, guid: 72ddc9b0d50a4234bb9e95b810d2f472, type: 3}
+  electricShot: {fileID: 8300000, guid: 22902d48dd93b654c9811d183964e9df, type: 3}
+  laserShot: {fileID: 8300000, guid: ef3ffd722e779014f8842b225f93d432, type: 3}
+  energyImpactSound: {fileID: 8300000, guid: 7908c2ef2150a0f4eba6aa3a86986d61, type: 3}
+  soundVolume: 0.3

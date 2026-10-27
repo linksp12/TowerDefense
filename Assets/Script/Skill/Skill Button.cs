@@ -170,8 +170,16 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (skill == null) return;
         displayedSkill = skill;
-        if (iconImage != null && skill.Icon != null && iconImage.sprite != skill.Icon)
+        if (iconImage != null && skill.Icon != null)
+        {
+            iconImage.preserveAspect = true;
             iconImage.sprite = skill.Icon;
+        }
+        if (cooldownOverlay != null && skill.VisualProfile != null)
+        {
+            cooldownOverlay.sprite = skill.Icon;
+            cooldownOverlay.preserveAspect = true;
+        }
     }
 
     private void UpdateCooldownUI(SkillData skill)

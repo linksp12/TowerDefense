@@ -28,6 +28,10 @@ public class TowerAttack : MonoBehaviour
     public Transform firePoint;
 
     private float attackTimer = 0f;
+    private TowerSpecialAttack specialAttack;
+    public TowerAttackProfile CurrentAttackProfile { get; private set; }
+    public float ChargeNormalized => specialAttack != null ? specialAttack.ChargeNormalized : 0;
+    public Vector3 ShotOrigin => firePoint != null ? firePoint.position : transform.position;
 
     // 스킬 등 외부 효과가 거는 공격 속도 배율입니다. 쿨타임 값(연구 보정 포함)은 그대로 두고
     // 타이머가 흐르는 속도만 바꾸므로 능력치 UI와 연구 보정에 영향을 주지 않습니다.
@@ -48,6 +52,7 @@ public class TowerAttack : MonoBehaviour
 
     private void OnDisable()
     {
+        specialAttack?.Reset();
         activeTowers.Remove(this);
         speedBuffs.Clear();
         foreach (GameObject marker in buffMarkers.Values)
@@ -168,12 +173,21 @@ public class TowerAttack : MonoBehaviour
             towerData.baseStats.attackCooldown,
             towerData.baseStats.attackRange);
         projectileEffects = towerData.baseProjectileEffects;
+        CurrentAttackProfile = towerData.baseAttack;
+        specialAttack?.Reset();
     }
 
     private void Update()
     {
         attackTimer += Time.deltaTime * CurrentAttackSpeedMultiplier;
         RefreshBuffMarkers();
+
+        if (CurrentAttackProfile != null && CurrentAttackProfile.mode != TowerAttackMode.Projectile)
+        {
+            if (specialAttack == null) specialAttack = new TowerSpecialAttack(this);
+            specialAttack.Tick(Time.deltaTime * CurrentAttackSpeedMultiplier);
+            return;
+        }
 
         GameObject target = FindNearestMonster();
 
@@ -338,6 +352,11 @@ public class TowerAttack : MonoBehaviour
     {
         ApplyGrowthToCombatStats(newDamage, newCooldown, newRange);
         projectileEffects = newProjectileEffects;
+        var upgrade = GetComponent<TowerUpgrade>();
+        CurrentAttackProfile = towerData != null ? towerData.GetAttackProfile(
+            upgrade != null ? upgrade.path : TowerUpgrade.UpgradePath.None,
+            upgrade != null ? upgrade.level : 1) : null;
+        specialAttack?.Reset();
 
         if (newArrowPrefab != null)
         {
