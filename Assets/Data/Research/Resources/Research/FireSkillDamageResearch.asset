@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6a91a08236ecb46a475dbd457fae85, type: 3}
+  m_Name: FireSkillDamageResearch
+  m_EditorClassIdentifier: Assembly-CSharp::ResearchData
+  researchId: fire_skill_damage
+  targetType: 1
+  targetId: fire_skill
+  modifierType: 0
+  towerTarget: {fileID: 0}
+  skillTarget: {fileID: 11400000, guid: 95169902fd49a7f428b3db19aa3d5715, type: 2}
+  displayName: "\uD654\uC5FC \uC751\uCD95"
+  description: "\uD654\uC5FC \uC2A4\uD0AC\uC758 \uCD5C\uCD08 \uD53C\uD574\uB7C9\uC744
+    \uD55C \uB2E8\uACC4\uC529 \uAC15\uD654\uD569\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 3f4ed634430fc504fa19c6b408cd40c1, type: 3}
+  ranks:
+  - skillPointCost: 1
+    modifierValue: 2
+  - skillPointCost: 1
+    modifierValue: 2
+  - skillPointCost: 1
+    modifierValue: 2
+  - skillPointCost: 1
+    modifierValue: 2
+  - skillPointCost: 1
+    modifierValue: 2

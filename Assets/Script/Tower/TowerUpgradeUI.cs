@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class TowerUpgradeUI : MonoBehaviour
 {
@@ -66,6 +68,10 @@ public class TowerUpgradeUI : MonoBehaviour
     public Vector2 onePathClosePosition = new Vector2(300f, 120f);
 
     private TowerUpgrade selectedTower;
+    private bool isOpen;
+    private Coroutine closeCoroutine;
+
+    public bool IsOpen => isOpen;
 
     void Awake()
     {
@@ -80,6 +86,11 @@ public class TowerUpgradeUI : MonoBehaviour
         if (panelShake == null && panel != null)
             panelShake = panel.GetComponent<PanelShake>();
 
+        // 씬 로딩 화면의 Canvas를 잘못 잡으면 로딩 종료 후 파괴되어 위치 이동이 멈춘다.
+        // 패널이 속한 Canvas를 우선 사용한다. (TowerBuildManager와 같은 방식)
+        if (canvas == null && panel != null)
+            canvas = panel.GetComponentInParent<Canvas>(true);
+
         if (canvas == null)
             canvas = FindFirstObjectByType<Canvas>();
 
@@ -88,6 +99,25 @@ public class TowerUpgradeUI : MonoBehaviour
         else if (panel != null)
             panel.SetActive(false);
     }
+
+    private void Update()
+{
+    if (isOpen && Input.GetMouseButtonDown(0))
+    {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+
+        if (hit.collider != null && selectedTower != null && hit.collider.gameObject == selectedTower.gameObject)
+        {
+            return;
+        }
+
+        Close();
+    }
+}
 
     void Start()
     {
@@ -115,6 +145,35 @@ public class TowerUpgradeUI : MonoBehaviour
 
     public void Open(TowerUpgrade tower)
     {
+        if (tower == null)
+            return;
+
+        if (isOpen && selectedTower == tower)
+        {
+            Close();
+            return;
+        }
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (TowerBuildManager.Instance != null &&
+            TowerBuildManager.Instance.IsOpen)
+        {
+            TowerBuildManager.Instance.CloseBuildPanelSilently();
+        }
+
+        isOpen = true;
+
+        if (panel != null)
+            panel.transform.SetAsLastSibling();
+
+        if (BossInfoUI.Instance != null)
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
+
         selectedTower = tower;
 
         MovePanelToTowerPosition();
@@ -134,6 +193,9 @@ public class TowerUpgradeUI : MonoBehaviour
     {
         if (selectedTower == null)
             return;
+
+        if (canvas == null && panel != null)
+            canvas = panel.GetComponentInParent<Canvas>(true);
 
         if (panelRect == null || canvas == null || Camera.main == null)
         {
@@ -220,10 +282,10 @@ public class TowerUpgradeUI : MonoBehaviour
             pathBImage.sprite = selectedTower.GetPathBSprite();
 
         if (pathANameText != null)
-            pathANameText.text = selectedTower.GetPathAName();
+            pathANameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
 
         if (pathBNameText != null)
-            pathBNameText.text = selectedTower.GetPathBName();
+            pathBNameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
 
         if (sellButton != null)
             sellButton.gameObject.SetActive(true);
@@ -252,7 +314,7 @@ public class TowerUpgradeUI : MonoBehaviour
             finalUpgradeImage.sprite = selectedTower.GetFinalUpgradeSprite();
 
         if (finalUpgradeNameText != null)
-            finalUpgradeNameText.text = selectedTower.GetFinalUpgradeName();
+            finalUpgradeNameText.text = $"{selectedTower.GetUpgradeCost()} 원"; //변수 이름은 바꾸면 문제될까봐 안바꿨습니다
 
         if (sellButton != null)
             sellButton.gameObject.SetActive(true);
@@ -315,17 +377,17 @@ public class TowerUpgradeUI : MonoBehaviour
         if (type == UpgradeTooltipTrigger.TooltipType.PathA)
         {
             title = selectedTower.GetPathAName();
-            desc = GetPathADescription();
+            desc = selectedTower.GetPathADescription();
         }
         else if (type == UpgradeTooltipTrigger.TooltipType.PathB)
         {
             title = selectedTower.GetPathBName();
-            desc = GetPathBDescription();
+            desc = selectedTower.GetPathBDescription();
         }
         else if (type == UpgradeTooltipTrigger.TooltipType.FinalUpgrade)
         {
             title = selectedTower.GetFinalUpgradeName();
-            desc = GetFinalUpgradeDescription();
+            desc = selectedTower.GetFinalUpgradeDescription();
         }
         else if (type == UpgradeTooltipTrigger.TooltipType.Sell)
         {
@@ -343,102 +405,6 @@ public class TowerUpgradeUI : MonoBehaviour
     {
         if (tooltipUI != null)
             tooltipUI.Hide();
-    }
-
-    string GetPathADescription()
-    {
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Archer)
-        {
-            return
-                "빠른 공격 속도를 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 공격속도 증가\n" +
-                "추천: 많은 몬스터 처리";
-        }
-
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Cannon)
-        {
-            return
-                "폭발 피해를 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 주변 몬스터에게 범위 피해\n" +
-                "추천: 몰려오는 몬스터 처리";
-        }
-
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Magic)
-        {
-            return
-                "마법화살을 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 몬스터 이동속도 감소\n" +
-                "추천: 적 이동 지연";
-        }
-
-        return "업그레이드 정보를 불러올 수 없습니다.";
-    }
-
-    string GetPathBDescription()
-    {
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Archer)
-        {
-            return
-                "강한 화살과 관통 공격을 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 높은 공격력 / 관통 공격\n" +
-                "추천: 체력이 높은 몬스터 처리";
-        }
-
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Cannon)
-        {
-            return
-                "강력한 한 방 피해를 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 높은 단일 피해\n" +
-                "추천: 보스 및 단단한 몬스터 처리";
-        }
-
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Magic)
-        {
-            return
-                "화염 피해를 강화하는 루트입니다.\n\n" +
-                "비용: " + selectedTower.level2Cost + "G\n" +
-                "특징: 지속 피해 부여\n" +
-                "추천: 체력이 높은 몬스터 처리";
-        }
-
-        return "업그레이드 정보를 불러올 수 없습니다.";
-    }
-
-    string GetFinalUpgradeDescription()
-    {
-        string effectText = "";
-
-        if (selectedTower.towerType == TowerUpgrade.TowerType.Archer)
-        {
-            if (selectedTower.path == TowerUpgrade.UpgradePath.PathA)
-                effectText = "공격속도가 크게 증가합니다.";
-            else if (selectedTower.path == TowerUpgrade.UpgradePath.PathB)
-                effectText = "관통 성능과 공격력이 크게 증가합니다.";
-        }
-        else if (selectedTower.towerType == TowerUpgrade.TowerType.Cannon)
-        {
-            if (selectedTower.path == TowerUpgrade.UpgradePath.PathA)
-                effectText = "폭발 범위와 피해가 크게 증가합니다.";
-            else if (selectedTower.path == TowerUpgrade.UpgradePath.PathB)
-                effectText = "강력한 공성 피해를 입힙니다.";
-        }
-        else if (selectedTower.towerType == TowerUpgrade.TowerType.Magic)
-        {
-            if (selectedTower.path == TowerUpgrade.UpgradePath.PathA)
-                effectText = "마법화살의 슬로우 효과가 강화됩니다.";
-            else if (selectedTower.path == TowerUpgrade.UpgradePath.PathB)
-                effectText = "화염 지속 피해가 강화됩니다.";
-        }
-
-        return
-            "최종 단계로 업그레이드합니다.\n\n" +
-            "비용: " + selectedTower.level3Cost + "G\n" +
-            "효과: " + effectText;
     }
 
     void OnClickPathA()
@@ -548,6 +514,9 @@ public class TowerUpgradeUI : MonoBehaviour
 
     public void Close()
     {
+        if (UISoundManager.Instance != null)
+            UISoundManager.Instance.PlayClosePanel();
+
         HideTooltip();
 
         if (panelAnimator != null)
@@ -556,5 +525,44 @@ public class TowerUpgradeUI : MonoBehaviour
             panel.SetActive(false);
 
         selectedTower = null;
+
+        if (closeCoroutine != null)
+            StopCoroutine(closeCoroutine);
+
+        closeCoroutine = StartCoroutine(FinishClose());
+    }
+
+    public void CloseInstantly()
+    {
+        HideTooltip();
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (panelAnimator != null)
+            panelAnimator.HideInstant();
+        else if (panel != null)
+            panel.SetActive(false);
+
+        selectedTower = null;
+        isOpen = false;
+    }
+
+    private IEnumerator FinishClose()
+    {
+        if (panelAnimator != null)
+            yield return new WaitForSecondsRealtime(panelAnimator.animationTime);
+
+        isOpen = false;
+        closeCoroutine = null;
+
+        if (BossInfoUI.Instance != null &&
+            (TowerBuildManager.Instance == null || !TowerBuildManager.Instance.IsOpen))
+        {
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(false);
+        }
     }
 }

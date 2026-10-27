@@ -1,0 +1,433 @@
+fileFormatVersion: 2
+guid: 261b6e7b56a106c4695e30eea15c5eea
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7890297758152493153
+    second: "\uD018\uC2A4\uD2B8 npc_0"
+  - first:
+      213: -8790213501120651685
+    second: "\uD018\uC2A4\uD2B8 npc_1"
+  - first:
+      213: 2850175323421730373
+    second: "\uD018\uC2A4\uD2B8 npc_2"
+  - first:
+      213: -2192065852804367662
+    second: "\uD018\uC2A4\uD2B8 npc_3"
+  - first:
+      213: 31241208595981337
+    second: "\uD018\uC2A4\uD2B8 npc_4"
+  - first:
+      213: -8377564515460685550
+    second: "\uD018\uC2A4\uD2B8 npc_5"
+  - first:
+      213: -2191462997581694861
+    second: "\uD018\uC2A4\uD2B8 npc_6"
+  - first:
+      213: 6321549698515144707
+    second: "\uD018\uC2A4\uD2B8 npc_7"
+  - first:
+      213: 494644335452570212
+    second: "\uD018\uC2A4\uD2B8 npc_8"
+  - first:
+      213: -649148738586258696
+    second: "\uD018\uC2A4\uD2B8 npc_9"
+  - first:
+      213: 7015750005126499538
+    second: "\uD018\uC2A4\uD2B8 npc_10"
+  - first:
+      213: -1760006091368615680
+    second: "\uD018\uC2A4\uD2B8 npc_11"
+  - first:
+      213: 8741624305751966476
+    second: "\uD018\uC2A4\uD2B8 npc_12"
+  - first:
+      213: 2162532176749002089
+    second: "\uD018\uC2A4\uD2B8 npc_13"
+  - first:
+      213: -7612320838793135143
+    second: "\uD018\uC2A4\uD2B8 npc_14"
+  - first:
+      213: -8857295072353511014
+    second: "\uD018\uC2A4\uD2B8 npc_15"
+  - first:
+      213: -7549882183774363446
+    second: "\uD018\uC2A4\uD2B8 npc_16"
+  - first:
+      213: 1789577701849129140
+    second: "\uD018\uC2A4\uD2B8 npc_17"
+  - first:
+      213: 2213731456742723839
+    second: "\uD018\uC2A4\uD2B8 npc_18"
+  - first:
+      213: -8822666506828287678
+    second: "\uD018\uC2A4\uD2B8 npc_19"
+  - first:
+      213: -8258940712676963006
+    second: "\uD018\uC2A4\uD2B8 npc_20"
+  - first:
+      213: 6921945754264115894
+    second: "\uD018\uC2A4\uD2B8 npc_21"
+  - first:
+      213: -3319345228592045113
+    second: "\uD018\uC2A4\uD2B8 npc_22"
+  - first:
+      213: -7540521135625857097
+    second: "\uD018\uC2A4\uD2B8 npc_23"
+  - first:
+      213: 1936499450076962203
+    second: "\uD018\uC2A4\uD2B8 npc_24"
+  - first:
+      213: -9163028284405515197
+    second: "\uD018\uC2A4\uD2B8 npc_25"
+  - first:
+      213: -4227726919475277045
+    second: "\uD018\uC2A4\uD2B8 npc_26"
+  - first:
+      213: -4875515972119984493
+    second: "\uD018\uC2A4\uD2B8 npc_27"
+  - first:
+      213: 6279483366723714088
+    second: "\uD018\uC2A4\uD2B8 npc_28"
+  - first:
+      213: 3064259511162558915
+    second: "\uD018\uC2A4\uD2B8 npc_29"
+  - first:
+      213: 289715779340782016
+    second: "\uD018\uC2A4\uD2B8 npc_30"
+  - first:
+      213: 4998169668812842311
+    second: "\uD018\uC2A4\uD2B8 npc_31"
+  - first:
+      213: -4873191048566679452
+    second: "\uD018\uC2A4\uD2B8 npc_32"
+  - first:
+      213: -133711559414321716
+    second: "\uD018\uC2A4\uD2B8 npc_33"
+  - first:
+      213: 787483327288641713
+    second: "\uD018\uC2A4\uD2B8 npc_34"
+  - first:
+      213: 8605983057366876923
+    second: "\uD018\uC2A4\uD2B8 npc_35"
+  - first:
+      213: 904494458677833925
+    second: "\uD018\uC2A4\uD2B8 npc_36"
+  - first:
+      213: 7353323364679503647
+    second: "\uD018\uC2A4\uD2B8 npc_37"
+  - first:
+      213: 4855072115226507645
+    second: "\uD018\uC2A4\uD2B8 npc_38"
+  - first:
+      213: -8060445644744096584
+    second: "\uD018\uC2A4\uD2B8 npc_39"
+  - first:
+      213: -1302136321853899748
+    second: "\uD018\uC2A4\uD2B8 npc_40"
+  - first:
+      213: -6162113067886701159
+    second: "\uD018\uC2A4\uD2B8 npc_41"
+  - first:
+      213: -6189053169471303487
+    second: "\uD018\uC2A4\uD2B8 npc_42"
+  - first:
+      213: -1726367442199541579
+    second: "\uD018\uC2A4\uD2B8 npc_43"
+  - first:
+      213: -7210206754668705412
+    second: "\uD018\uC2A4\uD2B8 npc_44"
+  - first:
+      213: 7918204892485360671
+    second: "\uD018\uC2A4\uD2B8 npc_45"
+  - first:
+      213: -3842127314375950224
+    second: "\uD018\uC2A4\uD2B8 npc_46"
+  - first:
+      213: 6350293650356230359
+    second: "\uD018\uC2A4\uD2B8 npc_47"
+  - first:
+      213: -1324991709234556287
+    second: "\uD018\uC2A4\uD2B8 npc_48"
+  - first:
+      213: -7818909031067668406
+    second: "\uD018\uC2A4\uD2B8 npc_49"
+  - first:
+      213: 7795630891006486532
+    second: "\uD018\uC2A4\uD2B8 npc_50"
+  - first:
+      213: 2593817809941579671
+    second: "\uD018\uC2A4\uD2B8 npc_51"
+  - first:
+      213: 7364233105596863356
+    second: "\uD018\uC2A4\uD2B8 npc_52"
+  - first:
+      213: -1275379501579888714
+    second: "\uD018\uC2A4\uD2B8 npc_53"
+  - first:
+      213: -6243708000716760973
+    second: "\uD018\uC2A4\uD2B8 npc_54"
+  - first:
+      213: 6224622251867395429
+    second: "\uD018\uC2A4\uD2B8 npc_55"
+  - first:
+      213: 3729035626837195222
+    second: "\uD018\uC2A4\uD2B8 npc_56"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\uD018\uC2A4\uD2B8 npc_2"
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 34
+        width: 417
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 546e2241b5bdd8720800000000000000
+      internalID: 2850175323421730373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD018\uC2A4\uD2B8 npc_3"
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 26
+        width: 444
+        height: 673
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2daf45f88b73491e0800000000000000
+      internalID: -2192065852804367662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD018\uC2A4\uD2B8 npc_4"
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 31
+        width: 486
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 914a7b4b6bdfe6000800000000000000
+      internalID: 31241208595981337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD018\uC2A4\uD2B8 npc_6"
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 30
+        width: 573
+        height: 635
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378fabab30c5691e0800000000000000
+      internalID: -2191462997581694861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 25129271df1b76248969700a30fc0c8d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "\uD018\uC2A4\uD2B8 npc_0": -7890297758152493153
+      "\uD018\uC2A4\uD2B8 npc_1": -8790213501120651685
+      "\uD018\uC2A4\uD2B8 npc_10": 7015750005126499538
+      "\uD018\uC2A4\uD2B8 npc_11": -1760006091368615680
+      "\uD018\uC2A4\uD2B8 npc_12": 8741624305751966476
+      "\uD018\uC2A4\uD2B8 npc_13": 2162532176749002089
+      "\uD018\uC2A4\uD2B8 npc_14": -7612320838793135143
+      "\uD018\uC2A4\uD2B8 npc_15": -8857295072353511014
+      "\uD018\uC2A4\uD2B8 npc_16": -7549882183774363446
+      "\uD018\uC2A4\uD2B8 npc_17": 1789577701849129140
+      "\uD018\uC2A4\uD2B8 npc_18": 2213731456742723839
+      "\uD018\uC2A4\uD2B8 npc_19": -8822666506828287678
+      "\uD018\uC2A4\uD2B8 npc_2": 2850175323421730373
+      "\uD018\uC2A4\uD2B8 npc_20": -8258940712676963006
+      "\uD018\uC2A4\uD2B8 npc_21": 6921945754264115894
+      "\uD018\uC2A4\uD2B8 npc_22": -3319345228592045113
+      "\uD018\uC2A4\uD2B8 npc_23": -7540521135625857097
+      "\uD018\uC2A4\uD2B8 npc_24": 1936499450076962203
+      "\uD018\uC2A4\uD2B8 npc_25": -9163028284405515197
+      "\uD018\uC2A4\uD2B8 npc_26": -4227726919475277045
+      "\uD018\uC2A4\uD2B8 npc_27": -4875515972119984493
+      "\uD018\uC2A4\uD2B8 npc_28": 6279483366723714088
+      "\uD018\uC2A4\uD2B8 npc_29": 3064259511162558915
+      "\uD018\uC2A4\uD2B8 npc_3": -2192065852804367662
+      "\uD018\uC2A4\uD2B8 npc_30": 289715779340782016
+      "\uD018\uC2A4\uD2B8 npc_31": 4998169668812842311
+      "\uD018\uC2A4\uD2B8 npc_32": -4873191048566679452
+      "\uD018\uC2A4\uD2B8 npc_33": -133711559414321716
+      "\uD018\uC2A4\uD2B8 npc_34": 787483327288641713
+      "\uD018\uC2A4\uD2B8 npc_35": 8605983057366876923
+      "\uD018\uC2A4\uD2B8 npc_36": 904494458677833925
+      "\uD018\uC2A4\uD2B8 npc_37": 7353323364679503647
+      "\uD018\uC2A4\uD2B8 npc_38": 4855072115226507645
+      "\uD018\uC2A4\uD2B8 npc_39": -8060445644744096584
+      "\uD018\uC2A4\uD2B8 npc_4": 31241208595981337
+      "\uD018\uC2A4\uD2B8 npc_40": -1302136321853899748
+      "\uD018\uC2A4\uD2B8 npc_41": -6162113067886701159
+      "\uD018\uC2A4\uD2B8 npc_42": -6189053169471303487
+      "\uD018\uC2A4\uD2B8 npc_43": -1726367442199541579
+      "\uD018\uC2A4\uD2B8 npc_44": -7210206754668705412
+      "\uD018\uC2A4\uD2B8 npc_45": 7918204892485360671
+      "\uD018\uC2A4\uD2B8 npc_46": -3842127314375950224
+      "\uD018\uC2A4\uD2B8 npc_47": 6350293650356230359
+      "\uD018\uC2A4\uD2B8 npc_48": -1324991709234556287
+      "\uD018\uC2A4\uD2B8 npc_49": -7818909031067668406
+      "\uD018\uC2A4\uD2B8 npc_5": -8377564515460685550
+      "\uD018\uC2A4\uD2B8 npc_50": 7795630891006486532
+      "\uD018\uC2A4\uD2B8 npc_51": 2593817809941579671
+      "\uD018\uC2A4\uD2B8 npc_52": 7364233105596863356
+      "\uD018\uC2A4\uD2B8 npc_53": -1275379501579888714
+      "\uD018\uC2A4\uD2B8 npc_54": -6243708000716760973
+      "\uD018\uC2A4\uD2B8 npc_55": 6224622251867395429
+      "\uD018\uC2A4\uD2B8 npc_56": 3729035626837195222
+      "\uD018\uC2A4\uD2B8 npc_6": -2191462997581694861
+      "\uD018\uC2A4\uD2B8 npc_7": 6321549698515144707
+      "\uD018\uC2A4\uD2B8 npc_8": 494644335452570212
+      "\uD018\uC2A4\uD2B8 npc_9": -649148738586258696
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

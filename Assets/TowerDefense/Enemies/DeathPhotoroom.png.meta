@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: bbf4dd3f8c2379640ad7066b68b89254
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1860088740291691213
+    second: DeathPhotoroom_0
+  - first:
+      213: 6488471639509060237
+    second: DeathPhotoroom_1
+  - first:
+      213: -627524862822883270
+    second: DeathPhotoroom_2
+  - first:
+      213: -3549410110924839525
+    second: DeathPhotoroom_3
+  - first:
+      213: 8720811144145315778
+    second: DeathPhotoroom_4
+  - first:
+      213: 176962183267441039
+    second: DeathPhotoroom_5
+  - first:
+      213: -4074003171311681362
+    second: DeathPhotoroom_6
+  - first:
+      213: 683727617364400524
+    second: DeathPhotoroom_7
+  - first:
+      213: 6994740716022459471
+    second: DeathPhotoroom_8
+  - first:
+      213: -7214803731565153650
+    second: DeathPhotoroom_9
+  - first:
+      213: -7298789199397423289
+    second: DeathPhotoroom_10
+  - first:
+      213: 1788183349129955042
+    second: DeathPhotoroom_11
+  - first:
+      213: 3910332575839264297
+    second: DeathPhotoroom_12
+  - first:
+      213: 1818896380325628611
+    second: DeathPhotoroom_13
+  - first:
+      213: -1985127907017359921
+    second: DeathPhotoroom_14
+  - first:
+      213: 3232057075985752117
+    second: DeathPhotoroom_15
+  - first:
+      213: -884467751673979103
+    second: DeathPhotoroom_16
+  - first:
+      213: 7185567793173350895
+    second: DeathPhotoroom_17
+  - first:
+      213: 7131955280849446921
+    second: DeathPhotoroom_18
+  - first:
+      213: 3829071441451175808
+    second: DeathPhotoroom_19
+  - first:
+      213: -5843547151637762240
+    second: DeathPhotoroom_20
+  - first:
+      213: -2312802926280600280
+    second: DeathPhotoroom_21
+  - first:
+      213: 3784710548795311787
+    second: DeathPhotoroom_22
+  - first:
+      213: -5264016946959323127
+    second: DeathPhotoroom_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 210
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DeathPhotoroom_0
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 196
+        width: 296
+        height: 363
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33db5385523af26e0800000000000000
+      internalID: -1860088740291691213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathPhotoroom_1
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 197
+        width: 277
+        height: 355
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a4228249eab0a50800000000000000
+      internalID: 6488471639509060237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathPhotoroom_2
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 198
+        width: 253
+        height: 354
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3067b746759a47f0800000000000000
+      internalID: -627524862822883270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathPhotoroom_3
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 195
+        width: 258
+        height: 362
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9525284f46fdbec0800000000000000
+      internalID: -3549410110924839525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathPhotoroom_4
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 196
+        width: 159
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c7ac00e78b860970800000000000000
+      internalID: 8720811144145315778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathPhotoroom_5
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 195
+        width: 167
+        height: 167
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8955580b22b47200800000000000000
+      internalID: 176962183267441039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5d04b6cf7415c924581e2023f301550b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DeathPhotoroom_0: -1860088740291691213
+      DeathPhotoroom_1: 6488471639509060237
+      DeathPhotoroom_10: -7298789199397423289
+      DeathPhotoroom_11: 1788183349129955042
+      DeathPhotoroom_12: 3910332575839264297
+      DeathPhotoroom_13: 1818896380325628611
+      DeathPhotoroom_14: -1985127907017359921
+      DeathPhotoroom_15: 3232057075985752117
+      DeathPhotoroom_16: -884467751673979103
+      DeathPhotoroom_17: 7185567793173350895
+      DeathPhotoroom_18: 7131955280849446921
+      DeathPhotoroom_19: 3829071441451175808
+      DeathPhotoroom_2: -627524862822883270
+      DeathPhotoroom_20: -5843547151637762240
+      DeathPhotoroom_21: -2312802926280600280
+      DeathPhotoroom_22: 3784710548795311787
+      DeathPhotoroom_23: -5264016946959323127
+      DeathPhotoroom_3: -3549410110924839525
+      DeathPhotoroom_4: 8720811144145315778
+      DeathPhotoroom_5: 176962183267441039
+      DeathPhotoroom_6: -4074003171311681362
+      DeathPhotoroom_7: 683727617364400524
+      DeathPhotoroom_8: 6994740716022459471
+      DeathPhotoroom_9: -7214803731565153650
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

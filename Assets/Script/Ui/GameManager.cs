@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
     private int currentMoney;
 
     [Header("Player HP")]
-    public int maxPlayerHp => 5;
+    public int maxPlayerHp => MainMenuManager.EasterEggPlayerHpOverride > 0
+        ? MainMenuManager.EasterEggPlayerHpOverride
+        : 15;
+
     private int currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;
@@ -32,7 +35,11 @@ public class GameManager : MonoBehaviour
     public Sprite shieldCritical;
 
     private bool isGameEnded = false;
+    private int shieldState;
+    private Vector3? pendingHitPosition;
     private bool isSceneTransitioning = false;
+    private LastOfTheTower.Progression.BattleSession battleSession;
+    private LastOfTheTower.Progression.StageProgressService stageProgress;
 
     private void Awake()
     {
@@ -44,6 +51,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        string stageId = LastOfTheTower.Progression.StageIds.FromSceneName(gameObject.scene.name);
+        if (stageId != null)
+        {
+            battleSession = new LastOfTheTower.Progression.BattleSession(stageId);
+            stageProgress = new LastOfTheTower.Progression.StageProgressService(
+                new LastOfTheTower.Progression.PlayerPrefsStageProgressStorage());
+            stageProgress.Load();
+        }
+
         Time.timeScale = testTimeScale;
 
         currentMoney = startingMoney;
@@ -52,7 +68,14 @@ public class GameManager : MonoBehaviour
         currentPlayerHp = maxPlayerHp;
 
         UpdateHpText();
+        // 'Shield' 태그 기지마다 보호막·체력바 연출을 붙인다. (4스테이지처럼 기지가 여럿이어도 같이 갱신)
+        DefenseBase.AttachAll();
         UpdateShieldVisual();
+
+        Canvas gameCanvas = moneyText != null
+            ? moneyText.canvas
+            : FindAnyObjectByType<Canvas>();
+        GameSpeedController.Create(gameCanvas, testTimeScale);
     }
 
     public void AddMoney(int amount)
@@ -74,7 +97,8 @@ public class GameManager : MonoBehaviour
             Debug.Log($"돈 부족! 필요: {amount} / 보유: {currentMoney}");
             if (SoundManager.Instance != null)
             {
-                SoundManager.Instance.ShowMoneyWarning();
+                amount -= currentMoney;
+                SoundManager.Instance.ShowMoneyWarning(amount);
             }
             return false;
         }
@@ -84,6 +108,15 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"돈 사용: -{amount} / 현재 잔액: {currentMoney}");
         return true;
+    }
+
+    // 튜토리얼처럼 연습으로 쓴 골드를 되돌릴 때 사용한다. 설치된 타워는 건드리지 않는다.
+    public void RestoreStartingMoney()
+    {
+        if (isGameEnded) return;
+
+        currentMoney = startingMoney;
+        UpdateMoneyUI();
     }
 
     public bool CanAfford(int amount)
@@ -102,6 +135,14 @@ public class GameManager : MonoBehaviour
             moneyText.text = $" {currentMoney}";
     }
 
+    // 몬스터가 도착한 위치를 함께 받으면 가장 가까운 기지가 맞는 연출을 한다.
+    public void TakePlayerDamage(int damage, Vector3 hitPosition)
+    {
+        pendingHitPosition = hitPosition;
+        TakePlayerDamage(damage);
+        pendingHitPosition = null;
+    }
+
     public void TakePlayerDamage(int damage)
     {
         if (isGameEnded) return;
@@ -111,8 +152,10 @@ public class GameManager : MonoBehaviour
         if (currentPlayerHp < 0)
             currentPlayerHp = 0;
 
+        int previousShieldState = shieldState;
         UpdateHpText();
         UpdateShieldVisual();
+        DefenseBase.PlayHit(pendingHitPosition, shieldState > previousShieldState);
 
         if (hpText != null)
         {
@@ -129,7 +172,7 @@ public class GameManager : MonoBehaviour
         }
         if (audioSource != null && damageSound != null)
         {
-            audioSource.PlayOneShot(damageSound);
+            AudioManager.PlaySFXOn(audioSource, damageSound);
         }
 
         if (currentPlayerHp <= 0)
@@ -145,23 +188,18 @@ public class GameManager : MonoBehaviour
 
     private void UpdateShieldVisual()
     {
-        if (shieldRenderer == null || maxPlayerHp <= 0)
+        if (maxPlayerHp <= 0)
             return;
 
         float hpRatio = (float)currentPlayerHp / maxPlayerHp;
 
-        if (hpRatio > 0.6f)
-        {
-            shieldRenderer.sprite = shieldHealthy;
-        }
-        else if (hpRatio > 0.2f)
-        {
-            shieldRenderer.sprite = shieldDamaged;
-        }
-        else
-        {
-            shieldRenderer.sprite = shieldCritical;
-        }
+        // 0: 온전, 1: 금 감, 2: 위험
+        shieldState = hpRatio > 0.6f ? 0 : hpRatio > 0.2f ? 1 : 2;
+        Sprite sprite = shieldState == 0 ? shieldHealthy : shieldState == 1 ? shieldDamaged : shieldCritical;
+
+        if (shieldRenderer != null)
+            shieldRenderer.sprite = sprite;
+        DefenseBase.UpdateAll(hpRatio, shieldState, sprite);
     }
 
     private void GameOver()
@@ -171,6 +209,9 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
+        if (isGameEnded || isSceneTransitioning)
+            return;
+
         BeginResultTransition(true);
     }
 
@@ -182,13 +223,92 @@ public class GameManager : MonoBehaviour
         isGameEnded = true;
         isSceneTransitioning = true;
 
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string nextSceneName = GetNextStageSceneName(currentSceneName);
+        string nextStageId = LastOfTheTower.Progression.StageIds.FromSceneName(nextSceneName);
+        bool newlyUnlocked = false;
+        bool progressSaveFailed = false;
+
+        if (battleSession != null && battleSession.TryComplete(victory, currentPlayerHp, out var result))
+        {
+            // 최신 기록을 읽고 승리만 저장한다. 패배/중복 종료는 클리어를 지우지 않는다.
+            stageProgress.Load();
+            bool wasUnlocked = LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
+            var status = stageProgress.RecordResult(result);
+            progressSaveFailed = victory &&
+                (status == LastOfTheTower.Progression.StageClearRecordStatus.LoadRequired ||
+                 status == LastOfTheTower.Progression.StageClearRecordStatus.WriteFailed);
+            newlyUnlocked = status == LastOfTheTower.Progression.StageClearRecordStatus.SaveRequested &&
+                !wasUnlocked && LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
+            if (progressSaveFailed)
+                Debug.LogError($"스테이지 클리어 기록 저장 실패: {stageProgress.LastError}", this);
+
+            // 같은 확정 결과(스테이지·승패·남은 체력)를 퀘스트 판정에 한 번만 전달한다.
+            if (QuestManager.Instance != null)
+                QuestManager.Instance.OnBattleResult(result);
+        }
+
         Debug.Log(victory ? "게임 클리어" : "게임 오버");
 
         Time.timeScale = 1f;
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayStageResultSound();
+        }
+
+        PrepareGameUiForResult();
+
+        // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
+        if (victory && currentSceneName == "Stage4Scene")
+        {
+            ResultSceneManager.isVictory = true;
+            ResultSceneManager.restartSceneName = currentSceneName;
+            StartCoroutine(LoadResultScene());
+            return;
+        }
+
+        // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
+        StageResultUI.Show(victory, currentSceneName, currentPlayerHp, maxPlayerHp,
+            newlyUnlocked ? nextSceneName : null, progressSaveFailed);
+        Time.timeScale = 0f;
+    }
+
+    private void PrepareGameUiForResult()
+    {
         StopGameUiTweens();
 
-        ResultSceneManager.isVictory = victory;
-        StartCoroutine(LoadResultScene());
+        if (hpText != null)
+            hpText.color = Color.white;
+
+        if (damageImage != null)
+        {
+            Color damageColor = damageImage.color;
+            damageColor.a = 0f;
+            damageImage.color = damageColor;
+        }
+
+        DamagePopup.HideAll();
+        CombatFeedback.ClearAll();
+
+        UIManager uiManager = FindAnyObjectByType<UIManager>();
+        if (uiManager != null)
+            uiManager.PrepareForGameResult();
+    }
+
+    private string GetNextStageSceneName(string currentSceneName)
+    {
+        switch (currentSceneName)
+        {
+            case "Stage1Scene":
+                return "Stage2Scene";
+            case "Stage2Scene":
+                return "Stage3Scene";
+            case "Stage3Scene":
+                return "Stage4Scene";
+            default:
+                return string.Empty;
+        }
     }
 
     private IEnumerator LoadResultScene()

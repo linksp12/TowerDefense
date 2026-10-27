@@ -4,10 +4,18 @@ using UnityEngine.UI;
 
 public class MonsterHealth : MonoBehaviour
 {
-    public int maxHp = 200;
-
-    [Header("Reward")]
-    public int goldReward = 20;
+    [Header("Balance Data")]
+    [Tooltip("연결하면 최대 체력과 처치 골드를 이 데이터에서 읽습니다.")]
+    public MonsterData monsterData;
+    [HideInInspector] public int maxHp;
+    [HideInInspector] public int maxShield;
+    public GameObject shieldFXObject;
+    [HideInInspector] public int goldReward;
+    [HideInInspector] public bool isBoss;
+    [HideInInspector] public int defense;
+    [HideInInspector] public int magicResistance;
+    [HideInInspector] public Sprite bossPortrait;
+    [HideInInspector] public string bossName;
 
     [Header("HP UI")]
     public Slider monsterHpSlider;
@@ -23,7 +31,6 @@ public class MonsterHealth : MonoBehaviour
 
     [Header("Sound")]
     public AudioSource audioSource;
-    public AudioClip hitSound;
     public AudioClip deathSound;
 
     [Header("Death Animation")]
@@ -35,21 +42,22 @@ public class MonsterHealth : MonoBehaviour
     public string deathStateName = "death_NormalSlime";
 
     private int currentHp;
+    private int currentShield;
     private bool isDead = false;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine flashCoroutine;
-
     private Animator animator;
+    private GolemRootSkill golemRootSkill;
 
+    public int CurrentHp => currentHp;
+    public bool IsDead => isDead;
 
-    // ==============================
-    // Awake
-    // ==============================
-    void Awake()
+    private void Awake()
     {
-        // SpriteRenderer 가져오기
+        ApplyStatsFromData();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (spriteRenderer != null)
@@ -57,96 +65,194 @@ public class MonsterHealth : MonoBehaviour
             originalColor = spriteRenderer.color;
         }
 
-        // AudioSource 가져오기
+        // 죽음 효과음 등에 사용할 AudioSource
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
         }
 
-        // Animator 가져오기
         animator = GetComponent<Animator>();
+        golemRootSkill = GetComponent<GolemRootSkill>();
 
-        // HP 초기화
         currentHp = maxHp;
+        currentShield = maxShield;
         isDead = false;
     }
 
-
-    // ==============================
-    // Start
-    // ==============================
-    void Start()
+    public void ApplyStatsFromData()
     {
-        // HP UI 설정
+        if (monsterData == null)
+            return;
+
+        maxHp = monsterData.maxHp;
+        goldReward = monsterData.goldReward;
+        maxShield = monsterData.maxShield;
+        isBoss = monsterData.isBoss;
+        defense = monsterData.defense;
+        magicResistance = monsterData.magicResistance;
+        bossPortrait = monsterData.bossPortrait;
+        bossName = monsterData.bossName;
+    }
+
+    private void Start()
+    {
         if (monsterHpSlider != null)
         {
+            BattleUiSkin.ApplyMonsterHpBar(monsterHpSlider);
             monsterHpSlider.maxValue = maxHp;
             monsterHpSlider.value = currentHp;
         }
 
-        // 정상 애니메이션은 Animator의 기본(Default) State가 재생하도록 둡니다.
-        // 몬스터마다 normal State 이름이 달라도 문제없습니다.
+        if (shieldFXObject != null)
+        {
+            shieldFXObject.SetActive(currentShield > 0);
+        }
     }
 
-
-    // ==============================
-    // 데미지 받기
-    // ==============================
+    // =========================================================
+    // 데미지 처리
+    // =========================================================
     public void TakeDamage(int damage)
     {
-        // 이미 죽었으면 추가 데미지 무시
+        TakeDamage(damage, true);
+    }
+
+    public void TakeDamage(int damage, bool playHitSound)
+    {
+        TakeDamage(damage, playHitSound, 0f, 1f);
+    }
+
+    public void TakeDamage(
+        int damage,
+        bool playHitSound,
+        float criticalChance,
+        float criticalDamageMultiplier)
+    {
         if (isDead)
-            return;
-
-        currentHp -= damage;
-
-        // 피격 효과
-        PlayHitFeedback();
-
-        // HP UI 갱신
-        if (monsterHpSlider != null)
         {
-            monsterHpSlider.value = Mathf.Max(currentHp, 0);
+            return;
         }
 
-        // HP가 0 이하가 되면 사망
+        int finalDamage = Mathf.Max(0, damage);
+        bool isCritical = false;
+        bool shieldBlocked =
+            shieldFXObject != null && currentShield > 0;
+
+        // =====================================================
+        // 실드 처리
+        // =====================================================
+        if (shieldBlocked)
+        {
+            currentShield -= 1;
+
+            if (currentShield <= 0)
+            {
+                shieldFXObject.SetActive(false);
+            }
+        }
+        else
+        {
+            // =================================================
+            // 치명타 처리
+            // =================================================
+            if (criticalChance > 0f &&
+                Random.value < Mathf.Clamp01(criticalChance))
+            {
+                finalDamage = Mathf.RoundToInt(
+                    finalDamage *
+                    Mathf.Max(1f, criticalDamageMultiplier)
+                );
+
+                isCritical = true;
+                CombatFeedback.CriticalHit();
+            }
+
+            currentHp -= finalDamage;
+            currentHp = Mathf.Max(currentHp, 0);
+        }
+
+        // =====================================================
+        // 데미지 팝업
+        // =====================================================
+        if (shieldBlocked)
+        {
+            DamagePopup.ShowShield(transform.position);
+        }
+        else
+        {
+            DamagePopup.Show(
+                transform.position,
+                finalDamage,
+                isCritical
+            );
+        }
+
+        // =====================================================
+        // 피격 효과
+        // =====================================================
+        PlayHitFeedback(playHitSound);
+
+        // =====================================================
+        // HP UI
+        // =====================================================
+        if (monsterHpSlider != null)
+        {
+            monsterHpSlider.value = currentHp;
+        }
+
+        // =====================================================
+        // 골렘 스킬
+        // =====================================================
+        if (currentHp > 0 && golemRootSkill != null)
+        {
+            golemRootSkill.OnDamaged();
+        }
+
+        // =====================================================
+        // 사망
+        // =====================================================
         if (currentHp <= 0)
         {
             Die();
         }
     }
 
-
-    // ==============================
+    // =========================================================
     // 피격 효과 전체
-    // ==============================
-    private void PlayHitFeedback()
+    // =========================================================
+    private void PlayHitFeedback(bool playHitSound)
     {
-        PlayHitSound();
+        if (playHitSound)
+        {
+            PlayHitSound();
+        }
+
         SpawnHitEffect();
         PlayHitFlash();
     }
 
-
-    // ==============================
-    // 피격 사운드
-    // ==============================
+    // =========================================================
+    // 타격음
+    // =========================================================
     private void PlayHitSound()
     {
-        if (audioSource != null && hitSound != null)
+        // 이제 몬스터 개별 AudioSource에서 재생하지 않고
+        // 씬의 HitSoundManager가 전체 타격음을 관리함
+        if (HitSoundManager.Instance != null)
         {
-            audioSource.PlayOneShot(hitSound);
+            HitSoundManager.Instance.PlayHitSound();
         }
     }
 
-
-    // ==============================
+    // =========================================================
     // 피격 이펙트
-    // ==============================
+    // =========================================================
     private void SpawnHitEffect()
     {
         if (hitEffectPrefab == null)
+        {
             return;
+        }
 
         GameObject effect = Instantiate(
             hitEffectPrefab,
@@ -157,19 +263,16 @@ public class MonsterHealth : MonoBehaviour
         Destroy(effect, hitEffectDestroyTime);
     }
 
-
-    // ==============================
-    // 피격 Flash
-    // ==============================
+    // =========================================================
+    // 피격 플래시
+    // =========================================================
     private void PlayHitFlash()
     {
-        if (!useHitFlash)
+        if (!useHitFlash || spriteRenderer == null)
+        {
             return;
+        }
 
-        if (spriteRenderer == null)
-            return;
-
-        // 이전 Flash가 실행 중이면 중지
         if (flashCoroutine != null)
         {
             StopCoroutine(flashCoroutine);
@@ -178,10 +281,6 @@ public class MonsterHealth : MonoBehaviour
         flashCoroutine = StartCoroutine(HitFlashRoutine());
     }
 
-
-    // ==============================
-    // 피격 Flash 코루틴
-    // ==============================
     private IEnumerator HitFlashRoutine()
     {
         spriteRenderer.color = hitColor;
@@ -196,24 +295,23 @@ public class MonsterHealth : MonoBehaviour
         flashCoroutine = null;
     }
 
-
-    // ==============================
-    // 몬스터 사망
-    // ==============================
+    // =========================================================
+    // 사망 처리
+    // =========================================================
     private void Die()
     {
         if (isDead)
+        {
             return;
+        }
 
         isDead = true;
 
         Debug.Log(gameObject.name + " 몬스터 사망");
 
-
-        // ==============================
-        // 이동 정지
-        // ==============================
-
+        // =====================================================
+        // 이동 중지
+        // =====================================================
         MonsterMove move = GetComponent<MonsterMove>();
 
         if (move != null)
@@ -221,11 +319,9 @@ public class MonsterHealth : MonoBehaviour
             move.enabled = false;
         }
 
-
-        // ==============================
-        // Collider 비활성화
-        // ==============================
-
+        // =====================================================
+        // 콜라이더 비활성화
+        // =====================================================
         Collider2D col = GetComponent<Collider2D>();
 
         if (col != null)
@@ -233,68 +329,50 @@ public class MonsterHealth : MonoBehaviour
             col.enabled = false;
         }
 
-
-        // ==============================
-        // 죽음 사운드
-        // ==============================
-
+        // =====================================================
+        // 죽음 효과음
+        // =====================================================
         if (deathSound != null)
         {
-            AudioSource.PlayClipAtPoint(
+            AudioManager.PlaySFXAtPoint(
                 deathSound,
                 transform.position,
                 0.8f
             );
         }
 
-
-        // ==============================
-        // WaveManager에 사망 알림
-        // ==============================
-
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
+        // 연습 몬스터는 실제 웨이브 처치 수와 골드를 변경하지 않는다.
+        bool practice = GetComponent<TutorialPracticeMonster>() != null;
+        if (!practice)
         {
-            waveManager.OnMonsterKilled();
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterKilled();
+
+            if (GameManager.Instance != null)
+                GameManager.Instance.AddMoney(goldReward);
         }
 
+        // 처치 연출: 연기·처치음, 실제 보상이 있을 때만 골드 숫자와 날아가는 동전
+        CombatFeedback.MonsterKilled(transform.position, practice ? 0 : goldReward, isBoss);
 
-        // ==============================
-        // 골드 지급
-        // ==============================
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddMoney(goldReward);
-        }
-
-
-        // ==============================
-        // 죽음 애니메이션 실행
-        // ==============================
-
+        // =====================================================
+        // 죽음 애니메이션
+        // =====================================================
         PlayDeathAnimation();
-
-
-        // ==============================
-        // 죽음 애니메이션 후 삭제
-        // ==============================
 
         StartCoroutine(DeathCoroutine());
     }
 
-
-    // ==============================
-    // 죽음 애니메이션 실행
-    // ==============================
+    // =========================================================
+    // 죽음 애니메이션
+    // =========================================================
     private void PlayDeathAnimation()
     {
         if (animator == null)
         {
             Debug.LogWarning(
-                gameObject.name +
-                " : Animator가 없습니다."
+                gameObject.name + " : Animator가 없습니다."
             );
 
             return;
@@ -310,32 +388,33 @@ public class MonsterHealth : MonoBehaviour
             return;
         }
 
-        // 해당 State가 실제로 존재하는지 확인
-       string statePath = "Base Layer." + deathStateName;
-int stateHash = Animator.StringToHash(statePath);
+        string statePath = "Base Layer." + deathStateName;
+        int stateHash = Animator.StringToHash(statePath);
 
-if (animator.HasState(0, stateHash))
-{
-    animator.Play(statePath, 0, 0f);
-}
-else
-{
-    Debug.LogError(
-        gameObject.name +
-        " : Animator에서 Death State를 찾을 수 없습니다. " +
-        "입력한 이름 = " +
-        statePath
-    );
-}
+        if (animator.HasState(0, stateHash))
+        {
+            animator.Play(
+                statePath,
+                0,
+                0f
+            );
+        }
+        else
+        {
+            Debug.LogError(
+                gameObject.name +
+                " : Animator에서 Death State를 찾을 수 없습니다.\n" +
+                "입력한 이름 = " +
+                statePath
+            );
+        }
     }
 
-
-    // ==============================
-    // 죽음 애니메이션 후 삭제
-    // ==============================
+    // =========================================================
+    // 죽음 후 삭제
+    // =========================================================
     private IEnumerator DeathCoroutine()
     {
-        // 죽음 애니메이션이 보이는 시간
         yield return new WaitForSeconds(deathAnimationTime);
 
         Destroy(gameObject);

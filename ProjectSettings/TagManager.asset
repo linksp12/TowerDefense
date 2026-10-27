@@ -13,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Monster
   - 
   - 
   - 
@@ -42,6 +42,24 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Road
+    uniqueID: 621207418
+    locked: 0
+  - name: GroundProps
+    uniqueID: 621207419
+    locked: 0
+  - name: Monsters
+    uniqueID: 621207420
+    locked: 0
+  - name: ForegroundProps
+    uniqueID: 621207421
+    locked: 0
+  - name: Towers
+    uniqueID: 621207422
+    locked: 0
+  - name: Effects
+    uniqueID: 621207423
     locked: 0
   m_RenderingLayers:
   - Default

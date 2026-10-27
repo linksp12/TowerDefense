@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerBuildManager : MonoBehaviour
 {
@@ -22,11 +24,16 @@ public class TowerBuildManager : MonoBehaviour
     public GameObject magicTowerPrefab;
 
     [Header("Tower Costs")]
-    public int basicTowerCost = 50;
-    public int cannonTowerCost = 100;
-    public int magicTowerCost = 150;
+    public int basicTowerCost => GetConfiguredBuildCost(basicTowerPrefab);
+    public int cannonTowerCost => GetConfiguredBuildCost(cannonTowerPrefab);
+    public int magicTowerCost => GetConfiguredBuildCost(magicTowerPrefab);
+
 
     private BuildPoint selectedBuildPoint;
+    private bool isOpen;
+    private Coroutine closeCoroutine;
+
+    public bool IsOpen => isOpen;
 
     private void Awake()
     {
@@ -41,8 +48,8 @@ public class TowerBuildManager : MonoBehaviour
         if (towerBuildPanelShake == null && towerBuildPanel != null)
             towerBuildPanelShake = towerBuildPanel.GetComponent<PanelShake>();
 
-        if (canvas == null)
-            canvas = FindFirstObjectByType<Canvas>();
+        if (canvas == null && towerBuildPanelRect != null)
+            canvas = towerBuildPanelRect.GetComponentInParent<Canvas>(true);
     }
 
     private void Start()
@@ -57,10 +64,57 @@ public class TowerBuildManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // 패널이 열려 있을 때 마우스 좌클릭 감지
+        if (isOpen && Input.GetMouseButtonDown(0))
+        {
+            // UI 버튼이나 패널 자체를 클릭한 경우는 예외 (타워 건설 버튼 클릭 등)
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            // 3D/2D 레이캐스트로 클릭한 월드 오브젝트 확인
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+
+            // 클릭한 대상이 현재 선택된 BuildPoint라면 BuildPoint.OnMouseDown에서 토글 처리하므로 무시
+            if (hit.collider != null && selectedBuildPoint != null && hit.collider.gameObject == selectedBuildPoint.gameObject)
+            {
+                return;
+            }
+
+            // 그 외 배경, 땅, 맵의 빈 공간을 클릭했다면 패널 닫기
+            CloseBuildPanel();
+        }
+    }
+
     public void OpenBuildPanel(BuildPoint buildPoint)
     {
         if (buildPoint == null)
             return;
+
+        if (isOpen && selectedBuildPoint == buildPoint)
+        {
+            CloseBuildPanel();
+            return;
+        }
+
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (TowerUpgradeUI.Instance != null && TowerUpgradeUI.Instance.IsOpen)
+            TowerUpgradeUI.Instance.Close();
+
+        isOpen = true;
+
+        if (towerBuildPanel != null)
+            towerBuildPanel.transform.SetAsLastSibling();
+
+        if (BossInfoUI.Instance != null)
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
 
         selectedBuildPoint = buildPoint;
 
@@ -124,20 +178,20 @@ public class TowerBuildManager : MonoBehaviour
 
     public void BuildBasicTower()
     {
-        BuildTower(basicTowerPrefab, basicTowerCost);
+        BuildTower(basicTowerPrefab);
     }
 
     public void BuildCannonTower()
     {
-        BuildTower(cannonTowerPrefab, cannonTowerCost);
+        BuildTower(cannonTowerPrefab);
     }
 
     public void BuildMagicTower()
     {
-        BuildTower(magicTowerPrefab, magicTowerCost);
+        BuildTower(magicTowerPrefab);
     }
 
-    private void BuildTower(GameObject towerPrefab, int cost)
+    private void BuildTower(GameObject towerPrefab)
     {
         if (selectedBuildPoint == null)
         {
@@ -149,6 +203,12 @@ public class TowerBuildManager : MonoBehaviour
         if (towerPrefab == null)
         {
             Debug.LogWarning("타워 프리팹이 연결되지 않았습니다.");
+            PlayFailFeedback();
+            return;
+        }
+
+        if (!TryGetBuildCost(towerPrefab, out int cost))
+        {
             PlayFailFeedback();
             return;
         }
@@ -173,6 +233,28 @@ public class TowerBuildManager : MonoBehaviour
         CloseBuildPanel(true);
     }
 
+    public void CloseBuildPanelSilently()
+    {
+        CloseBuildPanel(false);
+    }
+
+    public void CloseBuildPanelInstantly()
+    {
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        if (towerBuildPanelAnimator != null)
+            towerBuildPanelAnimator.HideInstant();
+        else if (towerBuildPanel != null)
+            towerBuildPanel.SetActive(false);
+
+        selectedBuildPoint = null;
+        isOpen = false;
+    }
+
     private void CloseBuildPanel(bool playSound)
     {
         if (playSound && UISoundManager.Instance != null)
@@ -188,6 +270,26 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         selectedBuildPoint = null;
+
+        if (closeCoroutine != null)
+            StopCoroutine(closeCoroutine);
+
+        closeCoroutine = StartCoroutine(FinishClose());
+    }
+
+    private IEnumerator FinishClose()
+    {
+        if (towerBuildPanelAnimator != null)
+            yield return new WaitForSecondsRealtime(towerBuildPanelAnimator.animationTime);
+
+        isOpen = false;
+        closeCoroutine = null;
+
+        if (BossInfoUI.Instance != null &&
+            (TowerUpgradeUI.Instance == null || !TowerUpgradeUI.Instance.IsOpen))
+        {
+            BossInfoUI.Instance.SetSuppressedByTowerPanel(false);
+        }
     }
 
     private void PlayFailFeedback()
@@ -201,14 +303,54 @@ public class TowerBuildManager : MonoBehaviour
 
     public int GetCheapestTowerCost()
     {
-        int cheapest = basicTowerCost;
+        int cheapest = int.MaxValue;
 
-        if (cannonTowerCost < cheapest)
-            cheapest = cannonTowerCost;
+        TryUpdateCheapestCost(basicTowerPrefab, ref cheapest);
+        TryUpdateCheapestCost(cannonTowerPrefab, ref cheapest);
+        TryUpdateCheapestCost(magicTowerPrefab, ref cheapest);
 
-        if (magicTowerCost < cheapest)
-            cheapest = magicTowerCost;
+        return cheapest == int.MaxValue ? 0 : cheapest;
+    }
 
-        return cheapest;
+    private int GetConfiguredBuildCost(GameObject towerPrefab)
+    {
+        if (towerPrefab == null)
+            return 0;
+
+        TowerAttack towerAttack = towerPrefab.GetComponent<TowerAttack>();
+
+        return towerAttack != null && towerAttack.towerData != null
+            ? towerAttack.BuildCost
+            : 0;
+    }
+
+    private bool TryGetBuildCost(GameObject towerPrefab, out int cost)
+    {
+        cost = 0;
+
+        TowerAttack towerAttack = towerPrefab.GetComponent<TowerAttack>();
+
+        if (towerAttack == null)
+        {
+            Debug.LogError($"{towerPrefab.name}: TowerAttack 컴포넌트가 없어 설치할 수 없습니다.", towerPrefab);
+            return false;
+        }
+
+        if (towerAttack.towerData == null)
+        {
+            Debug.LogError($"{towerPrefab.name}: TowerData가 연결되지 않아 설치할 수 없습니다.", towerPrefab);
+            return false;
+        }
+
+        cost = towerAttack.BuildCost;
+        return true;
+    }
+
+    private void TryUpdateCheapestCost(GameObject towerPrefab, ref int cheapest)
+    {
+        int cost = GetConfiguredBuildCost(towerPrefab);
+
+        if (cost > 0 && cost < cheapest)
+            cheapest = cost;
     }
 }

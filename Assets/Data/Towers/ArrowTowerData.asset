@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af3e7c0f9dc44cfa1b79e3b837438b1, type: 3}
+  m_Name: ArrowTowerData
+  m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  id: arrow_tower
+  attackFeel: 0
+  towerName: "\uAE30\uBCF8 \uD654\uC0B4 \uD0C0\uC6CC"
+  description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615
+    \uD0C0\uC6CC\uC785\uB2C8\uB2E4.\n\uC274\uB4DC \uBAAC\uC2A4\uD130\uC5D0\uAC8C
+    \uD6A8\uACFC\uC801\uC785\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: fd7d41e58cf47f54992e3081433a1c97, type: 3}
+  buildCost: 50
+  sellRate: 0.7
+  baseStats:
+    damage: 24
+    attackCooldown: 0.7
+    attackRange: 5
+  baseProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  level2Cost: 150
+  level3Cost: 300
+  pathALv2Stats:
+    damage: 15
+    attackCooldown: 0.3
+    attackRange: 5.2
+  pathALv3Stats:
+    damage: 20
+    attackCooldown: 0.2
+    attackRange: 5.5
+  pathALv2ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathALv3ProjectileEffects:
+    canPierce: 0
+    maxHitCount: 1
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathBLv2Stats:
+    damage: 32
+    attackCooldown: 0.8
+    attackRange: 5.4
+  pathBLv3Stats:
+    damage: 55
+    attackCooldown: 0.6
+    attackRange: 6
+  pathBLv2ProjectileEffects:
+    canPierce: 1
+    maxHitCount: 2
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathBLv3ProjectileEffects:
+    canPierce: 1
+    maxHitCount: 3
+    canExplode: 0
+    explosionRadius: 0
+    splashDamageRate: 0
+    canSlow: 0
+    slowRate: 0
+    slowDuration: 0
+    canDot: 0
+    dotDamage: 0
+    dotDuration: 0
+    dotInterval: 0
+  pathA:
+    routeName: "\uC5F0\uC0AC \uB8E8\uD2B8"
+    lv2Name: "\uC5F0\uC0AC \uD654\uC0B4 \uD0C0\uC6CC"
+    lv3Name: "\uD3ED\uD48D \uD654\uC0B4 \uD0C0\uC6CC"
+    featureText: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC15\uD654\uD558\uB294
+      \uB8E8\uD2B8\uC785\uB2C8\uB2E4.\n\uD2B9\uC9D5: \uACF5\uACA9\uC18D\uB3C4 \uC99D\uAC00"
+    effectText: "\uACF5\uACA9\uC18D\uB3C4\uAC00 \uD06C\uAC8C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  pathB:
+    routeName: "\uAD00\uD1B5 \uB8E8\uD2B8"
+    lv2Name: "\uAC15\uD654 \uD654\uC0B4 \uD0C0\uC6CC"
+    lv3Name: "\uAD00\uD1B5 \uD654\uC0B4 \uD0C0\uC6CC"
+    featureText: "\uAC15\uD55C \uD654\uC0B4\uACFC \uAD00\uD1B5 \uACF5\uACA9\uC744
+      \uAC15\uD654\uD558\uB294 \uB8E8\uD2B8\uC785\uB2C8\uB2E4.\n\uD2B9\uC9D5: \uB192\uC740
+      \uACF5\uACA9\uB825 / \uAD00\uD1B5 \uACF5\uACA9"
+    effectText: "\uAD00\uD1B5 \uC131\uB2A5\uACFC \uACF5\uACA9\uB825\uC774 \uD06C\uAC8C
+      \uC99D\uAC00\uD569\uB2C8\uB2E4."

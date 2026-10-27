@@ -468,8 +468,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "UI \uBCFC\uB968"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -860,8 +860,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBC1D\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1305,6 +1305,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &207309909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,8 +1605,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC124\uC815\uCC3D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2414,7 +2415,11 @@ MonoBehaviour:
   storyBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
   gameBGM: {fileID: 8300000, guid: 0db37fd42dbbafd499bfb4d26563ae9f, type: 3}
   resultBGM: {fileID: 8300000, guid: 46e22b92f75e736428e1aabe7ba1e964, type: 3}
+  stageSelectionBGM: {fileID: 8300000, guid: 984238510a85af9408fbfa8ea6b8856c, type: 3}
+  plazaBGM: {fileID: 8300000, guid: 2bf007eb3be4a0b4386fff0687735c28, type: 3}
   buttonClickSFX: {fileID: 8300000, guid: 4ef8efbd9f8a035419e614c08b3d90d8, type: 3}
+  stageDeploymentSFX: {fileID: 8300000, guid: 78a2af7ad331cd24f8fac906273c862d, type: 3}
+  npcInteractionSFX: {fileID: 8300000, guid: c213995af28bf00439531e525e85583a, type: 3}
 --- !u!4 &601917150
 Transform:
   m_ObjectHideFlags: 0
@@ -2583,8 +2588,9 @@ MonoBehaviour:
   useHoverEffect: 1
   hoverScale: 1.05
   hoverDuration: 0.1
-  playClickSound: 1
+  playClickSound: 0
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &716974294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2740,6 +2746,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &753736234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,8 +2943,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "SFX \uBCFC\uB968"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3514,8 +3521,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB9C8\uC2A4\uD130 \uBCFC\uB968"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4470,8 +4477,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD504\uB808\uC784"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5231,8 +5238,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "BGM \uBCFC\uB968"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5562,6 +5569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0930a3cbcfd264880fee276fd2e726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
+  easterEggSuccessSound: {fileID: 8300000, guid: 83e2cc7d7e9e4cdca8237a5f7d244e13, type: 3}
+  easterEggFont: {fileID: 0}
 --- !u!4 &1724833695
 Transform:
   m_ObjectHideFlags: 0
@@ -5726,8 +5735,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD22C\uBA85\uB3C4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
-  m_sharedMaterial: {fileID: -4608160337817658724, guid: e7fb6e660ea98a642aad83521183793a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
+  m_sharedMaterial: {fileID: -520419066170536579, guid: 1db3814cd7f54c44aa8d3b1a93dbd113, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5959,6 +5968,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &1826140998
 GameObject:
   m_ObjectHideFlags: 0
@@ -6477,6 +6487,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &2111436370
 GameObject:
   m_ObjectHideFlags: 0

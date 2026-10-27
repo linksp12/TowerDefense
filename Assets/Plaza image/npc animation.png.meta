@@ -1,0 +1,601 @@
+fileFormatVersion: 2
+guid: 31bca7e691df1164bba8172ca656da7d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3746067181281705825
+    second: npc animation_0
+  - first:
+      213: -1110798446244406224
+    second: npc animation_1
+  - first:
+      213: -1900318048034081298
+    second: npc animation_2
+  - first:
+      213: 7394811876063711145
+    second: npc animation_3
+  - first:
+      213: -4365788283014346191
+    second: npc animation_4
+  - first:
+      213: 6349346648070343154
+    second: npc animation_5
+  - first:
+      213: -3092384966231924152
+    second: npc animation_6
+  - first:
+      213: -1608482282422820535
+    second: npc animation_7
+  - first:
+      213: 1398705345133672655
+    second: npc animation_8
+  - first:
+      213: 8885439666514009492
+    second: npc animation_9
+  - first:
+      213: 6600079202468483462
+    second: npc animation_10
+  - first:
+      213: -6955457617699603938
+    second: npc animation_11
+  - first:
+      213: 7137151473258012124
+    second: npc animation_12
+  - first:
+      213: -4499879299387443584
+    second: npc animation_13
+  - first:
+      213: 831802018370623493
+    second: npc animation_14
+  - first:
+      213: 8586623881043275219
+    second: npc animation_15
+  - first:
+      213: -8895347172009888503
+    second: npc animation_16
+  - first:
+      213: 1950416761796893124
+    second: npc animation_17
+  - first:
+      213: 3980881766507067366
+    second: npc animation_18
+  - first:
+      213: -1967357593043203142
+    second: npc animation_19
+  - first:
+      213: -6961889964770813265
+    second: npc animation_20
+  - first:
+      213: 7655049499838280808
+    second: npc animation_21
+  - first:
+      213: -8888010211786705546
+    second: npc animation_22
+  - first:
+      213: 5871633308572988729
+    second: npc animation_23
+  - first:
+      213: -7016251709862620738
+    second: npc animation_24
+  - first:
+      213: -5873232586909251009
+    second: npc animation_25
+  - first:
+      213: 1556215117266852329
+    second: npc animation_26
+  - first:
+      213: 1982628397260185316
+    second: npc animation_27
+  - first:
+      213: -7382145185496443043
+    second: npc animation_28
+  - first:
+      213: 1031800786117216793
+    second: npc animation_29
+  - first:
+      213: -5463807673457688918
+    second: npc animation_30
+  - first:
+      213: 6002538051616196482
+    second: npc animation_31
+  - first:
+      213: 8176373534932477885
+    second: npc animation_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: npc animation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 197
+        height: 280
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16f7b0df044bcf330800000000000000
+      internalID: 3746067181281705825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 641
+        width: 197
+        height: 307
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03cdb8ac2b6a590f0800000000000000
+      internalID: -1110798446244406224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_3
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 637
+        width: 160
+        height: 287
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9af0e9dc836af9660800000000000000
+      internalID: 7394811876063711145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 639
+        width: 195
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13a0e5200ba9963c0800000000000000
+      internalID: -4365788283014346191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_5
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 643
+        width: 165
+        height: 355
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9cc0ad2296d1850800000000000000
+      internalID: 6349346648070343154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_6
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 639
+        width: 159
+        height: 289
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 842ecf2e144a515d0800000000000000
+      internalID: -3092384966231924152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_7
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 643
+        width: 191
+        height: 281
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 941ada0e2e58da9e0800000000000000
+      internalID: -1608482282422820535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_8
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 647
+        width: 177
+        height: 307
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc8f12ac913396310800000000000000
+      internalID: 1398705345133672655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_19
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 59
+        width: 183
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb0e7051ba82b4e0800000000000000
+      internalID: -1967357593043203142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_20
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 170
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faa9a7476f5626f90800000000000000
+      internalID: -6961889964770813265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_21
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 63
+        width: 154
+        height: 269
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86474ef36f23c3a60800000000000000
+      internalID: 7655049499838280808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_23
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 15
+        width: 191
+        height: 315
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93538d8826b3c7150800000000000000
+      internalID: 5871633308572988729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_24
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 63
+        width: 166
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb159ea5e3441ae90800000000000000
+      internalID: -7016251709862620738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_25
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 23
+        width: 193
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3a860674161e7ea0800000000000000
+      internalID: -5873232586909251009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_26
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 39
+        width: 169
+        height: 297
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e998ca6769c89510800000000000000
+      internalID: 1556215117266852329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc animation_27
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 67
+        width: 201
+        height: 269
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee9b4cd506b38b10800000000000000
+      internalID: 1982628397260185316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cd6d1dff2529e674ca84d86a24006d53
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      npc animation_0: 3746067181281705825
+      npc animation_1: -1110798446244406224
+      npc animation_10: 6600079202468483462
+      npc animation_11: -6955457617699603938
+      npc animation_12: 7137151473258012124
+      npc animation_13: -4499879299387443584
+      npc animation_14: 831802018370623493
+      npc animation_15: 8586623881043275219
+      npc animation_16: -8895347172009888503
+      npc animation_17: 1950416761796893124
+      npc animation_18: 3980881766507067366
+      npc animation_19: -1967357593043203142
+      npc animation_2: -1900318048034081298
+      npc animation_20: -6961889964770813265
+      npc animation_21: 7655049499838280808
+      npc animation_22: -8888010211786705546
+      npc animation_23: 5871633308572988729
+      npc animation_24: -7016251709862620738
+      npc animation_25: -5873232586909251009
+      npc animation_26: 1556215117266852329
+      npc animation_27: 1982628397260185316
+      npc animation_28: -7382145185496443043
+      npc animation_29: 1031800786117216793
+      npc animation_3: 7394811876063711145
+      npc animation_30: -5463807673457688918
+      npc animation_31: 6002538051616196482
+      npc animation_32: 8176373534932477885
+      npc animation_4: -4365788283014346191
+      npc animation_5: 6349346648070343154
+      npc animation_6: -3092384966231924152
+      npc animation_7: -1608482282422820535
+      npc animation_8: 1398705345133672655
+      npc animation_9: 8885439666514009492
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

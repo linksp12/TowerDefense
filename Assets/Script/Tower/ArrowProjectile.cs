@@ -4,40 +4,72 @@ using UnityEngine;
 public class ArrowProjectile : MonoBehaviour
 {
     public float speed => 8f;
-    public int damage = 10;
+    private int damage = 10;
 
     [Header("Rotation Settings")]
     public float rotationOffset = 0f;
 
-    [Header("Pierce Settings")]
-    public bool canPierce = false;
-    public int maxHitCount = 1;
-
-    [Header("Explosion Settings")]
-    public bool canExplode = false;
-    public float explosionRadius = 1.5f;
-    public float splashDamageRate = 0.7f;
-
-    [Header("Slow Settings")]
-    public bool canSlow = false;
-    [Range(0f, 1f)] public float slowRate = 0.5f;
-    public float slowDuration = 2f;
-
-    [Header("DoT Settings")]
-    public bool canDot = false;
-    public int dotDamage = 5;
-    public float dotDuration = 3f;
-    public float dotInterval = 1f;
+    // 투사체 특수효과는 프리팹 Inspector가 아니라 TowerData에서 발사 시점에 적용됩니다.
+    private bool canPierce;
+    private int maxHitCount = 1;
+    private bool canExplode;
+    private float explosionRadius;
+    private float splashDamageRate;
+    private bool canSlow;
+    private float slowRate;
+    private float slowDuration;
+    private bool canDot;
+    private int dotDamage;
+    private float dotDuration;
+    private float dotInterval;
 
     private Transform target;
     private int currentHitCount = 0;
+    private bool canHitStealth = false;
+    private float criticalChance = 0.1f;
+    private float criticalDamageMultiplier = 2f;
 
     private HashSet<GameObject> hitMonsters = new HashSet<GameObject>();
 
-    public void SetTarget(Transform newTarget, int newDamage)
+    // 타격음·타격 이펙트 종류. 발사한 타워의 TowerData에서 받는다.
+    private TowerData.AttackFeel feel = TowerData.AttackFeel.Arrow;
+
+    public void SetFeel(TowerData.AttackFeel attackFeel)
+    {
+        feel = attackFeel;
+    }
+
+    public void SetTarget(
+        Transform newTarget,
+        int newDamage,
+        bool newCanHitStealth,
+        float newCriticalChance,
+        float newCriticalDamageMultiplier)
     {
         target = newTarget;
         damage = newDamage;
+        canHitStealth = newCanHitStealth;
+        criticalChance = Mathf.Clamp01(newCriticalChance);
+        criticalDamageMultiplier = Mathf.Max(1f, newCriticalDamageMultiplier);
+    }
+
+    public void ApplyEffectStats(TowerData.ProjectileEffectStats effectStats)
+    {
+        canPierce = effectStats.canPierce;
+        maxHitCount = Mathf.Max(1, effectStats.maxHitCount);
+
+        canExplode = effectStats.canExplode;
+        explosionRadius = Mathf.Max(0f, effectStats.explosionRadius);
+        splashDamageRate = Mathf.Clamp01(effectStats.splashDamageRate);
+
+        canSlow = effectStats.canSlow;
+        slowRate = Mathf.Clamp01(effectStats.slowRate);
+        slowDuration = Mathf.Max(0f, effectStats.slowDuration);
+
+        canDot = effectStats.canDot;
+        dotDamage = Mathf.Max(0, effectStats.dotDamage);
+        dotDuration = Mathf.Max(0f, effectStats.dotDuration);
+        dotInterval = Mathf.Max(0f, effectStats.dotInterval);
     }
 
     void Update()
@@ -80,6 +112,12 @@ public class ArrowProjectile : MonoBehaviour
 
     void HitTarget(GameObject monster)
     {
+        if (!CanHitMonster(monster))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (hitMonsters.Contains(monster))
         {
             FindNextTarget();
@@ -90,12 +128,26 @@ public class ArrowProjectile : MonoBehaviour
 
         if (monsterHealth != null)
         {
-            monsterHealth.TakeDamage(damage);
+            StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+
+            if (stealthMonster != null && canHitStealth)
+            {
+                stealthMonster.Reveal();
+            }
+
+            // 타격음은 아래 전투 연출에서 공격 종류별로 재생하므로 공용 타격음은 끈다.
+            monsterHealth.TakeDamage(
+                damage,
+                false,
+                criticalChance,
+                criticalDamageMultiplier
+            );
             hitMonsters.Add(monster);
             currentHitCount++;
         }
 
         ApplySpecialEffect(monster);
+        CombatFeedback.ProjectileImpact(feel, transform.position, canExplode, explosionRadius, canDot, canSlow);
 
         if (canExplode)
         {
@@ -144,6 +196,7 @@ public class ArrowProjectile : MonoBehaviour
         {
             if (monster == null) continue;
             if (monster == mainTarget) continue;
+            if (!CanHitMonster(monster)) continue;
 
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 
@@ -153,8 +206,19 @@ public class ArrowProjectile : MonoBehaviour
 
                 if (monsterHealth != null)
                 {
+                    if (canHitStealth)
+                    {
+                        StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+                        stealthMonster?.Reveal();
+                    }
+
                     int splashDamage = Mathf.RoundToInt(damage * splashDamageRate);
-                    monsterHealth.TakeDamage(splashDamage);
+                    monsterHealth.TakeDamage(
+                        splashDamage,
+                        false,
+                        criticalChance,
+                        criticalDamageMultiplier
+                    );
                 }
 
                 ApplySpecialEffect(monster);
@@ -173,6 +237,7 @@ public class ArrowProjectile : MonoBehaviour
         {
             if (monster == null) continue;
             if (hitMonsters.Contains(monster)) continue;
+            if (!CanHitMonster(monster)) continue;
 
             float distance = Vector2.Distance(transform.position, monster.transform.position);
 
@@ -191,5 +256,18 @@ public class ArrowProjectile : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    bool CanHitMonster(GameObject monster)
+    {
+        if (monster == null)
+            return false;
+
+        StealthMonster stealthMonster = monster.GetComponent<StealthMonster>();
+
+        if (stealthMonster == null || !stealthMonster.IsStealthed)
+            return true;
+
+        return canHitStealth;
     }
 }

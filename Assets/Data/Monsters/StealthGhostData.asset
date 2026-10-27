@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a5b4e642c4f22b560dd64100fb69a, type: 3}
+  m_Name: StealthGhostData
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  id: stealth_ghost
+  monsterName: Stealth Ghost
+  maxHp: 500
+  moveSpeed: 2
+  goldReward: 40
+  maxShield: 0
+  baseDamage: 1
+  isBoss: 0
+  defense: 0
+  magicResistance: 0
+  bossPortrait: {fileID: 0}
+  bossName: 
+  displayName: "\uC740\uC2E0 \uC720\uB839"
+  description: "\uC804\uC7A5\uC5D0 \uB098\uD0C0\uB098\uC790\uB9C8\uC790 \uBAA8\uC2B5\uC744
+    \uAC10\uCD94\uB294 \uC720\uB839\uC785\uB2C8\uB2E4.\n\uB9C8\uBC95 \uD0C0\uC6CC\uB85C
+    \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0B4\uC57C\n\uB2E4\uB978 \uD0C0\uC6CC\uB3C4
+    \uACF5\uACA9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: 8562384368771663046, guid: c816914950bc5564eb429f872b080490, type: 3}

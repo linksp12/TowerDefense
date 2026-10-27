@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a5b4e642c4f22b560dd64100fb69a, type: 3}
+  m_Name: SlimeData
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  id: slime
+  monsterName: Slime
+  maxHp: 200
+  moveSpeed: 2
+  goldReward: 14
+  maxShield: 0
+  baseDamage: 1
+  isBoss: 0
+  defense: 0
+  magicResistance: 0
+  bossPortrait: {fileID: 0}
+  bossName: 
+  displayName: "\uC2AC\uB77C\uC784"
+  description: "\uC2AC\uB77C\uC784 \uBB34\uB9AC\uC5D0\uC11C \uAC00\uC7A5 \uD754\uD55C
+    \uB140\uC11D\uC785\uB2C8\uB2E4.\n\uCCB4\uB825\uC774 \uB0AE\uC544 \uC5B4\uB5A4
+    \uD0C0\uC6CC\uB85C\uB3C4\n\uC27D\uAC8C \uBB3C\uB9AC\uCE60 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  icon: {fileID: 4993211426662605759, guid: 9fea81a44bf7d8949ab3704cb1ee7034, type: 3}

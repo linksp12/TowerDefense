@@ -10,6 +10,7 @@ public class PanelShake : MonoBehaviour
     public float shakePower = 12f;
     public float shakeSpeed = 45f;
 
+    /*
     private Vector2 originalPosition;
     private Coroutine shakeCoroutine;
 
@@ -21,9 +22,12 @@ public class PanelShake : MonoBehaviour
         if (targetRect != null)
             originalPosition = targetRect.anchoredPosition;
     }
+    */
 
     public void PlayShake()
     {
+        return;
+        /*
         if (targetRect == null)
             return;
 
@@ -34,8 +38,10 @@ public class PanelShake : MonoBehaviour
             StopCoroutine(shakeCoroutine);
 
         shakeCoroutine = StartCoroutine(ShakeRoutine());
+        */
     }
 
+    /*
     private IEnumerator ShakeRoutine()
     {
         originalPosition = targetRect.anchoredPosition;
@@ -55,4 +61,5 @@ public class PanelShake : MonoBehaviour
         targetRect.anchoredPosition = originalPosition;
         shakeCoroutine = null;
     }
+    */
 }

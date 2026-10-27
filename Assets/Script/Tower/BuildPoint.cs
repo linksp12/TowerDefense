@@ -5,6 +5,7 @@ public class BuildPoint : MonoBehaviour
 {
     private bool hasTower = false;
     private SpriteRenderer spriteRenderer;
+    private Collider2D clickCollider;
 
     [Header("Preview")]
     public GameObject previewObject;
@@ -20,6 +21,7 @@ public class BuildPoint : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        clickCollider = GetComponent<Collider2D>();
 
         if (previewObject == null)
         {
@@ -71,12 +73,6 @@ public class BuildPoint : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance != null && !GameManager.Instance.CanAfford(minimumBuildCost))
-        {
-            Debug.Log("돈이 부족해서 타워를 설치할 수 없습니다.");
-            return;
-        }
-
         if (TowerBuildManager.Instance != null)
         {
             TowerBuildManager.Instance.OpenBuildPanel(this);
@@ -107,6 +103,12 @@ public class BuildPoint : MonoBehaviour
 
         hasTower = true;
 
+        // 설치된 타워와 빌드 포인트의 콜라이더가 겹쳐 클릭을 가로채지 않게 한다.
+        if (clickCollider != null)
+        {
+            clickCollider.enabled = false;
+        }
+
         HidePreview();
 
         // 타워 설치 후 설치 위치 표시 이미지 숨기기
@@ -119,6 +121,11 @@ public class BuildPoint : MonoBehaviour
     public void ClearTower()
     {
         hasTower = false;
+
+        if (clickCollider != null)
+        {
+            clickCollider.enabled = true;
+        }
 
         // 판매 후 다시 설치 위치 표시 이미지 보이게 하기
         if (spriteRenderer != null)
@@ -136,14 +143,8 @@ public class BuildPoint : MonoBehaviour
 
         previewObject.SetActive(true);
 
-        if (CanBuildHere())
-        {
-            previewRenderer.color = canBuildColor;
-        }
-        else
-        {
-            previewRenderer.color = cannotBuildColor;
-        }
+        previewRenderer.color = canBuildColor;
+        
     }
 
     private void HidePreview()
@@ -152,17 +153,6 @@ public class BuildPoint : MonoBehaviour
         {
             previewObject.SetActive(false);
         }
-    }
-
-    private bool CanBuildHere()
-    {
-        if (hasTower)
-            return false;
-
-        if (GameManager.Instance == null)
-            return true;
-
-        return GameManager.Instance.CanAfford(TowerBuildManager.Instance.GetCheapestTowerCost());
     }
 
     private bool IsPointerOverUI()

@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: 3ae1bb991479c9745a5032af8454d68b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1083596799075242011
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_0"
+  - first:
+      213: -4874136684805909332
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_1"
+  - first:
+      213: 1015218484418141609
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_2"
+  - first:
+      213: 7392055930142214216
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_3"
+  - first:
+      213: 5357877817881650877
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_4"
+  - first:
+      213: 8341484248205434084
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_5"
+  - first:
+      213: 4357657428492641066
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_6"
+  - first:
+      213: 8531868980722385864
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_7"
+  - first:
+      213: -7316598238343673021
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_8"
+  - first:
+      213: -2891382473400836729
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_9"
+  - first:
+      213: -7279861344298576641
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_10"
+  - first:
+      213: -2380357181152533226
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_11"
+  - first:
+      213: 5278536599430188266
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_12"
+  - first:
+      213: 5232243786538585594
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_13"
+  - first:
+      213: -820935385814622981
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_14"
+  - first:
+      213: 6758798938632290766
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_15"
+  - first:
+      213: 8156108061349678876
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_16"
+  - first:
+      213: 1431108050184374742
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_17"
+  - first:
+      213: -1005556580601327840
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_18"
+  - first:
+      213: 8427025651214990191
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_19"
+  - first:
+      213: -2448480805987141661
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_20"
+  - first:
+      213: -6000953917052345380
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_21"
+  - first:
+      213: -2216649297141483857
+    second: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_22"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 512
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5efae5fc37a46f0f0800000000000000
+      internalID: -1083596799075242011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_2"
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 21
+        width: 500
+        height: 605
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ad572d25d7c61e00800000000000000
+      internalID: 1015218484418141609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_3"
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 21
+        width: 556
+        height: 681
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84842f324bbd59660800000000000000
+      internalID: 7392055930142214216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC2A4\uD0AC,\uD0C0\uC6CC npc_4"
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 15
+        width: 546
+        height: 631
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db6e7c4fc710b5a40800000000000000
+      internalID: 5357877817881650877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 586be56fc4cb9c248bd2f83c097c54c5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_0": -1083596799075242011
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_1": -4874136684805909332
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_10": -7279861344298576641
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_11": -2380357181152533226
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_12": 5278536599430188266
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_13": 5232243786538585594
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_14": -820935385814622981
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_15": 6758798938632290766
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_16": 8156108061349678876
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_17": 1431108050184374742
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_18": -1005556580601327840
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_19": 8427025651214990191
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_2": 1015218484418141609
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_20": -2448480805987141661
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_21": -6000953917052345380
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_22": -2216649297141483857
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_3": 7392055930142214216
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_4": 5357877817881650877
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_5": 8341484248205434084
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_6": 4357657428492641066
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_7": 8531868980722385864
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_8": -7316598238343673021
+      "\uC2A4\uD0AC,\uD0C0\uC6CC npc_9": -2891382473400836729
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

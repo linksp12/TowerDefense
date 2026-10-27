@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a99a70de3f855e41b3afd367d132e85, type: 3}
+  m_Name: IceSkillData
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillId: ice_skill
+  displayName: Ice Attack
+  description: "\uC9C0\uC815\uD55C \uBC94\uC704\uC758 \uBAAC\uC2A4\uD130\uB97C \uC5BC\uB824
+    \uC774\uB3D9\uC744 \uC7A0\uC2DC \uBA48\uCDA5\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 17951649342328b44a00606416d2b440, type: 3}
+  effectType: 1
+  damage: 0
+  range: 3.3
+  cooldown: 90
+  duration: 3
+  maxTargets: 0
+  periodicDamage: 0
+  periodicInterval: 0.5
+  magicCircle: {fileID: 21300000, guid: 9b43f83fffa3aa2469871b7e24751214, type: 3}
+  effectPrefab: {fileID: 5914528978012337479, guid: d5e3b614277e17149ae37e89dff9550e, type: 3}
+  effectScale: 1
+  sound: {fileID: 8300000, guid: 17fd9b3583fa3054f84838cda3f5abd9, type: 3}
+  soundVolume: 0.7

@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class MonsterMove : MonoBehaviour
 {
-    public Transform[] waypoints;
-    public float moveSpeed = 1.5f;
+    public MonsterData monsterData;
 
-    private float originalMoveSpeed;
+    public Transform[] waypoints;
+    [HideInInspector] public float moveSpeed;
+
     private Coroutine slowCoroutine;
     
     private Coroutine freezeCoroutine;
@@ -17,10 +18,20 @@ public class MonsterMove : MonoBehaviour
     // 스킬용 빙결 상태
     private bool isFrozen = false;
 
+    private int baseDamage;
+
+    void Awake()
+    {
+        ApplyStatsFromData();
+
+        if (monsterData != null)
+        {
+            moveSpeed = monsterData.moveSpeed;
+        }
+    }
+
     void Start()
     {
-        originalMoveSpeed = moveSpeed;
-
         if (waypoints != null && waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -57,6 +68,14 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
+    public void ApplyStatsFromData()
+    {
+        if (monsterData == null)
+            return;
+
+        baseDamage = monsterData.baseDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Shield"))
@@ -72,16 +91,15 @@ public class MonsterMove : MonoBehaviour
 
         hasReachedShield = true;
 
-        if (GameManager.Instance != null)
+        // 연습 몬스터가 도착해도 실제 기지 체력과 웨이브 상태는 그대로 둔다.
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            GameManager.Instance.TakePlayerDamage(1);
-        }
+            if (GameManager.Instance != null)
+                GameManager.Instance.TakePlayerDamage(baseDamage, transform.position);
 
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
-        {
-            waveManager.OnMonsterPassed();
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterPassed();
         }
 
         Destroy(gameObject);
@@ -93,7 +111,7 @@ public class MonsterMove : MonoBehaviour
         if (slowCoroutine != null)
         {
             StopCoroutine(slowCoroutine);
-            moveSpeed = originalMoveSpeed;
+            moveSpeed = monsterData.moveSpeed;
         }
 
         slowCoroutine = StartCoroutine(SlowRoutine(slowRate, duration));
@@ -101,11 +119,11 @@ public class MonsterMove : MonoBehaviour
 
     IEnumerator SlowRoutine(float slowRate, float duration)
     {
-        moveSpeed = originalMoveSpeed * slowRate;
+        moveSpeed = monsterData.moveSpeed * slowRate;
 
         yield return new WaitForSeconds(duration);
 
-        moveSpeed = originalMoveSpeed;
+        moveSpeed = monsterData.moveSpeed;
         slowCoroutine = null;
 
     }
@@ -134,11 +152,11 @@ public class MonsterMove : MonoBehaviour
 
     public void Die()
     {
-        WaveManager waveManager = FindFirstObjectByType<WaveManager>();
-
-        if (waveManager != null)
+        if (GetComponent<TutorialPracticeMonster>() == null)
         {
-            waveManager.OnMonsterKilled();
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+                waveManager.OnMonsterKilled();
         }
 
         Destroy(gameObject);
