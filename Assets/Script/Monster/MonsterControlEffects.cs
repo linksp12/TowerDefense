@@ -10,6 +10,16 @@ internal sealed class MonsterControlEffects
 
     public bool IsStunned => Time.time < stunnedUntil;
 
+    public bool IsSlowed
+    {
+        get
+        {
+            for (int i = 0; i < slows.Count; i++)
+                if (Time.time < slows[i].Until) return true;
+            return false;
+        }
+    }
+
     public void Apply(float stun, float reduction, float duration)
     {
         stunnedUntil = Mathf.Max(stunnedUntil, Time.time + Mathf.Max(0, stun));

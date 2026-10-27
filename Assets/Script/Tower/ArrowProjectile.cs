@@ -181,6 +181,7 @@ public class ArrowProjectile : MonoBehaviour
             if (monsterMove != null)
             {
                 monsterMove.ApplySlow(slowRate, slowDuration);
+                MonsterStatusMarkers.Attach(monster);
             }
         }
 

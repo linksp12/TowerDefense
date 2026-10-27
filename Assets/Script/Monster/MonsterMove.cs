@@ -169,7 +169,9 @@ public class MonsterMove : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // 마법화살 루트용 슬로우 기능
+    // 마법화살 루트용 슬로우 기능. 둔화 표시는 감전 둔화까지 함께 본다.
+    public bool IsSlowed => slowCoroutine != null || controlEffects.IsSlowed;
+
     public void ApplySlow(float slowRate, float duration)
     {
         if (slowCoroutine != null)

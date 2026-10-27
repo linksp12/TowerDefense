@@ -66,6 +66,9 @@ public class TowerData : ScriptableObject
 
     public ElementType element = ElementType.None;
 
+    [Tooltip("은신 몬스터를 드러내고 공격할 수 있는지. 도감 태그와 전투 판정에 함께 쓰인다.")]
+    public bool detectsStealth;
+
     // 발사·타격 효과음과 이펙트 종류. 새 타워는 가장 가까운 공격 방식을 고른다.
     public enum AttackFeel { Arrow, Cannon, Magic }
 

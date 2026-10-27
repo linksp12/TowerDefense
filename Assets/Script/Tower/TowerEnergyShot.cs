@@ -22,7 +22,9 @@ public sealed class TowerEnergyShot : MonoBehaviour
         shot.profile = profile;
         shot.detect = detectStealth;
         shot.endTime = Time.time + 5;
-        TowerVfx.Renderer(go, TowerVfx.Settings != null ? TowerVfx.Settings.energyBolt : null, 0.75f);
+        CombatFeelSettings fx = CombatFeedback.Settings;
+        if (fx != null) PixelLoop.Create("Bolt", go.transform, fx.energyBoltFx, 105);
+        TowerVfx.Trail(go, new Color(1f, 0.3f, 0.25f, 0.7f), 0.3f, 0.12f);
     }
 
     private void Update()
@@ -38,11 +40,8 @@ public sealed class TowerEnergyShot : MonoBehaviour
 
     private void Impact()
     {
-        var visuals = TowerVfx.Settings;
-        // B1도 큰 에너지 폭발을 보여 주지만, 광역 피해는 B2의 설정이 있을 때만 적용한다.
-        TowerVfx.Burst(visuals != null ? visuals.energyImpact : null, destination,
-            profile.splashRadius > 0 ? 2.6f : 1.8f, 0.36f);
-        if (visuals != null) TowerVfx.Play(visuals.energyImpactSound, destination);
+        // B1도 에너지 폭발을 보여 주지만, 광역 피해는 B2의 설정이 있을 때만 적용한다(폭발 그림도 그 반경까지 커진다).
+        CombatFeedback.EnergyBlast(destination, profile.splashRadius > 0 ? profile.splashRadius : 0.8f);
         if (TowerTargeting.CanHit(target, detect))
             target.TakeDamage(Mathf.RoundToInt(damage * (target.isBoss ? profile.bossDamage : 1)), false);
         if (profile.splashRadius > 0)

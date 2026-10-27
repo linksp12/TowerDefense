@@ -80,6 +80,13 @@ public sealed class CombatFeedback : MonoBehaviour
             fx.Spawn(settings.magicHitFx, position, 1f);
             fx.Play(settings.magicHit);
         }
+        else if (feel == TowerData.AttackFeel.Cannon)
+        {
+            // 폭발하지 않는 포탄(공성 루트)도 무거운 한 방이 느껴지게 작은 폭발과 흔들림을 준다.
+            fx.Spawn(settings.explosionFx, position, 0.6f * settings.explosionFx.scale, false);
+            fx.Play(settings.cannonExplode, 0.85f);
+            fx.Shake(settings.explosionShake * 0.7f);
+        }
         else
         {
             fx.Spawn(settings.arrowHitFx, position, 1f);
@@ -134,6 +141,88 @@ public sealed class CombatFeedback : MonoBehaviour
         CombatFeedback fx = Get();
         if (fx != null)
             fx.Spawn(settings.muzzleSmokeFx, position, 1.6f);
+    }
+
+    // ──────── 새 타워(레이저·저격·감전)와 화상 ────────
+
+    // 지속 레이저 한 번 타격. 오래 맞힐수록(strength 0~1) 소리가 높아지고 불꽃이 커진다.
+    public static void LaserTick(Vector3 hitPosition, float strength)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.laserSparkFx, hitPosition, Mathf.Lerp(0.8f, 1.35f, strength));
+        fx.Play(settings.laserTick, Mathf.Lerp(0.92f, 1.25f, strength));
+    }
+
+    public static void LaserChargeFired(Vector3 muzzlePosition)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.laserSparkFx, muzzlePosition, 1.3f);
+        fx.Play(settings.laserChargeShot);
+    }
+
+    // 충전 레이저 폭발. 그림(32px, PPU 16 = 지름 2)을 폭발 반경에 맞춘다.
+    public static void EnergyBlast(Vector3 position, float radius)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.energyBlastFx, position, Mathf.Max(0.7f, radius) * settings.energyBlastFx.scale, false);
+        fx.Play(settings.energyBlast);
+        fx.Shake(settings.energyBlastShake);
+    }
+
+    public static void SniperFired(Vector3 muzzlePosition, bool critical)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.sniperMuzzleFx, muzzlePosition, critical ? 1.4f : 1f);
+        fx.Play(settings.sniperShot);
+        if (critical)
+            fx.Shake(settings.sniperCriticalShake);
+    }
+
+    // 저격탄이 몬스터를 뚫은 순간. 파편(A 경로)은 작게, 폭발 타격(B 경로)은 작은 폭발로,
+    // 화상이 붙으면 불꽃도 함께 터진다. 치명타는 타격 효과를 크게 키운다.
+    public static void SniperHit(Vector3 position, bool fragment, bool explosion, bool burns, bool critical)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.sniperHitFx, position, fragment ? 0.55f : critical ? 1.6f : 1f);
+        fx.Play(settings.sniperPierce, fragment ? 1.25f : 1f);
+        if (explosion)
+        {
+            fx.Spawn(settings.explosionFx, position, 0.5f * settings.explosionFx.scale, false);
+            fx.Play(settings.cannonExplode, 1.15f);
+        }
+        if (burns)
+            fx.Spawn(settings.fireHitFx, position, 1f);
+    }
+
+    public static void ShockHit(Vector3 position)
+    {
+        CombatFeedback fx = Get();
+        if (fx != null)
+            fx.Spawn(settings.shockHitFx, position, 1f);
+    }
+
+    public static void ShockFired()
+    {
+        CombatFeedback fx = Get();
+        if (fx != null)
+            fx.Play(settings.shockZap);
+    }
+
+    public static void BurnTick()
+    {
+        CombatFeedback fx = Get();
+        if (fx != null)
+            fx.Play(settings.burnTick);
     }
 
     public static CombatFeelSettings Settings
@@ -230,7 +319,7 @@ public sealed class CombatFeedback : MonoBehaviour
             instance = null;
     }
 
-    private void Play(CombatFeelSettings.Sound sound)
+    private void Play(CombatFeelSettings.Sound sound, float pitch = 1f)
     {
         if (sound == null || sound.clip == null)
             return;
@@ -256,7 +345,7 @@ public sealed class CombatFeedback : MonoBehaviour
 
         voice.clip = sound.clip;
         voice.volume = sound.volume * AudioManager.SfxGroupVolume;
-        voice.pitch = 1f + Random.Range(-sound.pitchJitter, sound.pitchJitter);
+        voice.pitch = pitch * (1f + Random.Range(-sound.pitchJitter, sound.pitchJitter));
         voice.Play();
     }
 

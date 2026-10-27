@@ -182,6 +182,9 @@ public class TowerAttack : MonoBehaviour
             towerData.baseStats.attackRange);
         projectileEffects = towerData.baseProjectileEffects;
         CurrentAttackProfile = towerData.baseAttack;
+        // 데이터에서 은신 감지를 켜면 프리팹 설정과 상관없이 적용한다(도감 표시와 같은 값).
+        if (towerData.detectsStealth)
+            canDetectStealth = true;
         specialAttack?.Reset();
     }
 

@@ -9,7 +9,7 @@ internal sealed class TowerSpecialAttack
         public MonsterHealth Target;
         public int Step;
         public float Timer;
-        public LineRenderer Line;
+        public TowerLaserBeam Visual;
     }
 
     private readonly TowerAttack tower;
@@ -18,7 +18,7 @@ internal sealed class TowerSpecialAttack
     private readonly List<MonsterHealth> selected = new List<MonsterHealth>();
     private TowerAttackProfile profile;
     private float timer;
-    private SpriteRenderer charge;
+    private PixelLoop charge;
     public float ChargeNormalized => profile == null ? 0 : Mathf.Clamp01(timer / Mathf.Max(0.05f, tower.attackCooldown));
 
     public TowerSpecialAttack(TowerAttack tower)
@@ -42,7 +42,7 @@ internal sealed class TowerSpecialAttack
     public void Reset()
     {
         foreach (var beam in beams)
-            if (beam.Line != null) { beam.Line.enabled = false; Object.Destroy(beam.Line.gameObject); }
+            beam.Visual?.Destroy();
         beams.Clear();
         if (charge != null) Object.Destroy(charge.gameObject);
         charge = null;
@@ -70,22 +70,19 @@ internal sealed class TowerSpecialAttack
         else if (profile.mode == TowerAttackMode.ChargedLaser)
         {
             TowerEnergyShot.Fire(tower.ShotOrigin, target, EnvDamage(tower.damage), profile, tower.canDetectStealth);
-            if (TowerVfx.Settings != null) TowerVfx.Play(TowerVfx.Settings.laserShot, tower.ShotOrigin);
+            CombatFeedback.LaserChargeFired(tower.ShotOrigin);
         }
     }
 
     private void FireSniper(MonsterHealth target)
     {
         int damage = EnvDamage(tower.damage);
-        if (Random.value < tower.criticalChance) damage = Mathf.RoundToInt(damage * tower.criticalDamageMultiplier);
+        bool critical = Random.value < tower.criticalChance;
+        if (critical) damage = Mathf.RoundToInt(damage * tower.criticalDamageMultiplier);
         Vector2 direction = target.transform.position - tower.ShotOrigin;
         TowerPiercingShot.Fire(tower.ShotOrigin, direction, damage, profile, tower.attackRange + 2,
-            tower.canDetectStealth);
-        if (TowerVfx.Settings != null)
-        {
-            TowerVfx.Play(TowerVfx.Settings.sniperShot, tower.ShotOrigin);
-            TowerVfx.Burst(TowerVfx.Settings.energyImpact, tower.ShotOrigin, 0.2f, 0.07f);
-        }
+            tower.canDetectStealth, critical: critical);
+        CombatFeedback.SniperFired(tower.ShotOrigin, critical);
     }
 
     private void FireShock()
@@ -96,19 +93,19 @@ internal sealed class TowerSpecialAttack
             var target = TowerTargeting.Nearest(tower, selected);
             if (target == null) break;
             selected.Add(target);
-            Vector3 origin = EmitterPosition(i, profile.targets);
-            TowerVfx.Flash(origin, target.transform.position, TowerVfx.ElectricColor, true);
+            Vector3 hit = TowerBodyBounds.Of(target.gameObject).center;
+            TowerElectricArc.Spawn(EmitterPosition(i, profile.targets), hit);
+            CombatFeedback.ShockHit(hit);
             int damage = EnvDamage(tower.damage);
             target.TakeDamage(damage, false, tower.criticalChance, tower.criticalDamageMultiplier);
             if (target.IsDead) continue;
             target.GetComponent<MonsterMove>()?.ApplyShock(profile.stunDuration,
                 profile.slowReduction, profile.slowDuration);
+            if (profile.stunDuration > 0) MonsterStatusMarkers.Attach(target.gameObject);
             TowerBurnStack.Apply(target, Mathf.RoundToInt(damage * profile.burnDamage),
                 profile.burnTicks, profile.burnInterval);
-            if (TowerVfx.Settings != null)
-                TowerVfx.Burst(TowerVfx.Settings.shockImpact, target.transform.position, 0.4f, 0.12f);
         }
-        if (TowerVfx.Settings != null) TowerVfx.Play(TowerVfx.Settings.electricShot, tower.ShotOrigin);
+        if (selected.Count > 0) CombatFeedback.ShockFired();
     }
 
     private void TickBeams(float delta)
@@ -156,43 +153,43 @@ internal sealed class TowerSpecialAttack
         int cap = ResearchStatResolver.GetTowerDamage(tower.towerData.id, profile.laserDamageCap);
         int damage = Mathf.Min(cap, Mathf.RoundToInt(tower.damage * multiplier));
         if (beam.Target.isBoss) damage = Mathf.RoundToInt(damage * profile.bossDamage);
+        Vector3 hit = TowerBodyBounds.Of(beam.Target.gameObject).center;
         beam.Target.TakeDamage(EnvDamage(damage), false);
-        if (TowerVfx.Settings != null)
-            TowerVfx.Burst(TowerVfx.Settings.energyImpact, beam.Target.transform.position, 0.2f, 0.08f);
+        CombatFeedback.LaserTick(hit, BeamStrength(beam));
+    }
+
+    // 레이저 단계(0~1). 오래 맞힐수록 빔이 굵어지고 달아오른다.
+    private float BeamStrength(Beam beam)
+    {
+        int steps = Mathf.Max(1, profile.laserRamp != null ? profile.laserRamp.Length - 1 : 1);
+        return Mathf.Clamp01(beam.Step / (float)steps);
     }
 
     private void UpdateBeamVisual(Beam beam, int index, int count)
     {
         if (beam.Target == null || beam.Target.IsDead)
         {
-            if (beam.Line != null) beam.Line.enabled = false;
+            beam.Visual?.Hide();
             return;
         }
-        if (beam.Line == null)
-        {
-            var go = new GameObject("Sustained Laser");
-            go.transform.SetParent(tower.transform, false);
-            beam.Line = TowerVfx.Line(go, TowerVfx.LaserColor, 0.025f);
-            beam.Line.positionCount = 2;
-        }
-        beam.Line.enabled = true;
-        int steps = Mathf.Max(1, profile.laserRamp != null ? profile.laserRamp.Length - 1 : 1);
-        float strength = Mathf.Clamp01(beam.Step / (float)steps);
-        beam.Line.startWidth = beam.Line.endWidth = Mathf.Lerp(0.025f, 0.075f, strength);
-        beam.Line.SetPosition(0, EmitterPosition(index, count));
-        beam.Line.SetPosition(1, beam.Target.transform.position);
+        if (beam.Visual == null) beam.Visual = new TowerLaserBeam(tower.transform);
+        beam.Visual.Show(EmitterPosition(index, count), TowerBodyBounds.Of(beam.Target.gameObject).center,
+            BeamStrength(beam));
     }
 
+    // 충전 레이저: 탑 위에 에너지 구슬이 점점 커지고, 다 차면 크게 맥동한다.
     private void UpdateCharge()
     {
-        if (charge == null && TowerVfx.Settings != null && TowerVfx.Settings.energyBolt != null)
+        if (charge == null)
         {
-            var go = new GameObject("Stored Laser Charge");
-            go.transform.SetParent(tower.transform, false);
-            charge = TowerVfx.Renderer(go, TowerVfx.Settings.energyBolt, 0.3f);
+            CombatFeelSettings fx = CombatFeedback.Settings;
+            charge = fx != null ? PixelLoop.Create("Stored Laser Charge", tower.transform, fx.energyChargeFx, 105) : null;
+            if (charge == null) return;
         }
-        if (charge == null) return;
+        float fill = ChargeNormalized;
+        float pulse = fill >= 1f ? 1f + 0.12f * Mathf.Sin(Time.time * 14f) : 1f;
         charge.transform.position = tower.ShotOrigin;
-        charge.color = new Color(1, 0.55f, 0.45f, ChargeNormalized * 0.85f);
+        charge.SetWorldScale(Mathf.Lerp(0.3f, 0.9f, fill) * pulse);
+        charge.Renderer.color = new Color(1f, 1f, 1f, Mathf.Lerp(0.25f, 1f, fill));
     }
 }

@@ -135,6 +135,30 @@ public class MonsterHealth : MonoBehaviour
         float criticalChance,
         float criticalDamageMultiplier)
     {
+        ApplyDamage(damage, playHitSound, criticalChance, criticalDamageMultiplier, HitKind.Normal);
+    }
+
+    // 치명타 계산을 공격 쪽에서 이미 끝낸 피해(저격 치명타). 치명타 표시·소리만 낸다.
+    public void TakeCriticalDamage(int damage)
+    {
+        ApplyDamage(damage, false, 0f, 1f, HitKind.Critical);
+    }
+
+    // 화상 지속 피해: 주황색 숫자로 구분한다.
+    public void TakeBurnDamage(int damage)
+    {
+        ApplyDamage(damage, false, 0f, 1f, HitKind.Burn);
+    }
+
+    private enum HitKind { Normal, Critical, Burn }
+
+    private void ApplyDamage(
+        int damage,
+        bool playHitSound,
+        float criticalChance,
+        float criticalDamageMultiplier,
+        HitKind kind)
+    {
         if (isDead)
         {
             return;
@@ -181,6 +205,11 @@ public class MonsterHealth : MonoBehaviour
                 isCritical = true;
                 CombatFeedback.CriticalHit();
             }
+            else if (kind == HitKind.Critical)
+            {
+                isCritical = true;
+                CombatFeedback.CriticalHit();
+            }
 
             if (ward != null)
             {
@@ -197,6 +226,10 @@ public class MonsterHealth : MonoBehaviour
         if (shieldBlocked || wardBlocked)
         {
             DamagePopup.ShowShield(transform.position);
+        }
+        else if (kind == HitKind.Burn)
+        {
+            DamagePopup.ShowBurn(transform.position, finalDamage);
         }
         else
         {

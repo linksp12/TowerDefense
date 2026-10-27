@@ -294,6 +294,7 @@ public sealed class PlazaCodexUI : MonoBehaviour
         if (effects.canPierce) tags.Add(("관통", new Color(0.9f, 0.9f, 0.75f)));
         if (effects.canSlow) tags.Add(("둔화", new Color(0.55f, 0.8f, 1f)));
         if (effects.canDot) tags.Add(("지속 피해", new Color(1f, 0.45f, 0.35f)));
+        if (data.detectsStealth) tags.Add(("은신 감지", new Color(0.78f, 0.62f, 1f)));
         if (tags.Count == 0) tags.Add(("단일 공격", new Color(0.9f, 0.9f, 0.75f)));
         Tags(tags, 122f);
         DetailText($"건설 비용  ·  {data.buildCost} G", new Vector2(460f, 78f), new Vector2(420f, 30f), 20f, Muted,
@@ -393,9 +394,11 @@ public sealed class PlazaCodexUI : MonoBehaviour
         levels.overflowMode = TextOverflowModes.Ellipsis;
         var effect = MakeText("Effect", box.transform, path.effectText, new Vector2(150f, 0f), new Vector2(330f, 52f), 19f, Ivory);
         effect.alignment = TextAlignmentOptions.Left;
-        effect.textWrappingMode = TextWrappingModes.NoWrap;
+        // 긴 설명(새 타워)은 두 줄로 접고 글자를 줄여 칸 안에 넣는다.
+        effect.textWrappingMode = TextWrappingModes.Normal;
+        effect.overflowMode = TextOverflowModes.Ellipsis;
         effect.enableAutoSizing = true;
-        effect.fontSizeMin = 14f;
+        effect.fontSizeMin = 13f;
         effect.fontSizeMax = 19f;
     }
 

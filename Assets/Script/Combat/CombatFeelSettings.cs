@@ -76,6 +76,37 @@ public sealed class CombatFeelSettings : ScriptableObject
     [Tooltip("금이 갈 때(상태가 나빠질 때) 추가 흔들림")]
     [Range(0f, 1f)] public float baseCrackShake = 0.55f;
 
+    [Header("새 타워(레이저·저격·감전)와 화상")]
+    [Tooltip("지속 레이저 한 번 타격. 오래 맞힐수록 높게 재생된다.")]
+    public Sound laserTick = new Sound();
+    public Sound laserChargeShot = new Sound();
+    public Sound energyBlast = new Sound();
+    public Sound sniperShot = new Sound();
+    public Sound sniperPierce = new Sound();
+    public Sound shockZap = new Sound();
+    public Sound burnTick = new Sound();
+    public Effect laserSparkFx = new Effect();
+    public Effect sniperMuzzleFx = new Effect();
+    public Effect sniperHitFx = new Effect();
+    public Effect shockHitFx = new Effect();
+    [Tooltip("충전 레이저 폭발. 그림 지름이 폭발 반경에 맞춰 늘어난다.")]
+    public Effect energyBlastFx = new Effect();
+    [Tooltip("충전 레이저 탄(반복)")]
+    public Effect energyBoltFx = new Effect();
+    [Tooltip("충전 레이저가 모으는 에너지 구슬(반복)")]
+    public Effect energyChargeFx = new Effect();
+    [Tooltip("감전으로 멈춘 몬스터 머리 위 표시(반복)")]
+    public Effect shockStunFx = new Effect();
+    [Tooltip("화상 불꽃(반복). 화상이 쌓일수록 몸 가장자리에 하나씩 늘어난다. 큰 몬스터용")]
+    public Effect burnFlameFx = new Effect();
+    [Tooltip("작은 몬스터용 화상 불꽃(반복)")]
+    public Effect burnFlameSmallFx = new Effect();
+    public Effect emberFx = new Effect();
+    [Tooltip("둔화(마법화살) 동안 발밑에 도는 서리 고리(반복)")]
+    public Effect slowFrostFx = new Effect();
+    [Range(0f, 1f)] public float energyBlastShake = 0.22f;
+    [Range(0f, 1f)] public float sniperCriticalShake = 0.12f;
+
     [Header("골드 연출")]
     public Sprite coinIcon;
     [Tooltip("동시에 날아가는 동전 수 제한")]

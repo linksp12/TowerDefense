@@ -183,6 +183,144 @@ MonoBehaviour:
   auraDamaged: {r: 1, g: 0.82, b: 0.35, a: 0.8}
   auraCritical: {r: 1, g: 0.32, b: 0.26, a: 0.9}
   baseCrackShake: 0.55
+  laserTick:
+    clip: {fileID: 8300000, guid: 7fb830b282fb0c544bb6416743fef140, type: 3}
+    volume: 0.32
+    minInterval: 0.1
+    pitchJitter: 0.02
+  laserChargeShot:
+    clip: {fileID: 8300000, guid: 3e3ab5dc8d3397b44bbe76d056aa21bd, type: 3}
+    volume: 0.75
+    minInterval: 0.08
+    pitchJitter: 0.04
+  energyBlast:
+    clip: {fileID: 8300000, guid: be297160a020b1a45baa4323103d1fcb, type: 3}
+    volume: 0.9
+    minInterval: 0.1
+    pitchJitter: 0.05
+  sniperShot:
+    clip: {fileID: 8300000, guid: 92fc1e41ff3728a408d4a6715efbb192, type: 3}
+    volume: 0.7
+    minInterval: 0.06
+    pitchJitter: 0.05
+  sniperPierce:
+    clip: {fileID: 8300000, guid: cb613c1bf550dde42b1a4d700599eec9, type: 3}
+    volume: 0.6
+    minInterval: 0.04
+    pitchJitter: 0.08
+  shockZap:
+    clip: {fileID: 8300000, guid: d90fc9215e4f3d54fb4fa72aed6ee093, type: 3}
+    volume: 0.6
+    minInterval: 0.08
+    pitchJitter: 0.07
+  burnTick:
+    clip: {fileID: 8300000, guid: 143a951e4023b7b458f0ecc32163a762, type: 3}
+    volume: 0.35
+    minInterval: 0.18
+    pitchJitter: 0.12
+  laserSparkFx:
+    frames:
+    - {fileID: -6393937901612232863, guid: c70616f4c62b0294091bd4f375b5cb87, type: 3}
+    - {fileID: -4895889781888590447, guid: c70616f4c62b0294091bd4f375b5cb87, type: 3}
+    - {fileID: -7142326603380719168, guid: c70616f4c62b0294091bd4f375b5cb87, type: 3}
+    - {fileID: -2418695941999864131, guid: c70616f4c62b0294091bd4f375b5cb87, type: 3}
+    - {fileID: 7340310036525643939, guid: c70616f4c62b0294091bd4f375b5cb87, type: 3}
+    fps: 24
+    scale: 1
+  sniperMuzzleFx:
+    frames:
+    - {fileID: 1764182465637363624, guid: e742cb21240424c48ad1a2bf62389027, type: 3}
+    - {fileID: 2013304391562402546, guid: e742cb21240424c48ad1a2bf62389027, type: 3}
+    - {fileID: 8168142003450715556, guid: e742cb21240424c48ad1a2bf62389027, type: 3}
+    - {fileID: -2556772812136165055, guid: e742cb21240424c48ad1a2bf62389027, type: 3}
+    fps: 22
+    scale: 1
+  sniperHitFx:
+    frames:
+    - {fileID: -5225451012175205304, guid: 4d96e7633551c81449d4b085a89cf441, type: 3}
+    - {fileID: -7455069445483335200, guid: 4d96e7633551c81449d4b085a89cf441, type: 3}
+    - {fileID: -1756019899361686992, guid: 4d96e7633551c81449d4b085a89cf441, type: 3}
+    - {fileID: 2436647277431992063, guid: 4d96e7633551c81449d4b085a89cf441, type: 3}
+    - {fileID: 1947849494474605915, guid: 4d96e7633551c81449d4b085a89cf441, type: 3}
+    fps: 22
+    scale: 1
+  shockHitFx:
+    frames:
+    - {fileID: 3244819226068227145, guid: 994741e104653334883e3512554f120e, type: 3}
+    - {fileID: 6545195788638624433, guid: 994741e104653334883e3512554f120e, type: 3}
+    - {fileID: 7583125689109175709, guid: 994741e104653334883e3512554f120e, type: 3}
+    - {fileID: 1728605692728239576, guid: 994741e104653334883e3512554f120e, type: 3}
+    - {fileID: 1675549129306704850, guid: 994741e104653334883e3512554f120e, type: 3}
+    - {fileID: -5821257906088266067, guid: 994741e104653334883e3512554f120e, type: 3}
+    fps: 24
+    scale: 1
+  energyBlastFx:
+    frames:
+    - {fileID: -5317756663367255344, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: 6690713553642525605, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: -6458073353263119883, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: 5036041198800536631, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: -444635224998758720, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: 8308593666911758596, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    - {fileID: 2133508154629071726, guid: 1b462cfecbef33b4e8ff96ac44116963, type: 3}
+    fps: 18
+    scale: 1
+  energyBoltFx:
+    frames:
+    - {fileID: -8665730368039410629, guid: d16d5a9a9528f8d4f8b9182204ebb4ee, type: 3}
+    - {fileID: 3357732040167214381, guid: d16d5a9a9528f8d4f8b9182204ebb4ee, type: 3}
+    - {fileID: -3273904271880734672, guid: d16d5a9a9528f8d4f8b9182204ebb4ee, type: 3}
+    fps: 14
+    scale: 1
+  energyChargeFx:
+    frames:
+    - {fileID: 3992722391411881507, guid: 0503057105658f44c99c14b9bfea7f69, type: 3}
+    - {fileID: -6301188382494905825, guid: 0503057105658f44c99c14b9bfea7f69, type: 3}
+    - {fileID: -5303936403389205074, guid: 0503057105658f44c99c14b9bfea7f69, type: 3}
+    - {fileID: 1536731369022819839, guid: 0503057105658f44c99c14b9bfea7f69, type: 3}
+    fps: 10
+    scale: 1
+  shockStunFx:
+    frames:
+    - {fileID: -3962621499523651867, guid: 03c1b36bf2110f941a587d5bdae66595, type: 3}
+    - {fileID: -5864512853114857702, guid: 03c1b36bf2110f941a587d5bdae66595, type: 3}
+    - {fileID: -6770244950365351623, guid: 03c1b36bf2110f941a587d5bdae66595, type: 3}
+    - {fileID: -2584553000117858259, guid: 03c1b36bf2110f941a587d5bdae66595, type: 3}
+    fps: 10
+    scale: 1
+  burnFlameFx:
+    frames:
+    - {fileID: 5165717614467539379, guid: a5e0fa9307dc13948adbdf7483917f91, type: 3}
+    - {fileID: 5523805502500363651, guid: a5e0fa9307dc13948adbdf7483917f91, type: 3}
+    - {fileID: 465939020377266044, guid: a5e0fa9307dc13948adbdf7483917f91, type: 3}
+    - {fileID: 3719016131350558006, guid: a5e0fa9307dc13948adbdf7483917f91, type: 3}
+    fps: 10
+    scale: 1
+  burnFlameSmallFx:
+    frames:
+    - {fileID: -2558424226299179639, guid: ceaf22b106bde3c45b66b65d0abaece2, type: 3}
+    - {fileID: 4706488610870142668, guid: ceaf22b106bde3c45b66b65d0abaece2, type: 3}
+    - {fileID: 5914884765456592172, guid: ceaf22b106bde3c45b66b65d0abaece2, type: 3}
+    - {fileID: -6144343219095008948, guid: ceaf22b106bde3c45b66b65d0abaece2, type: 3}
+    fps: 10
+    scale: 1
+  emberFx:
+    frames:
+    - {fileID: 6635729731184251705, guid: bf930568005a85f48a55a95cdb6f38ac, type: 3}
+    - {fileID: 9050706063826362875, guid: bf930568005a85f48a55a95cdb6f38ac, type: 3}
+    - {fileID: -7188237882695405398, guid: bf930568005a85f48a55a95cdb6f38ac, type: 3}
+    fps: 6
+    scale: 1
+  slowFrostFx:
+    frames:
+    - {fileID: -2855055288014773587, guid: 6036faefa51313a4e8880ad6cb0d590d, type: 3}
+    - {fileID: -1417494231814630251, guid: 6036faefa51313a4e8880ad6cb0d590d, type: 3}
+    - {fileID: 3577231533720119516, guid: 6036faefa51313a4e8880ad6cb0d590d, type: 3}
+    - {fileID: 3230976053004918851, guid: 6036faefa51313a4e8880ad6cb0d590d, type: 3}
+    fps: 8
+    scale: 1
+  energyBlastShake: 0.22
+  sniperCriticalShake: 0.12
   coinIcon: {fileID: 21300000, guid: 715d7c0498d11bb44848b79dfa91c901, type: 3}
   maxFlyingCoins: 12
   maxVoices: 10
