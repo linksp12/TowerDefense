@@ -11,6 +11,21 @@ using UnityEngine.UI;
 /// </summary>
 public class StorySceneManager : MonoBehaviour
 {
+    public enum Sequence { Intro, Ending }
+
+    [Header("진행 종류 (Intro: 시작 스토리 → 광장, Ending: 에필로그 → 크레딧 → 마무리)")]
+    public Sequence sequence = Sequence.Intro;
+
+    [Header("엔딩 배경 (새벽 지도 · 새벽 광장 · 새벽 탑) / 크레딧 글")]
+    public Sprite[] endingSprites;
+    public TextAsset credits;
+
+    [Header("엔딩 소리 (비어 있으면 결과 화면 배경음·기존 효과음 사용)")]
+    public AudioClip endingBGM;
+    public AudioClip bossFallSound;
+    public AudioClip creditsSound;
+    public AudioClip endSound;
+
     [Header("배경 이미지 (Story 1, 2, 3 순서)")]
     public Image backgroundImage;
     public Sprite[] backgroundSprites;
@@ -46,7 +61,7 @@ public class StorySceneManager : MonoBehaviour
     [Tooltip("건너뛰기를 길게 누르는 시간")]
     public float skipHoldTime = 0.9f;
 
-    private enum Mood { Prosperity, Omen, Invasion, Awakening, Finale }
+    private enum Mood { Prosperity, Omen, Invasion, Awakening, Finale, Victory, Dawn, Ember }
 
     private sealed class Panel
     {
@@ -86,7 +101,12 @@ public class StorySceneManager : MonoBehaviour
     private void Start()
     {
         if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayBGMForScene("StoryScene");
+        {
+            if (sequence == Sequence.Ending && endingBGM != null)
+                AudioManager.Instance.PlayBGM(endingBGM);
+            else
+                AudioManager.Instance.PlayBGMForScene(sequence == Sequence.Ending ? "ResultScene" : "StoryScene");
+        }
 
         BuildPanels();
         BuildLayout();
@@ -97,6 +117,29 @@ public class StorySceneManager : MonoBehaviour
     private void BuildPanels()
     {
         Sprite Story(int i) => backgroundSprites != null && i < backgroundSprites.Length ? backgroundSprites[i] : null;
+        if (sequence == Sequence.Ending)
+        {
+            Sprite End(int i) => endingSprites != null && i < endingSprites.Length ? endingSprites[i] : null;
+            panels = new[]
+            {
+                new Panel { Sprite = End(0), Chapter = "에필로그 · 새벽", Mood = Mood.Victory,
+                    Text = "숲의 골렘, 설원의 얼음 마녀, 화산의 화염 드래곤.\n" +
+                           "세 땅을 뒤덮었던 마물들이 하나둘 쓰러졌다.\n" +
+                           "긴 밤이 끝나고, 대지 위로 첫 햇살이 비쳤다.",
+                    ZoomFrom = 1.035f },
+                new Panel { Sprite = End(1), Chapter = "에필로그 · 다시 찾은 일상", Mood = Mood.Dawn,
+                    Text = "광장에는 다시 사람들의 목소리가 돌아왔다.\n" +
+                           "무너진 담을 고치고, 꺼졌던 불을 다시 밝혔다.\n" +
+                           "마지막 탑은 끝내 무너지지 않았다.",
+                    ZoomFrom = 1.035f },
+                new Panel { Sprite = End(2), Chapter = "에필로그 · 남은 불씨", Mood = Mood.Ember, Fit = true,
+                    Text = "그러나 대지 깊은 곳에서는\n" +
+                           "아직 꺼지지 않은 더 강한 기운이 꿈틀거리고 있다.\n" +
+                           "탑의 수호자여, 싸움은 아직 끝나지 않았다.",
+                    ZoomFrom = 1.035f },
+            };
+            return;
+        }
         panels = new[]
         {
             new Panel { Sprite = Story(0), Chapter = "제1장 · 번영", Mood = Mood.Prosperity,
@@ -406,6 +449,8 @@ public class StorySceneManager : MonoBehaviour
         if (panel.Mood == Mood.Invasion) embers.rate = moodRate(embers);
         if (panel.Mood == Mood.Finale) { embers.rate = moodRate(embers) * 0.6f; motes.rate = moodRate(motes) * 0.5f; }
         if (panel.Mood == Mood.Finale) Play(impactSound, 0.9f);
+        if (panel.Mood == Mood.Dawn || panel.Mood == Mood.Victory) motes.rate = moodRate(motes);
+        if (panel.Mood == Mood.Ember) { embers.rate = moodRate(embers) * 0.8f; motes.rate = moodRate(motes) * 0.4f; }
 
         // 장면 전환: 새 그림이 서서히 나타나고 이전 그림이 사라진다. 종장은 띠를 걷어 그림 전체를 보여 준다.
         float t = 0f;
@@ -417,7 +462,7 @@ public class StorySceneManager : MonoBehaviour
             active.color = new Color(1f, 1f, 1f, k);
             if (previous != null) previous.color = new Color(1f, 1f, 1f, 1f - k);
             chapterGroup.alpha = Mathf.Max(0f, chapterGroup.alpha - Time.unscaledDeltaTime * 4f);
-            if (panel.Mood == Mood.Awakening) mapGroup.alpha = k;
+            if (panel.Mood == Mood.Awakening || panel.Mood == Mood.Victory) mapGroup.alpha = k;
             else mapGroup.alpha = Mathf.Min(mapGroup.alpha, 1f - k);
             float backdropTarget = panel.Fit ? 1f : 0f;
             backdrop.color = new Color(0.3f, 0.28f, 0.4f, Mathf.Lerp(backdrop.color.a, backdropTarget, k));
@@ -494,7 +539,157 @@ public class StorySceneManager : MonoBehaviour
             yield return null;
         }
         blackout.color = Color.black;
+        if (sequence == Sequence.Ending)
+        {
+            StartCoroutine(RunCredits());
+            yield break;
+        }
         LoadPlazaScene();
+    }
+
+    // ───────── 엔딩 크레딧 · 마무리 카드 ─────────
+    private bool creditsRunning, creditsSkip;
+
+    private IEnumerator RunCredits()
+    {
+        creditsRunning = true;
+        Play(creditsSound, 0.7f);
+        storyText.text = "";
+        chapterGroup.alpha = 0f;
+        hintArrow.color = Color.clear;
+        mapGroup.alpha = 0f;
+        hintLabel.text = "길게 누르면 빠르게";
+        foreach (var dot in dots) dot.gameObject.SetActive(false);
+
+        // 어두워진 마지막 그림 위로 이름이 올라간다(띠·건너뛰기는 위에 그대로).
+        topBar.SetAsLastSibling();
+        bottomBar.SetAsLastSibling();
+        var roll = UiFx.Rect("CreditsRoll", canvas);
+        roll.anchorMin = roll.anchorMax = new Vector2(0.5f, 0f);
+        roll.pivot = new Vector2(0.5f, 1f);
+        roll.sizeDelta = new Vector2(1400f, 10f);
+        roll.SetSiblingIndex(topBar.GetSiblingIndex());
+        float height = BuildCreditLines(roll, out float lastLineY);
+
+        float start = Time.unscaledTime;
+        while (Time.unscaledTime - start < 1.2f)
+        {
+            blackout.color = new Color(0f, 0f, 0f, Mathf.Lerp(1f, 0.86f, (Time.unscaledTime - start) / 1.2f));
+            yield return null;
+        }
+        // 마지막 줄이 화면 가운데에 올 때까지 올린다. 누르고 있으면 4배 빠르게.
+        var canvasRect = (RectTransform)canvas;
+        float targetY = canvasRect.rect.height * 0.5f - lastLineY;
+        float y = 0f;
+        while (y < targetY && !creditsSkip)
+        {
+            bool fast = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
+            y += Time.unscaledDeltaTime * (fast ? 260f : 65f);
+            roll.anchoredPosition = new Vector2(0f, y);
+            yield return null;
+        }
+        if (!creditsSkip)
+        {
+            float hold = Time.unscaledTime;
+            while (Time.unscaledTime - hold < 2.2f && !creditsSkip) yield return null;
+        }
+        // 크레딧을 걷고 마무리 카드
+        var rollGroup = roll.gameObject.AddComponent<CanvasGroup>();
+        float fade = Time.unscaledTime;
+        while (Time.unscaledTime - fade < 0.8f)
+        {
+            rollGroup.alpha = 1f - (Time.unscaledTime - fade) / 0.8f;
+            yield return null;
+        }
+        Destroy(roll.gameObject);
+        creditsRunning = false;
+        // 띠는 남기고 건너뛰기·안내 글씨만 숨긴다.
+        foreach (Transform child in topBar) child.gameObject.SetActive(false);
+        hintLabel.text = "";
+        yield return ShowEndCard();
+    }
+
+    // credits.txt: @큰 제목 / #묶음 제목 / -작은 글씨 / 빈 줄 간격 / //메모(표시 안 함)
+    private float BuildCreditLines(RectTransform roll, out float lastLineY)
+    {
+        string source = credits != null ? credits.text : "@Last of the Tower\n\n플레이해 주셔서 감사합니다";
+        float y = 0f;
+        lastLineY = 0f;
+        foreach (string raw in source.Split('\n'))
+        {
+            string line = raw.TrimEnd('\r');
+            if (line.StartsWith("//")) continue;
+            if (line.Trim().Length == 0) { y += 26f; continue; }
+            float size = 28f, gap = 12f;
+            Color color = Ivory;
+            string content = line.Trim();
+            if (content.StartsWith("@")) { size = 64f; color = Gold; content = content.Substring(1).Trim(); gap = 30f; }
+            else if (content.StartsWith("#")) { size = 32f; color = Gold; content = content.Substring(1).Trim(); y += 40f; gap = 16f; }
+            else if (content.StartsWith("-")) { size = 20f; color = Muted; content = content.Substring(1).Trim(); gap = 6f; }
+            var text = Text("Line", roll, content, size, color);
+            text.textWrappingMode = TextWrappingModes.Normal;
+            float lineHeight = size * 1.35f;
+            Place(text.rectTransform, new Vector2(0.5f, 1f), new Vector2(0f, -y - lineHeight * 0.5f), new Vector2(1400f, lineHeight));
+            if (size == 32f) text.characterSpacing = 6f;
+            lastLineY = -(y + lineHeight * 0.5f);
+            y += lineHeight + gap;
+        }
+        roll.anchoredPosition = Vector2.zero;
+        return y;
+    }
+
+    private IEnumerator ShowEndCard()
+    {
+        var card = UiFx.Rect("EndCard", canvas);
+        UiFx.Stretch(card);
+        var group = card.gameObject.AddComponent<CanvasGroup>();
+        group.alpha = 0f;
+        var theEnd = Text("TheEnd", card, "THE END", 84f, Gold);
+        theEnd.characterSpacing = 18f;
+        Place(theEnd.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 170f), new Vector2(1200f, 120f));
+        var cleared = Text("Cleared", card, "본편 8개 전장을 모두 지켜냈습니다", 30f, Ivory);
+        Place(cleared.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 70f), new Vector2(1200f, 50f));
+        var hardcore = Text("Hardcore", card, "하드코어 전장이 열렸습니다", 34f, new Color32(255, 128, 96, 255));
+        Place(hardcore.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 10f), new Vector2(1200f, 56f));
+        MakeEndButton(card, "광장으로", new Vector2(-170f, -120f), BattleUiSkin.GoldButton, new Color32(58, 36, 18, 255),
+            () => SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중"));
+        MakeEndButton(card, "메인 메뉴", new Vector2(170f, -120f), BattleUiSkin.DarkButton, Ivory,
+            () => SceneLoadingScreen.TryLoad("MainScene", "메인 화면으로 이동 중"));
+        Play(endSound != null ? endSound : impactSound, 0.75f);
+        float start = Time.unscaledTime;
+        while (Time.unscaledTime - start < 1.2f)
+        {
+            float k = UiFx.EaseOut((Time.unscaledTime - start) / 1.2f);
+            group.alpha = k;
+            // 그림에 박힌 제목 글씨와 겹치지 않게 배경을 더 어둡게
+            blackout.color = new Color(0f, 0f, 0f, Mathf.Lerp(0.86f, 0.93f, k));
+            theEnd.rectTransform.localScale = Vector3.one * Mathf.Lerp(1.12f, 1f, k);
+            yield return null;
+        }
+        group.alpha = 1f;
+    }
+
+    private void MakeEndButton(Transform parent, string label, Vector2 position, Sprite sprite, Color labelColor, System.Func<bool> onClick)
+    {
+        var image = UiFx.Image(label, parent, sprite, Color.white);
+        image.raycastTarget = true;
+        if (sprite != null) BattleUiSkin.Skin(image, sprite, 3f);
+        Place(image.rectTransform, new Vector2(0.5f, 0.5f), position, new Vector2(280f, 72f));
+        var button = image.gameObject.AddComponent<Button>();
+        var colors = button.colors;
+        colors.highlightedColor = new Color(1f, 0.93f, 0.75f, 1f);
+        colors.pressedColor = new Color(0.8f, 0.72f, 0.55f, 1f);
+        button.colors = colors;
+        var text = Text("Label", image.transform, label, 30f, labelColor);
+        text.outlineWidth = 0f;
+        UiFx.Stretch(text.rectTransform);
+        bool clicked = false;
+        button.onClick.AddListener(() =>
+        {
+            if (clicked || SceneLoadingScreen.IsLoading) return;
+            AudioManager.Instance?.PlayButtonClick();
+            clicked = onClick();
+        });
     }
 
     // ───────── 매 프레임 ─────────
@@ -552,8 +747,14 @@ public class StorySceneManager : MonoBehaviour
                 // 포화 섬광(화면은 흔들지 않는다)
                 if (Random.value < Time.unscaledDeltaTime * 1.4f) flashAlpha = Mathf.Max(flashAlpha, Random.Range(0.05f, 0.12f));
                 break;
+            case Mood.Victory:
+                UpdateMapMarkers(t, true);
+                break;
+            case Mood.Ember:
+                tintAlpha = Mathf.Clamp01((t - 3f) / 3f) * 0.05f;
+                break;
             case Mood.Awakening:
-                UpdateMapMarkers(t);
+                UpdateMapMarkers(t, false);
                 tintAlpha = Mathf.Clamp01((t - 5.6f) / 2f) * 0.08f;
                 break;
             case Mood.Finale:
@@ -565,6 +766,44 @@ public class StorySceneManager : MonoBehaviour
     }
 
     // 세 지역이 차례로 밝아지며 보스가 나타난다.
+    // 에필로그: 세 보스가 처음부터 보이다가 차례로 빛이 꺼지며 잿빛으로 쓰러진다.
+    private readonly bool[] defeatSounded = new bool[3];
+
+    private void UpdateMapMarkers(float t, bool defeat)
+    {
+        if (!defeat)
+        {
+            UpdateMapMarkers(t);
+            return;
+        }
+        for (int i = 0; i < mapOverlay.childCount; i++)
+        {
+            var marker = mapOverlay.GetChild(i);
+            float start = 1.8f + i * 1.4f;
+            float k = Mathf.Clamp01((t - start) / 0.6f);
+            if (k > 0f && i < defeatSounded.Length && !defeatSounded[i])
+            {
+                defeatSounded[i] = true;
+                Play(bossFallSound != null ? bossFallSound : rumbleSound, 0.6f);
+            }
+            marker.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0.75f, k);
+            float pop = k < 0.25f ? Mathf.Lerp(1f, 1.15f, k / 0.25f) : Mathf.Lerp(1.15f, 0.88f, (k - 0.25f) / 0.75f);
+            marker.localScale = new Vector3(pop, pop, 1f) / Mathf.Max(0.01f, active.rectTransform.localScale.x);
+            var glow = marker.GetChild(0).GetComponent<Image>();
+            Color c = glow.color;
+            c.a = Mathf.Lerp(0.45f + 0.15f * Mathf.Sin(t * 3f + i), 0f, k);
+            glow.color = c;
+            var portrait = marker.GetChild(1).Find("Portrait")?.GetComponent<Image>();
+            if (portrait != null)
+            {
+                float grey = Mathf.Lerp(1f, 0.35f, k);
+                portrait.color = new Color(grey, grey, grey, 1f);
+            }
+            var label = marker.GetChild(2).GetComponent<TextMeshProUGUI>();
+            if (label != null) label.alpha = Mathf.Lerp(1f, 0.7f, k);
+        }
+    }
+
     private void UpdateMapMarkers(float t)
     {
         for (int i = 0; i < mapOverlay.childCount; i++)
@@ -589,6 +828,12 @@ public class StorySceneManager : MonoBehaviour
         if (skipPointerDown || skipKey) skipHeld += Time.unscaledDeltaTime;
         else skipHeld = Mathf.Max(0f, skipHeld - Time.unscaledDeltaTime * 3f);
         skipFill.fillAmount = Mathf.Clamp01(skipHeld / skipHoldTime);
+        if (skipHeld >= skipHoldTime && creditsRunning)
+        {
+            skipHeld = 0f;
+            creditsSkip = true;
+            return;
+        }
         if (skipHeld >= skipHoldTime && !finished)
         {
             skipHeld = 0f;

@@ -1,0 +1,45 @@
+// 엔딩 크레딧 내용. 한 줄씩 위에서 아래로 올라간다.
+// @ 큰 제목 / # 묶음 제목 / - 작은 글씨(출처·라이선스) / 빈 줄은 간격 / // 로 시작하면 화면에 나오지 않음(메모)
+@Last of the Tower
+
+# 개발팀
+김승민
+박희태
+김연준
+최도현
+// 역할을 넣으려면 예: "김승민 · 광장·NPC" 처럼 이름 뒤에 적으면 된다.
+
+# 음악
+"Lord of the Land" (스테이지 선택)
+"Folk Round" (연구소)
+"Angevin 70" (퀘스트 게시판)
+Kevin MacLeod (incompetech.com)
+- Licensed under Creative Commons: By Attribution 4.0 License
+- http://creativecommons.org/licenses/by/4.0/
+
+스토리 배경음 · 새 타워 효과음 · 스토리 효과음
+- 팀 자체 제작
+// 출처 확인 필요(확인되면 // 를 지우고 출처·라이선스를 적는다):
+// "Tower of Lava" (메인 화면·엔딩) - 출처 미확인
+// "Battle Theme II v1.2" (전투) - 출처 미확인
+// 광장 배경음 Plaza_BGM - 출처 미확인
+
+# 효과음
+Kenney (kenney.nl)
+- CC0 1.0 Universal
+// 출처 확인 필요: click_iron_01, grass_5, StageDeployment, StageResultPopup
+
+# 그래픽
+CraftPix.net — Free Tower Defense 2D Tileset · 스킬 이펙트
+- craftpix.net/file-licenses
+// 출처 확인 필요: 광장 그림(Plaza image, RPG_Plaza_Unity_Pack), 몬스터·보스 그림
+
+# 글꼴
+메이플스토리 서체 — NEXON
+Noto Sans KR — Google
+- SIL Open Font License 1.1
+
+# 도구
+Unity · DOTween (Demigiant)
+
+플레이해 주셔서 감사합니다
