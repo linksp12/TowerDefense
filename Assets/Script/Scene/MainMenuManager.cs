@@ -71,6 +71,10 @@ public class MainMenuManager : MonoBehaviour
         }
 
         Vector2 pointer = Input.mousePosition;
+        MainMenuPresentation presentation = FindAnyObjectByType<MainMenuPresentation>();
+        if (presentation != null)
+            return presentation.IsOverTitleLetterT(pointer);
+
         float normalizedX = pointer.x / Mathf.Max(1f, Screen.width);
         float normalizedY = pointer.y / Mathf.Max(1f, Screen.height);
 
@@ -276,7 +280,12 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!LastOfTheTower.Progression.GameProgressReset.TryReset(out string error, false))
             return error;
-        SceneManager.LoadScene("StoryScene");
+        // 메인 연출이 있으면 화면을 검게 닫은 뒤 스토리로 넘어간다.
+        MainMenuPresentation presentation = FindAnyObjectByType<MainMenuPresentation>();
+        if (presentation != null)
+            presentation.FadeOutThen(() => SceneManager.LoadScene("StoryScene"));
+        else
+            SceneManager.LoadScene("StoryScene");
         return null;
     }
 
