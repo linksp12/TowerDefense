@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7a5b4e642c4f22b560dd64100fb69a, type: 3}
+  m_Name: FireDragonData
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  id: fire_dragon
+  monsterName: Fire Dragon
+  maxHp: 30000
+  moveSpeed: 0.3
+  goldReward: 220
+  maxShield: 0
+  baseDamage: 1
+  isBoss: 1
+  defense: 80
+  magicResistance: 80
+  bossPortrait: {fileID: 4993511223410325148, guid: aabf90ceeefed0b419b2b5a159e3a825, type: 3}
+  bossName: "\uD654\uC5FC \uB4DC\uB798\uACE4"
+  displayName: "\uD654\uC5FC \uB4DC\uB798\uACE4"
+  description: "\uCCB4\uB825 70%\xB740%\uC5D0\uC11C \uBE0C\uB808\uC2A4\uB85C \uD0C0\uC6CC\uB97C
+    \uBD80\uC21C\uB2E4.\n\uC228\uC744 \uB4E4\uC774\uC26C\uB294 \uB3D9\uC548 \uBAB0\uC544\uCE58\uBA74
+    \uBE0C\uB808\uC2A4\uB97C \uB04A\uC744 \uC218 \uC788\uB2E4."
+  icon: {fileID: 4993511223410325148, guid: aabf90ceeefed0b419b2b5a159e3a825, type: 3}

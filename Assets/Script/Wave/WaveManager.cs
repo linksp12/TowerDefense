@@ -231,6 +231,12 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>웨이브 도중 분열·소환으로 새로 생긴 몬스터를 남은 몬스터 수에 더합니다.</summary>
+    public void RegisterSpawnedMonster(GameObject monster)
+    {
+        OnMonsterSpawned(monster);
+    }
+
     public void OnMonsterKilled()
     {
         if (IsGameEnded())
