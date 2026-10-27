@@ -185,7 +185,7 @@ public sealed class SaveSlotWindow : MonoBehaviour
                 foreach (var entry in data.research) levels += entry.level;
                 string date = DateTime.ParseExact(data.savedUtc, "O", CultureInfo.InvariantCulture,
                     DateTimeStyles.RoundtripKind).ToLocalTime().ToString("yyyy.MM.dd  HH:mm");
-                descriptions[i].text = $"<color=#F2D594>{date}</color>\n클리어 {GameSaveSlotStore.ClearedStages(data)}/4  ·  연구 {levels}  ·  SP {data.skillPoints}";
+                descriptions[i].text = $"<color=#F2D594>{date}</color>\n클리어 {GameSaveSlotStore.ClearedStages(data)}/{LastOfTheTower.Progression.StageIds.MainStageIds.Count}  ·  연구 {levels}  ·  SP {data.skillPoints}";
             }
             if (preferred < 0 && statuses[i] == (saveMode ? SaveSlotStatus.Empty : SaveSlotStatus.Saved)) preferred = i;
             cards[i].interactable = saveMode || statuses[i] == SaveSlotStatus.Saved;

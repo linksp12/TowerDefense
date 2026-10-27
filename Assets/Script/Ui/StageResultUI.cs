@@ -184,7 +184,7 @@ public class StageResultUI : MonoBehaviour
                 panel.transform,
                 progressSaveFailed
                     ? "클리어 기록을 저장하지 못했습니다. 스테이지 해금을 확인해 주세요."
-                    : GetStageLabel(unlockedSceneName) + "가 해금되었습니다!",
+                    : WithSubjectParticle(GetStageLabel(unlockedSceneName)) + " 해금되었습니다!",
                 new Vector2(0f, noticeY),
                 new Vector2(800f, 45f),
                 progressSaveFailed ? 23f : 27f,
@@ -331,14 +331,19 @@ public class StageResultUI : MonoBehaviour
 
     private static string GetStageLabel(string sceneName)
     {
-        switch (LastOfTheTower.Progression.StageIds.FromSceneName(sceneName))
-        {
-            case LastOfTheTower.Progression.StageIds.StageOne: return "1스테이지";
-            case LastOfTheTower.Progression.StageIds.StageTwo: return "2스테이지";
-            case LastOfTheTower.Progression.StageIds.StageThree: return "3스테이지";
-            case LastOfTheTower.Progression.StageIds.StageFour: return "4스테이지";
-            default: return "스테이지";
-        }
+        string label = LastOfTheTower.Progression.StageIds.GetLabel(
+            LastOfTheTower.Progression.StageIds.FromSceneName(sceneName));
+        return label ?? "스테이지";
+    }
+
+    // "하드코어 1이", "5스테이지가"처럼 마지막 글자 발음에 맞는 조사를 붙인다.
+    private static string WithSubjectParticle(string label)
+    {
+        char last = label[label.Length - 1];
+        bool hasFinalConsonant = last >= '0' && last <= '9'
+            ? "013678".IndexOf(last) >= 0
+            : last >= '가' && last <= '힣' && (last - '가') % 28 != 0;
+        return label + (hasFinalConsonant ? "이" : "가");
     }
 
     private System.Collections.IEnumerator AnimateIn()

@@ -214,18 +214,18 @@ public class AudioManager : MonoBehaviour
                 PlayBGM(stageSelectionBGM);
                 break;
 
-            case "Stage1Scene":
-            case "Stage2Scene":
-            case "Stage3Scene":
-            case "Stage4Scene":
-                PlayBGM(gameBGM);
-                break;
-
             case "ResultScene":
                 PlayBGM(resultBGM);
                 break;
 
             default:
+                // 본편·하드코어 전투 씬은 진행 목록(StageIds)에 등록된 씬이다.
+                if (LastOfTheTower.Progression.StageIds.FromSceneName(sceneName) != null)
+                {
+                    PlayBGM(gameBGM);
+                    break;
+                }
+
                 Debug.Log(
                     "AudioManager: 등록되지 않은 씬입니다. BGM 변경 없음: "
                     + sceneName

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -58,17 +57,40 @@ public class UIManager : MonoBehaviour
     {
         waveText.text = $" {waveNumber} / {waveManager.TotalWaves}";
 
-        bool isStage4BossWave =
-            SceneManager.GetActiveScene().name == "Stage4Scene" &&
-            waveNumber == 4;
-
-        if (!isStage4BossWave)
+        // 보스 웨이브는 보스 경고 연출이 대신 나오므로 일반 배너를 띄우지 않는다.
+        if (!IsBossWaveWithWarning(waveNumber))
         {
             bool lastWave = waveManager != null && waveNumber >= waveManager.TotalWaves;
             ShowBanner($"WAVE {waveNumber}",
                 lastWave ? "<color=#FFB25C>마지막 웨이브입니다!</color>" : "몬스터가 몰려옵니다!",
                 $"Wave {waveNumber} 시작!");
         }
+    }
+
+    private bool IsBossWaveWithWarning(int waveNumber)
+    {
+        if (BossWarningUI.Instance == null || waveManager == null || waveManager.waves == null)
+            return false;
+
+        int index = waveNumber - 1;
+        if (index < 0 || index >= waveManager.waves.Length || waveManager.waves[index] == null)
+            return false;
+
+        WaveData.SpawnInfo[] spawnInfos = waveManager.waves[index].spawnInfos;
+        if (spawnInfos == null)
+            return false;
+
+        foreach (WaveData.SpawnInfo spawnInfo in spawnInfos)
+        {
+            if (spawnInfo == null || spawnInfo.monsterPrefab == null)
+                continue;
+
+            MonsterHealth health = spawnInfo.monsterPrefab.GetComponent<MonsterHealth>();
+            if (health != null && health.monsterData != null && health.monsterData.isBoss)
+                return true;
+        }
+
+        return false;
     }
 
     // 웨이브 클리어

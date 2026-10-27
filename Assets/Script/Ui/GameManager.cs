@@ -224,8 +224,9 @@ public class GameManager : MonoBehaviour
         isSceneTransitioning = true;
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        string nextSceneName = GetNextStageSceneName(currentSceneName);
-        string nextStageId = LastOfTheTower.Progression.StageIds.FromSceneName(nextSceneName);
+        string currentStageId = LastOfTheTower.Progression.StageIds.FromSceneName(currentSceneName);
+        string nextStageId = LastOfTheTower.Progression.StageIds.GetNextStage(currentStageId);
+        string nextSceneName = LastOfTheTower.Progression.StageIds.ToSceneName(nextStageId);
         bool newlyUnlocked = false;
         bool progressSaveFailed = false;
 
@@ -259,8 +260,8 @@ public class GameManager : MonoBehaviour
 
         PrepareGameUiForResult();
 
-        // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
-        if (victory && currentSceneName == "Stage4Scene")
+        // 본편 최종 스테이지 승리만 기존 ResultScene(엔딩)으로 이동한다.
+        if (victory && currentStageId == LastOfTheTower.Progression.StageIds.FinalMainStage)
         {
             ResultSceneManager.isVictory = true;
             ResultSceneManager.restartSceneName = currentSceneName;
@@ -268,7 +269,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
+        // 그 외 승리(하드코어 포함)와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
         StageResultUI.Show(victory, currentSceneName, currentPlayerHp, maxPlayerHp,
             newlyUnlocked ? nextSceneName : null, progressSaveFailed);
         Time.timeScale = 0f;
@@ -294,21 +295,6 @@ public class GameManager : MonoBehaviour
         UIManager uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
             uiManager.PrepareForGameResult();
-    }
-
-    private string GetNextStageSceneName(string currentSceneName)
-    {
-        switch (currentSceneName)
-        {
-            case "Stage1Scene":
-                return "Stage2Scene";
-            case "Stage2Scene":
-                return "Stage3Scene";
-            case "Stage3Scene":
-                return "Stage4Scene";
-            default:
-                return string.Empty;
-        }
     }
 
     private IEnumerator LoadResultScene()

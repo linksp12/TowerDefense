@@ -163,7 +163,7 @@ namespace LastOfTheTower.Progression
             var progress = new StageProgressService(new SnapshotStorage(data.stageProgressJson));
             progress.Load();
             int count = 0;
-            foreach (string id in new[] { StageIds.StageOne, StageIds.StageTwo, StageIds.StageThree, StageIds.StageFour })
+            foreach (string id in StageIds.MainStageIds)
                 if (progress.IsCleared(id)) count++;
             return count;
         }
