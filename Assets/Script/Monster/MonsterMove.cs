@@ -141,6 +141,8 @@ public class MonsterMove : MonoBehaviour
     }
 
     // 스킬용 빙결 기능
+    public bool IsFrozen => isFrozen;
+
     public void Freeze(float duration)
     {
         if (freezeCoroutine != null)

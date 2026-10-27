@@ -1,0 +1,943 @@
+fileFormatVersion: 2
+guid: 90f21812090cd094fad888b473de3224
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3514876241621700322
+    second: HasteEffects_0
+  - first:
+      213: 2999010765961329971
+    second: HasteEffects_1
+  - first:
+      213: 2100069535546695460
+    second: HasteEffects_2
+  - first:
+      213: 4857872618100550548
+    second: HasteEffects_3
+  - first:
+      213: 8684516376458319717
+    second: HasteEffects_4
+  - first:
+      213: -4544258662108906465
+    second: HasteEffects_5
+  - first:
+      213: 1152648374047514370
+    second: HasteEffects_6
+  - first:
+      213: 5727409170153381025
+    second: HasteEffects_7
+  - first:
+      213: -6642461800238480119
+    second: HasteEffects_8
+  - first:
+      213: -3088031523174227464
+    second: HasteEffects_9
+  - first:
+      213: -6496547344381812682
+    second: HasteEffects_10
+  - first:
+      213: -6261967139421569362
+    second: HasteEffects_11
+  - first:
+      213: -3423232410955911686
+    second: HasteEffects_12
+  - first:
+      213: 6842132523843970009
+    second: HasteEffects_13
+  - first:
+      213: 8627161082705572426
+    second: HasteEffects_14
+  - first:
+      213: -6861894545404087400
+    second: HasteEffects_15
+  - first:
+      213: 4558975973605550331
+    second: HasteEffects_16
+  - first:
+      213: 7748667423230992331
+    second: HasteEffects_17
+  - first:
+      213: -7495797054129594566
+    second: HasteEffects_18
+  - first:
+      213: 4503377915333662489
+    second: HasteEffects_19
+  - first:
+      213: 6399223877571926392
+    second: HasteEffects_20
+  - first:
+      213: 1862650350693451762
+    second: HasteEffects_21
+  - first:
+      213: -8926327846475737496
+    second: HasteEffects_22
+  - first:
+      213: 4850831700581472386
+    second: HasteEffects_23
+  - first:
+      213: -7214314821710380758
+    second: HasteEffects_24
+  - first:
+      213: 7513918765001656429
+    second: HasteEffects_25
+  - first:
+      213: 3920688547482393992
+    second: HasteEffects_26
+  - first:
+      213: 4446907765280281435
+    second: HasteEffects_27
+  - first:
+      213: -5542499210136401067
+    second: HasteEffects_28
+  - first:
+      213: -700477065203179056
+    second: HasteEffects_29
+  - first:
+      213: -5780655059409572482
+    second: HasteEffects_30
+  - first:
+      213: -6289675612478426642
+    second: HasteEffects_31
+  - first:
+      213: -1018104575940272442
+    second: HasteEffects_32
+  - first:
+      213: -2527716120128844545
+    second: HasteEffects_33
+  - first:
+      213: 7352900865393277688
+    second: HasteEffects_34
+  - first:
+      213: 3074382067337824886
+    second: HasteEffects_35
+  - first:
+      213: 219986413684950748
+    second: HasteEffects_36
+  - first:
+      213: -7473537772350114504
+    second: HasteEffects_37
+  - first:
+      213: 2545506184743748785
+    second: HasteEffects_38
+  - first:
+      213: -1032082952716923960
+    second: HasteEffects_39
+  - first:
+      213: -5312064189779596965
+    second: HasteEffects_40
+  - first:
+      213: -2397295848788590088
+    second: HasteEffects_41
+  - first:
+      213: 7962824356483262995
+    second: HasteEffects_42
+  - first:
+      213: 1897597928459314144
+    second: HasteEffects_43
+  - first:
+      213: -9054171044611568417
+    second: HasteEffects_44
+  - first:
+      213: 3541389989735155496
+    second: HasteEffects_45
+  - first:
+      213: 3130061278317320195
+    second: HasteEffects_46
+  - first:
+      213: -4227292650996713463
+    second: HasteEffects_47
+  - first:
+      213: 4290445131229689956
+    second: HasteEffects_48
+  - first:
+      213: 6534036279945811680
+    second: HasteEffects_49
+  - first:
+      213: 4219506097382011327
+    second: HasteEffects_50
+  - first:
+      213: 9162014220695238595
+    second: HasteEffects_51
+  - first:
+      213: -8641290361114756132
+    second: HasteEffects_52
+  - first:
+      213: 5105456545381952448
+    second: HasteEffects_53
+  - first:
+      213: -5391628285436796456
+    second: HasteEffects_54
+  - first:
+      213: 1521970565446235509
+    second: HasteEffects_55
+  - first:
+      213: -4157927127737488994
+    second: HasteEffects_56
+  - first:
+      213: 8430263959864370
+    second: HasteEffects_57
+  - first:
+      213: -1713810517886535418
+    second: HasteEffects_58
+  - first:
+      213: -943445035071689247
+    second: HasteEffects_59
+  - first:
+      213: 323033799966305122
+    second: HasteEffects_60
+  - first:
+      213: 1986848498950895163
+    second: HasteEffects_61
+  - first:
+      213: -4776105141290164281
+    second: HasteEffects_62
+  - first:
+      213: 2544674005531748837
+    second: HasteEffects_63
+  - first:
+      213: 6879881205993870220
+    second: HasteEffects_64
+  - first:
+      213: 8621822116331423408
+    second: HasteEffects_65
+  - first:
+      213: -8134389835602525860
+    second: HasteEffects_66
+  - first:
+      213: 2192044035454927034
+    second: HasteEffects_67
+  - first:
+      213: 2800743144180760039
+    second: HasteEffects_68
+  - first:
+      213: 4761507821594852043
+    second: HasteEffects_69
+  - first:
+      213: -5237725430300569636
+    second: HasteEffects_70
+  - first:
+      213: 2672517047384866794
+    second: HasteEffects_71
+  - first:
+      213: -2809719741295332678
+    second: HasteEffects_72
+  - first:
+      213: 7384016296031340469
+    second: HasteEffects_73
+  - first:
+      213: -5520172255117499414
+    second: HasteEffects_74
+  - first:
+      213: 6314576257360468879
+    second: HasteEffects_75
+  - first:
+      213: -7497507529428556471
+    second: HasteEffects_76
+  - first:
+      213: 3426342115763408135
+    second: HasteEffects_77
+  - first:
+      213: -1394978152970869018
+    second: HasteEffects_78
+  - first:
+      213: 4046560696399125716
+    second: HasteEffects_79
+  - first:
+      213: 7093691838598936078
+    second: HasteEffects_80
+  - first:
+      213: -7451084446995114792
+    second: HasteEffects_81
+  - first:
+      213: -6233679321387020667
+    second: HasteEffects_82
+  - first:
+      213: -9059765157335658559
+    second: HasteEffects_83
+  - first:
+      213: 3585908943658658088
+    second: HasteEffects_84
+  - first:
+      213: 7741058810665864176
+    second: HasteEffects_85
+  - first:
+      213: -2455768532824262087
+    second: HasteEffects_86
+  - first:
+      213: -1272016350703525483
+    second: HasteEffects_87
+  - first:
+      213: 7797312805948222558
+    second: HasteEffects_88
+  - first:
+      213: -8852615603063571037
+    second: HasteEffects_89
+  - first:
+      213: 4168578666299291933
+    second: HasteEffects_90
+  - first:
+      213: -7637042938355258454
+    second: HasteEffects_91
+  - first:
+      213: 2206841657590227357
+    second: HasteEffects_92
+  - first:
+      213: -3555846635513405743
+    second: HasteEffects_93
+  - first:
+      213: -4936242158813620444
+    second: HasteEffects_94
+  - first:
+      213: -3289013971580650471
+    second: HasteEffects_95
+  - first:
+      213: -4047060053365131563
+    second: HasteEffects_96
+  - first:
+      213: -4154973648577149023
+    second: HasteEffects_97
+  - first:
+      213: 6174710660926939904
+    second: HasteEffects_98
+  - first:
+      213: 3358867172027314440
+    second: HasteEffects_99
+  - first:
+      213: -2443141757008149635
+    second: HasteEffects_100
+  - first:
+      213: 3288983839868568892
+    second: HasteEffects_101
+  - first:
+      213: -539194253761262599
+    second: HasteEffects_102
+  - first:
+      213: -2646516306584827708
+    second: HasteEffects_103
+  - first:
+      213: -3596597891157886323
+    second: HasteEffects_104
+  - first:
+      213: 4984072772109471659
+    second: HasteEffects_105
+  - first:
+      213: 8939975800462314884
+    second: HasteEffects_106
+  - first:
+      213: 4214376647350985161
+    second: HasteEffects_107
+  - first:
+      213: -7062104307116359236
+    second: HasteEffects_108
+  - first:
+      213: 4835980048357052635
+    second: HasteEffects_109
+  - first:
+      213: -4537275994410503158
+    second: HasteEffects_110
+  - first:
+      213: 4603814059709318066
+    second: HasteEffects_111
+  - first:
+      213: -2088463668879676945
+    second: HasteEffects_112
+  - first:
+      213: -8833872420167166418
+    second: HasteEffects_113
+  - first:
+      213: 4536422930121454982
+    second: HasteEffects_114
+  - first:
+      213: 7014575064569917944
+    second: HasteEffects_115
+  - first:
+      213: 5934189569131528527
+    second: HasteEffects_116
+  - first:
+      213: -3244788112309493094
+    second: HasteEffects_117
+  - first:
+      213: -8521243128842974959
+    second: HasteEffects_118
+  - first:
+      213: -4099720848558833790
+    second: HasteEffects_119
+  - first:
+      213: 8683298595633840368
+    second: HasteEffects_120
+  - first:
+      213: -5024570176391074222
+    second: HasteEffects_121
+  - first:
+      213: 1647122667821063628
+    second: HasteEffects_122
+  - first:
+      213: -3204744015062937598
+    second: HasteEffects_123
+  - first:
+      213: 1037372623870388226
+    second: HasteEffects_124
+  - first:
+      213: 4268156024010917695
+    second: HasteEffects_125
+  - first:
+      213: 3502049496156099029
+    second: HasteEffects_126
+  - first:
+      213: 7458231702839084318
+    second: HasteEffects_127
+  - first:
+      213: 5161497628710688515
+    second: HasteEffects_128
+  - first:
+      213: 3922253631511643360
+    second: HasteEffects_129
+  - first:
+      213: 2749255860964526286
+    second: HasteEffects_130
+  - first:
+      213: 4312421998275726647
+    second: HasteEffects_131
+  - first:
+      213: 8692341205863816129
+    second: HasteEffects_132
+  - first:
+      213: 8065170104130069644
+    second: HasteEffects_133
+  - first:
+      213: 1804198081948189515
+    second: HasteEffects_134
+  - first:
+      213: 1979115926199321395
+    second: HasteEffects_135
+  - first:
+      213: 2471792505341670884
+    second: HasteEffects_136
+  - first:
+      213: -8042641757169036719
+    second: HasteEffects_137
+  - first:
+      213: 3586772075908772890
+    second: HasteEffects_138
+  - first:
+      213: -2609777474882060443
+    second: HasteEffects_139
+  - first:
+      213: -8599778812037822602
+    second: HasteEffects_140
+  - first:
+      213: 9049998351286230717
+    second: HasteEffects_141
+  - first:
+      213: 3065149399508896812
+    second: HasteEffects_142
+  - first:
+      213: 8642283516891817805
+    second: HasteEffects_143
+  - first:
+      213: 4519731956302047023
+    second: HasteEffects_144
+  - first:
+      213: 3755804479311538548
+    second: HasteEffects_145
+  - first:
+      213: 7946157713934320238
+    second: HasteEffects_146
+  - first:
+      213: -866305540146012235
+    second: HasteEffects_147
+  - first:
+      213: -6417637725732679371
+    second: HasteEffects_148
+  - first:
+      213: -2806389178383419674
+    second: HasteEffects_149
+  - first:
+      213: -4819236959437341125
+    second: HasteEffects_150
+  - first:
+      213: -2110768592659871014
+    second: HasteEffects_151
+  - first:
+      213: 5269109538150006475
+    second: HasteEffects_152
+  - first:
+      213: 6552119123273761031
+    second: HasteEffects_153
+  - first:
+      213: -8921651866809581901
+    second: HasteEffects_154
+  - first:
+      213: -8720421938407209288
+    second: HasteEffects_155
+  - first:
+      213: 1394578695770544204
+    second: HasteEffects_156
+  - first:
+      213: -3154083758754895365
+    second: HasteEffects_157
+  - first:
+      213: -7525364510792273105
+    second: HasteEffects_158
+  - first:
+      213: -3919409468537408654
+    second: HasteEffects_159
+  - first:
+      213: -6211652577485276421
+    second: HasteEffects_160
+  - first:
+      213: 1016871279695529664
+    second: HasteEffects_161
+  - first:
+      213: 8425047217701926940
+    second: HasteEffects_162
+  - first:
+      213: -6608499729063742399
+    second: HasteEffects_163
+  - first:
+      213: 4884247426694821081
+    second: HasteEffects_164
+  - first:
+      213: 4391621658372642329
+    second: HasteEffects_165
+  - first:
+      213: 207855072205697575
+    second: HasteEffects_166
+  - first:
+      213: -420377112956365960
+    second: HasteEffects_167
+  - first:
+      213: 2471894030204657166
+    second: HasteEffects_168
+  - first:
+      213: 527206586357121455
+    second: HasteEffects_169
+  - first:
+      213: -4092230198338808866
+    second: HasteEffects_170
+  - first:
+      213: 2160642860636087902
+    second: HasteEffects_171
+  - first:
+      213: -3829100888897390894
+    second: HasteEffects_172
+  - first:
+      213: -7026396966372606404
+    second: HasteEffects_173
+  - first:
+      213: -2940130301957101671
+    second: HasteEffects_174
+  - first:
+      213: -6937749870322680242
+    second: HasteEffects_175
+  - first:
+      213: 6039205329978742637
+    second: HasteEffects_176
+  - first:
+      213: -5739959534699437784
+    second: HasteEffects_177
+  - first:
+      213: 8703418981528331019
+    second: HasteEffects_178
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HasteCast0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 691
+        width: 355
+        height: 338
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74d5aca024f9cdf41997d72339bc30d7
+      internalID: -1696059565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteCast1
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 691
+        width: 355
+        height: 338
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0a3926f0cfa1d4cb37300854db6352
+      internalID: 430654871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteCast2
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 691
+        width: 355
+        height: 338
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcd65ed6b4545aa4d840eb16f96f668d
+      internalID: 604397830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteCast3
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 691
+        width: 355
+        height: 338
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae1360ed5168254aaaa3ad868835f35
+      internalID: 63970254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteStatus0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 402
+        width: 246
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.013215859}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c381d8662352006408e07cf357500f56
+      internalID: -1485687751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteStatus1
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 402
+        width: 246
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.013215859}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 401d0b1b5c820324180f76313621d375
+      internalID: -1097213382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteStatus2
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 402
+        width: 246
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.013215859}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84683efd05bb51c46ae6e8ceb08ff212
+      internalID: 405246854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteStatus3
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 402
+        width: 246
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.013215859}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51cfe7f5f5b08254c8e21749c40ca7f6
+      internalID: -1958892632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteTarget0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 66
+        width: 304
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7881926080d2b64394ed0da30cb23a9
+      internalID: 2071944138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteTarget1
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 66
+        width: 304
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c7ebb2ccd5639418c44277ca3440b3
+      internalID: -398277590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteTarget2
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 66
+        width: 304
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e4fd43af29fed47ba4871d716e0669
+      internalID: 1527577173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HasteTarget3
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 66
+        width: 304
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b378187d8b61e5a40a5385ce7a9e1483
+      internalID: -850812807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fc2910988ba2e40468dd96be2e1fc22a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HasteCast0: -1696059565
+      HasteCast1: 430654871
+      HasteCast2: 604397830
+      HasteCast3: 63970254
+      HasteStatus0: -1485687751
+      HasteStatus1: -1097213382
+      HasteStatus2: 405246854
+      HasteStatus3: -1958892632
+      HasteTarget0: 2071944138
+      HasteTarget1: -398277590
+      HasteTarget2: 1527577173
+      HasteTarget3: -850812807
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

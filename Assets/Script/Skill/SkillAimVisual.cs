@@ -27,6 +27,8 @@ internal sealed class SkillAimVisual : IDisposable
     private bool hasDrawnColor;
     private float drawnWidth = -1f;
     private SkillEffectType effectType;
+    private SkillData selectedSkill;
+    private readonly SkillTargetPreview targets = new SkillTargetPreview();
 
     public bool IsReady => circle != null && spriteRenderer != null;
 
@@ -68,6 +70,8 @@ internal sealed class SkillAimVisual : IDisposable
     public bool Show(SkillData skill, Vector3 position, float radius, SkillAimVisualSettings settings)
     {
         if (!IsReady || skill == null || skill.MagicCircle == null) return false;
+        targets.Clear();
+        selectedSkill = skill;
         effectType = skill.EffectType;
         spriteRenderer.sprite = skill.MagicCircle;
         spriteRenderer.enabled = true;
@@ -81,7 +85,7 @@ internal sealed class SkillAimVisual : IDisposable
             case SkillEffectType.Lightning: scale *= settings.LightningScale; break;
         }
         circle.transform.localScale = Vector3.one * scale;
-        if (effectType == SkillEffectType.TowerHaste)
+        if (skill.VisualProfile != null || effectType == SkillEffectType.TowerHaste)
             SkillRangeVisual.Fit(spriteRenderer, radius, skill.MagicCircleRadiusFraction);
         circle.transform.rotation = Quaternion.identity;
         Color color = spriteRenderer.color;
@@ -106,7 +110,10 @@ internal sealed class SkillAimVisual : IDisposable
             indicator.transform.rotation = Quaternion.identity;
         }
         UpdateLine(radius, settings);
-        float targetAlpha = settings.Highlight && HasTargetInside(radius, settings.MonsterLayer)
+        bool hasTarget = selectedSkill != null && selectedSkill.VisualProfile != null
+            ? targets.Refresh(selectedSkill, circle.transform.position, radius)
+            : HasTargetInside(radius, settings.MonsterLayer);
+        float targetAlpha = settings.Highlight && hasTarget
             ? settings.HighlightAlpha : settings.NormalAlpha;
         if (effectType == SkillEffectType.TowerHaste) targetAlpha = Mathf.Min(targetAlpha, 0.6f);
         Color color = spriteRenderer.color;
@@ -159,7 +166,8 @@ internal sealed class SkillAimVisual : IDisposable
             line.startWidth = line.endWidth = settings.LineWidth;
             drawnWidth = settings.LineWidth;
         }
-        line.enabled = true;
+        // 새 그림은 자체 외곽 원을 사용한다. 실제 판정과 같은 반경으로 맞춘다.
+        line.enabled = selectedSkill == null || selectedSkill.VisualProfile == null;
     }
 
     private bool HasTargetInside(float radius, LayerMask monsterLayer)
@@ -196,6 +204,8 @@ internal sealed class SkillAimVisual : IDisposable
 
     public void Hide()
     {
+        targets.Clear();
+        selectedSkill = null;
         if (circle != null) circle.SetActive(false);
         if (line != null) line.enabled = false;
         if (indicator != null) indicator.SetActive(false);

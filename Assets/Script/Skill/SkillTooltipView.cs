@@ -74,7 +74,7 @@ internal sealed class SkillTooltipView
         text.alignment = TextAlignmentOptions.TopLeft;
         text.textWrappingMode = TextWrappingModes.Normal;
         text.enableAutoSizing = false;
-        text.overflowMode = TextOverflowModes.Overflow;
+        text.overflowMode = TextOverflowModes.Ellipsis;
         text.raycastTarget = false;
         root.SetActive(false);
     }
@@ -88,9 +88,18 @@ internal sealed class SkillTooltipView
         background.color = style.BackgroundColor;
         text.font = style.Font != null ? style.Font : TMP_Settings.defaultFontAsset;
         text.text = content;
-        text.fontSize = style.FontSize;
+        text.fontSize = Mathf.Max(14f, style.FontSize);
         text.color = style.TextColor;
-        rect.sizeDelta = style.Size;
+        RectTransform bounds = (RectTransform)canvas.transform;
+        float width = Mathf.Min(style.Size.x, bounds.rect.width - 24f);
+        float height = text.GetPreferredValues(content, width - 40f, Mathf.Infinity).y + 32f;
+        float maximum = bounds.rect.height - 100f;
+        while (height > maximum && text.fontSize > 12f)
+        {
+            text.fontSize -= 1f;
+            height = text.GetPreferredValues(content, width - 40f, Mathf.Infinity).y + 32f;
+        }
+        rect.sizeDelta = new Vector2(width, Mathf.Min(height, maximum));
         root.SetActive(true);
         root.transform.SetAsLastSibling();
         Position(anchor, style.Margin);
@@ -107,18 +116,16 @@ internal sealed class SkillTooltipView
     {
         RectTransform canvasRect = canvas.GetComponent<RectTransform>();
         if (canvasRect == null) return;
-        Camera camera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
         anchor.GetWorldCorners(corners);
-        Vector2 top = RectTransformUtility.WorldToScreenPoint(camera, (corners[1] + corners[2]) * 0.5f);
-        Vector2 bottom = RectTransformUtility.WorldToScreenPoint(camera, (corners[0] + corners[3]) * 0.5f);
+        Vector3 top = canvasRect.InverseTransformPoint((corners[1] + corners[2]) * 0.5f);
+        Vector3 bottom = canvasRect.InverseTransformPoint((corners[0] + corners[3]) * 0.5f);
         float width = rect.rect.width;
         float height = rect.rect.height;
         float y = top.y + height * 0.5f + margin;
-        if (top.y + height + margin > Screen.height) y = bottom.y - height * 0.5f - margin;
-        Vector2 screenPoint = new Vector2(
-            Mathf.Clamp(top.x, width * 0.5f + margin, Screen.width - width * 0.5f - margin),
-            Mathf.Clamp(y, height * 0.5f + margin, Screen.height - height * 0.5f - margin));
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, camera, out Vector2 local))
-            rect.anchoredPosition = local;
+        Rect area = canvasRect.rect;
+        if (top.y + height + margin > area.yMax) y = bottom.y - height * 0.5f - margin;
+        rect.localPosition = new Vector3(
+            Mathf.Clamp(top.x, area.xMin + width * 0.5f + 8f, area.xMax - width * 0.5f - 8f),
+            Mathf.Clamp(y, area.yMin + height * 0.5f + 8f, area.yMax - height * 0.5f - 8f), 0);
     }
 }

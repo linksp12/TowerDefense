@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: 90b1f2340d123a947912a8b069a43b4b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4999260129619779106
+    second: FireAim_0
+  - first:
+      213: -1122183296443917562
+    second: FireAim_1
+  - first:
+      213: -3338933227901523026
+    second: FireAim_2
+  - first:
+      213: 3082281144729150030
+    second: FireAim_3
+  - first:
+      213: -102148182605249144
+    second: FireAim_4
+  - first:
+      213: 367510242681658833
+    second: FireAim_5
+  - first:
+      213: 8142360016951566936
+    second: FireAim_6
+  - first:
+      213: -8315328909590702274
+    second: FireAim_7
+  - first:
+      213: -5470626798663132661
+    second: FireAim_8
+  - first:
+      213: 8919866084224640653
+    second: FireAim_9
+  - first:
+      213: 1433560144747871739
+    second: FireAim_10
+  - first:
+      213: 7770809051001097204
+    second: FireAim_11
+  - first:
+      213: -227943581159057417
+    second: FireAim_12
+  - first:
+      213: -5395325999718073091
+    second: FireAim_13
+  - first:
+      213: 7227428466367097877
+    second: FireAim_14
+  - first:
+      213: -8854273985232940611
+    second: FireAim_15
+  - first:
+      213: -2397322056090319063
+    second: FireAim_16
+  - first:
+      213: 5663956607824615260
+    second: FireAim_17
+  - first:
+      213: 8164673176814753377
+    second: FireAim_18
+  - first:
+      213: 8175676000297537051
+    second: FireAim_19
+  - first:
+      213: -8428164330375204174
+    second: FireAim_20
+  - first:
+      213: 3189292620138801979
+    second: FireAim_21
+  - first:
+      213: 153225956565143516
+    second: FireAim_22
+  - first:
+      213: -5411373131696593488
+    second: FireAim_23
+  - first:
+      213: -8064912523321987845
+    second: FireAim_24
+  - first:
+      213: 4424918961126905112
+    second: FireAim_25
+  - first:
+      213: 7052894581889757957
+    second: FireAim_26
+  - first:
+      213: 1291671097137171261
+    second: FireAim_27
+  - first:
+      213: -5829178988821243201
+    second: FireAim_28
+  - first:
+      213: 2571983240513989688
+    second: FireAim_29
+  - first:
+      213: 2559420649313766890
+    second: FireAim_30
+  - first:
+      213: -6817028682608690430
+    second: FireAim_31
+  - first:
+      213: -8277277225494126089
+    second: FireAim_32
+  - first:
+      213: -480807734255949707
+    second: FireAim_33
+  - first:
+      213: 7108884567399615765
+    second: FireAim_34
+  - first:
+      213: -7383381938844553404
+    second: FireAim_35
+  - first:
+      213: 1919115953381249184
+    second: FireAim_36
+  - first:
+      213: 8296260065462846838
+    second: FireAim_37
+  - first:
+      213: -3183990217883687631
+    second: FireAim_38
+  - first:
+      213: 4790780814910919799
+    second: FireAim_39
+  - first:
+      213: -2789436912840022781
+    second: FireAim_40
+  - first:
+      213: -616173922725218281
+    second: FireAim_41
+  - first:
+      213: -4380742162301665011
+    second: FireAim_42
+  - first:
+      213: 7726666868835436520
+    second: FireAim_43
+  - first:
+      213: 1793404254183826742
+    second: FireAim_44
+  - first:
+      213: 7251750837650963696
+    second: FireAim_45
+  - first:
+      213: 2691390900584300994
+    second: FireAim_46
+  - first:
+      213: -4311529982324329249
+    second: FireAim_47
+  - first:
+      213: -2489116056165539769
+    second: FireAim_48
+  - first:
+      213: -2350849128576881915
+    second: FireAim_49
+  - first:
+      213: 6293325097061752114
+    second: FireAim_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireAim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1245
+        height: 1248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22e92c5c990f06540800000000000000
+      internalID: 4999260129619779106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_1
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1225
+        width: 19
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b559acc343d60f0800000000000000
+      internalID: -1122183296443917562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_2
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 1205
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab6e2e6be9b9a1d0800000000000000
+      internalID: -3338933227901523026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_3
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 1213
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e422779de5676ca20800000000000000
+      internalID: 3082281144729150030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_4
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 1182
+        width: 6
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 885cc55e4c8159ef0800000000000000
+      internalID: -102148182605249144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_5
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 1189
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd9b5a5e98a91500800000000000000
+      internalID: 367510242681658833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_6
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1197
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852edbb9b497ff070800000000000000
+      internalID: 8142360016951566936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_7
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 1184
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e375f49c9640a9c80800000000000000
+      internalID: -8315328909590702274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_8
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 1093
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0a93f649ed6414b0800000000000000
+      internalID: -5470626798663132661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_9
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 1078
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d86a342b1fab9cb70800000000000000
+      internalID: 8919866084224640653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1026
+        width: 5
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfdbad73b5705e310800000000000000
+      internalID: 1433560144747871739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 923
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fb8f4e09a577db60800000000000000
+      internalID: 7770809051001097204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_12
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 901
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f71f28458e26dcf0800000000000000
+      internalID: -227943581159057417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_13
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 923
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfcff53c693ff15b0800000000000000
+      internalID: -5395325999718073091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_14
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 865
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c6b59c5ebfc4460800000000000000
+      internalID: 7227428466367097877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_15
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 885
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db1553ee8bc4f1580800000000000000
+      internalID: -8854273985232940611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_16
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 825
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9270782aa400bbed0800000000000000
+      internalID: -2397322056090319063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_17
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 784
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57dc90a68a6a9e40800000000000000
+      internalID: 5663956607824615260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_18
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 604
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166143bfefebe4170800000000000000
+      internalID: 8164673176814753377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_19
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 553
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1ecb647106d57170800000000000000
+      internalID: 8175676000297537051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_20
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 552
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b23e532235290b80800000000000000
+      internalID: -8428164330375204174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_21
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 531
+        width: 36
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3be52c8db4a24c20800000000000000
+      internalID: 3189292620138801979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_22
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 513
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf4f67123e502200800000000000000
+      internalID: 153225956565143516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_23
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 473
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b5a122bec0f6e4b0800000000000000
+      internalID: -5411373131696593488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_24
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 359
+        width: 14
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc2bce2acca31090800000000000000
+      internalID: -8064912523321987845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_25
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 351
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8151cd5d958786d30800000000000000
+      internalID: 4424918961126905112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_26
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 180
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 503f0df114ae0e160800000000000000
+      internalID: 7052894581889757957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_27
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 176
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b008fe400fce110800000000000000
+      internalID: 1291671097137171261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_28
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 185
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba932f08989a1fa0800000000000000
+      internalID: -5829178988821243201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_29
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 136
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c281b512581b320800000000000000
+      internalID: 2571983240513989688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_30
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 144
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aed85292583e48320800000000000000
+      internalID: 2559420649313766890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_31
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 144
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20bb575088c0561a0800000000000000
+      internalID: -6817028682608690430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_32
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 119
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f1edf2e734312d80800000000000000
+      internalID: -8277277225494126089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_33
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 30
+        width: 88
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578e962c9e3d359f0800000000000000
+      internalID: -480807734255949707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_34
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 97
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d4c1d79d4d7a260800000000000000
+      internalID: 7108884567399615765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_35
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 65
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44fa226de35f88990800000000000000
+      internalID: -7383381938844553404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_36
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 47
+        width: 53
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a0131caac112aa10800000000000000
+      internalID: 1919115953381249184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_37
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 37
+        width: 19
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6750c26f29c322370800000000000000
+      internalID: 8296260065462846838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_38
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 65
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13569be24c130d3d0800000000000000
+      internalID: -3183990217883687631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_39
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 55
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 774958db4c54c7240800000000000000
+      internalID: 4790780814910919799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_40
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 46
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 305eec628ede949d0800000000000000
+      internalID: -2789436912840022781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_41
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 39
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 718ba18f419e277f0800000000000000
+      internalID: -616173922725218281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_42
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 31
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d01ce6ba63a7433c0800000000000000
+      internalID: -4380742162301665011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_43
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 27
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e747be5492aa3b60800000000000000
+      internalID: 7726666868835436520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_44
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 39
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6352d45daa373e810800000000000000
+      internalID: 1793404254183826742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_45
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 23
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fcb3d527f463a460800000000000000
+      internalID: 7251750837650963696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_46
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 23
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c1cb05b3cdb95520800000000000000
+      internalID: 2691390900584300994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_47
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 23
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4bc15135e5a24c0800000000000000
+      internalID: -4311529982324329249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_48
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 17
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74028838222e47dd0800000000000000
+      internalID: -2489116056165539769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_49
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 15
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b63a24c2b106fd0800000000000000
+      internalID: -2350849128576881915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAim_50
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 15
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23d9a6215d1665750800000000000000
+      internalID: 6293325097061752114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireAim_0: 4999260129619779106
+      FireAim_1: -1122183296443917562
+      FireAim_10: 1433560144747871739
+      FireAim_11: 7770809051001097204
+      FireAim_12: -227943581159057417
+      FireAim_13: -5395325999718073091
+      FireAim_14: 7227428466367097877
+      FireAim_15: -8854273985232940611
+      FireAim_16: -2397322056090319063
+      FireAim_17: 5663956607824615260
+      FireAim_18: 8164673176814753377
+      FireAim_19: 8175676000297537051
+      FireAim_2: -3338933227901523026
+      FireAim_20: -8428164330375204174
+      FireAim_21: 3189292620138801979
+      FireAim_22: 153225956565143516
+      FireAim_23: -5411373131696593488
+      FireAim_24: -8064912523321987845
+      FireAim_25: 4424918961126905112
+      FireAim_26: 7052894581889757957
+      FireAim_27: 1291671097137171261
+      FireAim_28: -5829178988821243201
+      FireAim_29: 2571983240513989688
+      FireAim_3: 3082281144729150030
+      FireAim_30: 2559420649313766890
+      FireAim_31: -6817028682608690430
+      FireAim_32: -8277277225494126089
+      FireAim_33: -480807734255949707
+      FireAim_34: 7108884567399615765
+      FireAim_35: -7383381938844553404
+      FireAim_36: 1919115953381249184
+      FireAim_37: 8296260065462846838
+      FireAim_38: -3183990217883687631
+      FireAim_39: 4790780814910919799
+      FireAim_4: -102148182605249144
+      FireAim_40: -2789436912840022781
+      FireAim_41: -616173922725218281
+      FireAim_42: -4380742162301665011
+      FireAim_43: 7726666868835436520
+      FireAim_44: 1793404254183826742
+      FireAim_45: 7251750837650963696
+      FireAim_46: 2691390900584300994
+      FireAim_47: -4311529982324329249
+      FireAim_48: -2489116056165539769
+      FireAim_49: -2350849128576881915
+      FireAim_5: 367510242681658833
+      FireAim_50: 6293325097061752114
+      FireAim_6: 8142360016951566936
+      FireAim_7: -8315328909590702274
+      FireAim_8: -5470626798663132661
+      FireAim_9: 8919866084224640653
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

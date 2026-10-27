@@ -105,7 +105,7 @@ public class SkillAimController : MonoBehaviour
 
     [Tooltip("몬스터가 범위 안에 있을 때 투명도")]
     [Range(0f, 1f)]
-    public float enemyHighlightAlpha = 0.45f;
+    public float enemyHighlightAlpha = 0.50f;
 
     [Tooltip("밝기 변화 속도")]
     public float highlightSpeed = 8f;

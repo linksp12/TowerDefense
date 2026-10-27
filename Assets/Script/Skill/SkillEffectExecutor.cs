@@ -48,8 +48,8 @@ internal sealed class SkillEffectExecutor
     private void ApplyFire(SkillData skill, Vector3 castPosition, float radius, CastStats stats)
     {
         float duration = stats.Duration;
-        MonsterHealth[] monsters = UnityEngine.Object.FindObjectsByType<MonsterHealth>(
-            FindObjectsInactive.Exclude);
+        List<MonsterHealth> monsters = new List<MonsterHealth>();
+        SkillTargetQuery.Collect(skill, castPosition, radius, monsters, true);
 
         foreach (MonsterHealth monster in monsters)
         {
@@ -58,10 +58,14 @@ internal sealed class SkillEffectExecutor
 
             monster.TakeDamage(stats.Damage, false);
             if (skill.PeriodicDamage > 0 && duration > 0f)
+            {
                 owner.StartCoroutine(ApplyPeriodicDamage(monster, skill, stats));
+                SkillVisuals.AttachStatus(monster, skill, duration);
+            }
         }
 
-        CreateEffect(skill, castPosition, Mathf.Max(1f, duration), skill.EffectScale);
+        if (skill.VisualProfile != null) SkillVisuals.PlayCast(skill, castPosition, radius);
+        else CreateEffect(skill, castPosition, Mathf.Max(1f, duration), skill.EffectScale);
     }
 
     private static IEnumerator ApplyPeriodicDamage(MonsterHealth monster, SkillData skill, CastStats stats)
@@ -85,46 +89,28 @@ internal sealed class SkillEffectExecutor
     private void ApplyIce(SkillData skill, Vector3 castPosition, float radius, CastStats stats)
     {
         float duration = stats.Duration;
-        MonsterMove[] monsters = UnityEngine.Object.FindObjectsByType<MonsterMove>(
-            FindObjectsInactive.Exclude);
-
-        foreach (MonsterMove monster in monsters)
+        List<MonsterHealth> targets = new List<MonsterHealth>();
+        SkillTargetQuery.Collect(skill, castPosition, radius, targets, true);
+        foreach (MonsterHealth health in targets)
         {
-            if (monster == null)
-                continue;
-
-            MonsterHealth health = monster.GetComponent<MonsterHealth>();
-            if (!IsValidTarget(health, castPosition, radius))
-                continue;
-
+            MonsterMove monster = health.GetComponent<MonsterMove>();
             monster.Freeze(duration);
-            CreateAttachedEffect(skill, monster.transform, Mathf.Max(1f, duration));
+            if (skill.VisualProfile != null) SkillVisuals.AttachStatus(health, skill, duration);
+            else CreateAttachedEffect(skill, monster.transform, Mathf.Max(1f, duration));
         }
+        if (skill.VisualProfile != null) SkillVisuals.PlayCast(skill, castPosition, radius);
     }
 
     private void ApplyLightning(SkillData skill, Vector3 castPosition, float radius, CastStats stats)
     {
-        MonsterHealth[] allMonsters = UnityEngine.Object.FindObjectsByType<MonsterHealth>(
-            FindObjectsInactive.Exclude);
         List<MonsterHealth> targets = new List<MonsterHealth>();
-
-        foreach (MonsterHealth monster in allMonsters)
+        SkillTargetQuery.Collect(skill, castPosition, radius, targets, true);
+        foreach (MonsterHealth target in targets)
         {
-            if (IsValidTarget(monster, castPosition, radius))
-                targets.Add(monster);
-        }
-
-        targets.Sort((left, right) =>
-            ((Vector2)(left.transform.position - castPosition)).sqrMagnitude.CompareTo(
-                ((Vector2)(right.transform.position - castPosition)).sqrMagnitude));
-
-        int targetLimit = skill.MaxTargets > 0 ? skill.MaxTargets : targets.Count;
-        int hitCount = Mathf.Min(targetLimit, targets.Count);
-        for (int index = 0; index < hitCount; index++)
-        {
-            MonsterHealth target = targets[index];
+            Vector3 position = target.transform.position;
             target.TakeDamage(stats.Damage, false);
-            CreateEffect(skill, target.transform.position, 1f, skill.EffectScale);
+            if (skill.VisualProfile != null) SkillVisuals.PlayCast(skill, position, radius);
+            else CreateEffect(skill, position, 1f, skill.EffectScale);
         }
     }
 
@@ -140,13 +126,14 @@ internal sealed class SkillEffectExecutor
         }
 
         if (float.IsPositiveInfinity(radius)) radius = skill.Range;
-        GameObject field = skill.EffectPrefab != null
+        GameObject field = skill.VisualProfile == null && skill.EffectPrefab != null
             ? UnityEngine.Object.Instantiate(skill.EffectPrefab, castPosition, Quaternion.identity)
             : new GameObject(skill.DisplayName + " Area");
         field.transform.position = castPosition;
         TowerHasteArea area = field.GetComponent<TowerHasteArea>();
         if (area == null) area = field.AddComponent<TowerHasteArea>();
         area.Initialize(skill, radius, bonus, duration);
+        if (skill.VisualProfile != null) SkillVisuals.PlayCast(skill, castPosition, radius);
         return true;
     }
 

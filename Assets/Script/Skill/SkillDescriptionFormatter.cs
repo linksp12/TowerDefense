@@ -19,6 +19,6 @@ internal static class SkillDescriptionFormatter
         if (periodicDamage > 0)
             details += $"\n지속 피해: {periodicDamage} / {skill.PeriodicInterval:0.##}초";
 
-        return $"<size=28><b>{skill.DisplayName}</b></size>\n\n효과: {description}\n{details}";
+        return $"<size=125%><b>{skill.DisplayName}</b></size>\n\n효과: {description}\n{details}";
     }
 }

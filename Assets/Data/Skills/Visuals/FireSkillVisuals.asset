@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8b638e2b28f0542987d326fb2d9898, type: 3}
+  m_Name: FireSkillVisuals
+  m_EditorClassIdentifier: Assembly-CSharp::SkillVisualProfile
+  castFrames:
+  - {fileID: -628654628, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: -219270034, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: -1238703396, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: 1315295721, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  statusFrames:
+  - {fileID: -1102468169, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: 2073389399, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: -80076586, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: 1183397731, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  targetFrames:
+  - {fileID: 1018339453, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: 1764653112, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: -1144790182, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  - {fileID: 1714475313, guid: 86735cbf7f180544691ef2c787109117, type: 3}
+  castDuration: 0.45
+  statusFps: 7
+  targetFps: 6
+  castDiameterMultiplier: 0.9
+  accent: {r: 1, g: 0.35, b: 0.04, a: 1}
+  silhouetteMaterial: {fileID: 2100000, guid: 7073730d9e4e7824bbf0ee6fe444ca56, type: 2}
