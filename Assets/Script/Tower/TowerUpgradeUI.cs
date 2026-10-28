@@ -70,8 +70,16 @@ public class TowerUpgradeUI : MonoBehaviour
     private TowerUpgrade selectedTower;
     private bool isOpen;
     private Coroutine closeCoroutine;
+    // 도트 디자인 업그레이드 창. 있으면 기존 패널 대신 이 창을 보여 준다.
+    private TowerUpgradePanelUI modernPanel;
 
     public bool IsOpen => isOpen;
+    public bool IsPanelVisible => modernPanel != null
+        ? modernPanel.IsVisible
+        : panel != null && panel.activeInHierarchy;
+    public RectTransform PathATarget => modernPanel != null
+        ? modernPanel.PathATarget
+        : pathAButton != null ? pathAButton.GetComponent<RectTransform>() : null;
 
     void Awake()
     {
@@ -93,6 +101,8 @@ public class TowerUpgradeUI : MonoBehaviour
 
         if (canvas == null)
             canvas = FindFirstObjectByType<Canvas>();
+
+        modernPanel = TowerUpgradePanelUI.Create(this, canvas);
 
         if (panelAnimator != null)
             panelAnimator.HideInstant();
@@ -168,13 +178,21 @@ public class TowerUpgradeUI : MonoBehaviour
 
         isOpen = true;
 
-        if (panel != null)
-            panel.transform.SetAsLastSibling();
-
         if (BossInfoUI.Instance != null)
             BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
 
         selectedTower = tower;
+
+        if (modernPanel != null)
+        {
+            if (UISoundManager.Instance != null)
+                UISoundManager.Instance.PlayOpenPanel();
+            modernPanel.Show(tower);
+            return;
+        }
+
+        if (panel != null)
+            panel.transform.SetAsLastSibling();
 
         MovePanelToTowerPosition();
         Refresh();
@@ -247,6 +265,12 @@ public class TowerUpgradeUI : MonoBehaviour
     void Refresh()
     {
         if (selectedTower == null) return;
+
+        if (modernPanel != null)
+        {
+            modernPanel.Refresh();
+            return;
+        }
 
         if (towerNameText != null)
             towerNameText.text = selectedTower.GetTowerName() + "  Lv." + selectedTower.level;
@@ -411,6 +435,13 @@ public class TowerUpgradeUI : MonoBehaviour
             tooltipUI.Hide();
     }
 
+    // 도트 업그레이드 창 버튼·단축키가 쓰는 입구(처리는 기존 버튼과 같다)
+    public void ChoosePathA() => OnClickPathA();
+    public void ChoosePathB() => OnClickPathB();
+    public void ChooseFinalUpgrade() => OnClickFinalPath();
+    public void SellSelected() => OnClickSell();
+    public void CloseFromPanel() => OnClickClose();
+
     void OnClickPathA()
     {
         if (selectedTower == null) return;
@@ -512,7 +543,9 @@ public class TowerUpgradeUI : MonoBehaviour
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayFail();
 
-        if (panelShake != null)
+        if (modernPanel != null)
+            modernPanel.Shake();
+        else if (panelShake != null)
             panelShake.PlayShake();
     }
 
@@ -523,7 +556,9 @@ public class TowerUpgradeUI : MonoBehaviour
 
         HideTooltip();
 
-        if (panelAnimator != null)
+        if (modernPanel != null)
+            modernPanel.Hide();
+        else if (panelAnimator != null)
             panelAnimator.Hide();
         else if (panel != null)
             panel.SetActive(false);
@@ -545,6 +580,9 @@ public class TowerUpgradeUI : MonoBehaviour
             StopCoroutine(closeCoroutine);
             closeCoroutine = null;
         }
+
+        if (modernPanel != null)
+            modernPanel.Hide();
 
         if (panelAnimator != null)
             panelAnimator.HideInstant();

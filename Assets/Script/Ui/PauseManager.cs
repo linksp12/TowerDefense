@@ -20,6 +20,8 @@ public class PauseManager : MonoBehaviour
     private const float PauseBoxHeightWithPlaza = 500f;
 
     private bool isPaused = false;
+    // 도트 디자인 일시정지 창. 있으면 기존 패널 대신 이 창을 보여 준다.
+    private PauseMenuUI pauseMenu;
 
     void Awake()
     {
@@ -34,6 +36,7 @@ public class PauseManager : MonoBehaviour
         FindPauseButtons();
         ConfigurePauseVisual();
         pausePanel.SetActive(false);
+        pauseMenu = PauseMenuUI.Create(this, pausePanel.GetComponentInParent<Canvas>(true));
 
         if (resumeButton != null)
             resumeButton.onClick.AddListener(ResumeGame);
@@ -119,6 +122,12 @@ public class PauseManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // 그만두기 확인 중이면 확인창만 닫는다.
+            if (isPaused && pauseMenu != null && pauseMenu.IsConfirming)
+            {
+                pauseMenu.CancelConfirm();
+                return;
+            }
             if (isPaused) ResumeGame();
             else PauseGame();
         }
@@ -131,6 +140,11 @@ public class PauseManager : MonoBehaviour
 
         DamagePopup.HideAll();
         CloseGameplayPanels();
+        if (pauseMenu != null)
+        {
+            pauseMenu.Show();
+            return;
+        }
         pausePanel.SetActive(true);
         pausePanel.transform.SetAsLastSibling();
     }
@@ -192,6 +206,8 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         GameSpeedController.ResumeSelectedSpeed();
         pausePanel.SetActive(false);
+        if (pauseMenu != null)
+            pauseMenu.Hide();
     }
 
     // 결과창을 띄울 때 일시정지 창만 닫는다. 시간 배율은 결과 처리 쪽이 정한다.
@@ -200,20 +216,25 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         if (pausePanel != null)
             pausePanel.SetActive(false);
+        if (pauseMenu != null)
+            pauseMenu.Hide();
     }
 
+    // 다시하기·메인으로도 광장으로와 같은 로딩 화면을 쓴다(시간 배율은 로딩 화면이 1로 돌린다).
     public void RestartGame()
     {
-        isPaused = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (SceneLoadingScreen.IsLoading)
+            return;
+        if (SceneLoadingScreen.TryLoad(SceneManager.GetActiveScene().name, "전장을 다시 준비하고 있습니다"))
+            isPaused = false;
     }
 
     public void GoToMainMenu()
     {
-        isPaused = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainScene");
+        if (SceneLoadingScreen.IsLoading)
+            return;
+        if (SceneLoadingScreen.TryLoad("MainScene", "메인 화면으로 이동 중"))
+            isPaused = false;
     }
 
     // 전투를 그만두고 광장으로 돌아간다. 결과창의 "광장으로"와 같은 로딩 화면을 쓴다.

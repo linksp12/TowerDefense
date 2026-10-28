@@ -147,7 +147,8 @@ public class Stage1TutorialManager : MonoBehaviour
         {
             step = TutorialStep.BowCard;
             tutorialRoot.transform.SetAsLastSibling();
-            ShowTargetCallout(bowTowerCard.GetComponent<RectTransform>(),
+            RectTransform bowTarget = towerBuildManager.GetBuildSlotRect(towerBuildManager.basicTowerPrefab);
+            ShowTargetCallout(bowTarget != null ? bowTarget : bowTowerCard.GetComponent<RectTransform>(),
                 "화살 타워를 선택해 설치해보세요.\n이 타워는 빠르게 공격합니다.");
         }
         else if (step == TutorialStep.BowCard)
@@ -171,7 +172,7 @@ public class Stage1TutorialManager : MonoBehaviour
 
             step = TutorialStep.UpgradePanel;
             tutorialRoot.transform.SetAsLastSibling();
-            ShowTargetCallout(TowerUpgradeUI.Instance.pathAButton.GetComponent<RectTransform>(),
+            ShowTargetCallout(TowerUpgradeUI.Instance.PathATarget,
                 "업그레이드 루트를 선택해보세요.\n강화하거나 창을 닫으면 다음으로 넘어가요.");
         }
         else if (step == TutorialStep.UpgradePanel &&
@@ -185,6 +186,8 @@ public class Stage1TutorialManager : MonoBehaviour
     private bool EnsureUpgradePanelVisible()
     {
         TowerUpgradeUI upgradeUI = TowerUpgradeUI.Instance;
+        if (upgradeUI != null && upgradeUI.IsPanelVisible)
+            return true;
         if (upgradeUI == null || upgradeUI.panel == null || installedTower == null)
             return false;
 

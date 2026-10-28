@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         : 15;
 
     private int currentPlayerHp;
+    public int CurrentPlayerHp => currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;
     public AudioSource audioSource;
