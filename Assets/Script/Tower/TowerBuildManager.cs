@@ -255,6 +255,9 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         selectedBuildPoint.BuildTower(towerPrefab);
+        if (GameManager.Instance != null)
+            GameManager.Instance.ChallengeStats.RecordBuild(
+                towerPrefab.GetComponent<TowerAttack>().towerData.id, TowerAttack.ActiveTowers.Count);
 
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayBuildSuccess();

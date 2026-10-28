@@ -524,11 +524,7 @@ public class BossInfoUI : MonoBehaviour
         if (portraitImage != null && (registeredBosses.Count == 1 || portraitImage.sprite == null))
             portraitImage.sprite = boss.bossPortrait;
 
-        if (defenseText != null)
-            defenseText.text = "방어력 : " + boss.defense;
-
-        if (magicResistanceText != null)
-            magicResistanceText.text = "마법 저항 : " + boss.magicResistance;
+        ShowDamageTaken(boss);
 
         UpdateCombinedTopHP();
     }
@@ -631,18 +627,9 @@ public class BossInfoUI : MonoBehaviour
         }
 
 
-        if (defenseText != null)
-        {
-            defenseText.text =
-                "방어력 : " + boss.defense;
-        }
+        ShowDamageTaken(boss);
 
 
-        if (magicResistanceText != null)
-        {
-            magicResistanceText.text =
-                "마법 저항 : " + boss.magicResistance;
-        }
 
 
         // =====================================================
@@ -990,5 +977,16 @@ public class BossInfoUI : MonoBehaviour
         {
             topBossHPPanel.SetActive(false);
         }
+    }
+
+    // 실제 전투 규칙(방어 특성)대로 받는 피해 비율을 보여 준다.
+    private void ShowDamageTaken(MonsterHealth boss)
+    {
+        int physical = Mathf.RoundToInt(100f * (ArmorRules.Resists(boss.ArmorTrait, DamageKind.Physical) ? 1f - ArmorRules.Reduction : 1f));
+        int magic = Mathf.RoundToInt(100f * (ArmorRules.Resists(boss.ArmorTrait, DamageKind.Magic) ? 1f - ArmorRules.Reduction : 1f));
+        if (defenseText != null)
+            defenseText.text = $"물리 피해 {physical}%";
+        if (magicResistanceText != null)
+            magicResistanceText.text = $"마법 피해 {magic}%";
     }
 }

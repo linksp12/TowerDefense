@@ -40,7 +40,14 @@ public class QuestManager : MonoBehaviour
 
     public bool AcceptQuest(string questId)
     {
-        if (!CanSave || FindQuest(questId) == null || GetState(questId) != QuestState.None)
+        QuestData quest = FindQuest(questId);
+        if (!CanSave || quest == null || GetState(questId) != QuestState.None)
+            return false;
+
+        // 대상 스테이지가 잠겨 있으면 수락할 수 없다.
+        var progress = new StageProgressService(new PlayerPrefsStageProgressStorage());
+        progress.Load();
+        if (!StageIds.IsUnlocked(progress, quest.targetStageId))
             return false;
 
         states[questId] = QuestState.InProgress;
@@ -54,35 +61,111 @@ public class QuestManager : MonoBehaviour
         return true;
     }
 
-    // 한 전투의 확정 결과를 한 번 전달받는다. 수락한 퀘스트만, 승리일 때만 달성으로 바꾼다.
-    public void OnBattleResult(BattleResult result)
+    /// <summary>방금 끝난 전투의 도전 과제 결과(결과창 표시용, 저장하지 않음).</summary>
+    public sealed class ChallengeReport
     {
-        if (!CanSave || result == null || !result.IsVictory)
+        public string StageId;
+        public readonly List<QuestData> Challenges = new List<QuestData>();
+        public readonly List<bool> AchievedNow = new List<bool>();
+        public readonly List<bool> NewlyEarned = new List<bool>();
+        public int PointsGained;
+    }
+
+    public ChallengeReport LastChallengeReport { get; private set; }
+
+    public void OnBattleResult(BattleResult result) => OnBattleResult(result, null);
+
+    // 한 전투의 확정 결과를 한 번 전달받는다.
+    // 게시판 퀘스트: 수락한 것만, 조건을 모두 만족하면 달성(보상은 게시판에서 받기).
+    // 스테이지 도전 과제: 수락 없이, 처음 만족하면 바로 별과 보상 포인트.
+    public void OnBattleResult(BattleResult result, BattleChallengeStats stats)
+    {
+        if (result == null)
+            return;
+
+        var report = new ChallengeReport { StageId = result.StageId };
+        foreach (QuestData challenge in ChallengesFor(result.StageId))
+        {
+            bool met = challenge.IsMetBy(result, stats);
+            report.Challenges.Add(challenge);
+            report.AchievedNow.Add(met);
+            report.NewlyEarned.Add(false);
+        }
+        LastChallengeReport = report;
+
+        if (!CanSave || !result.IsVictory)
             return;
 
         var completed = new List<string>();
+        var earned = new List<string>();
+        int points = 0;
         foreach (QuestData data in allQuestDatas)
         {
-            if (data == null || data.targetStageId != result.StageId ||
-                GetState(data.questId) != QuestState.InProgress ||
-                result.RemainingBaseHealth < data.minRemainingBaseHealth)
+            if (data == null || !data.IsMetBy(result, stats))
                 continue;
 
-            states[data.questId] = QuestState.Completed;
-            completed.Add(data.questId);
+            QuestState state = GetState(data.questId);
+            if (data.kind == QuestData.QuestKind.StageChallenge)
+            {
+                if (state == QuestState.Rewarded)
+                    continue;
+                states[data.questId] = QuestState.Rewarded;
+                earned.Add(data.questId);
+                points += data.rewardAmount;
+            }
+            else if (state == QuestState.InProgress)
+            {
+                states[data.questId] = QuestState.Completed;
+                completed.Add(data.questId);
+            }
         }
 
-        if (completed.Count == 0)
+        if (completed.Count == 0 && earned.Count == 0)
             return;
 
-        if (!WriteStates(true))
+        // 별 기록과 포인트를 같은 PlayerPrefs.Save로 함께 기록해 중복 지급을 막는다.
+        bool saved = earned.Count > 0
+            ? WriteStates(false) && ResearchProgressStore.AddSkillPoints(points)
+            : WriteStates(true);
+        if (!saved)
         {
             foreach (string questId in completed)
                 states[questId] = QuestState.InProgress;
+            foreach (string questId in earned)
+                states.Remove(questId);
+            WriteStates(true);
             return;
         }
 
+        for (int i = 0; i < report.Challenges.Count; i++)
+            report.NewlyEarned[i] = earned.Contains(report.Challenges[i].questId);
+        report.PointsGained = points;
         StatesChanged?.Invoke();
+    }
+
+    /// <summary>스테이지의 도전 과제(별 순서대로).</summary>
+    public List<QuestData> ChallengesFor(string stageId)
+    {
+        var list = new List<QuestData>();
+        if (allQuestDatas == null)
+            return list;
+        foreach (QuestData data in allQuestDatas)
+            if (data != null && data.kind == QuestData.QuestKind.StageChallenge && data.targetStageId == stageId)
+                list.Add(data);
+        list.Sort((a, b) => a.star.CompareTo(b.star));
+        return list;
+    }
+
+    public bool IsChallengeEarned(QuestData challenge) =>
+        challenge != null && GetState(challenge.questId) == QuestState.Rewarded;
+
+    public int EarnedStars(string stageId)
+    {
+        int stars = 0;
+        foreach (QuestData challenge in ChallengesFor(stageId))
+            if (IsChallengeEarned(challenge))
+                stars++;
+        return stars;
     }
 
     public bool ClaimReward(string questId)

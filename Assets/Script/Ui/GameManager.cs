@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     private Vector3? pendingHitPosition;
     private bool isSceneTransitioning = false;
     private LastOfTheTower.Progression.BattleSession battleSession;
+
+    // 이번 전투의 퀘스트·도전 과제 판정 기록(설치한 타워, 기지 피해)
+    public BattleChallengeStats ChallengeStats { get; } = new BattleChallengeStats();
     private LastOfTheTower.Progression.StageProgressService stageProgress;
 
     private void Awake()
@@ -148,6 +151,8 @@ public class GameManager : MonoBehaviour
     {
         if (isGameEnded) return;
 
+        if (damage > 0)
+            ChallengeStats.RecordBaseDamage();
         currentPlayerHp -= damage;
 
         if (currentPlayerHp < 0)
@@ -247,7 +252,7 @@ public class GameManager : MonoBehaviour
 
             // 같은 확정 결과(스테이지·승패·남은 체력)를 퀘스트 판정에 한 번만 전달한다.
             if (QuestManager.Instance != null)
-                QuestManager.Instance.OnBattleResult(result);
+                QuestManager.Instance.OnBattleResult(result, ChallengeStats);
         }
 
         Debug.Log(victory ? "게임 클리어" : "게임 오버");

@@ -197,16 +197,137 @@ public class QuestUI : MonoBehaviour
         if (manager == null || manager.Quests == null || questSlotPrefab == null || questSlotParent == null)
             return;
 
+        EnsureScroll();
+
+        // 대상 스테이지가 아직 잠겨 있으면 의뢰도 잠근다(스테이지가 열리면 바로 수락 가능).
+        var progress = new LastOfTheTower.Progression.StageProgressService(
+            new LastOfTheTower.Progression.PlayerPrefsStageProgressStorage());
+        progress.Load();
+
+        // 받을 보상 → 수락 가능 → 진행 중 → 잠김 → 완료 순으로 보여 준다.
+        var entries = new System.Collections.Generic.List<(QuestData data, QuestState state, bool locked, int order)>();
+        int index = 0;
         foreach (QuestData data in manager.Quests)
         {
-            if (data == null)
+            // 스테이지 도전 과제(별)는 스테이지 선택·결과창에서 보여 주므로 게시판에는 넣지 않는다.
+            if (data == null || data.kind != QuestData.QuestKind.Board)
                 continue;
+            QuestState state = manager.GetState(data.questId);
+            bool locked = state == QuestState.None &&
+                !LastOfTheTower.Progression.StageIds.IsUnlocked(progress, data.targetStageId);
+            entries.Add((data, state, locked, index++));
+        }
+        int Rank((QuestData data, QuestState state, bool locked, int order) e) =>
+            e.state == QuestState.Completed ? 0 : e.locked ? 3 : e.state == QuestState.None ? 1 :
+            e.state == QuestState.InProgress ? 2 : 4;
+        entries.Sort((a, b) => Rank(a) != Rank(b) ? Rank(a).CompareTo(Rank(b)) : a.order.CompareTo(b.order));
 
+        int claim = 0, inProgress = 0, lockedCount = 0;
+        foreach (var entry in entries)
+        {
             GameObject slotObj = Instantiate(questSlotPrefab, questSlotParent);
             QuestSlotUI slotUI = slotObj.GetComponent<QuestSlotUI>();
             if (slotUI != null)
-                slotUI.Setup(data, manager.GetState(data.questId), manager.CanSave);
+                slotUI.Setup(entry.data, entry.state, manager.CanSave, entry.locked);
+            if (entry.state == QuestState.Completed) claim++;
+            else if (entry.state == QuestState.InProgress) inProgress++;
+            else if (entry.locked) lockedCount++;
         }
+
+        if (noticeText != null && manager.CanSave)
+        {
+            noticeText.richText = true;
+            noticeText.text = "원하는 의뢰를 골라 수락하고, 전투에서 조건을 달성하세요.    " +
+                $"<color=#8FE3A8>받을 보상 {claim}</color>  ·  <color=#9FD8FF>진행 중 {inProgress}</color>  ·  " +
+                $"<color=#A9A39A>잠김 {lockedCount}</color>";
+        }
+    }
+
+    // 의뢰가 칸보다 많으면 마우스 휠로 넘겨 볼 수 있게, 목록 칸을 한 번만 스크롤 영역으로 감싼다.
+    private bool scrollReady;
+
+    private void EnsureScroll()
+    {
+        if (scrollReady || !(questSlotParent is RectTransform content))
+            return;
+        scrollReady = true;
+        var viewportObject = new GameObject("QuestScroll", typeof(RectTransform), typeof(UnityEngine.UI.RectMask2D),
+            typeof(UnityEngine.UI.ScrollRect), typeof(UnityEngine.UI.Image));
+        viewportObject.layer = content.gameObject.layer;
+        var viewport = (RectTransform)viewportObject.transform;
+        viewport.SetParent(content.parent, false);
+        viewport.SetSiblingIndex(content.GetSiblingIndex());
+        viewport.anchorMin = content.anchorMin;
+        viewport.anchorMax = content.anchorMax;
+        viewport.pivot = content.pivot;
+        viewport.anchoredPosition = content.anchoredPosition;
+        viewport.sizeDelta = content.sizeDelta;
+        // 휠 입력을 받으려면 그림이 있어야 해서 투명 그림을 깐다.
+        viewportObject.GetComponent<UnityEngine.UI.Image>().color = new Color(0f, 0f, 0f, 0f);
+
+        content.SetParent(viewport, false);
+        content.anchorMin = new Vector2(0f, 1f);
+        content.anchorMax = new Vector2(1f, 1f);
+        content.pivot = new Vector2(0.5f, 1f);
+        content.anchoredPosition = Vector2.zero;
+        content.sizeDelta = new Vector2(0f, content.sizeDelta.y);
+        var fitter = content.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();
+        fitter.verticalFit = UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
+
+        var scroll = viewportObject.GetComponent<UnityEngine.UI.ScrollRect>();
+        scroll.content = content;
+        scroll.viewport = viewport;
+        scroll.horizontal = false;
+        scroll.vertical = true;
+        scroll.movementType = UnityEngine.UI.ScrollRect.MovementType.Clamped;
+        scroll.scrollSensitivity = 40f;
+
+        // 목록 오른쪽 도트 스크롤바(넘칠 때만 보임)
+        var barObject = new GameObject("QuestScrollbar", typeof(RectTransform), typeof(UnityEngine.UI.Image),
+            typeof(UnityEngine.UI.Scrollbar));
+        barObject.layer = viewport.gameObject.layer;
+        var bar = (RectTransform)barObject.transform;
+        bar.SetParent(viewport.parent, false);
+        // 목록 영역 오른쪽 바깥에 같은 높이로(부모 기준 실제 위치로 계산)
+        bar.anchorMin = bar.anchorMax = new Vector2(0.5f, 0.5f);
+        bar.pivot = new Vector2(0f, 0.5f);
+        bar.sizeDelta = new Vector2(24f, viewport.rect.height);
+        bar.localPosition = new Vector3(
+            viewport.localPosition.x + viewport.rect.xMax + 12f,
+            viewport.localPosition.y + viewport.rect.center.y, 0f);
+        var track = barObject.GetComponent<UnityEngine.UI.Image>();
+        track.sprite = TowerPanelArt.Sprite("scroll_track");
+        track.type = UnityEngine.UI.Image.Type.Sliced;
+        track.pixelsPerUnitMultiplier = 1f / TowerPanelArt.Dot;
+
+        var slide = new GameObject("SlidingArea", typeof(RectTransform));
+        slide.layer = bar.gameObject.layer;
+        var slideRect = (RectTransform)slide.transform;
+        slideRect.SetParent(bar, false);
+        slideRect.anchorMin = Vector2.zero;
+        slideRect.anchorMax = Vector2.one;
+        slideRect.offsetMin = new Vector2(3f, 3f);
+        slideRect.offsetMax = new Vector2(-3f, -3f);
+        var handleObject = new GameObject("Handle", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+        handleObject.layer = bar.gameObject.layer;
+        var handleRect = (RectTransform)handleObject.transform;
+        handleRect.SetParent(slideRect, false);
+        handleRect.offsetMin = handleRect.offsetMax = Vector2.zero;
+        var handle = handleObject.GetComponent<UnityEngine.UI.Image>();
+        handle.sprite = TowerPanelArt.Sprite("scroll_handle");
+        handle.type = UnityEngine.UI.Image.Type.Sliced;
+        handle.pixelsPerUnitMultiplier = 1f / TowerPanelArt.Dot;
+
+        var scrollbar = barObject.GetComponent<UnityEngine.UI.Scrollbar>();
+        scrollbar.handleRect = handleRect;
+        scrollbar.targetGraphic = handle;
+        scrollbar.direction = UnityEngine.UI.Scrollbar.Direction.BottomToTop;
+        var colors = scrollbar.colors;
+        colors.highlightedColor = new Color(1f, 0.95f, 0.8f, 1f);
+        colors.pressedColor = new Color(0.85f, 0.75f, 0.55f, 1f);
+        scrollbar.colors = colors;
+        scroll.verticalScrollbar = scrollbar;
+        scroll.verticalScrollbarVisibility = UnityEngine.UI.ScrollRect.ScrollbarVisibility.AutoHide;
     }
 
     private void ClearQuestList()
