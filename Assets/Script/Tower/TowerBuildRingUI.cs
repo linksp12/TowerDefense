@@ -53,6 +53,7 @@ public sealed class TowerBuildRingUI : MonoBehaviour
     private Image chipIcon;
     private TextMeshProUGUI chipText;
     private readonly TextMeshProUGUI[] statValues = new TextMeshProUGUI[3];
+    private TextMeshProUGUI damageLabel;
     private readonly Image[] statBars = new Image[3];
     private readonly TextMeshProUGUI[] routeTexts = new TextMeshProUGUI[2];
     private TextMeshProUGUI hintKey;
@@ -156,8 +157,10 @@ public sealed class TowerBuildRingUI : MonoBehaviour
         {
             float y = 32f + i * 22f;
             TowerPanelArt.Image("StatIcon", card, icons[i], 10f, y);
-            TowerPanelArt.Text("StatLabel", card, 22f, y - 1f, 50f, 11f, 17f, TowerPanelArt.Muted, TextAlignmentOptions.Left)
-                .text = labels[i];
+            var statLabel = TowerPanelArt.Text("StatLabel", card, 22f, y - 1f, 50f, 11f, 17f, TowerPanelArt.Muted, TextAlignmentOptions.Left);
+            statLabel.text = labels[i];
+            if (i == 0)
+                damageLabel = statLabel;
             statValues[i] = TowerPanelArt.Text("StatValue", card, 60f, y - 1f, 50f, 11f, 19f, TowerPanelArt.Ivory, TextAlignmentOptions.Right);
             TowerPanelArt.Image("BarFrame", card, "bar_frame", 10f, y + 11f);
             statBars[i] = TowerPanelArt.Image("BarFill", card, fills[i], 11f, y + 12f);
@@ -335,6 +338,7 @@ public sealed class TowerBuildRingUI : MonoBehaviour
         float cooldown = slot.tower.BaseAttackCooldown;
         float range = slot.tower.BaseAttackRange;
         statValues[0].text = damage.ToString();
+        damageLabel.text = data.damageKind == DamageKind.Magic ? "마법 공격력" : "물리 공격력";
         statValues[1].text = cooldown.ToString("0.##") + "초";
         statValues[2].text = range.ToString("0.#");
         statBars[0].fillAmount = damage / maxDamage;

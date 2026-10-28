@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: laser_tower
   element: 1
+  detectsStealth: 0
+  damageKind: 1
+  defaultTargetPriority: 0
   attackFeel: 0
   towerName: "\uB808\uC774\uC800 \uD0C0\uC6CC"
   description: "\uC911\uC7A5\uAC70\uB9AC \xB7 \uAC19\uC740 \uC801\uC744 \uACC4\uC18D

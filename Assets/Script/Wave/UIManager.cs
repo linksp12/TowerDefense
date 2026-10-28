@@ -49,6 +49,8 @@ public class UIManager : MonoBehaviour
         if (waveText != null && waveManager != null)
         {
             waveText.text = $" 0 / {waveManager.TotalWaves}";
+            // 다음 웨이브 미리보기·앞당기기
+            WavePreviewUI.Create(waveManager, waveText.canvas);
         }
     }
 
@@ -128,6 +130,12 @@ public class UIManager : MonoBehaviour
         bannerRoutine = null;
         if (waveBanner != null)
             waveBanner.gameObject.SetActive(false);
+    }
+
+    // 맵 기믹(용암 분출·눈보라) 안내
+    public void ShowHazardBanner(string title, string subtitle)
+    {
+        ShowBanner(title, subtitle, title);
     }
 
     // 보스 등장 알림 (BossInfoUI에서 첫 보스 등록 시 호출)

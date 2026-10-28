@@ -75,6 +75,7 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
     private RouteCard cardWide;
     private GameObject middleGem;
     private TextMeshProUGUI sellText;
+    private TextMeshProUGUI targetText;
 
     public bool IsVisible => open && root != null && root.gameObject.activeInHierarchy;
     public RectTransform PathATarget => mode == Mode.TwoPath ? cardA.rect : cardWide.rect;
@@ -137,9 +138,15 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
         cardB.buttonComponent.onClick.AddListener(() => owner.ChoosePathB());
         cardWide.buttonComponent.onClick.AddListener(() => owner.ChooseFinalUpgrade());
 
-        TowerPanelArt.Image("RangeIcon", panel, "icon_target", 14f, Height - 20f);
-        TowerPanelArt.Text("Hint", panel, 26f, Height - 21f, 120f, 11f, 17f, TowerPanelArt.Muted, TextAlignmentOptions.Left)
-            .text = "사거리 표시 · 빈 곳/우클릭 닫기";
+        // 공격 대상 고르기(누를 때마다 선두 → 후미 → 강한 적 → 가까운 적, E 키)
+        var target = TowerPanelArt.Image("Target", panel, "btn_target", 12f, Height - 23f);
+        TowerPanelArt.MakeButton(target).onClick.AddListener(CycleTarget);
+        TowerPanelArt.Image("Icon", target.transform, "icon_target", 5f, 3f);
+        targetText = TowerPanelArt.Text("Text", target.transform, 16f, 0f, 78f, 15f, 17f, TowerPanelArt.Ivory, TextAlignmentOptions.Left);
+        targetText.richText = true;
+        var targetKey = TowerPanelArt.Image("Key", target.transform, "keycap", 88f, -4f);
+        TowerPanelArt.Text("KeyText", targetKey.transform, 0f, 0f, 11f, 10f, 17f, TowerPanelArt.KeyInk,
+            TextAlignmentOptions.Center, false).text = "E";
         var sell = TowerPanelArt.Image("Sell", panel, "btn_red", Width - 72f, Height - 23f);
         TowerPanelArt.MakeButton(sell).onClick.AddListener(() => owner.SellSelected());
         TowerPanelArt.Image("Coin", sell.transform, "icon_coin", 6f, 3f);
@@ -325,7 +332,8 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
         levelText.text = $"Lv.{tower.level} / {tower.maxLevel}";
 
         int damage = attack.GetDisplayDamage(attack.damage);
-        stats[0].text = Stat("공격력", damage.ToString());
+        stats[0].text = Stat(attack.DamageKind == DamageKind.Magic ? "마법" : "물리", damage.ToString());
+        RefreshTargetText();
         stats[1].text = Stat("간격", attack.attackCooldown.ToString("0.##") + "초");
         stats[2].text = Stat("사거리", attack.attackRange.ToString("0.#"));
         bool fire = attack.Element == ElementType.Fire;
@@ -372,6 +380,19 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
         sellText.text = $"판매  {tower.GetSellPrice()} G";
         UpdateRangePreview();
     }
+
+    private void CycleTarget()
+    {
+        if (!open || attack == null)
+            return;
+        attack.targetPriority = (TargetPriority)(((int)attack.targetPriority + 1) % 4);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonClick();
+        RefreshTargetText();
+    }
+
+    private void RefreshTargetText() =>
+        targetText.text = $"<color=#C4B092>공격 대상</color>  {TowerTargeting.Label(attack.targetPriority)}";
 
     private static string Stat(string label, string value) => $"<color=#C4B092>{label}</color> {value}";
 
@@ -498,6 +519,8 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
             owner.ChoosePathB();
             return;
         }
+        if (Input.GetKeyDown(KeyCode.E))
+            CycleTarget();
         if (Input.GetMouseButtonDown(1))
         {
             owner.CloseFromPanel();

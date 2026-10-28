@@ -80,6 +80,74 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(RunWaves());
     }
 
+    // ───────── 다음 웨이브 미리보기·앞당기기 ─────────
+    public enum WavePhase { NotStarted, Waiting, Spawning, Fighting, Finished }
+
+    [Header("웨이브 앞당기기")]
+    [Tooltip("앞당겨 부를 때 다음 웨이브 처치 골드의 이 비율만큼 바로 준다")]
+    [Range(0f, 1f)] public float earlyCallBonusRate = 0.15f;
+
+    public WavePhase Phase { get; private set; } = WavePhase.NotStarted;
+    private float waitRemaining;
+    private float waitTotal;
+    private bool earlyCallRequested;
+
+    public event System.Action<int> EarlyCalled;
+
+    /// <summary>다음에 나올 웨이브(대기 중이면 곧 시작할 웨이브, 싸우는 중이면 그다음 웨이브).</summary>
+    public WaveData UpcomingWave
+    {
+        get
+        {
+            int index = UpcomingWaveIndex;
+            return index >= 0 && index < waves.Length ? waves[index] : null;
+        }
+    }
+
+    public int UpcomingWaveIndex => Phase == WavePhase.Waiting ? currentWaveIndex
+        : Phase == WavePhase.Fighting || Phase == WavePhase.Spawning ? currentWaveIndex + 1 : -1;
+
+    public float WaitRemaining => Phase == WavePhase.Waiting ? Mathf.Max(0f, waitRemaining) : -1f;
+
+    public bool CanCallEarly => wavesStarted && !IsGameEnded() && !earlyCallRequested &&
+        (Phase == WavePhase.Waiting ||
+         (Phase == WavePhase.Fighting && currentWaveIndex < waves.Length - 1));
+
+    // 싸우는 중에 부르면 전액, 대기 중에 부르면 남은 대기 시간 비율만큼(5골드 단위).
+    public int EarlyCallBonus
+    {
+        get
+        {
+            WaveData wave = UpcomingWave;
+            if (wave == null || wave.spawnInfos == null)
+                return 0;
+            int gold = 0;
+            foreach (WaveData.SpawnInfo info in wave.spawnInfos)
+            {
+                if (info == null || info.monsterPrefab == null) continue;
+                MonsterHealth health = info.monsterPrefab.GetComponent<MonsterHealth>();
+                if (health != null && health.monsterData != null)
+                    gold += health.monsterData.goldReward * info.count;
+            }
+            float ratio = Phase == WavePhase.Waiting && waitTotal > 0f ? Mathf.Clamp01(waitRemaining / waitTotal) : 1f;
+            int bonus = Mathf.RoundToInt(gold * earlyCallBonusRate * ratio / 5f) * 5;
+            return Mathf.Max(5, bonus);
+        }
+    }
+
+    /// <summary>다음 웨이브를 바로 부르고 보너스 골드를 준다.</summary>
+    public bool CallNextWaveEarly()
+    {
+        if (!CanCallEarly)
+            return false;
+        int bonus = EarlyCallBonus;
+        earlyCallRequested = true;
+        if (GameManager.Instance != null && bonus > 0)
+            GameManager.Instance.AddMoney(bonus);
+        EarlyCalled?.Invoke(bonus);
+        return true;
+    }
+
     private IEnumerator RunWaves()
     {
         for (
@@ -104,16 +172,26 @@ public class WaveManager : MonoBehaviour
                 yield break;
             }
 
-            aliveMonsterCount = 0;
+            // 남은 몬스터 수는 웨이브를 겹쳐 부를 수 있어 초기화하지 않는다.
             isSpawningDone = false;
 
-            yield return new WaitForSeconds(
-                wave.waveStartDelay
-            );
+            // 웨이브 사이 대기(앞당기면 바로 시작). 배속·일시정지를 따른다.
+            Phase = WavePhase.Waiting;
+            waitTotal = wave.waveStartDelay + (currentWaveIndex > 0 ? timeBetweenWaves : 0f);
+            waitRemaining = waitTotal;
+            while (waitRemaining > 0f && !earlyCallRequested)
+            {
+                if (IsGameEnded())
+                    yield break;
+                waitRemaining -= Time.deltaTime;
+                yield return null;
+            }
+            earlyCallRequested = false;
 
             if (IsGameEnded())
                 yield break;
 
+            Phase = WavePhase.Spawning;
             onWaveStart?.Invoke(CurrentWave);
 
             Debug.Log(
@@ -141,13 +219,16 @@ public class WaveManager : MonoBehaviour
             }
 
             isSpawningDone = true;
+            Phase = WavePhase.Fighting;
 
             Debug.Log(
                 $"스폰 완료! 남은 몬스터: {aliveMonsterCount}"
             );
 
+            // 다 처치하거나, 다음 웨이브를 앞당겨 부를 때까지
             yield return new WaitUntil(() =>
                 IsGameEnded() ||
+                earlyCallRequested ||
                 (
                     isSpawningDone &&
                     aliveMonsterCount <= 0
@@ -157,20 +238,18 @@ public class WaveManager : MonoBehaviour
             if (IsGameEnded())
                 yield break;
 
+            // 앞당긴 경우 이번 웨이브는 아직 남은 몬스터와 함께 이어서 싸운다.
+            if (earlyCallRequested)
+                continue;
+
             onWaveCleared?.Invoke(CurrentWave);
 
             Debug.Log(
                 $"Wave {CurrentWave} 클리어!"
             );
-
-            if (currentWaveIndex < waves.Length - 1)
-            {
-                yield return new WaitForSeconds(
-                    timeBetweenWaves
-                );
-            }
         }
 
+        Phase = WavePhase.Finished;
         TryGameClear();
     }
 
@@ -220,6 +299,8 @@ public class WaveManager : MonoBehaviour
             if (monsterHealth != null &&
                 monsterHealth.isBoss)
             {
+                TrackBossMusic(monsterHealth);
+
                 if (BossWarningUI.Instance != null)
                     BossWarningUI.Instance.ShowBossWarning();
 
@@ -229,6 +310,35 @@ public class WaveManager : MonoBehaviour
                     );
             }
         }
+    }
+
+    // ───────── 보스전 곡: 보스가 나오면 바꾸고, 모두 쓰러지면 전투곡으로 ─────────
+    private readonly System.Collections.Generic.List<MonsterHealth> livingBosses =
+        new System.Collections.Generic.List<MonsterHealth>();
+    private Coroutine bossMusicRoutine;
+
+    private void TrackBossMusic(MonsterHealth boss)
+    {
+        livingBosses.Add(boss);
+        if (bossMusicRoutine != null)
+            return;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayBossBGM();
+        bossMusicRoutine = StartCoroutine(WatchBosses());
+    }
+
+    private IEnumerator WatchBosses()
+    {
+        while (true)
+        {
+            livingBosses.RemoveAll(boss => boss == null || boss.IsDead);
+            if (livingBosses.Count == 0 || IsGameEnded())
+                break;
+            yield return new WaitForSeconds(0.25f);
+        }
+        bossMusicRoutine = null;
+        if (!IsGameEnded() && AudioManager.Instance != null)
+            AudioManager.Instance.ResumeBattleBGM();
     }
 
     /// <summary>웨이브 도중 분열·소환으로 새로 생긴 몬스터를 남은 몬스터 수에 더합니다.</summary>

@@ -6,6 +6,8 @@ public class StageEnvironment : MonoBehaviour
 {
     [SerializeField] private EnvironmentType environmentType = EnvironmentType.Default;
 
+    public EnvironmentType Type => environmentType;
+
     private void Start()
     {
         if (EnvironmentManager.Instance != null)

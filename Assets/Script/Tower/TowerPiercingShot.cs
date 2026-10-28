@@ -77,6 +77,7 @@ public sealed class TowerPiercingShot : MonoBehaviour
     {
         hit.Add(enemy);
         int amount = Mathf.RoundToInt(damage * (fragment ? 1 : profile.PierceMultiplier(hitCount)));
+        amount = enemy.Resist(amount, DamageKind.Physical);   // 저격은 물리 피해
         bool criticalHit = critical && hitCount == 0;
         hitCount++;
         if (detectStealth) enemy.GetComponent<StealthMonster>()?.Reveal();

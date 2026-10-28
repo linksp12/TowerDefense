@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: SniperTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: sniper_tower
+  element: 0
+  detectsStealth: 0
+  damageKind: 0
+  defaultTargetPriority: 2
   attackFeel: 0
   towerName: "\uC800\uACA9 \uD0C0\uC6CC"
   description: "\uC7A5\uAC70\uB9AC \xB7 \uC9C1\uC120 \uD0C4\uD658\uC774 \uCD5C\uB300

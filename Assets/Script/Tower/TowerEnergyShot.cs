@@ -43,15 +43,15 @@ public sealed class TowerEnergyShot : MonoBehaviour
         // B1도 에너지 폭발을 보여 주지만, 광역 피해는 B2의 설정이 있을 때만 적용한다(폭발 그림도 그 반경까지 커진다).
         CombatFeedback.EnergyBlast(destination, profile.splashRadius > 0 ? profile.splashRadius : 0.8f);
         if (TowerTargeting.CanHit(target, detect))
-            target.TakeDamage(Mathf.RoundToInt(damage * (target.isBoss ? profile.bossDamage : 1)), false);
+            target.TakeDamage(target.Resist(Mathf.RoundToInt(damage * (target.isBoss ? profile.bossDamage : 1)), DamageKind.Magic), false);
         if (profile.splashRadius > 0)
             foreach (var enemy in TowerTargeting.All)
             {
                 if (enemy == target || !TowerTargeting.CanHit(enemy, detect) ||
                     ((Vector2)(enemy.transform.position - destination)).sqrMagnitude >
                     profile.splashRadius * profile.splashRadius) continue;
-                enemy.TakeDamage(Mathf.RoundToInt(damage * profile.splashDamage *
-                    (enemy.isBoss ? profile.bossDamage : 1)), false);
+                enemy.TakeDamage(enemy.Resist(Mathf.RoundToInt(damage * profile.splashDamage *
+                    (enemy.isBoss ? profile.bossDamage : 1)), DamageKind.Magic), false);
             }
         Destroy(gameObject);
     }

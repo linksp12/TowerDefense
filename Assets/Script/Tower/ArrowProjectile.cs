@@ -41,6 +41,14 @@ public class ArrowProjectile : MonoBehaviour
         element = attackElement;
     }
 
+    // 물리(화살·캐논) / 마법(마법 타워). 몬스터 방어 특성에 맞으면 피해가 줄어든다.
+    private DamageKind damageKind = DamageKind.Physical;
+
+    public void SetDamageKind(DamageKind kind)
+    {
+        damageKind = kind;
+    }
+
     public void SetFeel(TowerData.AttackFeel attackFeel)
     {
         feel = attackFeel;
@@ -144,7 +152,7 @@ public class ArrowProjectile : MonoBehaviour
 
             // 타격음은 아래 전투 연출에서 공격 종류별로 재생하므로 공용 타격음은 끈다.
             monsterHealth.TakeDamage(
-                EnvironmentManager.ApplyToDamage(damage, element),
+                monsterHealth.Resist(EnvironmentManager.ApplyToDamage(damage, element), damageKind),
                 false,
                 criticalChance,
                 criticalDamageMultiplier
@@ -226,7 +234,7 @@ public class ArrowProjectile : MonoBehaviour
                     int splashDamage = EnvironmentManager.ApplyToDamage(
     Mathf.RoundToInt(damage * splashDamageRate), element);
                     monsterHealth.TakeDamage(
-                        splashDamage,
+                        monsterHealth.Resist(splashDamage, damageKind),
                         false,
                         criticalChance,
                         criticalDamageMultiplier

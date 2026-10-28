@@ -17,7 +17,8 @@ Kevin MacLeod (incompetech.com)
 - Licensed under Creative Commons: By Attribution 4.0 License
 - http://creativecommons.org/licenses/by/4.0/
 
-스토리 배경음 · 새 타워 효과음 · 스토리 효과음
+스토리 · 엔딩 · 설원 전투 · 화산 전투 · 보스전 배경음
+새 타워 효과음 · 스토리 효과음 · 맵 기믹 효과음
 - 팀 자체 제작
 // 출처 확인 필요(확인되면 // 를 지우고 출처·라이선스를 적는다):
 // "Tower of Lava" (메인 화면·엔딩) - 출처 미확인

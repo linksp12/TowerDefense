@@ -62,7 +62,7 @@ internal sealed class TowerSpecialAttack
         timer = Mathf.Min(timer + scaledDelta, Mathf.Max(0.05f, tower.attackCooldown));
         if (profile.mode == TowerAttackMode.ChargedLaser) UpdateCharge();
         if (timer + 0.00001f < tower.attackCooldown) return;
-        var target = TowerTargeting.Nearest(tower);
+        var target = TowerTargeting.Select(tower);
         if (target == null) return; // 완충 상태는 대상이 없어도 유지한다.
         timer = 0;
         if (profile.mode == TowerAttackMode.Sniper) FireSniper(target);
@@ -80,7 +80,7 @@ internal sealed class TowerSpecialAttack
         bool critical = Random.value < tower.criticalChance;
         if (critical) damage = Mathf.RoundToInt(damage * tower.criticalDamageMultiplier);
         Vector2 direction = target.transform.position - tower.ShotOrigin;
-        TowerPiercingShot.Fire(tower.ShotOrigin, direction, damage, profile, tower.attackRange + 2,
+        TowerPiercingShot.Fire(tower.ShotOrigin, direction, damage, profile, tower.EffectiveRange + 2,
             tower.canDetectStealth, critical: critical);
         CombatFeedback.SniperFired(tower.ShotOrigin, critical);
     }
@@ -90,14 +90,14 @@ internal sealed class TowerSpecialAttack
         selected.Clear();
         for (int i = 0; i < Mathf.Max(1, profile.targets); i++)
         {
-            var target = TowerTargeting.Nearest(tower, selected);
+            var target = TowerTargeting.Select(tower, selected);
             if (target == null) break;
             selected.Add(target);
             Vector3 hit = TowerBodyBounds.Of(target.gameObject).center;
             TowerElectricArc.Spawn(EmitterPosition(i, profile.targets), hit);
             CombatFeedback.ShockHit(hit);
             int damage = EnvDamage(tower.damage);
-            target.TakeDamage(damage, false, tower.criticalChance, tower.criticalDamageMultiplier);
+            target.TakeDamage(target.Resist(damage, DamageKind.Magic), false, tower.criticalChance, tower.criticalDamageMultiplier);
             if (target.IsDead) continue;
             target.GetComponent<MonsterMove>()?.ApplyShock(profile.stunDuration,
                 profile.slowReduction, profile.slowDuration);
@@ -128,7 +128,7 @@ internal sealed class TowerSpecialAttack
             Beam beam = beams[i];
             if (beam.Target == null)
             {
-                beam.Target = TowerTargeting.Nearest(tower, selected);
+                beam.Target = TowerTargeting.Select(tower, selected);
                 if (beam.Target != null) { selected.Add(beam.Target); DamageBeam(beam); }
             }
             else
@@ -154,7 +154,7 @@ internal sealed class TowerSpecialAttack
         int damage = Mathf.Min(cap, Mathf.RoundToInt(tower.damage * multiplier));
         if (beam.Target.isBoss) damage = Mathf.RoundToInt(damage * profile.bossDamage);
         Vector3 hit = TowerBodyBounds.Of(beam.Target.gameObject).center;
-        beam.Target.TakeDamage(EnvDamage(damage), false);
+        beam.Target.TakeDamage(beam.Target.Resist(EnvDamage(damage), DamageKind.Magic), false);
         CombatFeedback.LaserTick(hit, BeamStrength(beam));
     }
 

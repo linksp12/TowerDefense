@@ -56,6 +56,23 @@ public class MonsterHealth : MonoBehaviour
     public int CurrentHp => currentHp;
     public bool IsDead => isDead;
 
+    // 타워가 '선두·후미'를 고를 때 길 위 위치를 읽는다.
+    private MonsterMove mover;
+    private bool moverCached;
+    public MonsterMove Mover
+    {
+        get
+        {
+            if (!moverCached) { mover = GetComponent<MonsterMove>(); moverCached = true; }
+            return mover;
+        }
+    }
+
+    public ArmorTrait ArmorTrait => monsterData != null ? monsterData.armorTrait : ArmorTrait.None;
+
+    /// <summary>방어 특성에 맞는 피해 종류면 피해를 줄인다(ArmorRules).</summary>
+    public int Resist(int damage, DamageKind kind) => ArmorRules.Apply(damage, ArmorTrait, kind);
+
     /// <summary>체력이 깎였고 아직 살아 있을 때 호출됩니다. (몬스터, 받은 피해)</summary>
     public event System.Action<MonsterHealth, int> Damaged;
 
@@ -108,12 +125,35 @@ public class MonsterHealth : MonoBehaviour
             BattleUiSkin.ApplyMonsterHpBar(monsterHpSlider);
             monsterHpSlider.maxValue = maxHp;
             monsterHpSlider.value = currentHp;
+            AttachArmorIcon();
         }
 
         if (shieldFXObject != null)
         {
             shieldFXObject.SetActive(currentShield > 0);
         }
+    }
+
+    // 방어 특성이 있으면 체력바 왼쪽에 방패(물리 방어)·룬(마법 저항) 표시를 붙인다.
+    private void AttachArmorIcon()
+    {
+        if (ArmorTrait == ArmorTrait.None)
+            return;
+        Sprite icon = Resources.Load<Sprite>(ArmorTrait == ArmorTrait.Armored
+            ? "UI/TowerPanel/trait_armor" : "UI/TowerPanel/trait_ward");
+        if (icon == null)
+            return;
+        var bar = (RectTransform)monsterHpSlider.transform;
+        var image = new GameObject("ArmorTrait", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+        image.rectTransform.SetParent(bar, false);
+        image.sprite = icon;
+        image.preserveAspect = true;
+        image.raycastTarget = false;
+        float size = bar.rect.height * 2.2f;
+        image.rectTransform.anchorMin = image.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+        image.rectTransform.pivot = new Vector2(1f, 0.5f);
+        image.rectTransform.sizeDelta = new Vector2(size, size);
+        image.rectTransform.anchoredPosition = new Vector2(-bar.rect.height * 0.2f, 0f);
     }
 
     // =========================================================

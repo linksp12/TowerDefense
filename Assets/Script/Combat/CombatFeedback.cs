@@ -244,6 +244,17 @@ public sealed class CombatFeedback : MonoBehaviour
         fx.Shake(settings.bossAppearShake);
     }
 
+    // 맵 기믹: 용암 분출. 반경에 맞춘 큰 폭발과 흔들림(소리는 기믹 쪽에서 낸다).
+    public static void LavaBurst(Vector3 position, float radius)
+    {
+        CombatFeedback fx = Get();
+        if (fx == null)
+            return;
+        fx.Spawn(settings.explosionFx, position, Mathf.Max(0.8f, radius) * settings.explosionFx.scale, false);
+        fx.Spawn(settings.fireHitFx, position + Vector3.up * 0.3f, 1.4f);
+        fx.Shake(settings.explosionShake * 1.3f);
+    }
+
     // 결과창이 뜰 때 남은 연출을 모두 정리한다.
     public static void ClearAll()
     {

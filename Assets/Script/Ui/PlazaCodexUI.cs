@@ -260,6 +260,8 @@ public sealed class PlazaCodexUI : MonoBehaviour
         if (data.isBoss) tags.Add(("보스", new Color(1f, 0.45f, 0.35f)));
         if (data.maxShield > 0) tags.Add(("방어막", new Color(0.55f, 0.8f, 1f)));
         if (entry.stealth) tags.Add(("은신", new Color(0.78f, 0.62f, 1f)));
+        if (data.armorTrait == ArmorTrait.Armored) tags.Add((ArmorRules.TraitName(data.armorTrait), new Color(0.78f, 0.8f, 0.86f)));
+        if (data.armorTrait == ArmorTrait.Warded) tags.Add((ArmorRules.TraitName(data.armorTrait), new Color(0.85f, 0.6f, 1f)));
         Tags(tags, 122f);
         DetailText($"등장 전장  ·  {AppearanceText(entry.appearances)}", new Vector2(460f, tags.Count > 0 ? 78f : 122f),
             new Vector2(420f, 30f), 20f, Muted, TextAlignmentOptions.Left);
@@ -273,8 +275,9 @@ public sealed class PlazaCodexUI : MonoBehaviour
             ("처치 보상", data.goldReward + " G")
         };
         if (data.maxShield > 0) stats.Add(("방어막", data.maxShield + "회 방어"));
-        if (data.isBoss || data.defense > 0) stats.Add(("방어력", data.defense.ToString(CultureInfo.InvariantCulture)));
-        if (data.isBoss || data.magicResistance > 0) stats.Add(("마법 저항", data.magicResistance.ToString(CultureInfo.InvariantCulture)));
+        // 방어 특성: 맞는 종류의 타워 피해가 줄어든다(전투와 같은 규칙).
+        if (data.armorTrait != ArmorTrait.None)
+            stats.Add((ArmorRules.TraitName(data.armorTrait), ArmorRules.ShortDescription(data.armorTrait)));
         Stats(stats, -128f);
     }
 
@@ -284,6 +287,8 @@ public sealed class PlazaCodexUI : MonoBehaviour
         DetailText(data.towerName, new Vector2(460f, 172f), new Vector2(420f, 56f), 38f, Gold, TextAlignmentOptions.Left);
         var effects = data.baseProjectileEffects;
         var tags = new List<(string, Color)>();
+        tags.Add((ArmorRules.KindName(data.damageKind),
+            data.damageKind == DamageKind.Magic ? new Color(0.85f, 0.6f, 1f) : new Color(0.78f, 0.8f, 0.86f)));
         if (data.baseAttack != null)
         {
             if (data.baseAttack.mode == TowerAttackMode.Laser) tags.Add(("대상 고정", new Color(1f, 0.45f, 0.4f)));
@@ -295,7 +300,7 @@ public sealed class PlazaCodexUI : MonoBehaviour
         if (effects.canSlow) tags.Add(("둔화", new Color(0.55f, 0.8f, 1f)));
         if (effects.canDot) tags.Add(("지속 피해", new Color(1f, 0.45f, 0.35f)));
         if (data.detectsStealth) tags.Add(("은신 감지", new Color(0.78f, 0.62f, 1f)));
-        if (tags.Count == 0) tags.Add(("단일 공격", new Color(0.9f, 0.9f, 0.75f)));
+        if (tags.Count == 1) tags.Add(("단일 공격", new Color(0.9f, 0.9f, 0.75f)));
         Tags(tags, 122f);
         DetailText($"건설 비용  ·  {data.buildCost} G", new Vector2(460f, 78f), new Vector2(420f, 30f), 20f, Muted,
             TextAlignmentOptions.Left);

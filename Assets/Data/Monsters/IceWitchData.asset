@@ -19,6 +19,7 @@ MonoBehaviour:
   goldReward: 160
   maxShield: 0
   baseDamage: 1
+  armorTrait: 0
   isBoss: 1
   defense: 60
   magicResistance: 60
