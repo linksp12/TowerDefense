@@ -256,8 +256,13 @@ public class MonsterHealth : MonoBehaviour
                 finalDamage = ward.ModifyDamage(finalDamage);
             }
 
+            int hpBefore = currentHp;
             currentHp -= finalDamage;
             currentHp = Mathf.Max(currentHp, 0);
+
+            // 타워별 피해량(실제로 깎인 체력만, 공격 중인 타워가 있을 때)
+            if (TowerDamageSource.Current is TowerAttack source && GameManager.Instance != null)
+                GameManager.Instance.Record.RecordDamage(source, hpBefore - currentHp);
         }
 
         // =====================================================
@@ -455,7 +460,10 @@ public class MonsterHealth : MonoBehaviour
                 waveManager.OnMonsterKilled();
 
             if (GameManager.Instance != null)
+            {
                 GameManager.Instance.AddMoney(goldReward);
+                GameManager.Instance.Record.RecordKill();
+            }
         }
 
         // 처치 연출: 연기·처치음, 실제 보상이 있을 때만 골드 숫자와 날아가는 동전

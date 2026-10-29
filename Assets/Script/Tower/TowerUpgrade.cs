@@ -46,12 +46,29 @@ public class TowerUpgrade : MonoBehaviour
         ApplyBasicSetting();
     }
 
+    // 황금 외형을 켜고 끄면 서 있는 타워도 바로 바꾼다.
+    private Sprite bodySprite;
+
+    void OnEnable() => TowerSkin.Changed += RefreshSkin;
+    void OnDisable() => TowerSkin.Changed -= RefreshSkin;
+
+    private void SetBodySprite(Sprite sprite)
+    {
+        if (spriteRenderer == null || sprite == null)
+            return;
+        bodySprite = sprite;
+        spriteRenderer.sprite = TowerSkin.Resolve(sprite);
+    }
+
+    private void RefreshSkin()
+    {
+        if (bodySprite != null)
+            SetBodySprite(bodySprite);
+    }
+
     void ApplyBasicSetting()
     {
-        if (spriteRenderer != null && basicTowerSprite != null)
-        {
-            spriteRenderer.sprite = basicTowerSprite;
-        }
+        SetBodySprite(basicTowerSprite);
 
         if (towerAttack != null && basicProjectilePrefab != null)
         {
@@ -283,10 +300,7 @@ public class TowerUpgrade : MonoBehaviour
         GameObject newProjectilePrefab,
         TowerData.ProjectileEffectStats newProjectileEffects)
     {
-        if (spriteRenderer != null && newSprite != null)
-        {
-            spriteRenderer.sprite = newSprite;
-        }
+        SetBodySprite(newSprite);
 
         if (towerAttack != null)
         {
@@ -498,21 +512,21 @@ public class TowerUpgrade : MonoBehaviour
     public Sprite GetFinalUpgradeSprite()
     {
         if (path == UpgradePath.PathA)
-            return pathALv3TowerSprite;
+            return TowerSkin.Resolve(pathALv3TowerSprite);
 
         if (path == UpgradePath.PathB)
-            return pathBLv3TowerSprite;
+            return TowerSkin.Resolve(pathBLv3TowerSprite);
 
         return null;
     }
 
     public Sprite GetPathASprite()
     {
-        return pathALv2TowerSprite;
+        return TowerSkin.Resolve(pathALv2TowerSprite);
     }
 
     public Sprite GetPathBSprite()
     {
-        return pathBLv2TowerSprite;
+        return TowerSkin.Resolve(pathBLv2TowerSprite);
     }
 }

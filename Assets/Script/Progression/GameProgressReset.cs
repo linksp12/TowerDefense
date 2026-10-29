@@ -8,7 +8,7 @@ namespace LastOfTheTower.Progression
     public static class GameProgressReset
     {
         private static readonly string[] ProgressStringKeys =
-            { QuestManager.SaveKey, PlayerPrefsStageProgressStorage.DefaultKey, GameUIManager.SavedStageKey };
+            { QuestManager.SaveKey, PlayerPrefsStageProgressStorage.DefaultKey, GameUIManager.SavedStageKey, PlayRecord.Key };
 
         // 새 게임이 지울 현재 진행 기록(슬롯·옵션 제외)이 하나라도 있는지 확인한다.
         public static bool HasProgress()

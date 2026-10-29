@@ -72,6 +72,8 @@ public sealed class PlazaAmbience : MonoBehaviour
     {
         softCircle = UiFx.SoftCircle;
         pixel = UiFx.Pixel;
+        // 하드코어 완주 기념 장식(기념비·깃발 줄)
+        if (TowerSkin.IsUnlocked) gameObject.AddComponent<PlazaLegendDecor>();
         birdFrames = PixelSprites(BirdArt, 4, new Color32(40, 36, 44, 255));
         butterflyFrames = PixelSprites(ButterflyArt, 3, new Color32(250, 240, 200, 255), new Color32(255, 170, 70, 255));
 

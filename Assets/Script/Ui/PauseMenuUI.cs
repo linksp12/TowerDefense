@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public sealed class PauseMenuUI : MonoBehaviour
 {
     private const float Width = 150f;
-    private const float Height = 182f;
+    private const float Height = 198f;
 
     private enum PendingAction { None, Restart, Plaza, MainMenu }
 
@@ -25,6 +25,10 @@ public sealed class PauseMenuUI : MonoBehaviour
     private TextMeshProUGUI hpText;
     private TextMeshProUGUI goldText;
     private VolumeControl bgm;
+    private Image skinIcon;
+    private Image skinToggle;
+    private TextMeshProUGUI skinLabel;
+    private TextMeshProUGUI skinToggleText;
     private VolumeControl sfx;
     private PendingAction pending;
     private float openedAt;
@@ -84,7 +88,7 @@ public sealed class PauseMenuUI : MonoBehaviour
         panel.anchorMin = panel.anchorMax = panel.pivot = new Vector2(0.5f, 0.5f);
         panel.anchoredPosition = new Vector2(0f, -12f);
 
-        TowerPanelArt.Image("Frame", panel, "pause_frame", 0f, 0f, true);
+        TowerPanelArt.Image("Frame", panel, "pause_frame_tall", 0f, 0f, true);
         TowerPanelArt.Image("Ribbon", panel, "pause_ribbon", 22f, -11f, true);
         TowerPanelArt.Text("Title", panel, 34f, -11f, 104f, 16f, 26f, TowerPanelArt.Ivory, TextAlignmentOptions.Center)
             .text = "일시 정지";
@@ -120,6 +124,20 @@ public sealed class PauseMenuUI : MonoBehaviour
             AudioManager.Instance.SFXVolume = value;
             AudioManager.Instance.UIVolume = value;
         });
+
+        // 황금 타워 외형(하드코어 모두 클리어 시 해금, 켜고 끄기)
+        skinIcon = TowerPanelArt.Image("SkinIcon", panel, "icon_crown", 12f, 177f);
+        skinLabel = TowerPanelArt.Text("SkinLabel", panel, 23f, 175f, 90f, 11f, 16f, TowerPanelArt.Gold, TextAlignmentOptions.Left);
+        skinLabel.richText = true;
+        skinToggle = TowerPanelArt.Image("SkinToggle", panel, "toggle_on", 98f, 174f);
+        TowerPanelArt.MakeButton(skinToggle).onClick.AddListener(() =>
+        {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlayButtonClick();
+            TowerSkin.SetEnabled(!TowerSkin.Enabled);
+            RefreshSkinRow();
+        });
+        skinToggleText = TowerPanelArt.Text("Text", skinToggle.transform, 0f, 0f, 40f, 12f, 16f, TowerPanelArt.Ink,
+            TextAlignmentOptions.Center, false);
 
         BuildConfirm();
         root.gameObject.SetActive(false);
@@ -238,6 +256,7 @@ public sealed class PauseMenuUI : MonoBehaviour
         bgm.slider.interactable = sfx.slider.interactable = hasAudio;
         bgm.Load(hasAudio ? AudioManager.Instance.BGMVolume : 1f);
         sfx.Load(hasAudio ? AudioManager.Instance.SFXVolume : 1f);
+        RefreshSkinRow();
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayOpenPanel();
     }
@@ -301,6 +320,24 @@ public sealed class PauseMenuUI : MonoBehaviour
             AudioManager.Instance.PlayButtonClick();
         pending = PendingAction.None;
         confirm.gameObject.SetActive(false);
+    }
+
+    private void RefreshSkinRow()
+    {
+        bool unlocked = TowerSkin.IsUnlocked;
+        skinToggle.gameObject.SetActive(unlocked);
+        TowerPanelArt.SetSprite(skinIcon, unlocked ? "icon_crown" : "icon_lock");
+        if (!unlocked)
+        {
+            skinLabel.text = "<color=#A9A39A>황금 외형 · 하드코어 완주 시 해금</color>";
+            skinLabel.rectTransform.sizeDelta = new Vector2(126f * TowerPanelArt.Dot, 11f * TowerPanelArt.Dot);
+            return;
+        }
+        bool on = TowerSkin.Enabled;
+        skinLabel.text = "황금 타워 외형";
+        skinLabel.rectTransform.sizeDelta = new Vector2(74f * TowerPanelArt.Dot, 11f * TowerPanelArt.Dot);
+        TowerPanelArt.SetSprite(skinToggle, on ? "toggle_on" : "toggle_off");
+        skinToggleText.text = on ? "켜짐" : "꺼짐";
     }
 
     private void Update()

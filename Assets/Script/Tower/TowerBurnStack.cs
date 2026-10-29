@@ -11,6 +11,7 @@ public sealed class TowerBurnStack : MonoBehaviour
     {
         public int Damage, Remaining;
         public float Next, Interval;
+        public TowerAttack Owner;   // 화상을 건 타워(타워별 피해량 기록용)
     }
 
     private readonly List<Stack> stacks = new List<Stack>();
@@ -25,7 +26,7 @@ public sealed class TowerBurnStack : MonoBehaviour
         burn.health = target;
         interval = Mathf.Max(0.05f, interval);
         burn.stacks.Add(new Stack { Damage = damage, Remaining = ticks, Interval = interval,
-            Next = Time.time + interval });
+            Next = Time.time + interval, Owner = TowerDamageSource.Current });
         burn.enabled = true;
         BurnVisual.Request(burn.gameObject, burn, burn.stacks.Count);
     }
@@ -42,7 +43,8 @@ public sealed class TowerBurnStack : MonoBehaviour
                 stack.Remaining--;
                 stack.Next += stack.Interval;
                 if (health == null || health.IsDead) break;
-                health.TakeBurnDamage(stack.Damage);
+                using (TowerDamageSource.From(stack.Owner))
+                    health.TakeBurnDamage(stack.Damage);
                 ticked = true;
             }
             if (stack.Remaining == 0) stacks.RemoveAt(i);

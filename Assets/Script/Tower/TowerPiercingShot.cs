@@ -12,6 +12,7 @@ public sealed class TowerPiercingShot : MonoBehaviour
     private int damage, hitCount;
     private float remainingDistance;
     private bool detectStealth, fragment, critical;
+    private TowerAttack owner;   // 쏜 타워(타워별 피해량 기록용)
 
     public static TowerPiercingShot Fire(Vector3 position, Vector2 direction, int damage,
         TowerAttackProfile profile, float travelDistance, bool detect, bool isFragment = false,
@@ -29,6 +30,7 @@ public sealed class TowerPiercingShot : MonoBehaviour
         shot.detectStealth = detect;
         shot.fragment = isFragment;
         shot.critical = critical && !isFragment;
+        shot.owner = TowerDamageSource.Current;
         if (ignore != null) shot.hit.Add(ignore);
         var visuals = TowerVfx.Settings;
         TowerVfx.Renderer(go, visuals == null ? null : isFragment ? visuals.fragment : visuals.piercingRound);
@@ -61,7 +63,8 @@ public sealed class TowerPiercingShot : MonoBehaviour
         {
             if (!TowerTargeting.CanHit(candidate.Enemy, detectStealth)) continue;
             Vector3 point = start + direction * candidate.Along;
-            Impact(candidate.Enemy, point);
+            using (TowerDamageSource.From(owner))
+                Impact(candidate.Enemy, point);
             if (fragment || profile.fragments > 0 || hitCount >= Mathf.Max(1, profile.pierceCount))
             {
                 Destroy(gameObject);

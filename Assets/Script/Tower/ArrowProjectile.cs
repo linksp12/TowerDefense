@@ -36,6 +36,9 @@ public class ArrowProjectile : MonoBehaviour
 
     private ElementType element = ElementType.None;
 
+    // 쏜 타워(타워별 피해량 기록용). 발사 시점의 TowerDamageSource에서 받는다.
+    private TowerAttack owner;
+
     public void SetElement(ElementType attackElement)
     {
         element = attackElement;
@@ -63,6 +66,7 @@ public class ArrowProjectile : MonoBehaviour
     {
         target = newTarget;
         damage = newDamage;
+        owner = TowerDamageSource.Current;
         canHitStealth = newCanHitStealth;
         criticalChance = Mathf.Clamp01(newCriticalChance);
         criticalDamageMultiplier = Mathf.Max(1f, newCriticalDamageMultiplier);
@@ -126,6 +130,12 @@ public class ArrowProjectile : MonoBehaviour
     }
 
     void HitTarget(GameObject monster)
+    {
+        using (TowerDamageSource.From(owner))
+            HitTargetBy(monster);
+    }
+
+    void HitTargetBy(GameObject monster)
     {
         if (!CanHitMonster(monster))
         {

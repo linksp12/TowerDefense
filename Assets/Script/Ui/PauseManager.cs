@@ -119,6 +119,8 @@ public class PauseManager : MonoBehaviour
 
         // 결과창이 뜬 뒤에는 ESC로 일시정지/재개하지 않는다(재개 시 배속이 되살아나 결과창 뒤 전투가 다시 돈다).
         if (GameManager.Instance != null && GameManager.Instance.IsGameEnded()) return;
+        // 보스전 앞 대사 중에는 Esc가 대사 건너뛰기로 쓰인다.
+        if (StageDialogue.BlocksInput) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

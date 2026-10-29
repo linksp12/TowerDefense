@@ -82,6 +82,13 @@ public class BossInfoUI : MonoBehaviour
     // =========================================================
     private Vector3 popupOriginalScale;
 
+    // 위쪽 보스 체력 UI 전체 크기(배치·글씨 비율은 그대로 두고 크기만 줄인다)
+    private const float TopBarScale = 0.75f;
+
+    /// <summary>위쪽 보스 체력 UI가 보이는 중인지(배너가 겹치지 않게 아래로 내릴 때 쓴다).</summary>
+    public bool IsTopBarVisible =>
+        (bossInfoPanel != null && bossInfoPanel.activeSelf) || (topBossHPPanel != null && topBossHPPanel.activeSelf);
+
     private sealed class BossHealthEntry
     {
         public MonsterHealth boss;
@@ -112,8 +119,9 @@ public class BossInfoUI : MonoBehaviour
 
             if (rect != null)
             {
-                popupOriginalScale = rect.localScale;
                 ConfigureBossInfoPanelAsTopBar(rect);
+                popupOriginalScale = Vector3.one * TopBarScale;
+                rect.localScale = popupOriginalScale;
             }
 
             bossInfoPanel.SetActive(false);
@@ -307,6 +315,7 @@ public class BossInfoUI : MonoBehaviour
         panelRect.pivot = new Vector2(0.5f, 1f);
         panelRect.anchoredPosition = new Vector2(0f, -18f);
         panelRect.sizeDelta = new Vector2(560f, 86f);
+        panelRect.localScale = Vector3.one * TopBarScale;
 
         Image panelImage = topBossHPPanel.GetComponent<Image>();
         panelImage.color = new Color(0.04f, 0.05f, 0.07f, 0.92f);
@@ -511,12 +520,17 @@ public class BossInfoUI : MonoBehaviour
                     : string.Empty);
         }
 
-        // 첫 보스가 나타날 때 웨이브와 같은 리본 배너로 알린다.
+        // 보스 종류가 처음 나타나면 등장 카드(초상화·이름·별칭)를 띄운다.
+        // 카드를 띄우지 못한 첫 보스는 웨이브와 같은 리본 배너로 알린다.
+        bool carded = BossIntroCard.Show(boss);
         if (registeredBosses.Count == 1)
         {
-            UIManager waveUi = FindAnyObjectByType<UIManager>();
-            if (waveUi != null)
-                waveUi.ShowBossBanner(displayName);
+            if (!carded)
+            {
+                UIManager waveUi = FindAnyObjectByType<UIManager>();
+                if (waveUi != null)
+                    waveUi.ShowBossBanner(displayName);
+            }
             CombatFeedback.BossAppeared();
         }
 

@@ -13,10 +13,11 @@ public class MonsterStatus : MonoBehaviour
             StopCoroutine(dotCoroutine);
         }
 
-        dotCoroutine = StartCoroutine(DotRoutine(damagePerTick, duration, interval));
+        // 화상을 건 타워(타워별 피해량 기록용)
+        dotCoroutine = StartCoroutine(DotRoutine(damagePerTick, duration, interval, TowerDamageSource.Current));
     }
 
-    IEnumerator DotRoutine(int damagePerTick, float duration, float interval)
+    IEnumerator DotRoutine(int damagePerTick, float duration, float interval, TowerAttack owner)
     {
         MonsterHealth monsterHealth = GetComponent<MonsterHealth>();
 
@@ -28,7 +29,8 @@ public class MonsterStatus : MonoBehaviour
 
         while (elapsed < duration)
         {
-            monsterHealth.TakeBurnDamage(damagePerTick);
+            using (TowerDamageSource.From(owner))
+                monsterHealth.TakeBurnDamage(damagePerTick);
             CombatFeedback.BurnTick();
             yield return new WaitForSeconds(interval);
             elapsed += interval;

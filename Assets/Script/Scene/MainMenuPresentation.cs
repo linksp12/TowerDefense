@@ -122,6 +122,11 @@ public sealed class MainMenuPresentation : MonoBehaviour
         flash.rectTransform.localScale = new Vector3(1f, -1f, 1f);
         flash.transform.SetSiblingIndex(backgroundIndex + 4);
 
+        // 본편 엔딩을 봤으면 왕관과 '마지막 탑의 수호자', 하드코어까지 모두 깼으면 빛나는 '전설의 수호자'
+        bool legend = TowerSkin.IsUnlocked;
+        if (legend || IsMainStoryCleared())
+            BuildLegendMark(legend);
+
         // 메뉴 버튼은 처음에 숨겨 두고 차례로 등장시킨다.
         buttonGroups = new CanvasGroup[menuButtons.Length];
         for (int i = 0; i < menuButtons.Length; i++)
@@ -143,6 +148,59 @@ public sealed class MainMenuPresentation : MonoBehaviour
         blackout = UiFx.Image("Blackout", canvas, UiFx.Pixel, Color.black);
         UiFx.Stretch(blackout.rectTransform);
         blackout.raycastTarget = true;
+    }
+
+    // 하드코어 완주 표식: 'Last'의 L 위에 비스듬히 얹힌 왕관과 제목 아래 '전설의 수호자'.
+    private CanvasGroup legendGroup;
+    private RectTransform legendCrown;
+    private Image legendShine;
+
+    private static bool IsMainStoryCleared()
+    {
+        var progress = new StageProgressService(new PlayerPrefsStageProgressStorage());
+        progress.Load();
+        return progress.IsCleared(StageIds.FinalMainStage);
+    }
+
+    private void BuildLegendMark(bool legend)
+    {
+        var root = UiFx.Rect("LegendMark", background);
+        UiFx.Stretch(root);
+        legendGroup = root.gameObject.AddComponent<CanvasGroup>();
+        legendGroup.alpha = 0f;
+        legendGroup.blocksRaycasts = false;
+
+        legendShine = UiFx.Image("CrownShine", root, UiFx.SoftCircle, new Color(1f, 0.85f, 0.45f, 0.35f));
+        legendShine.rectTransform.anchorMin = legendShine.rectTransform.anchorMax = new Vector2(0.418f, 0.94f);
+        legendShine.rectTransform.sizeDelta = new Vector2(260f, 200f);
+        legendShine.enabled = legend;
+
+        var crownSprite = Resources.Load<Sprite>("UI/TowerPanel/crown_big");
+        if (crownSprite != null)
+        {
+            var crown = UiFx.Image("Crown", root, crownSprite, Color.white);
+            legendCrown = crown.rectTransform;
+            legendCrown.anchorMin = legendCrown.anchorMax = new Vector2(0.418f, 0.94f);
+            legendCrown.sizeDelta = new Vector2(46f, 34f) * 2.6f;
+            legendCrown.localEulerAngles = new Vector3(0f, 0f, 14f);
+        }
+
+        var title = MakeText("LegendTitle", root, legend ? "— 전설의 수호자 —" : "— 마지막 탑의 수호자 —", 30f,
+            legend ? Gold : new Color32(232, 224, 206, 255));
+        title.alignment = TextAlignmentOptions.Center;
+        title.characterSpacing = 8f;
+        var rect = title.rectTransform;
+        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, titleArea.yMin - 0.025f);
+        rect.sizeDelta = new Vector2(600f, 44f);
+    }
+
+    private void UpdateLegendMark(float now)
+    {
+        if (legendGroup == null) return;
+        legendGroup.alpha = Mathf.Clamp01((now - introTime - 1.2f) / 0.8f);
+        if (legendCrown != null)
+            legendCrown.anchoredPosition = new Vector2(0f, 3f * Mathf.Sin(now * 1.8f));
+        legendShine.color = new Color(1f, 0.85f, 0.45f, 0.25f + 0.12f * Mathf.Sin(now * 2.4f) + lightning * 0.3f);
     }
 
     // 안개 띠: 가로로 반복되는 그림의 UV를 밀어 흐르게 한다.
@@ -254,6 +312,7 @@ public sealed class MainMenuPresentation : MonoBehaviour
         if (now - introTime > 3.2f)
             titleGlow.color = new Color(1f, 0.78f, 0.42f, GlowPulse() + LightningAmount() * 0.3f);
 
+        UpdateLegendMark(now);
         ScrollFog(fogA, now * 0.012f);
         ScrollFog(fogB, now * 0.022f + 0.4f);
         SelectWithKeyboard();

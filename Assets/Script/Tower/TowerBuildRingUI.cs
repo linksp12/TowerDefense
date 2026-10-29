@@ -299,8 +299,8 @@ public sealed class TowerBuildRingUI : MonoBehaviour
 
         var renderer = slot.prefab.GetComponent<SpriteRenderer>();
         var upgrade = slot.prefab.GetComponent<TowerUpgrade>();
-        Sprite ghost = upgrade != null && upgrade.basicTowerSprite != null ? upgrade.basicTowerSprite :
-            renderer != null ? renderer.sprite : null;
+        Sprite ghost = TowerSkin.Resolve(upgrade != null && upgrade.basicTowerSprite != null ? upgrade.basicTowerSprite :
+            renderer != null ? renderer.sprite : null);
         Color tint = new Color(0.47f, 0.86f, 1f, 1f);
         preview.Show(target.transform.position, slot.tower.BaseAttackRange, tint, ghost, slot.prefab.transform.localScale, true);
     }
@@ -337,7 +337,10 @@ public sealed class TowerBuildRingUI : MonoBehaviour
         int damage = slot.tower.GetDisplayDamage(slot.tower.BaseDamage);
         float cooldown = slot.tower.BaseAttackCooldown;
         float range = slot.tower.BaseAttackRange;
-        statValues[0].text = damage.ToString();
+        // 맵 환경 보정(설원: 불 +20%·얼음 -20% 등)은 이미 공격력에 들어가 있어 옆에 비율로 알려 준다.
+        float rate = EnvironmentManager.Instance != null ? EnvironmentManager.Instance.GetRate(data.element) : 0f;
+        statValues[0].text = Mathf.Approximately(rate, 0f) ? damage.ToString()
+            : $"<size=75%><color={(rate > 0f ? "#8CE878" : "#FF8A6A")}>{(rate > 0f ? "+" : "")}{rate * 100f:0}%</color></size> {damage}";
         damageLabel.text = data.damageKind == DamageKind.Magic ? "마법 공격력" : "물리 공격력";
         statValues[1].text = cooldown.ToString("0.##") + "초";
         statValues[2].text = range.ToString("0.#");

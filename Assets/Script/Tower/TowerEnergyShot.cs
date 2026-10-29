@@ -9,6 +9,7 @@ public sealed class TowerEnergyShot : MonoBehaviour
     private TowerAttackProfile profile;
     private bool detect;
     private float endTime;
+    private TowerAttack owner;   // 쏜 타워(타워별 피해량 기록용)
 
     public static void Fire(Vector3 origin, MonsterHealth target, int damage,
         TowerAttackProfile profile, bool detectStealth)
@@ -22,6 +23,7 @@ public sealed class TowerEnergyShot : MonoBehaviour
         shot.profile = profile;
         shot.detect = detectStealth;
         shot.endTime = Time.time + 5;
+        shot.owner = TowerDamageSource.Current;
         CombatFeelSettings fx = CombatFeedback.Settings;
         if (fx != null) PixelLoop.Create("Bolt", go.transform, fx.energyBoltFx, 105);
         TowerVfx.Trail(go, new Color(1f, 0.3f, 0.25f, 0.7f), 0.3f, 0.12f);
@@ -34,7 +36,11 @@ public sealed class TowerEnergyShot : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
         transform.position = Vector3.MoveTowards(transform.position, destination,
             Mathf.Max(1, profile.projectileSpeed) * Time.deltaTime);
-        if ((transform.position - destination).sqrMagnitude <= 0.01f) Impact();
+        if ((transform.position - destination).sqrMagnitude <= 0.01f)
+        {
+            using (TowerDamageSource.From(owner))
+                Impact();
+        }
         else if (Time.time >= endTime) Destroy(gameObject);
     }
 

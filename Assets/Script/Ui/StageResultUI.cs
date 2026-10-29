@@ -243,10 +243,108 @@ public class StageResultUI : MonoBehaviour
         if (showScore)
             BuildScore(panel.transform, remainingBaseHealth, maxBaseHealth);
 
+        BuildDamagePanel(panel.transform);
+
         panelRect.localScale = Vector3.one * 0.92f;
         StartCoroutine(AnimateIn());
         if (showScore)
             StartCoroutine(AnimateScore());
+    }
+
+    // ──────── 타워별 피해량 ────────
+
+    private readonly System.Collections.Generic.List<(RectTransform bar, float width)> damageBars =
+        new System.Collections.Generic.List<(RectTransform, float)>();
+
+    // 결과 패널 오른쪽에 이번 전투의 타워 종류별 피해량(많은 순 최대 6줄)을 붙인다. 타워를 짓지 않았으면 생략.
+    private void BuildDamagePanel(Transform panel)
+    {
+        BattleRecord record = GameManager.Instance != null ? GameManager.Instance.Record : null;
+        var list = record != null ? record.DamageByTower() : null;
+        if (list == null || list.Count == 0)
+            return;
+
+        float height = panelRect.sizeDelta.y;
+        panelRect.anchoredPosition = new Vector2(-210f, 0f);
+        UnityEngine.UI.Image side = CreateImage("DamagePanel", panel, new Color(0.055f, 0.075f, 0.11f, 0.98f));
+        RectTransform sideRect = side.rectTransform;
+        sideRect.anchorMin = sideRect.anchorMax = sideRect.pivot = new Vector2(0.5f, 0.5f);
+        sideRect.anchoredPosition = new Vector2(670f, 0f);
+        sideRect.sizeDelta = new Vector2(400f, height);
+        BattleUiSkin.Skin(side, BattleUiSkin.Frame, 1f);
+
+        float top = height * 0.5f;
+        CreateText("DamageTitle", side.transform, "타워별 피해량", new Vector2(0f, top - 58f),
+            new Vector2(340f, 40f), 30f, new Color(1f, 0.84f, 0.42f, 1f));
+        CreateText("DamageTotal", side.transform, $"총 피해 {record.TotalDamage:N0}  ·  처치 {record.Kills}",
+            new Vector2(0f, top - 96f), new Vector2(340f, 30f), 20f, new Color(0.7f, 0.72f, 0.78f, 1f));
+
+        int rows = Mathf.Min(6, list.Count);
+        float rowHeight = Mathf.Min(66f, (height - 170f) / rows);
+        long max = System.Math.Max(1L, list[0].Damage);
+        for (int i = 0; i < rows; i++)
+        {
+            BattleRecord.TowerDamage entry = list[i];
+            float y = top - 140f - rowHeight * (i + 0.5f) + 10f;
+
+            if (entry.Icon != null)
+            {
+                UnityEngine.UI.Image icon = CreateImage("Icon", side.transform, Color.white);
+                icon.sprite = entry.Icon;
+                icon.preserveAspect = true;
+                RectTransform iconRect = icon.rectTransform;
+                iconRect.anchorMin = iconRect.anchorMax = iconRect.pivot = new Vector2(0.5f, 0.5f);
+                iconRect.anchoredPosition = new Vector2(-152f, y - 4f);
+                iconRect.sizeDelta = new Vector2(50f, 50f);
+            }
+
+            int built = record.Builds.TryGetValue(entry.Id, out int builtCount) ? builtCount : entry.Towers.Count;
+            string count = built > 1 ? $" <color=#9AA6B8>×{built}</color>" : "";
+            TextMeshProUGUI name = CreateText("Name", side.transform, entry.Name + count, new Vector2(-14f, y + 6f),
+                new Vector2(216f, 30f), 21f, i == 0 ? new Color(1f, 0.93f, 0.7f, 1f) : new Color(0.9f, 0.92f, 0.96f, 1f));
+            name.alignment = TextAlignmentOptions.Left;
+            name.richText = true;
+            int percent = record.TotalDamage > 0 ? Mathf.RoundToInt(100f * entry.Damage / record.TotalDamage) : 0;
+            TextMeshProUGUI amount = CreateText("Damage", side.transform,
+                $"{entry.Damage:N0} <size=75%><color=#9AA6B8>{percent}%</color></size>", new Vector2(116f, y + 6f),
+                new Vector2(130f, 30f), 20f, new Color(1f, 0.84f, 0.42f, 1f));
+            amount.alignment = TextAlignmentOptions.Right;
+            amount.richText = true;
+
+            UnityEngine.UI.Image track = CreateImage("BarTrack", side.transform, new Color(0f, 0f, 0f, 0.45f));
+            RectTransform trackRect = track.rectTransform;
+            trackRect.anchorMin = trackRect.anchorMax = new Vector2(0.5f, 0.5f);
+            trackRect.pivot = new Vector2(0f, 0.5f);
+            trackRect.anchoredPosition = new Vector2(-122f, y - 18f);
+            trackRect.sizeDelta = new Vector2(302f, 10f);
+            UnityEngine.UI.Image fill = CreateImage("BarFill", track.transform,
+                i == 0 ? new Color(1f, 0.74f, 0.25f, 1f) : new Color(0.55f, 0.68f, 0.9f, 1f));
+            RectTransform fillRect = fill.rectTransform;
+            fillRect.anchorMin = fillRect.anchorMax = fillRect.pivot = new Vector2(0f, 0.5f);
+            fillRect.anchoredPosition = Vector2.zero;
+            fillRect.sizeDelta = new Vector2(0f, 10f);
+            damageBars.Add((fillRect, 302f * entry.Damage / max));
+        }
+        StartCoroutine(AnimateDamageBars());
+    }
+
+    // 막대가 0에서 차례로 차오른다.
+    private System.Collections.IEnumerator AnimateDamageBars()
+    {
+        float start = Time.unscaledTime + 0.3f;
+        while (true)
+        {
+            bool done = true;
+            for (int i = 0; i < damageBars.Count; i++)
+            {
+                float k = Mathf.Clamp01((Time.unscaledTime - start - i * 0.08f) / 0.5f);
+                if (k < 1f) done = false;
+                float eased = 1f - Mathf.Pow(1f - k, 3f);
+                damageBars[i].bar.sizeDelta = new Vector2(damageBars[i].width * eased, 10f);
+            }
+            if (done) yield break;
+            yield return null;
+        }
     }
 
     // ──────── 별·점수 ────────

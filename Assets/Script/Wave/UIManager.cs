@@ -156,6 +156,9 @@ public class UIManager : MonoBehaviour
 
         if (bannerRoutine != null)
             StopCoroutine(bannerRoutine);
+        // 보스 체력 UI가 떠 있으면 그 아래로 내려 겹치지 않게 한다.
+        if (BossInfoUI.Instance != null && BossInfoUI.Instance.IsTopBarVisible)
+            restY = Mathf.Min(restY, -240f);
         bannerTitle.text = title;
         bannerSubtitle.text = subtitle;
         bannerRestY = restY;

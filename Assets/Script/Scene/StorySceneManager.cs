@@ -11,14 +11,20 @@ using UnityEngine.UI;
 /// </summary>
 public class StorySceneManager : MonoBehaviour
 {
-    public enum Sequence { Intro, Ending }
+    public enum Sequence { Intro, Ending, TrueEnding }
 
-    [Header("진행 종류 (Intro: 시작 스토리 → 광장, Ending: 에필로그 → 크레딧 → 마무리)")]
+    /// <summary>다음에 열리는 Ending 장면을 다른 진행(진엔딩)으로 바꿔 달라는 요청. 한 번 쓰면 비운다.</summary>
+    public static Sequence? RequestedSequence;
+
+    [Header("진행 종류 (Intro: 시작 스토리 → 광장, Ending: 에필로그 → 크레딧 → 마무리, TrueEnding: 하드코어 완주 에필로그 → 진엔딩 카드)")]
     public Sequence sequence = Sequence.Intro;
 
     [Header("엔딩 배경 (새벽 지도 · 새벽 광장 · 새벽 탑) / 크레딧 글")]
     public Sprite[] endingSprites;
     public TextAsset credits;
+
+    [Header("진엔딩 배경 (맑은 대지 · 축제의 밤 · 황금빛 탑)")]
+    public Sprite[] trueEndingSprites;
 
     [Header("엔딩 소리 (비어 있으면 결과 화면 배경음·기존 효과음 사용)")]
     public AudioClip endingBGM;
@@ -61,7 +67,7 @@ public class StorySceneManager : MonoBehaviour
     [Tooltip("건너뛰기를 길게 누르는 시간")]
     public float skipHoldTime = 0.9f;
 
-    private enum Mood { Prosperity, Omen, Invasion, Awakening, Finale, Victory, Dawn, Ember }
+    private enum Mood { Prosperity, Omen, Invasion, Awakening, Finale, Victory, Dawn, Ember, Clear, Festival, Golden }
 
     private sealed class Panel
     {
@@ -100,12 +106,16 @@ public class StorySceneManager : MonoBehaviour
 
     private void Start()
     {
+        if (sequence == Sequence.Ending && RequestedSequence.HasValue)
+            sequence = RequestedSequence.Value;
+        RequestedSequence = null;
+
         if (AudioManager.Instance != null)
         {
-            if (sequence == Sequence.Ending && endingBGM != null)
+            if (sequence != Sequence.Intro && endingBGM != null)
                 AudioManager.Instance.PlayBGM(endingBGM);
             else
-                AudioManager.Instance.PlayBGMForScene(sequence == Sequence.Ending ? "ResultScene" : "StoryScene");
+                AudioManager.Instance.PlayBGMForScene(sequence != Sequence.Intro ? "ResultScene" : "StoryScene");
         }
 
         BuildPanels();
@@ -117,6 +127,29 @@ public class StorySceneManager : MonoBehaviour
     private void BuildPanels()
     {
         Sprite Story(int i) => backgroundSprites != null && i < backgroundSprites.Length ? backgroundSprites[i] : null;
+        if (sequence == Sequence.TrueEnding)
+        {
+            Sprite True(int i) => trueEndingSprites != null && i < trueEndingSprites.Length ? trueEndingSprites[i] : null;
+            panels = new[]
+            {
+                new Panel { Sprite = True(0), Chapter = "에필로그 II · 꺼진 불씨", Mood = Mood.Clear,
+                    Text = "대지 깊은 곳에서 꿈틀대던 마지막 불씨마저\n" +
+                           "수호자의 탑 앞에서 끝내 빛을 잃었다.\n" +
+                           "땅은 더 이상 울지 않았고, 하늘은 맑게 개었다.",
+                    ZoomFrom = 1.035f },
+                new Panel { Sprite = True(1), Chapter = "에필로그 II · 축제의 밤", Mood = Mood.Festival,
+                    Text = "그날 밤, 광장에는 처음으로 축제의 등불이 걸렸다.\n" +
+                           "사람들은 노래하고 춤추며 탑을 올려다보았다.\n" +
+                           "이제 누구도 내일을 두려워하지 않았다.",
+                    ZoomFrom = 1.035f },
+                new Panel { Sprite = True(2), Chapter = "에필로그 II · 황금빛 탑", Mood = Mood.Golden, Fit = true,
+                    Text = "사람들은 탑을 황금빛으로 다시 단장하고\n" +
+                           "그 이름을 오래도록 기억하기로 했다.\n" +
+                           "마지막 탑의 전설적인 수호자, 바로 당신이다.",
+                    ZoomFrom = 1.035f },
+            };
+            return;
+        }
         if (sequence == Sequence.Ending)
         {
             Sprite End(int i) => endingSprites != null && i < endingSprites.Length ? endingSprites[i] : null;
@@ -451,6 +484,9 @@ public class StorySceneManager : MonoBehaviour
         if (panel.Mood == Mood.Finale) Play(impactSound, 0.9f);
         if (panel.Mood == Mood.Dawn || panel.Mood == Mood.Victory) motes.rate = moodRate(motes);
         if (panel.Mood == Mood.Ember) { embers.rate = moodRate(embers) * 0.8f; motes.rate = moodRate(motes) * 0.4f; }
+        if (panel.Mood == Mood.Clear) motes.rate = moodRate(motes) * 0.7f;
+        if (panel.Mood == Mood.Festival) { motes.rate = moodRate(motes); embers.rate = moodRate(embers) * 0.3f; }
+        if (panel.Mood == Mood.Golden) { motes.rate = moodRate(motes) * 1.6f; Play(impactSound, 0.6f); }
 
         // 장면 전환: 새 그림이 서서히 나타나고 이전 그림이 사라진다. 종장은 띠를 걷어 그림 전체를 보여 준다.
         float t = 0f;
@@ -542,6 +578,19 @@ public class StorySceneManager : MonoBehaviour
         if (sequence == Sequence.Ending)
         {
             StartCoroutine(RunCredits());
+            yield break;
+        }
+        if (sequence == Sequence.TrueEnding)
+        {
+            // 크레딧은 본편 엔딩에서 이미 봤으므로 바로 진엔딩 카드로 넘어간다.
+            ClearForEndCard();
+            float dim = Time.unscaledTime;
+            while (Time.unscaledTime - dim < 0.8f)
+            {
+                blackout.color = new Color(0f, 0f, 0f, Mathf.Lerp(1f, 0.86f, (Time.unscaledTime - dim) / 0.8f));
+                yield return null;
+            }
+            yield return ShowTrueEndCard();
             yield break;
         }
         LoadPlazaScene();
@@ -638,6 +687,77 @@ public class StorySceneManager : MonoBehaviour
         return y;
     }
 
+    private void ClearForEndCard()
+    {
+        storyText.text = "";
+        chapterGroup.alpha = 0f;
+        hintArrow.color = Color.clear;
+        mapGroup.alpha = 0f;
+        foreach (var dot in dots) dot.gameObject.SetActive(false);
+        topBar.SetAsLastSibling();
+        bottomBar.SetAsLastSibling();
+        foreach (Transform child in topBar) child.gameObject.SetActive(false);
+        hintLabel.text = "";
+    }
+
+    private IEnumerator ShowTrueEndCard()
+    {
+        var card = UiFx.Rect("TrueEndCard", canvas);
+        UiFx.Stretch(card);
+        var group = card.gameObject.AddComponent<CanvasGroup>();
+        group.alpha = 0f;
+        var crownSprite = Resources.Load<Sprite>("UI/TowerPanel/crown_big");
+        Image crown = null;
+        if (crownSprite != null)
+        {
+            crown = UiFx.Image("Crown", card, crownSprite, Color.white);
+            Place(crown.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 270f), new Vector2(46f, 34f) * 3f);
+        }
+        var trueEnd = Text("TrueEnd", card, "TRUE END", 84f, Gold);
+        trueEnd.characterSpacing = 18f;
+        Place(trueEnd.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 150f), new Vector2(1200f, 120f));
+        var title = Text("Title", card, "전설의 수호자", 34f, Ivory);
+        title.characterSpacing = 10f;
+        Place(title.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 72f), new Vector2(1200f, 52f));
+        var cleared = Text("Cleared", card, "하드코어 4개 전장까지 모두 지켜냈습니다", 28f, Muted);
+        Place(cleared.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 22f), new Vector2(1200f, 46f));
+        var reward = Text("Reward", card, "황금 타워 외형이 열렸습니다 · 일시정지 창에서 켜고 끌 수 있어요", 26f, Gold);
+        Place(reward.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, -30f), new Vector2(1400f, 46f));
+        AddPlayRecord(card, -76f);
+        MakeEndButton(card, "광장으로", new Vector2(-170f, -140f), BattleUiSkin.GoldButton, new Color32(58, 36, 18, 255),
+            () => SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중"));
+        MakeEndButton(card, "메인 메뉴", new Vector2(170f, -140f), BattleUiSkin.DarkButton, Ivory,
+            () => SceneLoadingScreen.TryLoad("MainScene", "메인 화면으로 이동 중"));
+        Play(endSound != null ? endSound : impactSound, 0.75f);
+        float start = Time.unscaledTime;
+        while (Time.unscaledTime - start < 1.4f)
+        {
+            float k = UiFx.EaseOut((Time.unscaledTime - start) / 1.4f);
+            group.alpha = k;
+            blackout.color = new Color(0f, 0f, 0f, Mathf.Lerp(0.86f, 0.93f, k));
+            trueEnd.rectTransform.localScale = Vector3.one * Mathf.Lerp(1.12f, 1f, k);
+            if (crown != null) crown.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Lerp(300f, 270f, k));
+            yield return null;
+        }
+        group.alpha = 1f;
+        // 왕관이 천천히 떠올랐다 내려앉는다.
+        while (crown != null)
+        {
+            crown.rectTransform.anchoredPosition = new Vector2(0f, 270f + 4f * Mathf.Sin(Time.unscaledTime * 2f));
+            yield return null;
+        }
+    }
+
+    // 이번 여정의 플레이 기록 한 줄(처치 수·플레이 시간·가장 많이 쓴 타워)
+    private void AddPlayRecord(Transform card, float y)
+    {
+        string summary = LastOfTheTower.Progression.PlayRecord.Summary();
+        if (string.IsNullOrEmpty(summary))
+            return;
+        var record = Text("PlayRecord", card, summary, 23f, Muted);
+        Place(record.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, y), new Vector2(1500f, 36f));
+    }
+
     private IEnumerator ShowEndCard()
     {
         var card = UiFx.Rect("EndCard", canvas);
@@ -651,6 +771,7 @@ public class StorySceneManager : MonoBehaviour
         Place(cleared.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 70f), new Vector2(1200f, 50f));
         var hardcore = Text("Hardcore", card, "하드코어 전장이 열렸습니다", 34f, new Color32(255, 128, 96, 255));
         Place(hardcore.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 10f), new Vector2(1200f, 56f));
+        AddPlayRecord(card, -48f);
         MakeEndButton(card, "광장으로", new Vector2(-170f, -120f), BattleUiSkin.GoldButton, new Color32(58, 36, 18, 255),
             () => SceneLoadingScreen.TryLoad("PlazaScene", "광장으로 이동 중"));
         MakeEndButton(card, "메인 메뉴", new Vector2(170f, -120f), BattleUiSkin.DarkButton, Ivory,
@@ -730,6 +851,7 @@ public class StorySceneManager : MonoBehaviour
         shakeOffset = Vector2.zero;
         float tintAlpha = 0f;
         float flashAlpha = Mathf.Max(0f, flash.color.a - Time.unscaledDeltaTime * 2.5f);
+        Color tintColor = new Color(0.7f, 0.05f, 0.05f);
         switch (panel.Mood)
         {
             case Mood.Omen:
@@ -760,8 +882,17 @@ public class StorySceneManager : MonoBehaviour
             case Mood.Finale:
                 if (t < 0.4f) flashAlpha = Mathf.Max(flashAlpha, 0.35f * (1f - t / 0.4f));
                 break;
+            case Mood.Festival:
+                // 멀리서 터지는 불꽃처럼 가끔 약하게 밝아진다.
+                if (t > 1.2f && Random.value < Time.unscaledDeltaTime * 0.9f) flashAlpha = Mathf.Max(flashAlpha, Random.Range(0.04f, 0.09f));
+                break;
+            case Mood.Golden:
+                if (t < 0.5f) flashAlpha = Mathf.Max(flashAlpha, 0.45f * (1f - t / 0.5f));
+                tintColor = new Color(1f, 0.75f, 0.25f);
+                tintAlpha = 0.05f + 0.03f * Mathf.Sin(t * 1.6f);
+                break;
         }
-        tint.color = new Color(0.7f, 0.05f, 0.05f, Mathf.MoveTowards(tint.color.a, tintAlpha, Time.unscaledDeltaTime * 0.6f));
+        tint.color = new Color(tintColor.r, tintColor.g, tintColor.b, Mathf.MoveTowards(tint.color.a, tintAlpha, Time.unscaledDeltaTime * 0.6f));
         flash.color = new Color(1f, 0.95f, 0.85f, flashAlpha);
     }
 

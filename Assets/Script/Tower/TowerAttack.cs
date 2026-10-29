@@ -224,7 +224,8 @@ public class TowerAttack : MonoBehaviour
         if (CurrentAttackProfile != null && CurrentAttackProfile.mode != TowerAttackMode.Projectile)
         {
             if (specialAttack == null) specialAttack = new TowerSpecialAttack(this);
-            specialAttack.Tick(Time.deltaTime * CurrentAttackSpeedMultiplier);
+            using (TowerDamageSource.From(this))
+                specialAttack.Tick(Time.deltaTime * CurrentAttackSpeedMultiplier);
             return;
         }
 
@@ -233,7 +234,8 @@ public class TowerAttack : MonoBehaviour
         if (target != null &&
             attackTimer >= attackCooldown)
         {
-            Attack(target);
+            using (TowerDamageSource.From(this))
+                Attack(target);
             attackTimer = 0f;
         }
     }

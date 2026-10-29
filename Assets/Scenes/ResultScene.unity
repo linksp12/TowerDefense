@@ -693,6 +693,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 55f9985f7aecefd4a8567492947aaf17, type: 3}
   - {fileID: 21300000, guid: 84bb0d257ec319b47aac4b09dad6f7a6, type: 3}
   credits: {fileID: 4900000, guid: 878c5b180cacee2448b846e5fc80bbba, type: 3}
+  trueEndingSprites:
+  - {fileID: 21300000, guid: 60f79c1954986304cbd0d5b43bae93eb, type: 3}
+  - {fileID: 21300000, guid: 30f4ad3c119174649a727ba6c6379b60, type: 3}
+  - {fileID: 21300000, guid: cf11018d8749ea34681d6d5a93ff0ca8, type: 3}
   endingBGM: {fileID: 8300000, guid: d1c4d9a8e5029344d9fc15b1bc0e6666, type: 3}
   bossFallSound: {fileID: 8300000, guid: 9a752623a291f0f47921a6e1d546d4fc, type: 3}
   creditsSound: {fileID: 8300000, guid: 2e70e3d869e4df8468da9fff3d2b4dcb, type: 3}
