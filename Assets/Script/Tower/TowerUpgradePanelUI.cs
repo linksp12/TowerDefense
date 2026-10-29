@@ -61,6 +61,7 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
     private TowerAttack attack;
     private Mode mode;
     private bool open;
+    private bool waitRelease;
     private float openedAt;
     private Coroutine shakeRoutine;
 
@@ -222,6 +223,10 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
         attack = target.GetComponent<TowerAttack>();
         open = true;
         openedAt = Time.unscaledTime;
+        // 창을 연 클릭(마우스를 누른 채)이 그 자리에 뜬 버튼을 바로 누르지 않게, 뗄 때까지 클릭을 받지 않는다.
+        // (자리를 누르는 순간 창이 열리고, 같은 프레임에 UI가 '눌린 곳'을 새 버튼으로 잡아 떼는 순간 클릭이 됐다)
+        waitRelease = Input.GetMouseButton(0);
+        rootGroup.blocksRaycasts = !waitRelease;
         root.gameObject.SetActive(true);
         root.SetAsLastSibling();
         TowerPanelArt.FitRoot(root, canvas);
@@ -506,6 +511,11 @@ public sealed class TowerUpgradePanelUI : MonoBehaviour
         {
             owner.CloseInstantly();
             return;
+        }
+        if (waitRelease && !Input.GetMouseButton(0))
+        {
+            waitRelease = false;
+            rootGroup.blocksRaycasts = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))

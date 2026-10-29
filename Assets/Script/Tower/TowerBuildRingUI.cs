@@ -42,6 +42,7 @@ public sealed class TowerBuildRingUI : MonoBehaviour
     private int selected = -1;
     private bool open;
     private float openedAt;
+    private bool waitRelease;
     private Coroutine shakeRoutine;
     private Vector2 cardBase;
     private float maxDamage = 1f, maxSpeed = 1f, maxRange = 1f;
@@ -202,6 +203,10 @@ public sealed class TowerBuildRingUI : MonoBehaviour
         target = point;
         open = true;
         openedAt = Time.unscaledTime;
+        // 창을 연 클릭(마우스를 누른 채)이 그 자리에 뜬 버튼을 바로 누르지 않게, 뗄 때까지 클릭을 받지 않는다.
+        // (자리를 누르는 순간 창이 열리고, 같은 프레임에 UI가 '눌린 곳'을 새 버튼으로 잡아 떼는 순간 클릭이 됐다)
+        waitRelease = Input.GetMouseButton(0);
+        rootGroup.blocksRaycasts = !waitRelease;
         selected = -1;
         root.gameObject.SetActive(true);
         root.SetAsLastSibling();
@@ -380,6 +385,11 @@ public sealed class TowerBuildRingUI : MonoBehaviour
         {
             manager.CloseBuildPanelSilently();
             return;
+        }
+        if (waitRelease && !Input.GetMouseButton(0))
+        {
+            waitRelease = false;
+            rootGroup.blocksRaycasts = true;
         }
 
         for (int i = 0; i < slots.Count; i++)
