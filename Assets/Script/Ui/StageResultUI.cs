@@ -118,13 +118,15 @@ public class StageResultUI : MonoBehaviour
         // 승리 시 남은 기지 체력 비율로 점수(%)와 별 1~3개를 보여 준다.
         bool showScore = victory && ribbon != null &&
             BattleUiSkin.StarFull != null && BattleUiSkin.StarEmpty != null;
+        // 스테이지 도전 과제(별 3개)가 있으면 별은 도전 과제 달성으로 보여 준다.
+        challengeReport = FindChallengeReport(currentSceneName);
         if (showScore)
-            panelRect.sizeDelta = new Vector2(900f, 560f);
+            panelRect.sizeDelta = new Vector2(900f, challengeReport != null ? 620f : 560f);
         float titleY = ribbon != null ? panelRect.sizeDelta.y * 0.5f : 145f;
         float messageY = showScore ? 20f : ribbon != null ? 92f : 70f;
         float healthY = showScore ? -16f : ribbon != null ? 34f : 10f;
         float noticeY = showScore ? -54f : ribbon != null ? -30f : -55f;
-        float buttonY = showScore ? -172f : -150f;
+        float buttonY = showScore ? (challengeReport != null ? -202f : -172f) : -150f;
 
         UnityEngine.UI.Image topLine = ribbon != null ? null : CreateImage(
             "TopLine",
@@ -184,7 +186,7 @@ public class StageResultUI : MonoBehaviour
                 panel.transform,
                 progressSaveFailed
                     ? "클리어 기록을 저장하지 못했습니다. 스테이지 해금을 확인해 주세요."
-                    : GetStageLabel(unlockedSceneName) + "가 해금되었습니다!",
+                    : WithSubjectParticle(GetStageLabel(unlockedSceneName)) + " 해금되었습니다!",
                 new Vector2(0f, noticeY),
                 new Vector2(800f, 45f),
                 progressSaveFailed ? 23f : 27f,
@@ -241,10 +243,108 @@ public class StageResultUI : MonoBehaviour
         if (showScore)
             BuildScore(panel.transform, remainingBaseHealth, maxBaseHealth);
 
+        BuildDamagePanel(panel.transform);
+
         panelRect.localScale = Vector3.one * 0.92f;
         StartCoroutine(AnimateIn());
         if (showScore)
             StartCoroutine(AnimateScore());
+    }
+
+    // ──────── 타워별 피해량 ────────
+
+    private readonly System.Collections.Generic.List<(RectTransform bar, float width)> damageBars =
+        new System.Collections.Generic.List<(RectTransform, float)>();
+
+    // 결과 패널 오른쪽에 이번 전투의 타워 종류별 피해량(많은 순 최대 6줄)을 붙인다. 타워를 짓지 않았으면 생략.
+    private void BuildDamagePanel(Transform panel)
+    {
+        BattleRecord record = GameManager.Instance != null ? GameManager.Instance.Record : null;
+        var list = record != null ? record.DamageByTower() : null;
+        if (list == null || list.Count == 0)
+            return;
+
+        float height = panelRect.sizeDelta.y;
+        panelRect.anchoredPosition = new Vector2(-210f, 0f);
+        UnityEngine.UI.Image side = CreateImage("DamagePanel", panel, new Color(0.055f, 0.075f, 0.11f, 0.98f));
+        RectTransform sideRect = side.rectTransform;
+        sideRect.anchorMin = sideRect.anchorMax = sideRect.pivot = new Vector2(0.5f, 0.5f);
+        sideRect.anchoredPosition = new Vector2(670f, 0f);
+        sideRect.sizeDelta = new Vector2(400f, height);
+        BattleUiSkin.Skin(side, BattleUiSkin.Frame, 1f);
+
+        float top = height * 0.5f;
+        CreateText("DamageTitle", side.transform, "타워별 피해량", new Vector2(0f, top - 58f),
+            new Vector2(340f, 40f), 30f, new Color(1f, 0.84f, 0.42f, 1f));
+        CreateText("DamageTotal", side.transform, $"총 피해 {record.TotalDamage:N0}  ·  처치 {record.Kills}",
+            new Vector2(0f, top - 96f), new Vector2(340f, 30f), 20f, new Color(0.7f, 0.72f, 0.78f, 1f));
+
+        int rows = Mathf.Min(6, list.Count);
+        float rowHeight = Mathf.Min(66f, (height - 170f) / rows);
+        long max = System.Math.Max(1L, list[0].Damage);
+        for (int i = 0; i < rows; i++)
+        {
+            BattleRecord.TowerDamage entry = list[i];
+            float y = top - 140f - rowHeight * (i + 0.5f) + 10f;
+
+            if (entry.Icon != null)
+            {
+                UnityEngine.UI.Image icon = CreateImage("Icon", side.transform, Color.white);
+                icon.sprite = entry.Icon;
+                icon.preserveAspect = true;
+                RectTransform iconRect = icon.rectTransform;
+                iconRect.anchorMin = iconRect.anchorMax = iconRect.pivot = new Vector2(0.5f, 0.5f);
+                iconRect.anchoredPosition = new Vector2(-152f, y - 4f);
+                iconRect.sizeDelta = new Vector2(50f, 50f);
+            }
+
+            int built = record.Builds.TryGetValue(entry.Id, out int builtCount) ? builtCount : entry.Towers.Count;
+            string count = built > 1 ? $" <color=#9AA6B8>×{built}</color>" : "";
+            TextMeshProUGUI name = CreateText("Name", side.transform, entry.Name + count, new Vector2(-14f, y + 6f),
+                new Vector2(216f, 30f), 21f, i == 0 ? new Color(1f, 0.93f, 0.7f, 1f) : new Color(0.9f, 0.92f, 0.96f, 1f));
+            name.alignment = TextAlignmentOptions.Left;
+            name.richText = true;
+            int percent = record.TotalDamage > 0 ? Mathf.RoundToInt(100f * entry.Damage / record.TotalDamage) : 0;
+            TextMeshProUGUI amount = CreateText("Damage", side.transform,
+                $"{entry.Damage:N0} <size=75%><color=#9AA6B8>{percent}%</color></size>", new Vector2(116f, y + 6f),
+                new Vector2(130f, 30f), 20f, new Color(1f, 0.84f, 0.42f, 1f));
+            amount.alignment = TextAlignmentOptions.Right;
+            amount.richText = true;
+
+            UnityEngine.UI.Image track = CreateImage("BarTrack", side.transform, new Color(0f, 0f, 0f, 0.45f));
+            RectTransform trackRect = track.rectTransform;
+            trackRect.anchorMin = trackRect.anchorMax = new Vector2(0.5f, 0.5f);
+            trackRect.pivot = new Vector2(0f, 0.5f);
+            trackRect.anchoredPosition = new Vector2(-122f, y - 18f);
+            trackRect.sizeDelta = new Vector2(302f, 10f);
+            UnityEngine.UI.Image fill = CreateImage("BarFill", track.transform,
+                i == 0 ? new Color(1f, 0.74f, 0.25f, 1f) : new Color(0.55f, 0.68f, 0.9f, 1f));
+            RectTransform fillRect = fill.rectTransform;
+            fillRect.anchorMin = fillRect.anchorMax = fillRect.pivot = new Vector2(0f, 0.5f);
+            fillRect.anchoredPosition = Vector2.zero;
+            fillRect.sizeDelta = new Vector2(0f, 10f);
+            damageBars.Add((fillRect, 302f * entry.Damage / max));
+        }
+        StartCoroutine(AnimateDamageBars());
+    }
+
+    // 막대가 0에서 차례로 차오른다.
+    private System.Collections.IEnumerator AnimateDamageBars()
+    {
+        float start = Time.unscaledTime + 0.3f;
+        while (true)
+        {
+            bool done = true;
+            for (int i = 0; i < damageBars.Count; i++)
+            {
+                float k = Mathf.Clamp01((Time.unscaledTime - start - i * 0.08f) / 0.5f);
+                if (k < 1f) done = false;
+                float eased = 1f - Mathf.Pow(1f - k, 3f);
+                damageBars[i].bar.sizeDelta = new Vector2(damageBars[i].width * eased, 10f);
+            }
+            if (done) yield break;
+            yield return null;
+        }
     }
 
     // ──────── 별·점수 ────────
@@ -255,6 +355,16 @@ public class StageResultUI : MonoBehaviour
     private TextMeshProUGUI scoreText;
     private int scorePercent;
     private int earnedStars;
+    private QuestManager.ChallengeReport challengeReport;
+    private readonly bool[] starOn = new bool[3];
+    private string finalScoreText;
+
+    private static QuestManager.ChallengeReport FindChallengeReport(string sceneName)
+    {
+        QuestManager.ChallengeReport report = QuestManager.Instance != null ? QuestManager.Instance.LastChallengeReport : null;
+        string stageId = LastOfTheTower.Progression.StageIds.FromSceneName(sceneName);
+        return report != null && report.StageId == stageId && report.Challenges.Count >= 3 ? report : null;
+    }
 
     // 점수 = 남은 기지 체력 / 최대 체력. 90% 이상 별 3개, 50% 이상 별 2개, 그 밖의 클리어는 별 1개.
     private void BuildScore(Transform panel, int remainingBaseHealth, int maxBaseHealth)
@@ -263,6 +373,22 @@ public class StageResultUI : MonoBehaviour
             ? Mathf.Clamp(Mathf.RoundToInt(100f * remainingBaseHealth / maxBaseHealth), 0, 100)
             : 0;
         earnedStars = scorePercent >= ThreeStarPercent ? 3 : scorePercent >= TwoStarPercent ? 2 : 1;
+        for (int i = 0; i < 3; i++)
+            starOn[i] = i < earnedStars;
+        finalScoreText = $"점수  {scorePercent}%";
+        if (challengeReport != null)
+        {
+            int newCount = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                starOn[i] = challengeReport.AchievedNow[i];
+                if (challengeReport.NewlyEarned[i]) newCount++;
+            }
+            finalScoreText = challengeReport.PointsGained > 0
+                ? $"새 별 {newCount}개  ·  연구 포인트 +{challengeReport.PointsGained}"
+                : $"이번 전투 별 {System.Array.FindAll(starOn, on => on).Length} / 3";
+            BuildChallengeRow(panel);
+        }
 
         Vector2[] positions = { new Vector2(-118f, 136f), new Vector2(0f, 146f), new Vector2(118f, 136f) };
         float[] sizes = { 84f, 104f, 84f };
@@ -283,8 +409,36 @@ public class StageResultUI : MonoBehaviour
             fill.gameObject.SetActive(false);
         }
 
-        scoreText = CreateText("Score", panel, "점수  0%", new Vector2(0f, 62f), new Vector2(400f, 50f), 34f,
-            new Color(1f, 0.84f, 0.42f, 1f));
+        scoreText = CreateText("Score", panel, challengeReport != null ? "" : "점수  0%", new Vector2(0f, 62f),
+            new Vector2(640f, 50f), challengeReport != null ? 30f : 34f, new Color(1f, 0.84f, 0.42f, 1f));
+    }
+
+    // 도전 과제 3개: 별 아이콘 + 조건, 처음 달성한 것은 NEW
+    private void BuildChallengeRow(Transform panel)
+    {
+        float[] xs = { -270f, 0f, 270f };
+        for (int i = 0; i < 3; i++)
+        {
+            QuestData challenge = challengeReport.Challenges[i];
+            bool on = challengeReport.AchievedNow[i];
+            UnityEngine.UI.Image icon = CreateImage("ChallengeStar" + (i + 1), panel, on ? Color.white : new Color(1f, 1f, 1f, 0.55f));
+            icon.sprite = on ? BattleUiSkin.StarFull : BattleUiSkin.StarEmpty;
+            RectTransform iconRect = icon.rectTransform;
+            iconRect.anchorMin = iconRect.anchorMax = iconRect.pivot = new Vector2(0.5f, 0.5f);
+            iconRect.anchoredPosition = new Vector2(xs[i] - 104f, -112f);
+            iconRect.sizeDelta = new Vector2(34f, 34f);
+            TextMeshProUGUI label = CreateText("Challenge" + (i + 1), panel, challenge.ConditionText,
+                new Vector2(xs[i] + 26f, -112f), new Vector2(210f, 34f), 21f,
+                on ? new Color(1f, 0.93f, 0.7f, 1f) : new Color(0.62f, 0.64f, 0.7f, 1f));
+            label.alignment = TextAlignmentOptions.Left;
+            string reward = challengeReport.NewlyEarned[i]
+                ? $"<color=#FFB25C>NEW +{challenge.rewardAmount}P</color>"
+                : on ? "<color=#9AA6B8>달성</color>" : $"<color=#6E7684>+{challenge.rewardAmount}P</color>";
+            TextMeshProUGUI tag = CreateText("ChallengeReward" + (i + 1), panel, reward,
+                new Vector2(xs[i] + 26f, -140f), new Vector2(210f, 26f), 17f, Color.white);
+            tag.alignment = TextAlignmentOptions.Left;
+            tag.richText = true;
+        }
     }
 
     // 패널이 뜬 뒤 별이 하나씩 튀어나오고 점수가 0%부터 올라간다.
@@ -297,13 +451,19 @@ public class StageResultUI : MonoBehaviour
         float nextStarTime = 0f;
         float[] popStart = { -1f, -1f, -1f };
 
-        while (elapsed < countDuration + 0.25f * earnedStars + 0.3f)
+        while (elapsed < countDuration + 0.25f * 3 + 0.3f)
         {
             elapsed += Time.unscaledDeltaTime;
-            int shown = Mathf.RoundToInt(scorePercent * Mathf.Clamp01(elapsed / countDuration));
-            scoreText.text = $"점수  {shown}%";
+            if (challengeReport == null)
+            {
+                int shown = Mathf.RoundToInt(scorePercent * Mathf.Clamp01(elapsed / countDuration));
+                scoreText.text = $"점수  {shown}%";
+            }
 
-            if (nextStar < earnedStars && elapsed >= nextStarTime)
+            // 달성한 별만 차례로 튀어나온다(도전 과제는 순서대로 ★1·★2·★3 자리).
+            while (nextStar < 3 && !starOn[nextStar])
+                nextStar++;
+            if (nextStar < 3 && elapsed >= nextStarTime)
             {
                 starFills[nextStar].gameObject.SetActive(true);
                 popStart[nextStar] = elapsed;
@@ -324,21 +484,27 @@ public class StageResultUI : MonoBehaviour
             yield return null;
         }
 
-        scoreText.text = $"점수  {scorePercent}%";
-        for (int i = 0; i < earnedStars; i++)
-            starFills[i].localScale = Vector3.one;
+        scoreText.text = finalScoreText;
+        for (int i = 0; i < 3; i++)
+            if (starOn[i])
+                starFills[i].localScale = Vector3.one;
     }
 
     private static string GetStageLabel(string sceneName)
     {
-        switch (LastOfTheTower.Progression.StageIds.FromSceneName(sceneName))
-        {
-            case LastOfTheTower.Progression.StageIds.StageOne: return "1스테이지";
-            case LastOfTheTower.Progression.StageIds.StageTwo: return "2스테이지";
-            case LastOfTheTower.Progression.StageIds.StageThree: return "3스테이지";
-            case LastOfTheTower.Progression.StageIds.StageFour: return "4스테이지";
-            default: return "스테이지";
-        }
+        string label = LastOfTheTower.Progression.StageIds.GetLabel(
+            LastOfTheTower.Progression.StageIds.FromSceneName(sceneName));
+        return label ?? "스테이지";
+    }
+
+    // "하드코어 1이", "5스테이지가"처럼 마지막 글자 발음에 맞는 조사를 붙인다.
+    private static string WithSubjectParticle(string label)
+    {
+        char last = label[label.Length - 1];
+        bool hasFinalConsonant = last >= '0' && last <= '9'
+            ? "013678".IndexOf(last) >= 0
+            : last >= '가' && last <= '힣' && (last - '가') % 28 != 0;
+        return label + (hasFinalConsonant ? "이" : "가");
     }
 
     private System.Collections.IEnumerator AnimateIn()

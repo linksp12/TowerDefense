@@ -162,8 +162,53 @@ public class AudioManager : MonoBehaviour
     {
         if (bgmSource == null)
             return;
-        float clipScale = gameBGM != null && bgmSource.clip == gameBGM ? battleBgmVolumeScale : 1f;
+        float clipScale = bgmSource.clip != null && IsBattleClip(bgmSource.clip) ? battleBgmVolumeScale : 1f;
         bgmSource.volume = bgmVolume * masterVolume * clipScale;
+    }
+
+    // ───────── 지역별 전투곡 · 보스전 곡 (Resources/Audio/BGM) ─────────
+    private AudioClip iceBattleBGM, fireBattleBGM, bossBattleBGM;
+    private bool battleClipsLoaded;
+
+    private void LoadBattleClips()
+    {
+        if (battleClipsLoaded)
+            return;
+        battleClipsLoaded = true;
+        iceBattleBGM = Resources.Load<AudioClip>("Audio/BGM/BattleIce");
+        fireBattleBGM = Resources.Load<AudioClip>("Audio/BGM/BattleFire");
+        bossBattleBGM = Resources.Load<AudioClip>("Audio/BGM/BattleBoss");
+    }
+
+    private bool IsBattleClip(AudioClip clip)
+    {
+        LoadBattleClips();
+        return clip == gameBGM || clip == iceBattleBGM || clip == fireBattleBGM || clip == bossBattleBGM;
+    }
+
+    // 숲은 기존 전투곡, 설원·화산 맵은 전용 곡(없으면 기존 곡)
+    private AudioClip BattleClipForCurrentStage()
+    {
+        LoadBattleClips();
+        StageEnvironment stage = FindAnyObjectByType<StageEnvironment>();
+        EnvironmentType type = stage != null ? stage.Type : EnvironmentType.Default;
+        if (type == EnvironmentType.Ice && iceBattleBGM != null) return iceBattleBGM;
+        if (type == EnvironmentType.Fire && fireBattleBGM != null) return fireBattleBGM;
+        return gameBGM;
+    }
+
+    /// <summary>보스가 나오면 보스전 곡으로 바꾼다.</summary>
+    public void PlayBossBGM()
+    {
+        LoadBattleClips();
+        if (bossBattleBGM != null)
+            PlayBGM(bossBattleBGM);
+    }
+
+    /// <summary>보스를 모두 쓰러뜨리면 이 스테이지의 전투곡으로 돌아간다.</summary>
+    public void ResumeBattleBGM()
+    {
+        PlayBGM(BattleClipForCurrentStage());
     }
 
     /// <summary>
@@ -214,18 +259,18 @@ public class AudioManager : MonoBehaviour
                 PlayBGM(stageSelectionBGM);
                 break;
 
-            case "Stage1Scene":
-            case "Stage2Scene":
-            case "Stage3Scene":
-            case "Stage4Scene":
-                PlayBGM(gameBGM);
-                break;
-
             case "ResultScene":
                 PlayBGM(resultBGM);
                 break;
 
             default:
+                // 본편·하드코어 전투 씬은 진행 목록(StageIds)에 등록된 씬이다. 지역(설원·화산)마다 전투곡이 다르다.
+                if (LastOfTheTower.Progression.StageIds.FromSceneName(sceneName) != null)
+                {
+                    PlayBGM(BattleClipForCurrentStage());
+                    break;
+                }
+
                 Debug.Log(
                     "AudioManager: 등록되지 않은 씬입니다. BGM 변경 없음: "
                     + sceneName

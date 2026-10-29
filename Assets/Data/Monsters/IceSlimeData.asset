@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: ice_slime
   monsterName: Ice Slime
-  maxHp: 480
+  maxHp: 300
   moveSpeed: 2
   goldReward: 15
   maxShield: 0
   baseDamage: 1
+  armorTrait: 0
   isBoss: 0
   defense: 0
   magicResistance: 0

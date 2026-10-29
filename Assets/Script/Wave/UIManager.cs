@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -50,6 +49,8 @@ public class UIManager : MonoBehaviour
         if (waveText != null && waveManager != null)
         {
             waveText.text = $" 0 / {waveManager.TotalWaves}";
+            // 다음 웨이브 미리보기·앞당기기
+            WavePreviewUI.Create(waveManager, waveText.canvas);
         }
     }
 
@@ -58,17 +59,40 @@ public class UIManager : MonoBehaviour
     {
         waveText.text = $" {waveNumber} / {waveManager.TotalWaves}";
 
-        bool isStage4BossWave =
-            SceneManager.GetActiveScene().name == "Stage4Scene" &&
-            waveNumber == 4;
-
-        if (!isStage4BossWave)
+        // 보스 웨이브는 보스 경고 연출이 대신 나오므로 일반 배너를 띄우지 않는다.
+        if (!IsBossWaveWithWarning(waveNumber))
         {
             bool lastWave = waveManager != null && waveNumber >= waveManager.TotalWaves;
             ShowBanner($"WAVE {waveNumber}",
                 lastWave ? "<color=#FFB25C>마지막 웨이브입니다!</color>" : "몬스터가 몰려옵니다!",
                 $"Wave {waveNumber} 시작!");
         }
+    }
+
+    private bool IsBossWaveWithWarning(int waveNumber)
+    {
+        if (BossWarningUI.Instance == null || waveManager == null || waveManager.waves == null)
+            return false;
+
+        int index = waveNumber - 1;
+        if (index < 0 || index >= waveManager.waves.Length || waveManager.waves[index] == null)
+            return false;
+
+        WaveData.SpawnInfo[] spawnInfos = waveManager.waves[index].spawnInfos;
+        if (spawnInfos == null)
+            return false;
+
+        foreach (WaveData.SpawnInfo spawnInfo in spawnInfos)
+        {
+            if (spawnInfo == null || spawnInfo.monsterPrefab == null)
+                continue;
+
+            MonsterHealth health = spawnInfo.monsterPrefab.GetComponent<MonsterHealth>();
+            if (health != null && health.monsterData != null && health.monsterData.isBoss)
+                return true;
+        }
+
+        return false;
     }
 
     // 웨이브 클리어
@@ -108,6 +132,12 @@ public class UIManager : MonoBehaviour
             waveBanner.gameObject.SetActive(false);
     }
 
+    // 맵 기믹(용암 분출·눈보라) 안내
+    public void ShowHazardBanner(string title, string subtitle)
+    {
+        ShowBanner(title, subtitle, title);
+    }
+
     // 보스 등장 알림 (BossInfoUI에서 첫 보스 등록 시 호출)
     public void ShowBossBanner(string bossName)
     {
@@ -126,6 +156,9 @@ public class UIManager : MonoBehaviour
 
         if (bannerRoutine != null)
             StopCoroutine(bannerRoutine);
+        // 보스 체력 UI가 떠 있으면 그 아래로 내려 겹치지 않게 한다.
+        if (BossInfoUI.Instance != null && BossInfoUI.Instance.IsTopBarVisible)
+            restY = Mathf.Min(restY, -240f);
         bannerTitle.text = title;
         bannerSubtitle.text = subtitle;
         bannerRestY = restY;

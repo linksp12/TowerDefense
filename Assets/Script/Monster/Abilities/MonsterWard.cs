@@ -65,11 +65,19 @@ public class MonsterWard : MonoBehaviour
         {
             shell = CreateChild("WardShell", shellSprite, 2);
             // 몸을 감싸도록 껍질 크기·위치를 맞춘다. (피벗이 발밑인 보스도 몸 가운데에)
+            // 스프라이트 사각형은 투명 여백까지 포함해 실제 몸보다 크므로, 몸 크기는 충돌체로 잰다.
             if (body != null && body.sprite != null)
             {
                 Bounds b = body.sprite.bounds;
+                Vector2 bodySize = b.size;
+                if (TryGetComponent(out Collider2D col) && col.enabled)
+                {
+                    Vector3 lossy = transform.lossyScale;
+                    bodySize = new Vector2(col.bounds.size.x / Mathf.Max(0.0001f, Mathf.Abs(lossy.x)),
+                        col.bounds.size.y / Mathf.Max(0.0001f, Mathf.Abs(lossy.y)));
+                }
                 Vector2 shellSize = shellSprite.bounds.size;
-                float scale = Mathf.Max(b.size.x / (shellSize.x * 0.85f), b.size.y / (shellSize.y * 0.8f));
+                float scale = Mathf.Max(bodySize.x / shellSize.x, bodySize.y / shellSize.y) * 1.15f;
                 shell.transform.localScale = Vector3.one * scale;
                 shell.transform.localPosition = new Vector3(b.center.x, b.center.y, 0f);
             }

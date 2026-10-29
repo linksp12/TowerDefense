@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
@@ -12,13 +13,17 @@ public class MonsterSpawner : MonoBehaviour
     public Transform[] secondaryWaypoints;
     public bool useMultipleRoutes = false;
 
-    [Header("4개 출발 경로 (Stage 4)")]
+    [Header("여러 출발 경로 (Stage 4 이후, Path1부터 필요한 개수만)")]
     public Transform[] path1Waypoints;
     public Transform[] path2Waypoints;
     public Transform[] path3Waypoints;
     public Transform[] path4Waypoints;
 
     private int runningCoroutinesCount = 0;
+
+    // Inspector 배열에 남은 빈칸(삭제된 웨이포인트)을 뺀 경로. 원본 배열 단위로 한 번만 만든다.
+    private readonly Dictionary<Transform[], Transform[]> compactRoutes =
+        new Dictionary<Transform[], Transform[]>();
 
     public bool HasSpawnError { get; protected set; }
 
@@ -55,20 +60,9 @@ public class MonsterSpawner : MonoBehaviour
         }
 
         /*
-         * Stage 4 경로가 일부만 연결된 경우 오류
+         * 여러 경로 모드는 Path1부터 필요한 개수만 연결한다.
+         * 웨이브가 쓰는 경로가 비어 있으면 아래 검사에서 막는다.
          */
-        if (HasAnyStage4Routes() &&
-            !HasStage4Routes())
-        {
-            HasSpawnError = true;
-
-            Debug.LogError(
-                "MonsterSpawner: Stage 4의 4개 경로가 모두 연결되어야 합니다.",
-                this
-            );
-
-            yield break;
-        }
 
         /*
          * 생성 전에 모든 SpawnInfo를 검사한다.
@@ -313,7 +307,7 @@ public class MonsterSpawner : MonoBehaviour
                 info.pathIndex > 4)
             {
                 Debug.LogError(
-                    $"MonsterSpawner: Stage 4에서는 Path Index 1~4만 사용할 수 있습니다. 입력값={info.pathIndex}",
+                    $"MonsterSpawner: 여러 경로 모드에서는 Path Index 1~4만 사용할 수 있습니다. 입력값={info.pathIndex}",
                     this
                 );
 
@@ -352,8 +346,25 @@ public class MonsterSpawner : MonoBehaviour
     private Transform[] GetPathWaypoints(
         int pathIndex)
     {
+        Transform[] route = GetRawPathWaypoints(pathIndex);
+
+        if (route == null)
+            return null;
+
+        if (!compactRoutes.TryGetValue(route, out Transform[] compact))
+        {
+            compact = Array.FindAll(route, waypoint => waypoint != null);
+            compactRoutes[route] = compact;
+        }
+
+        return compact;
+    }
+
+    private Transform[] GetRawPathWaypoints(
+        int pathIndex)
+    {
         /*
-         * Stage 4
+         * Stage 4 이후 여러 경로
          */
         if (HasStage4Routes())
         {
@@ -373,7 +384,7 @@ public class MonsterSpawner : MonoBehaviour
 
                 default:
                     Debug.LogError(
-                        $"MonsterSpawner: Stage 4의 잘못된 Path Index({pathIndex})입니다.",
+                        $"MonsterSpawner: 여러 경로 모드의 잘못된 Path Index({pathIndex})입니다.",
                         this
                     );
 
@@ -420,27 +431,17 @@ public class MonsterSpawner : MonoBehaviour
         return waypoints;
     }
 
+    // Path1이 연결돼 있으면 여러 경로 모드다. Path2~4는 맵에 필요한 만큼만 연결한다.
     private bool HasStage4Routes()
     {
-        return HasWaypoints(path1Waypoints) &&
-               HasWaypoints(path2Waypoints) &&
-               HasWaypoints(path3Waypoints) &&
-               HasWaypoints(path4Waypoints);
-    }
-
-    private bool HasAnyStage4Routes()
-    {
-        return HasWaypoints(path1Waypoints) ||
-               HasWaypoints(path2Waypoints) ||
-               HasWaypoints(path3Waypoints) ||
-               HasWaypoints(path4Waypoints);
+        return HasWaypoints(path1Waypoints);
     }
 
     private bool HasWaypoints(
         Transform[] targetWaypoints)
     {
         return targetWaypoints != null &&
-               targetWaypoints.Length > 0;
+               Array.Exists(targetWaypoints, waypoint => waypoint != null);
     }
 }
 

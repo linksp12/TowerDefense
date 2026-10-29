@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f37b9aedf477604aa911c3f8d811fed, type: 3}
+  m_Name: stage_seven_star3
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: stage_seven_star3
+  questTitle: "\uBD88 \uC18D\uC131 \uD0C0\uC6CC \uC5C6\uC774"
+  questDescription: "7\uC2A4\uD14C\uC774\uC9C0: \uBD88 \uC18D\uC131 \uD0C0\uC6CC
+    \uC5C6\uC774 \uD074\uB9AC\uC5B4"
+  targetStageId: stage_seven
+  kind: 1
+  star: 3
+  minRemainingBaseHealth: 0
+  noBaseDamage: 0
+  maxTowers: 0
+  bannedTowerIds:
+  - cannon_tower
+  - laser_tower
+  rewardAmount: 3

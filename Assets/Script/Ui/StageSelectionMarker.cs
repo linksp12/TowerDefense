@@ -12,6 +12,8 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private GameObject selectionAccent;
     [SerializeField] private GameObject detailsPanel;
     [SerializeField] private bool previewOnly;
+    [Tooltip("하드코어 표지판은 붉은 색으로 표시한다.")]
+    [SerializeField] private bool hardcore;
 
     private bool hovered;
     private bool progressKnown = true;
@@ -99,12 +101,24 @@ public class StageSelectionMarker : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Refresh()
     {
         bool highlighted = unlocked && (hovered || IsSelected);
-        frame.color = highlighted
-            ? new Color32(255, 217, 126, 255)
-            : unlocked ? new Color32(163, 121, 57, 255) : new Color32(89, 95, 100, 255);
-        surface.color = highlighted
-            ? new Color32(29, 45, 58, 250)
-            : new Color32(14, 26, 37, 245);
+        if (hardcore)
+        {
+            frame.color = highlighted
+                ? new Color32(255, 146, 112, 255)
+                : unlocked ? new Color32(176, 64, 48, 255) : new Color32(96, 72, 72, 255);
+            surface.color = highlighted
+                ? new Color32(58, 26, 28, 250)
+                : new Color32(34, 14, 18, 245);
+        }
+        else
+        {
+            frame.color = highlighted
+                ? new Color32(255, 217, 126, 255)
+                : unlocked ? new Color32(163, 121, 57, 255) : new Color32(89, 95, 100, 255);
+            surface.color = highlighted
+                ? new Color32(29, 45, 58, 250)
+                : new Color32(14, 26, 37, 245);
+        }
         statusText.text = !unlocked ? lockMessage : IsSelected ? "선택됨" : hovered ? "클릭하여 선택" :
             previewOnly ? "상세 보기" : !progressKnown ? "기록 확인 불가" :
             cleared ? "다시 도전 가능" : "도전 가능";

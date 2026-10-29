@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f37b9aedf477604aa911c3f8d811fed, type: 3}
+  m_Name: 04_quest
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: archer_corps
+  questTitle: "\uAD81\uC218 \uBD80\uB300"
+  questDescription: "3\uC2A4\uD14C\uC774\uC9C0\uB97C \uD654\uC0B4 \uD0C0\uC6CC\uB9CC\uC73C\uB85C
+    \uD074\uB9AC\uC5B4\uD558\uC138\uC694"
+  targetStageId: stage_three
+  kind: 0
+  star: 0
+  minRemainingBaseHealth: 0
+  noBaseDamage: 0
+  maxTowers: 0
+  bannedTowerIds:
+  - cannon_tower
+  - magic_tower
+  - laser_tower
+  - sniper_tower
+  - shock_tower
+  rewardAmount: 3

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         : 15;
 
     private int currentPlayerHp;
+    public int CurrentPlayerHp => currentPlayerHp;
     public TextMeshProUGUI hpText;
     public Image damageImage;
     public AudioSource audioSource;
@@ -39,10 +40,17 @@ public class GameManager : MonoBehaviour
     private Vector3? pendingHitPosition;
     private bool isSceneTransitioning = false;
     private LastOfTheTower.Progression.BattleSession battleSession;
+
+    // 이번 전투의 퀘스트·도전 과제 판정 기록(설치한 타워, 기지 피해)
+    public BattleChallengeStats ChallengeStats { get; } = new BattleChallengeStats();
+    // 이번 전투의 플레이 기록(처치 수·타워별 피해량·설치 수·시간). 결과창과 누적 플레이 기록이 읽는다.
+    // (시간을 읽으므로 필드 초기화가 아니라 Awake에서 만든다)
+    public BattleRecord Record { get; private set; }
     private LastOfTheTower.Progression.StageProgressService stageProgress;
 
     private void Awake()
     {
+        Record = new BattleRecord();
         if (Instance == null)
             Instance = this;
         else
@@ -76,6 +84,10 @@ public class GameManager : MonoBehaviour
             ? moneyText.canvas
             : FindAnyObjectByType<Canvas>();
         GameSpeedController.Create(gameCanvas, testTimeScale);
+
+        // 아직 깨지 않은 보스 스테이지는 시작 전에 짧은 대사를 보여 준다.
+        if (stageId != null && !stageProgress.IsCleared(stageId))
+            StageDialogue.TryShow(stageId);
     }
 
     public void AddMoney(int amount)
@@ -147,6 +159,8 @@ public class GameManager : MonoBehaviour
     {
         if (isGameEnded) return;
 
+        if (damage > 0)
+            ChallengeStats.RecordBaseDamage();
         currentPlayerHp -= damage;
 
         if (currentPlayerHp < 0)
@@ -222,12 +236,15 @@ public class GameManager : MonoBehaviour
 
         isGameEnded = true;
         isSceneTransitioning = true;
+        Record.Finish();
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        string nextSceneName = GetNextStageSceneName(currentSceneName);
-        string nextStageId = LastOfTheTower.Progression.StageIds.FromSceneName(nextSceneName);
+        string currentStageId = LastOfTheTower.Progression.StageIds.FromSceneName(currentSceneName);
+        string nextStageId = LastOfTheTower.Progression.StageIds.GetNextStage(currentStageId);
+        string nextSceneName = LastOfTheTower.Progression.StageIds.ToSceneName(nextStageId);
         bool newlyUnlocked = false;
         bool progressSaveFailed = false;
+        bool trueEnding = false;
 
         if (battleSession != null && battleSession.TryComplete(victory, currentPlayerHp, out var result))
         {
@@ -242,10 +259,16 @@ public class GameManager : MonoBehaviour
                 !wasUnlocked && LastOfTheTower.Progression.StageIds.IsUnlocked(stageProgress, nextStageId);
             if (progressSaveFailed)
                 Debug.LogError($"스테이지 클리어 기록 저장 실패: {stageProgress.LastError}", this);
+            // 이번 승리로 하드코어 전장을 처음 모두 클리어했으면 진엔딩을 한 번 보여 준다.
+            trueEnding = status == LastOfTheTower.Progression.StageClearRecordStatus.SaveRequested &&
+                LastOfTheTower.Progression.StageIds.IsHardcore(currentStageId) && TowerSkin.IsUnlocked;
+
+            // 확정된 전투 기록을 이번 여정의 플레이 기록(엔딩 카드)에 한 번만 더한다.
+            LastOfTheTower.Progression.PlayRecord.AddBattle(Record);
 
             // 같은 확정 결과(스테이지·승패·남은 체력)를 퀘스트 판정에 한 번만 전달한다.
             if (QuestManager.Instance != null)
-                QuestManager.Instance.OnBattleResult(result);
+                QuestManager.Instance.OnBattleResult(result, ChallengeStats);
         }
 
         Debug.Log(victory ? "게임 클리어" : "게임 오버");
@@ -259,16 +282,17 @@ public class GameManager : MonoBehaviour
 
         PrepareGameUiForResult();
 
-        // 최종 스테이지 승리만 기존 ResultScene으로 이동한다.
-        if (victory && currentSceneName == "Stage4Scene")
+        // 본편 최종 스테이지 승리와 하드코어 완주(진엔딩)는 ResultScene(엔딩)으로 이동한다.
+        if (victory && (trueEnding || currentStageId == LastOfTheTower.Progression.StageIds.FinalMainStage))
         {
+            StorySceneManager.RequestedSequence = trueEnding ? StorySceneManager.Sequence.TrueEnding : (StorySceneManager.Sequence?)null;
             ResultSceneManager.isVictory = true;
             ResultSceneManager.restartSceneName = currentSceneName;
             StartCoroutine(LoadResultScene());
             return;
         }
 
-        // Stage1~3 승리와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
+        // 그 외 승리(하드코어 포함)와 모든 스테이지 패배는 현재 화면 위에 결과창을 표시한다.
         StageResultUI.Show(victory, currentSceneName, currentPlayerHp, maxPlayerHp,
             newlyUnlocked ? nextSceneName : null, progressSaveFailed);
         Time.timeScale = 0f;
@@ -294,21 +318,10 @@ public class GameManager : MonoBehaviour
         UIManager uiManager = FindAnyObjectByType<UIManager>();
         if (uiManager != null)
             uiManager.PrepareForGameResult();
-    }
 
-    private string GetNextStageSceneName(string currentSceneName)
-    {
-        switch (currentSceneName)
-        {
-            case "Stage1Scene":
-                return "Stage2Scene";
-            case "Stage2Scene":
-                return "Stage3Scene";
-            case "Stage3Scene":
-                return "Stage4Scene";
-            default:
-                return string.Empty;
-        }
+        PauseManager pauseManager = FindAnyObjectByType<PauseManager>();
+        if (pauseManager != null)
+            pauseManager.CloseForResult();
     }
 
     private IEnumerator LoadResultScene()

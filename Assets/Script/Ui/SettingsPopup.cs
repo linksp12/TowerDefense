@@ -144,6 +144,11 @@ public class SettingsPopup : MonoBehaviour
 
     private void LateUpdate()
     {
+        // 값을 알림 없이 넣는 경우(열기·기본값·취소)도 있어 열려 있는 동안 % 표시를 맞춘다.
+        if (settingsPanel != null && settingsPanel.activeSelf)
+            foreach (var pair in valueLabels)
+                pair.Value.text = Mathf.RoundToInt(Mathf.InverseLerp(pair.Key.minValue, pair.Key.maxValue, pair.Key.value) * 100f) + "%";
+
         if (settingsParentRect == null) return;
 
         Vector2 currentSize = settingsParentRect.rect.size;
@@ -327,38 +332,39 @@ public class SettingsPopup : MonoBehaviour
         if (uiVolumeSlider != null)
             uiVolumeSlider.gameObject.SetActive(false);
 
-        SetupText("TitleText", new Vector2(0f, 367f), new Vector2(430f, 64f), 42f, true);
-        SetupText("ScreenMode", new Vector2(-205f, 300f), new Vector2(210f, 48f), 25f);
-        SetupText("Resolution", new Vector2(-205f, 235f), new Vector2(210f, 48f), 25f);
-        SetupText("Frame", new Vector2(-205f, 170f), new Vector2(210f, 48f), 25f);
-        SetupText("Brightness", new Vector2(-205f, 105f), new Vector2(210f, 48f), 25f);
-        SetupText("Popup", new Vector2(-205f, 35f), new Vector2(210f, 48f), 25f);
-        SetupText("ShakeValue", new Vector2(300f, 35f), new Vector2(90f, 48f), 22f);
-        SetupText("Master", new Vector2(-205f, -70f), new Vector2(210f, 48f), 25f);
-        SetupText("BGM", new Vector2(-205f, -145f), new Vector2(210f, 48f), 25f);
-        SetupText("SFX", new Vector2(-205f, -220f), new Vector2(210f, 48f), 25f);
+        // 두 묶음(화면·게임 / 소리)으로 나눠 배치한다. 판·테두리 등 도트 스킨은 ApplyPixelSkin에서 입힌다.
+        SetupText("TitleText", new Vector2(0f, 410f), new Vector2(430f, 64f), 38f, true);
+        SetupText("ScreenMode", new Vector2(-200f, 282f), new Vector2(220f, 48f), 25f);
+        SetupText("Resolution", new Vector2(-200f, 222f), new Vector2(220f, 48f), 25f);
+        SetupText("Frame", new Vector2(-200f, 162f), new Vector2(220f, 48f), 25f);
+        SetupText("Brightness", new Vector2(-200f, 102f), new Vector2(220f, 48f), 25f);
+        SetupText("Popup", new Vector2(-200f, 42f), new Vector2(220f, 48f), 25f);
+        SetupText("ShakeValue", new Vector2(305f, 42f), new Vector2(80f, 48f), 21f);
+        SetupText("Master", new Vector2(-200f, -82f), new Vector2(220f, 48f), 25f);
+        SetupText("BGM", new Vector2(-200f, -142f), new Vector2(220f, 48f), 25f);
+        SetupText("SFX", new Vector2(-200f, -202f), new Vector2(220f, 48f), 25f);
 
-        SetupControl(screenModeDropdown, new Vector2(145f, 300f), new Vector2(390f, 50f));
-        SetupControl(resolutionDropdown, new Vector2(145f, 235f), new Vector2(390f, 50f));
-        SetupControl(frameRateDropdown, new Vector2(145f, 170f), new Vector2(390f, 50f));
-        SetupControl(brightnessSlider, new Vector2(145f, 105f), new Vector2(390f, 38f));
-        SetupControl(popupAlphaSlider, new Vector2(95f, 35f), new Vector2(280f, 38f));
-        SetupControl(masterVolumeSlider, new Vector2(145f, -70f), new Vector2(390f, 38f));
-        SetupControl(bgmVolumeSlider, new Vector2(145f, -145f), new Vector2(390f, 38f));
-        SetupControl(sfxVolumeSlider, new Vector2(145f, -220f), new Vector2(390f, 38f));
+        SetupControl(screenModeDropdown, new Vector2(110f, 282f), new Vector2(300f, 46f));
+        SetupControl(resolutionDropdown, new Vector2(110f, 222f), new Vector2(300f, 46f));
+        SetupControl(frameRateDropdown, new Vector2(110f, 162f), new Vector2(300f, 46f));
+        SetupControl(brightnessSlider, new Vector2(110f, 102f), new Vector2(300f, 34f));
+        SetupControl(popupAlphaSlider, new Vector2(110f, 42f), new Vector2(300f, 34f));
+        SetupControl(masterVolumeSlider, new Vector2(110f, -82f), new Vector2(300f, 34f));
+        SetupControl(bgmVolumeSlider, new Vector2(110f, -142f), new Vector2(300f, 34f));
+        SetupControl(sfxVolumeSlider, new Vector2(110f, -202f), new Vector2(300f, 34f));
 
         defaultsButton = CreateActionButton(
-            "DefaultsButton", "기본값", new Vector2(-210f, -345f),
+            "DefaultsButton", "기본값", new Vector2(-210f, -350f),
             new Color(0.26f, 0.30f, 0.38f, 1f));
         saveButton = CreateActionButton(
-            "SaveButton", "저장", new Vector2(0f, -345f),
+            "SaveButton", "저장", new Vector2(0f, -350f),
             new Color(0.63f, 0.43f, 0.16f, 1f));
         cancelButton = CreateActionButton(
-            "CancelButton", "취소", new Vector2(210f, -345f),
+            "CancelButton", "취소", new Vector2(210f, -350f),
             new Color(0.40f, 0.22f, 0.24f, 1f));
 
         resetDataButton = CreateActionButton(
-            "ResetDataButton", "데이터 초기화", new Vector2(0f, -282f),
+            "ResetDataButton", "데이터 초기화", new Vector2(0f, -276f),
             new Color(0.48f, 0.20f, 0.20f, 1f));
         resetDataButton.GetComponent<RectTransform>().sizeDelta = new Vector2(260f, 42f);
         resetDataButton.GetComponentInChildren<TMP_Text>().fontSize = 23f;
@@ -381,8 +387,287 @@ public class SettingsPopup : MonoBehaviour
         }
 
         ApplyOptionFonts();
+        ApplyPixelSkin();
 
         ApplyResponsiveScale();
+    }
+
+    // ──────── 도트 스킨(광장·전투 UI와 같은 테두리·판·버튼) ────────
+
+    private readonly Dictionary<Slider, TMP_Text> valueLabels = new Dictionary<Slider, TMP_Text>();
+    private static readonly Color SkinGold = new Color32(255, 214, 120, 255);
+    private static readonly Color SkinIvory = new Color32(244, 236, 220, 255);
+    private static readonly Color SkinDarkText = new Color32(58, 36, 18, 255);
+
+    private void ApplyPixelSkin()
+    {
+        if (settingsPanel == null) return;
+        Transform panel = settingsPanel.transform;
+
+        // 뒤 화면을 어둡게 가리고 클릭을 막는다(패널과 함께 나타나고 사라짐).
+        Image dim = MakeSkinImage("Dim", panel, UiFx.Pixel, new Color(0f, 0f, 0f, 0.6f));
+        dim.rectTransform.anchorMin = Vector2.zero;
+        dim.rectTransform.anchorMax = Vector2.one;
+        dim.rectTransform.offsetMin = new Vector2(-4000f, -4000f);
+        dim.rectTransform.offsetMax = new Vector2(4000f, 4000f);
+        dim.raycastTarget = true;
+        dim.transform.SetAsFirstSibling();
+
+        if (settingsPanel.TryGetComponent(out Image panelImage))
+            BattleUiSkin.Skin(panelImage, BattleUiSkin.Frame, 2f);
+
+        // 제목 리본
+        Image banner = MakeSkinImage("TitleBanner", panel, BattleUiSkin.Banner, Color.white);
+        if (banner.sprite != null) BattleUiSkin.Skin(banner, BattleUiSkin.Banner, 1f);
+        PlaceSkin(banner.rectTransform, new Vector2(0f, 404f), new Vector2(460f, 110f));
+        banner.transform.SetSiblingIndex(1);
+        Transform title = panel.Find("TitleText");
+        if (title != null && title.TryGetComponent(out TMP_Text titleText))
+        {
+            titleText.text = "설정";
+            titleText.color = SkinIvory;
+            titleText.outlineWidth = 0.22f;
+            titleText.outlineColor = new Color(0.25f, 0.05f, 0.03f, 1f);
+            title.SetAsLastSibling();
+        }
+
+        // 묶음 판과 머리말
+        MakeSection("SectionDisplay", "화면 · 게임", new Vector2(0f, 176f), new Vector2(690f, 330f), panel);
+        MakeSection("SectionSound", "소리", new Vector2(0f, -131f), new Vector2(690f, 230f), panel);
+
+        foreach (string labelName in new[] { "ScreenMode", "Resolution", "Frame", "Brightness", "Popup", "Master", "BGM", "SFX" })
+        {
+            Transform label = panel.Find(labelName);
+            if (label == null || !label.TryGetComponent(out TMP_Text text)) continue;
+            text.alignment = TextAlignmentOptions.Left;
+            text.color = SkinIvory;
+            text.fontSize = 24f;
+        }
+        Transform shake = panel.Find("ShakeValue");
+        if (shake != null && shake.TryGetComponent(out TMP_Text shakeText))
+        {
+            shakeText.color = SkinGold;
+            shakeText.alignment = TextAlignmentOptions.Left;
+        }
+
+        SkinDropdown(screenModeDropdown);
+        SkinDropdown(resolutionDropdown);
+        SkinDropdown(frameRateDropdown);
+        SkinSlider(brightnessSlider, true);
+        SkinSlider(popupAlphaSlider, false);
+        SkinSlider(masterVolumeSlider, true);
+        SkinSlider(bgmVolumeSlider, true);
+        SkinSlider(sfxVolumeSlider, true);
+
+        SkinButton(defaultsButton, BattleUiSkin.DarkButton, Color.white, SkinIvory);
+        SkinButton(saveButton, BattleUiSkin.GoldButton, Color.white, SkinDarkText);
+        SkinButton(cancelButton, BattleUiSkin.DarkButton, Color.white, SkinIvory);
+        SkinButton(resetDataButton, BattleUiSkin.DarkButton, new Color(1f, 0.62f, 0.55f), new Color32(255, 196, 180, 255));
+        if (resetDataButton != null)
+            resetDataButton.GetComponent<RectTransform>().sizeDelta = new Vector2(240f, 44f);
+
+        if (closeButton != null)
+        {
+            SkinButton(closeButton, BattleUiSkin.DarkButton, Color.white, SkinIvory);
+            var closeRect = closeButton.GetComponent<RectTransform>();
+            closeRect.anchoredPosition = new Vector2(-18f, -18f);
+            closeRect.sizeDelta = new Vector2(54f, 54f);
+        }
+
+        if (resetConfirmation != null)
+        {
+            Transform card = resetConfirmation.transform.Find("WarningPanel");
+            if (card != null)
+            {
+                if (card.TryGetComponent(out Outline outline)) outline.enabled = false;
+                if (card.TryGetComponent(out Image cardImage)) BattleUiSkin.Skin(cardImage, BattleUiSkin.Frame, 2f);
+                SkinButton(card.Find("YesButton")?.GetComponent<Button>(), BattleUiSkin.DarkButton,
+                    new Color(1f, 0.62f, 0.55f), new Color32(255, 196, 180, 255));
+                SkinButton(card.Find("NoButton")?.GetComponent<Button>(), BattleUiSkin.DarkButton, Color.white, SkinIvory);
+            }
+        }
+    }
+
+    private void MakeSection(string name, string header, Vector2 position, Vector2 size, Transform panel)
+    {
+        Image plate = MakeSkinImage(name, panel, BattleUiSkin.Plate, Color.white);
+        if (plate.sprite != null) BattleUiSkin.Skin(plate, BattleUiSkin.Plate, 2f);
+        else plate.color = new Color(0.12f, 0.09f, 0.07f, 0.9f);
+        PlaceSkin(plate.rectTransform, position, size);
+        plate.transform.SetSiblingIndex(2);
+
+        var headerObject = new GameObject("Header", typeof(RectTransform), typeof(TextMeshProUGUI));
+        headerObject.transform.SetParent(plate.transform, false);
+        var text = headerObject.GetComponent<TextMeshProUGUI>();
+        text.text = header;
+        text.fontSize = 20f;
+        text.alignment = TextAlignmentOptions.Left;
+        text.raycastTarget = false;
+        ApplyFont(text, SkinGold);
+        text.characterSpacing = 4f;
+        var rect = text.rectTransform;
+        rect.anchorMin = rect.anchorMax = new Vector2(0f, 1f);
+        rect.pivot = new Vector2(0f, 1f);
+        rect.anchoredPosition = new Vector2(26f, -10f);
+        rect.sizeDelta = new Vector2(300f, 28f);
+    }
+
+    private void SkinSlider(Slider slider, bool showPercent)
+    {
+        if (slider == null) return;
+        var background = slider.transform.Find("Background")?.GetComponent<Image>();
+        if (background != null)
+        {
+            BattleUiSkin.Skin(background, BattleUiSkin.Inset, 3f);
+            background.rectTransform.anchorMin = new Vector2(0f, 0.22f);
+            background.rectTransform.anchorMax = new Vector2(1f, 0.78f);
+            background.rectTransform.offsetMin = background.rectTransform.offsetMax = Vector2.zero;
+        }
+        if (slider.fillRect != null)
+        {
+            var fillArea = slider.fillRect.parent as RectTransform;
+            if (fillArea != null)
+            {
+                fillArea.anchorMin = new Vector2(0f, 0.22f);
+                fillArea.anchorMax = new Vector2(1f, 0.78f);
+                fillArea.offsetMin = new Vector2(5f, 5f);
+                fillArea.offsetMax = new Vector2(-5f, -5f);
+            }
+            slider.fillRect.offsetMin = slider.fillRect.offsetMax = Vector2.zero;
+            if (slider.fillRect.TryGetComponent(out Image fill))
+            {
+                if (BattleUiSkin.HpFill != null) BattleUiSkin.Skin(fill, BattleUiSkin.HpFill, 2f);
+                fill.color = new Color(1f, 0.76f, 0.3f, 1f);
+            }
+        }
+        if (slider.handleRect != null)
+        {
+            if (slider.handleRect.parent is RectTransform handleArea)
+            {
+                handleArea.offsetMin = new Vector2(10f, 0f);
+                handleArea.offsetMax = new Vector2(-10f, 0f);
+            }
+            slider.handleRect.sizeDelta = new Vector2(22f, 4f);
+            if (slider.handleRect.TryGetComponent(out Image handle))
+                BattleUiSkin.Skin(handle, BattleUiSkin.GoldButton, 3f);
+        }
+        ColorBlock colors = slider.colors;
+        colors.normalColor = Color.white;
+        colors.highlightedColor = new Color(1f, 0.93f, 0.75f, 1f);
+        colors.pressedColor = new Color(0.85f, 0.75f, 0.55f, 1f);
+        colors.selectedColor = colors.highlightedColor;
+        slider.colors = colors;
+
+        if (!showPercent || slider.transform.Find("Value") != null) return;
+        var valueObject = new GameObject("Value", typeof(RectTransform), typeof(TextMeshProUGUI));
+        valueObject.transform.SetParent(slider.transform, false);
+        var value = valueObject.GetComponent<TextMeshProUGUI>();
+        value.fontSize = 21f;
+        value.alignment = TextAlignmentOptions.Left;
+        value.raycastTarget = false;
+        ApplyFont(value, SkinGold);
+        var rect = value.rectTransform;
+        rect.anchorMin = rect.anchorMax = new Vector2(1f, 0.5f);
+        rect.pivot = new Vector2(0f, 0.5f);
+        rect.anchoredPosition = new Vector2(16f, 0f);
+        rect.sizeDelta = new Vector2(80f, 34f);
+        valueLabels[slider] = value;
+    }
+
+    private void SkinDropdown(TMP_Dropdown dropdown)
+    {
+        if (dropdown == null) return;
+        if (dropdown.TryGetComponent(out Image box)) BattleUiSkin.Skin(box, BattleUiSkin.DarkButton, 3f);
+        ColorBlock colors = dropdown.colors;
+        colors.normalColor = Color.white;
+        colors.highlightedColor = new Color(1f, 0.9f, 0.7f, 1f);
+        colors.pressedColor = new Color(0.85f, 0.75f, 0.55f, 1f);
+        colors.selectedColor = colors.highlightedColor;
+        dropdown.colors = colors;
+        if (dropdown.captionText != null)
+        {
+            dropdown.captionText.color = SkinIvory;
+            dropdown.captionText.fontSize = 21f;
+            dropdown.captionText.enableAutoSizing = false;
+            dropdown.captionText.rectTransform.offsetMin = new Vector2(18f, dropdown.captionText.rectTransform.offsetMin.y);
+        }
+        var arrow = dropdown.transform.Find("Arrow")?.GetComponent<Image>();
+        if (arrow != null) arrow.color = SkinGold;
+
+        RectTransform template = dropdown.template;
+        if (template == null) return;
+        if (template.TryGetComponent(out Image list)) BattleUiSkin.Skin(list, BattleUiSkin.Plate, 2f);
+        var item = template.Find("Viewport/Content/Item");
+        if (item != null)
+        {
+            // 글자를 키운 만큼 항목 높이도 키운다(목록 높이는 드롭다운이 항목 높이로 계산).
+            var itemRect = (RectTransform)item;
+            itemRect.sizeDelta = new Vector2(itemRect.sizeDelta.x, 36f);
+            var content = item.parent as RectTransform;
+            if (content != null) content.sizeDelta = new Vector2(content.sizeDelta.x, 40f);
+            var itemBackground = item.Find("Item Background")?.GetComponent<Image>();
+            if (itemBackground != null) itemBackground.color = Color.white;
+            if (item.TryGetComponent(out Toggle toggle))
+            {
+                ColorBlock itemColors = toggle.colors;
+                itemColors.normalColor = new Color(1f, 1f, 1f, 0f);
+                itemColors.highlightedColor = new Color(1f, 0.8f, 0.4f, 0.35f);
+                itemColors.selectedColor = itemColors.highlightedColor;
+                itemColors.pressedColor = new Color(1f, 0.8f, 0.4f, 0.5f);
+                toggle.colors = itemColors;
+            }
+            var check = item.Find("Item Checkmark")?.GetComponent<Image>();
+            if (check != null) check.color = SkinGold;
+            var label = item.Find("Item Label")?.GetComponent<TMP_Text>();
+            if (label != null)
+            {
+                label.color = SkinIvory;
+                label.fontSize = 20f;
+                label.enableAutoSizing = false;
+            }
+        }
+        var scrollbar = template.Find("Scrollbar")?.GetComponent<Image>();
+        if (scrollbar != null) scrollbar.color = new Color(0.1f, 0.07f, 0.05f, 0.9f);
+        var scrollHandle = template.Find("Scrollbar/Sliding Area/Handle")?.GetComponent<Image>();
+        if (scrollHandle != null) scrollHandle.color = SkinGold;
+    }
+
+    private static void SkinButton(Button button, Sprite sprite, Color tint, Color labelColor)
+    {
+        if (button == null) return;
+        if (button.TryGetComponent(out Image image) && sprite != null)
+        {
+            BattleUiSkin.Skin(image, sprite, 3f);
+            image.color = tint;
+        }
+        ColorBlock colors = button.colors;
+        colors.normalColor = Color.white;
+        colors.highlightedColor = new Color(1f, 0.93f, 0.75f, 1f);
+        colors.pressedColor = new Color(0.8f, 0.72f, 0.55f, 1f);
+        colors.selectedColor = colors.highlightedColor;
+        button.colors = colors;
+        foreach (TMP_Text text in button.GetComponentsInChildren<TMP_Text>(true))
+            text.color = labelColor;
+    }
+
+    private static Image MakeSkinImage(string name, Transform parent, Sprite sprite, Color color)
+    {
+        Transform existing = parent.Find(name);
+        if (existing != null && existing.TryGetComponent(out Image found)) return found;
+        var go = new GameObject(name, typeof(RectTransform), typeof(Image));
+        go.transform.SetParent(parent, false);
+        var image = go.GetComponent<Image>();
+        image.sprite = sprite;
+        image.color = color;
+        image.raycastTarget = false;
+        return image;
+    }
+
+    private static void PlaceSkin(RectTransform rect, Vector2 position, Vector2 size)
+    {
+        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = position;
+        rect.sizeDelta = size;
     }
 
     private void SetupCloseButtonLabel()

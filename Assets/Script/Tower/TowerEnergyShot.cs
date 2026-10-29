@@ -9,6 +9,7 @@ public sealed class TowerEnergyShot : MonoBehaviour
     private TowerAttackProfile profile;
     private bool detect;
     private float endTime;
+    private TowerAttack owner;   // 쏜 타워(타워별 피해량 기록용)
 
     public static void Fire(Vector3 origin, MonsterHealth target, int damage,
         TowerAttackProfile profile, bool detectStealth)
@@ -22,7 +23,10 @@ public sealed class TowerEnergyShot : MonoBehaviour
         shot.profile = profile;
         shot.detect = detectStealth;
         shot.endTime = Time.time + 5;
-        TowerVfx.Renderer(go, TowerVfx.Settings != null ? TowerVfx.Settings.energyBolt : null, 0.75f);
+        shot.owner = TowerDamageSource.Current;
+        CombatFeelSettings fx = CombatFeedback.Settings;
+        if (fx != null) PixelLoop.Create("Bolt", go.transform, fx.energyBoltFx, 105);
+        TowerVfx.Trail(go, new Color(1f, 0.3f, 0.25f, 0.7f), 0.3f, 0.12f);
     }
 
     private void Update()
@@ -32,27 +36,28 @@ public sealed class TowerEnergyShot : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
         transform.position = Vector3.MoveTowards(transform.position, destination,
             Mathf.Max(1, profile.projectileSpeed) * Time.deltaTime);
-        if ((transform.position - destination).sqrMagnitude <= 0.01f) Impact();
+        if ((transform.position - destination).sqrMagnitude <= 0.01f)
+        {
+            using (TowerDamageSource.From(owner))
+                Impact();
+        }
         else if (Time.time >= endTime) Destroy(gameObject);
     }
 
     private void Impact()
     {
-        var visuals = TowerVfx.Settings;
-        // B1도 큰 에너지 폭발을 보여 주지만, 광역 피해는 B2의 설정이 있을 때만 적용한다.
-        TowerVfx.Burst(visuals != null ? visuals.energyImpact : null, destination,
-            profile.splashRadius > 0 ? 2.6f : 1.8f, 0.36f);
-        if (visuals != null) TowerVfx.Play(visuals.energyImpactSound, destination);
+        // B1도 에너지 폭발을 보여 주지만, 광역 피해는 B2의 설정이 있을 때만 적용한다(폭발 그림도 그 반경까지 커진다).
+        CombatFeedback.EnergyBlast(destination, profile.splashRadius > 0 ? profile.splashRadius : 0.8f);
         if (TowerTargeting.CanHit(target, detect))
-            target.TakeDamage(Mathf.RoundToInt(damage * (target.isBoss ? profile.bossDamage : 1)), false);
+            target.TakeDamage(target.Resist(Mathf.RoundToInt(damage * (target.isBoss ? profile.bossDamage : 1)), DamageKind.Magic), false);
         if (profile.splashRadius > 0)
             foreach (var enemy in TowerTargeting.All)
             {
                 if (enemy == target || !TowerTargeting.CanHit(enemy, detect) ||
                     ((Vector2)(enemy.transform.position - destination)).sqrMagnitude >
                     profile.splashRadius * profile.splashRadius) continue;
-                enemy.TakeDamage(Mathf.RoundToInt(damage * profile.splashDamage *
-                    (enemy.isBoss ? profile.bossDamage : 1)), false);
+                enemy.TakeDamage(enemy.Resist(Mathf.RoundToInt(damage * profile.splashDamage *
+                    (enemy.isBoss ? profile.bossDamage : 1)), DamageKind.Magic), false);
             }
         Destroy(gameObject);
     }

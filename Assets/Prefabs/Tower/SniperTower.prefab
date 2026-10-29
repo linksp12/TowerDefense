@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   towerData: {fileID: 11400000, guid: cb89f03e378206947bb3efe7fba5ac1e, type: 2}
   canDetectStealth: 0
-  criticalChance: 0
+  criticalChance: 0.1
   criticalDamageMultiplier: 2
   arrowPrefab: {fileID: 0}
   firePoint: {fileID: 4274727955202689693}
@@ -190,8 +190,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.47660097, y: 0.25714287}
-    oldSize: {x: 1.4549487, y: 2.1}
+    pivot: {x: 0.44191343, y: 0.25714287}
+    oldSize: {x: 1.5732081, y: 2.1}
     newSize: {x: 0.16, y: 0.23}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

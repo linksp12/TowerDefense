@@ -52,5 +52,8 @@ public class StageSelectionProgressUI : MonoBehaviour
         detailStatusSurface.color = !known
             ? new Color32(78, 53, 31, 255)
             : cleared ? new Color32(29, 65, 53, 255) : new Color32(35, 46, 61, 255);
+
+        // 도전 과제 별(표지판 아래·상세창 아래쪽)
+        StageChallengeView.Refresh(marker, detailStatus, stageId, unlocked);
     }
 }

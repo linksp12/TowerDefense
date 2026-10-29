@@ -25,6 +25,10 @@ public class MonsterData : ScriptableObject
     [Header("기지 피해량")]
     [Min(0)] public int baseDamage;
 
+    [Header("방어 특성")]
+    [Tooltip("물리 방어: 화살·캐논·저격 피해 감소 / 마법 저항: 마법·레이저·감전 피해 감소 (ArmorRules)")]
+    public ArmorTrait armorTrait = ArmorTrait.None;
+
     [Header("보스 정보")]
     public bool isBoss;
     public int defense;

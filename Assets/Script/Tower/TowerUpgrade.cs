@@ -46,12 +46,29 @@ public class TowerUpgrade : MonoBehaviour
         ApplyBasicSetting();
     }
 
+    // 황금 외형을 켜고 끄면 서 있는 타워도 바로 바꾼다.
+    private Sprite bodySprite;
+
+    void OnEnable() => TowerSkin.Changed += RefreshSkin;
+    void OnDisable() => TowerSkin.Changed -= RefreshSkin;
+
+    private void SetBodySprite(Sprite sprite)
+    {
+        if (spriteRenderer == null || sprite == null)
+            return;
+        bodySprite = sprite;
+        spriteRenderer.sprite = TowerSkin.Resolve(sprite);
+    }
+
+    private void RefreshSkin()
+    {
+        if (bodySprite != null)
+            SetBodySprite(bodySprite);
+    }
+
     void ApplyBasicSetting()
     {
-        if (spriteRenderer != null && basicTowerSprite != null)
-        {
-            spriteRenderer.sprite = basicTowerSprite;
-        }
+        SetBodySprite(basicTowerSprite);
 
         if (towerAttack != null && basicProjectilePrefab != null)
         {
@@ -283,10 +300,7 @@ public class TowerUpgrade : MonoBehaviour
         GameObject newProjectilePrefab,
         TowerData.ProjectileEffectStats newProjectileEffects)
     {
-        if (spriteRenderer != null && newSprite != null)
-        {
-            spriteRenderer.sprite = newSprite;
-        }
+        SetBodySprite(newSprite);
 
         if (towerAttack != null)
         {
@@ -457,24 +471,62 @@ public class TowerUpgrade : MonoBehaviour
            $"</align>";
     }
 
+    // 업그레이드 창 미리보기: 대상 단계의 공격력(연구·환경 보정 포함)·공격 간격·사거리
+    public bool TryGetStatPreview(UpgradePath targetPath, int targetLevel,
+        out int displayDamage, out float cooldown, out float range)
+    {
+        displayDamage = 0;
+        cooldown = 0f;
+        range = 0f;
+        TowerData data = Data;
+        if (data == null || towerAttack == null || targetPath == UpgradePath.None)
+            return false;
+
+        TowerData.CombatStats stats = GetStats(targetPath, targetLevel);
+        displayDamage = towerAttack.GetDisplayDamage(ResearchStatResolver.GetTowerDamage(data.id, stats.damage));
+        cooldown = ResearchStatResolver.GetTowerAttackCooldown(data.id, stats.attackCooldown);
+        range = ResearchStatResolver.GetTowerAttackRange(data.id, stats.attackRange);
+        return true;
+    }
+
+    public string GetPathFeature(UpgradePath targetPath)
+    {
+        TowerData.PathTextInfo info = GetPathTextInfo(targetPath);
+        return info != null ? info.featureText : "";
+    }
+
+    public string GetPathEffect(UpgradePath targetPath)
+    {
+        TowerData.PathTextInfo info = GetPathTextInfo(targetPath);
+        return info != null ? info.effectText : "";
+    }
+
+    public string GetLevelName(UpgradePath targetPath, int targetLevel)
+    {
+        TowerData.PathTextInfo info = GetPathTextInfo(targetPath);
+        if (info == null)
+            return GetTowerName();
+        return targetLevel >= 3 ? info.lv3Name : info.lv2Name;
+    }
+
     public Sprite GetFinalUpgradeSprite()
     {
         if (path == UpgradePath.PathA)
-            return pathALv3TowerSprite;
+            return TowerSkin.Resolve(pathALv3TowerSprite);
 
         if (path == UpgradePath.PathB)
-            return pathBLv3TowerSprite;
+            return TowerSkin.Resolve(pathBLv3TowerSprite);
 
         return null;
     }
 
     public Sprite GetPathASprite()
     {
-        return pathALv2TowerSprite;
+        return TowerSkin.Resolve(pathALv2TowerSprite);
     }
 
     public Sprite GetPathBSprite()
     {
-        return pathBLv2TowerSprite;
+        return TowerSkin.Resolve(pathBLv2TowerSprite);
     }
 }

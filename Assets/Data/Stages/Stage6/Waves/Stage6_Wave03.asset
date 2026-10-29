@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe97a36364d18a45a5a320fe781ed4f, type: 3}
+  m_Name: Stage6_Wave03
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveId: stage_06_wave_03
+  waveNumber: 3
+  spawnInfos:
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 14135f9765093af4095da5d58c7470db, type: 3}
+    count: 4
+    interval: 0.5
+    pathIndex: 1
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 14d0716bf5d25cc4abdd946faabb0da6, type: 3}
+    count: 3
+    interval: 0.9
+    pathIndex: 2
+  - monsterPrefab: {fileID: 2638662418386846195, guid: ec2e024c6d88e0440a797a4316674cf2, type: 3}
+    count: 5
+    interval: 0.7
+    pathIndex: 1
+  - monsterPrefab: {fileID: 2638662418386846195, guid: ec2e024c6d88e0440a797a4316674cf2, type: 3}
+    count: 5
+    interval: 0.7
+    pathIndex: 2
+  - monsterPrefab: {fileID: 2638662418386846195, guid: 14135f9765093af4095da5d58c7470db, type: 3}
+    count: 4
+    interval: 0.5
+    pathIndex: 2
+  waveStartDelay: 3

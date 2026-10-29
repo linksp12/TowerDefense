@@ -82,6 +82,13 @@ public class BossInfoUI : MonoBehaviour
     // =========================================================
     private Vector3 popupOriginalScale;
 
+    // 위쪽 보스 체력 UI 전체 크기(배치·글씨 비율은 그대로 두고 크기만 줄인다)
+    private const float TopBarScale = 0.75f;
+
+    /// <summary>위쪽 보스 체력 UI가 보이는 중인지(배너가 겹치지 않게 아래로 내릴 때 쓴다).</summary>
+    public bool IsTopBarVisible =>
+        (bossInfoPanel != null && bossInfoPanel.activeSelf) || (topBossHPPanel != null && topBossHPPanel.activeSelf);
+
     private sealed class BossHealthEntry
     {
         public MonsterHealth boss;
@@ -112,8 +119,9 @@ public class BossInfoUI : MonoBehaviour
 
             if (rect != null)
             {
-                popupOriginalScale = rect.localScale;
                 ConfigureBossInfoPanelAsTopBar(rect);
+                popupOriginalScale = Vector3.one * TopBarScale;
+                rect.localScale = popupOriginalScale;
             }
 
             bossInfoPanel.SetActive(false);
@@ -307,6 +315,7 @@ public class BossInfoUI : MonoBehaviour
         panelRect.pivot = new Vector2(0.5f, 1f);
         panelRect.anchoredPosition = new Vector2(0f, -18f);
         panelRect.sizeDelta = new Vector2(560f, 86f);
+        panelRect.localScale = Vector3.one * TopBarScale;
 
         Image panelImage = topBossHPPanel.GetComponent<Image>();
         panelImage.color = new Color(0.04f, 0.05f, 0.07f, 0.92f);
@@ -511,23 +520,25 @@ public class BossInfoUI : MonoBehaviour
                     : string.Empty);
         }
 
-        // 첫 보스가 나타날 때 웨이브와 같은 리본 배너로 알린다.
+        // 보스 종류가 처음 나타나면 등장 카드(초상화·이름·별칭)를 띄운다.
+        // 카드를 띄우지 못한 첫 보스는 웨이브와 같은 리본 배너로 알린다.
+        bool carded = BossIntroCard.Show(boss);
         if (registeredBosses.Count == 1)
         {
-            UIManager waveUi = FindAnyObjectByType<UIManager>();
-            if (waveUi != null)
-                waveUi.ShowBossBanner(displayName);
+            if (!carded)
+            {
+                UIManager waveUi = FindAnyObjectByType<UIManager>();
+                if (waveUi != null)
+                    waveUi.ShowBossBanner(displayName);
+            }
             CombatFeedback.BossAppeared();
         }
 
-        if (portraitImage != null && portraitImage.sprite == null)
+        // 다른 씬에서 옮겨 온 패널에 이전 보스 그림이 남아 있을 수 있으므로 첫 보스로 덮어쓴다.
+        if (portraitImage != null && (registeredBosses.Count == 1 || portraitImage.sprite == null))
             portraitImage.sprite = boss.bossPortrait;
 
-        if (defenseText != null)
-            defenseText.text = "방어력 : " + boss.defense;
-
-        if (magicResistanceText != null)
-            magicResistanceText.text = "마법 저항 : " + boss.magicResistance;
+        ShowDamageTaken(boss);
 
         UpdateCombinedTopHP();
     }
@@ -539,6 +550,7 @@ public class BossInfoUI : MonoBehaviour
 
         int totalMaxHp = 0;
         int totalCurrentHp = 0;
+        bool anyAlive = false;
 
         for (int i = 0; i < registeredBosses.Count; i++)
         {
@@ -546,7 +558,18 @@ public class BossInfoUI : MonoBehaviour
             totalMaxHp += entry.maxHp;
 
             if (entry.boss != null && !entry.boss.IsDead)
+            {
                 totalCurrentHp += Mathf.Max(0, entry.boss.CurrentHp);
+                anyAlive = true;
+            }
+        }
+
+        // 보스가 모두 쓰러지거나 기지에 닿아 사라지면 체력 패널을 닫는다.
+        if (!anyAlive)
+        {
+            if (bossInfoPanel != null && bossInfoPanel.activeSelf)
+                bossInfoPanel.SetActive(false);
+            return;
         }
 
         if (bossInfoPanel != null &&
@@ -618,18 +641,9 @@ public class BossInfoUI : MonoBehaviour
         }
 
 
-        if (defenseText != null)
-        {
-            defenseText.text =
-                "방어력 : " + boss.defense;
-        }
+        ShowDamageTaken(boss);
 
 
-        if (magicResistanceText != null)
-        {
-            magicResistanceText.text =
-                "마법 저항 : " + boss.magicResistance;
-        }
 
 
         // =====================================================
@@ -977,5 +991,16 @@ public class BossInfoUI : MonoBehaviour
         {
             topBossHPPanel.SetActive(false);
         }
+    }
+
+    // 실제 전투 규칙(방어 특성)대로 받는 피해 비율을 보여 준다.
+    private void ShowDamageTaken(MonsterHealth boss)
+    {
+        int physical = Mathf.RoundToInt(100f * (ArmorRules.Resists(boss.ArmorTrait, DamageKind.Physical) ? 1f - ArmorRules.Reduction : 1f));
+        int magic = Mathf.RoundToInt(100f * (ArmorRules.Resists(boss.ArmorTrait, DamageKind.Magic) ? 1f - ArmorRules.Reduction : 1f));
+        if (defenseText != null)
+            defenseText.text = $"물리 피해 {physical}%";
+        if (magicResistanceText != null)
+            magicResistanceText.text = $"마법 피해 {magic}%";
     }
 }

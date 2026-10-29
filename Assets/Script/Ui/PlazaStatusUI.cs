@@ -11,8 +11,6 @@ public sealed class PlazaStatusUI : MonoBehaviour
     [SerializeField] private TMP_Text stageStatus;
     [SerializeField] private TMP_Text skillPoints;
     [SerializeField] private GameObject questRewardAlert;
-    [SerializeField] private string[] stageIds =
-        { StageIds.StageOne, StageIds.StageTwo, StageIds.StageThree, StageIds.StageFour };
 
     private QuestManager subscribedQuest;
     private bool started;
@@ -43,13 +41,18 @@ public sealed class PlazaStatusUI : MonoBehaviour
     {
         var progress = new StageProgressService(new PlayerPrefsStageProgressStorage());
         progress.Load();
+        // 본편 진행 현황만 센다. 하드코어는 별도 도전이라 클리어 수에 넣지 않는다.
+        var stageIds = StageIds.MainStageIds;
         int cleared = 0;
         int nextStage = -1;
-        for (int i = 0; i < stageIds.Length; i++)
+        for (int i = 0; i < stageIds.Count; i++)
             if (progress.IsCleared(stageIds[i])) cleared++;
             else if (nextStage < 0) nextStage = i;
+        string nextHardcore = null;
+        foreach (string hardcoreId in StageIds.HardcoreStageIds)
+            if (!progress.IsCleared(hardcoreId)) { nextHardcore = hardcoreId; break; }
         stageStatus.text = progress.CanWrite
-            ? $"클리어\n<color=#E2BB70>{cleared}/{stageIds.Length}</color>"
+            ? $"클리어\n<color=#E2BB70>{cleared}/{stageIds.Count}</color>"
             : "클리어\n확인 필요";
         skillPoints.text = $"보유 SP\n<color=#E2BB70>{ResearchProgressStore.SkillPoints}</color>";
 
@@ -91,7 +94,11 @@ public sealed class PlazaStatusUI : MonoBehaviour
         }
         else if (nextStage >= 0)
         {
-            SetGoal($"{nextStage + 1}스테이지에 도전하세요", "출전 NPC에게 말을 걸어\n다음 전투를 준비하세요.", "출전 준비");
+            SetGoal($"{StageIds.GetLabel(stageIds[nextStage])}에 도전하세요", "출전 NPC에게 말을 걸어\n다음 전투를 준비하세요.", "출전 준비");
+        }
+        else if (nextHardcore != null && StageIds.IsUnlocked(progress, nextHardcore))
+        {
+            SetGoal($"{StageIds.GetLabel(nextHardcore)}에 도전하세요", "본편을 모두 클리어했습니다!\n출전 NPC에서 하드코어에 도전할 수 있습니다.", "도전");
         }
         else
         {

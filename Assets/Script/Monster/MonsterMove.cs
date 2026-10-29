@@ -37,6 +37,32 @@ public class MonsterMove : MonoBehaviour
 
     public int CurrentWaypointIndex => currentWaypointIndex;
 
+    // 맵 기믹(눈보라 등)이 모든 몬스터에 거는 이동 속도 배율
+    public static float EnvironmentSpeedMultiplier = 1f;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetEnvironmentSpeed() => EnvironmentSpeedMultiplier = 1f;
+
+    /// <summary>기지까지 남은 길이(타워가 '선두'를 고를 때 쓴다).</summary>
+    public float RemainingPathDistance
+    {
+        get
+        {
+            if (waypoints == null || currentWaypointIndex >= waypoints.Length)
+                return 0f;
+            Vector3 from = transform.position;
+            float distance = 0f;
+            for (int i = currentWaypointIndex; i < waypoints.Length; i++)
+            {
+                if (waypoints[i] == null)
+                    continue;
+                distance += Vector2.Distance(from, waypoints[i].position);
+                from = waypoints[i].position;
+            }
+            return distance;
+        }
+    }
+
     // 얼음 길 등 바깥에서 잠깐 주는 가속
     private float boostMultiplier = 1f;
     private float boostUntil;
@@ -117,7 +143,7 @@ public class MonsterMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 target.position,
-                EffectiveMoveSpeed * CurrentBoost * Time.deltaTime
+                EffectiveMoveSpeed * CurrentBoost * EnvironmentSpeedMultiplier * Time.deltaTime
             );
 
             if (Vector3.Distance(transform.position, target.position) < 0.01f)
@@ -169,7 +195,9 @@ public class MonsterMove : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // 마법화살 루트용 슬로우 기능
+    // 마법화살 루트용 슬로우 기능. 둔화 표시는 감전 둔화까지 함께 본다.
+    public bool IsSlowed => slowCoroutine != null || controlEffects.IsSlowed;
+
     public void ApplySlow(float slowRate, float duration)
     {
         if (slowCoroutine != null)

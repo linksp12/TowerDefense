@@ -19,7 +19,8 @@ namespace LastOfTheTower.Progression.Editor
             CheckDamagedSaves();
             CheckStorageFailuresAndConflicts();
             CheckPlayerPrefs();
-            return "PASS stage progress: clear/reload, defeat unchanged, duplicate writes blocked, invalid input, corrupt/unsupported saves preserved, read/write failure and retry, stale-writer conflict, isolated PlayerPrefs round-trip and cleanup. Browser persistence/process restart not tested.";
+            CheckStageOrder();
+            return "PASS stage progress: main 8 + hardcore 4 order/unlock/scene mapping, clear/reload, defeat unchanged, duplicate writes blocked, invalid input, corrupt/unsupported saves preserved, read/write failure and retry, stale-writer conflict, isolated PlayerPrefs round-trip and cleanup. Browser persistence/process restart not tested.";
         }
 
         private static BattleResult Result(string stageId, bool victory, int health)
@@ -124,6 +125,58 @@ namespace LastOfTheTower.Progression.Editor
                 storage.Json == "broken after load", "External change was silently overwritten.");
             Require(progress.Load() == StageProgressLoadStatus.Corrupt && !progress.CanWrite &&
                 progress.IsCleared(StageIds.StageOne), "Failed reload destroyed the last known memory snapshot.");
+        }
+
+        private static void CheckStageOrder()
+        {
+            Require(StageIds.MainStageIds.Count == 8 && StageIds.HardcoreStageIds.Count == 4,
+                "Stage list must have 8 main and 4 hardcore stages.");
+
+            var all = new System.Collections.Generic.List<string>(StageIds.MainStageIds);
+            all.AddRange(StageIds.HardcoreStageIds);
+            var seenIds = new System.Collections.Generic.HashSet<string>();
+            var seenScenes = new System.Collections.Generic.HashSet<string>();
+            for (int i = 0; i < all.Count; i++)
+            {
+                string id = all[i];
+                string scene = StageIds.ToSceneName(id);
+                // BattleSession이 ID 형식을 검사한다(형식이 틀리면 예외).
+                Require(new BattleSession(id).StageId == id && seenIds.Add(id), $"Invalid or duplicate stage ID: {id}");
+                Require(!string.IsNullOrEmpty(scene) && seenScenes.Add(scene) && StageIds.FromSceneName(scene) == id,
+                    $"Scene mapping is not one-to-one: {id}");
+                Require(StageIds.IsHardcore(id) == (i >= 8) && !string.IsNullOrEmpty(StageIds.GetLabel(id)),
+                    $"Stage kind or label is wrong: {id}");
+                Require(StageIds.GetPreviousStage(id) == (i > 0 ? all[i - 1] : null) &&
+                    StageIds.GetNextStage(id) == (i + 1 < all.Count ? all[i + 1] : null),
+                    $"Stage order is broken around: {id}");
+                Require(EditorBuildSettings.scenes != null &&
+                    Array.Exists(EditorBuildSettings.scenes, s => s.enabled && s.path == $"Assets/Scenes/{scene}.unity"),
+                    $"Scene is not enabled in build settings: {scene}");
+            }
+            Require(StageIds.FinalMainStage == StageIds.MainStageIds[7], "Ending stage must be the last main stage.");
+            Require(StageIds.FromSceneName("Stage1Scene") == StageIds.StageOne &&
+                StageIds.FromSceneName("Stage4Scene") == "stage_four", "Existing stage IDs changed.");
+
+            // 본편을 순서대로 클리어하면 다음 판이 열리고, 하드코어는 본편 8 클리어 전까지 잠겨 있다.
+            var progress = new StageProgressService(new MemoryStorage());
+            Require(progress.Load() == StageProgressLoadStatus.Missing, "Fresh progress did not load.");
+            Require(StageIds.IsUnlocked(progress, StageIds.StageOne) && !StageIds.IsUnlocked(progress, StageIds.StageTwo),
+                "Fresh progress unlock state is wrong.");
+            for (int i = 0; i < all.Count; i++)
+            {
+                if (i == 8)
+                    Require(StageIds.IsUnlocked(progress, StageIds.HardcoreOne) &&
+                        !StageIds.IsUnlocked(progress, StageIds.HardcoreTwo),
+                        "Hardcore 1 must open only after the last main stage.");
+                if (i == 7)
+                    Require(!StageIds.IsUnlocked(progress, StageIds.HardcoreOne),
+                        "Hardcore opened before the last main stage was cleared.");
+                Require(StageIds.IsUnlocked(progress, all[i]), $"Stage did not unlock in order: {all[i]}");
+                Require(progress.RecordResult(Result(all[i], true, 5)) == StageClearRecordStatus.SaveRequested,
+                    $"Clear was not recorded: {all[i]}");
+                Require(progress.RecordResult(Result(all[i], false, 0)) == StageClearRecordStatus.NotVictory &&
+                    progress.IsCleared(all[i]), $"Defeat removed a clear: {all[i]}");
+            }
         }
 
         private static void CheckPlayerPrefs()

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: ArrowTowerData
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: arrow_tower
+  element: 0
+  detectsStealth: 0
+  damageKind: 0
+  defaultTargetPriority: 0
   attackFeel: 0
   towerName: "\uD654\uC0B4 \uD0C0\uC6CC"
   description: "\uBE60\uB978 \uACF5\uACA9 \uC18D\uB3C4\uB97C \uAC00\uC9C4 \uAE30\uBCF8\uD615

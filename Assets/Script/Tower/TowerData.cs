@@ -66,6 +66,15 @@ public class TowerData : ScriptableObject
 
     public ElementType element = ElementType.None;
 
+    [Tooltip("은신 몬스터를 드러내고 공격할 수 있는지. 도감 태그와 전투 판정에 함께 쓰인다.")]
+    public bool detectsStealth;
+
+    [Tooltip("물리(화살·캐논·저격) / 마법(마법·레이저·감전). 몬스터 방어 특성과 맞으면 피해가 줄어든다.")]
+    public DamageKind damageKind = DamageKind.Physical;
+
+    [Tooltip("설치했을 때 처음 노릴 대상(업그레이드 창에서 바꿀 수 있다)")]
+    public TargetPriority defaultTargetPriority = TargetPriority.First;
+
     // 발사·타격 효과음과 이펙트 종류. 새 타워는 가장 가까운 공격 방식을 고른다.
     public enum AttackFeel { Arrow, Cannon, Magic }
 

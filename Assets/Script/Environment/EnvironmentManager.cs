@@ -44,11 +44,20 @@ public class EnvironmentManager : MonoBehaviour
 
         Current = data;
         OnEnvironmentChanged?.Invoke(Current);
+
+        // 맵 기믹(화산 용암 분출·설원 눈보라)
+        var hazards = GetComponent<EnvironmentHazards>();
+        if (hazards == null)
+            hazards = gameObject.AddComponent<EnvironmentHazards>();
+        hazards.Begin(Current != null ? Current.type : EnvironmentType.Default);
     }
 
     // 3. 스테이지 종료: 환경 보정 해제 (기본 환경으로 복귀)
     public void Exit()
     {
+        var hazards = GetComponent<EnvironmentHazards>();
+        if (hazards != null)
+            hazards.Stop();
         Current = Find(EnvironmentType.Default);
         OnEnvironmentChanged?.Invoke(Current);
     }

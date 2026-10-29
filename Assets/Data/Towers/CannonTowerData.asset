@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   id: cannon_tower
   element: 1
+  detectsStealth: 0
+  damageKind: 0
+  defaultTargetPriority: 0
   attackFeel: 1
   towerName: "\uCE90\uB17C \uD0C0\uC6CC"
   description: "\uB290\uB9AC\uC9C0\uB9CC \uAC15\uD55C \uD53C\uD574\uB97C \uC8FC\uB294

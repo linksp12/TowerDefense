@@ -455,6 +455,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &1107778596
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,12 +604,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -895,6 +896,7 @@ MonoBehaviour:
   hoverDuration: 0.1
   playClickSound: 1
   customClickSound: {fileID: 0}
+  fallbackAudioSource: {fileID: 0}
 --- !u!1 &1434366902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,6 +1093,12 @@ MonoBehaviour:
   - {fileID: -3592075792917550496, guid: 5a8be2046fa780e479c74fb18a52bd90, type: 3}
   - {fileID: -4055224820565026827, guid: 778616e63a383a6459f11972718bb140, type: 3}
   - {fileID: 8624865400682589993, guid: f854c5bf9ee5ccd44b2a84aa08975672, type: 3}
+  worldMapSprite: {fileID: 21300000, guid: ae8721505f8fde4458090f6818b5238b, type: 3}
+  finalSprite: {fileID: 5357423462631031261, guid: df2b084799f6f3b4aa5740becc6f6e52, type: 3}
+  bossPortraits:
+  - {fileID: 2362635009126112453, guid: c5b3ef211eb30384eaa3211685138c99, type: 3}
+  - {fileID: -901664524796784728, guid: b2ff893499d6ea146b2de84b5a6fef63, type: 3}
+  - {fileID: 21300000, guid: 384da7c7b9ac93e44933d6392624ae26, type: 3}
   storyFrameImage: {fileID: 881423806}
   storyFrameSprites:
   - {fileID: -8029229923838067518, guid: ab4269512cdee34498e248a033e99fb3, type: 3}
@@ -1099,7 +1107,13 @@ MonoBehaviour:
   storyText: {fileID: 1434366903}
   nextButton: {fileID: 1006478751}
   skipButton: {fileID: 1350108576}
-  autoAdvanceTime: 7
+  typeSound: {fileID: 8300000, guid: b40389ce3bf2b0546842028168a52e7e, type: 3}
+  whooshSound: {fileID: 8300000, guid: 5828edc9d147c6d40b9039ad06092681, type: 3}
+  rumbleSound: {fileID: 8300000, guid: d3c9c70f4c7d691478f247b1baca133f, type: 3}
+  impactSound: {fileID: 8300000, guid: 2528fc25598347440925421ebb2a05e6, type: 3}
+  autoAdvanceTime: 4.5
+  charactersPerSecond: 24
+  skipHoldTime: 0.9
 --- !u!4 &1968266941
 Transform:
   m_ObjectHideFlags: 0

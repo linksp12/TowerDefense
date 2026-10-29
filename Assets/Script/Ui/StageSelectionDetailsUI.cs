@@ -77,10 +77,14 @@ public class StageSelectionDetailsUI : MonoBehaviour, IPointerClickHandler
 
     private string BuildWaveSummary()
     {
+        if (waves == null || waves.Length == 0)
+            return "웨이브 정보 준비 중";
+
         int monsterCount = 0;
         foreach (WaveData wave in waves)
-            foreach (WaveData.SpawnInfo spawn in wave.spawnInfos)
-                monsterCount += spawn.count;
+            if (wave != null && wave.spawnInfos != null)
+                foreach (WaveData.SpawnInfo spawn in wave.spawnInfos)
+                    monsterCount += spawn.count;
         return $"웨이브 {waves.Length}  ·  몬스터 {monsterCount}마리";
     }
 

@@ -56,6 +56,23 @@ public class MonsterHealth : MonoBehaviour
     public int CurrentHp => currentHp;
     public bool IsDead => isDead;
 
+    // 타워가 '선두·후미'를 고를 때 길 위 위치를 읽는다.
+    private MonsterMove mover;
+    private bool moverCached;
+    public MonsterMove Mover
+    {
+        get
+        {
+            if (!moverCached) { mover = GetComponent<MonsterMove>(); moverCached = true; }
+            return mover;
+        }
+    }
+
+    public ArmorTrait ArmorTrait => monsterData != null ? monsterData.armorTrait : ArmorTrait.None;
+
+    /// <summary>방어 특성에 맞는 피해 종류면 피해를 줄인다(ArmorRules).</summary>
+    public int Resist(int damage, DamageKind kind) => ArmorRules.Apply(damage, ArmorTrait, kind);
+
     /// <summary>체력이 깎였고 아직 살아 있을 때 호출됩니다. (몬스터, 받은 피해)</summary>
     public event System.Action<MonsterHealth, int> Damaged;
 
@@ -108,12 +125,35 @@ public class MonsterHealth : MonoBehaviour
             BattleUiSkin.ApplyMonsterHpBar(monsterHpSlider);
             monsterHpSlider.maxValue = maxHp;
             monsterHpSlider.value = currentHp;
+            AttachArmorIcon();
         }
 
         if (shieldFXObject != null)
         {
             shieldFXObject.SetActive(currentShield > 0);
         }
+    }
+
+    // 방어 특성이 있으면 체력바 왼쪽에 방패(물리 방어)·룬(마법 저항) 표시를 붙인다.
+    private void AttachArmorIcon()
+    {
+        if (ArmorTrait == ArmorTrait.None)
+            return;
+        Sprite icon = Resources.Load<Sprite>(ArmorTrait == ArmorTrait.Armored
+            ? "UI/TowerPanel/trait_armor" : "UI/TowerPanel/trait_ward");
+        if (icon == null)
+            return;
+        var bar = (RectTransform)monsterHpSlider.transform;
+        var image = new GameObject("ArmorTrait", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+        image.rectTransform.SetParent(bar, false);
+        image.sprite = icon;
+        image.preserveAspect = true;
+        image.raycastTarget = false;
+        float size = bar.rect.height * 2.2f;
+        image.rectTransform.anchorMin = image.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+        image.rectTransform.pivot = new Vector2(1f, 0.5f);
+        image.rectTransform.sizeDelta = new Vector2(size, size);
+        image.rectTransform.anchoredPosition = new Vector2(-bar.rect.height * 0.2f, 0f);
     }
 
     // =========================================================
@@ -134,6 +174,30 @@ public class MonsterHealth : MonoBehaviour
         bool playHitSound,
         float criticalChance,
         float criticalDamageMultiplier)
+    {
+        ApplyDamage(damage, playHitSound, criticalChance, criticalDamageMultiplier, HitKind.Normal);
+    }
+
+    // 치명타 계산을 공격 쪽에서 이미 끝낸 피해(저격 치명타). 치명타 표시·소리만 낸다.
+    public void TakeCriticalDamage(int damage)
+    {
+        ApplyDamage(damage, false, 0f, 1f, HitKind.Critical);
+    }
+
+    // 화상 지속 피해: 주황색 숫자로 구분한다.
+    public void TakeBurnDamage(int damage)
+    {
+        ApplyDamage(damage, false, 0f, 1f, HitKind.Burn);
+    }
+
+    private enum HitKind { Normal, Critical, Burn }
+
+    private void ApplyDamage(
+        int damage,
+        bool playHitSound,
+        float criticalChance,
+        float criticalDamageMultiplier,
+        HitKind kind)
     {
         if (isDead)
         {
@@ -181,14 +245,24 @@ public class MonsterHealth : MonoBehaviour
                 isCritical = true;
                 CombatFeedback.CriticalHit();
             }
+            else if (kind == HitKind.Critical)
+            {
+                isCritical = true;
+                CombatFeedback.CriticalHit();
+            }
 
             if (ward != null)
             {
                 finalDamage = ward.ModifyDamage(finalDamage);
             }
 
+            int hpBefore = currentHp;
             currentHp -= finalDamage;
             currentHp = Mathf.Max(currentHp, 0);
+
+            // 타워별 피해량(실제로 깎인 체력만, 공격 중인 타워가 있을 때)
+            if (TowerDamageSource.Current is TowerAttack source && GameManager.Instance != null)
+                GameManager.Instance.Record.RecordDamage(source, hpBefore - currentHp);
         }
 
         // =====================================================
@@ -197,6 +271,10 @@ public class MonsterHealth : MonoBehaviour
         if (shieldBlocked || wardBlocked)
         {
             DamagePopup.ShowShield(transform.position);
+        }
+        else if (kind == HitKind.Burn)
+        {
+            DamagePopup.ShowBurn(transform.position, finalDamage);
         }
         else
         {
@@ -382,7 +460,10 @@ public class MonsterHealth : MonoBehaviour
                 waveManager.OnMonsterKilled();
 
             if (GameManager.Instance != null)
+            {
                 GameManager.Instance.AddMoney(goldReward);
+                GameManager.Instance.Record.RecordKill();
+            }
         }
 
         // 처치 연출: 연기·처치음, 실제 보상이 있을 때만 골드 숫자와 날아가는 동전

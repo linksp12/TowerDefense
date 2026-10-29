@@ -35,8 +35,23 @@ public class TowerBuildManager : MonoBehaviour
     private bool isOpen;
     private Coroutine closeCoroutine;
     private TowerBuildPanelLayout buildPanelLayout;
+    // 도트 디자인 설치 링. 있으면 기존 설치 패널 대신 이 링을 보여 준다.
+    private TowerBuildRingUI buildRing;
 
     public bool IsOpen => isOpen;
+
+    // 설치 링 칸 순서(숫자키 1~6): 화살·캐논·마법 + 추가 타워
+    public System.Collections.Generic.List<GameObject> GetBuildOptions()
+    {
+        var options = new System.Collections.Generic.List<GameObject> { basicTowerPrefab, cannonTowerPrefab, magicTowerPrefab };
+        options.AddRange(additionalTowerPrefabs);
+        options.RemoveAll(prefab => prefab == null);
+        return options;
+    }
+
+    // 튜토리얼 안내가 가리킬 설치 칸
+    public RectTransform GetBuildSlotRect(GameObject towerPrefab) =>
+        buildRing != null ? buildRing.GetSlotRect(towerPrefab) : null;
 
     private void Awake()
     {
@@ -54,6 +69,8 @@ public class TowerBuildManager : MonoBehaviour
 
         if (canvas == null && towerBuildPanelRect != null)
             canvas = towerBuildPanelRect.GetComponentInParent<Canvas>(true);
+
+        buildRing = TowerBuildRingUI.Create(this, canvas, GetBuildOptions());
     }
 
     private void Start()
@@ -115,18 +132,24 @@ public class TowerBuildManager : MonoBehaviour
         isOpen = true;
         if (TowerInfoPanel.Instance != null) TowerInfoPanel.Instance.Hide();
 
-        if (towerBuildPanel != null)
-            towerBuildPanel.transform.SetAsLastSibling();
-
         if (BossInfoUI.Instance != null)
             BossInfoUI.Instance.SetSuppressedByTowerPanel(true);
 
         selectedBuildPoint = buildPoint;
 
-        MovePanelToBuildPoint(buildPoint.transform.position);
-
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayOpenPanel();
+
+        if (buildRing != null)
+        {
+            buildRing.Show(buildPoint);
+            return;
+        }
+
+        if (towerBuildPanel != null)
+            towerBuildPanel.transform.SetAsLastSibling();
+
+        MovePanelToBuildPoint(buildPoint.transform.position);
 
         if (towerBuildPanelAnimator != null)
         {
@@ -232,6 +255,12 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         selectedBuildPoint.BuildTower(towerPrefab);
+        if (GameManager.Instance != null)
+        {
+            TowerData builtData = towerPrefab.GetComponent<TowerAttack>().towerData;
+            GameManager.Instance.ChallengeStats.RecordBuild(builtData.id, TowerAttack.ActiveTowers.Count);
+            GameManager.Instance.Record.RecordBuild(builtData);
+        }
 
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayBuildSuccess();
@@ -260,6 +289,9 @@ public class TowerBuildManager : MonoBehaviour
             closeCoroutine = null;
         }
 
+        if (buildRing != null)
+            buildRing.Hide();
+
         if (towerBuildPanelAnimator != null)
             towerBuildPanelAnimator.HideInstant();
         else if (towerBuildPanel != null)
@@ -275,7 +307,11 @@ public class TowerBuildManager : MonoBehaviour
         if (playSound && UISoundManager.Instance != null)
             UISoundManager.Instance.PlayClosePanel();
 
-        if (towerBuildPanelAnimator != null)
+        if (buildRing != null)
+        {
+            buildRing.Hide();
+        }
+        else if (towerBuildPanelAnimator != null)
         {
             towerBuildPanelAnimator.Hide();
         }
@@ -312,7 +348,9 @@ public class TowerBuildManager : MonoBehaviour
         if (UISoundManager.Instance != null)
             UISoundManager.Instance.PlayFail();
 
-        if (towerBuildPanelShake != null)
+        if (buildRing != null)
+            buildRing.Shake();
+        else if (towerBuildPanelShake != null)
             towerBuildPanelShake.PlayShake();
     }
 

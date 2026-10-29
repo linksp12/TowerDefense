@@ -69,6 +69,19 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private SkillTooltipView tooltip;
     private SkillButtonFeedback feedback;
 
+    // 단축키(같은 줄 버튼을 왼쪽부터 Q·W·E·R)와 버튼 꾸밈(키 표시·준비 완료 번쩍임)
+    private static readonly KeyCode[] Hotkeys = { KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R };
+    private KeyCode hotkey = KeyCode.None;
+    private string hotkeyLabel;
+    private bool hotkeyBlockedLastFrame;
+    private TowerUpgradePanelUI upgradePanel;
+    private TowerBuildRingUI buildRing;
+    private Image readyGlow;
+    private float readyFlashAt = -10f;
+    private int lastShownSecond = -1;
+    private float secondPulseAt = -10f;
+    private bool cooldownOutlineInitialized;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -93,6 +106,114 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (button != null) button.onClick.AddListener(OnSkillButtonClick);
         else Debug.LogWarning($"{name}: Button 컴포넌트를 찾을 수 없습니다.", this);
         ApplySkillIcon(ResolveSkillData());
+        AssignHotkey();
+        BuildDecor();
+    }
+
+    private void AssignHotkey()
+    {
+        if (transform.parent == null) return;
+        var row = new System.Collections.Generic.List<SkillButton>(transform.parent.GetComponentsInChildren<SkillButton>(true));
+        row.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
+        int index = row.IndexOf(this);
+        if (index < 0 || index >= Hotkeys.Length) return;
+        hotkey = Hotkeys[index];
+        hotkeyLabel = hotkey.ToString();
+    }
+
+    private void BuildDecor()
+    {
+        // 준비 완료 때 번쩍이는 금빛
+        readyGlow = new GameObject("ReadyGlow", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+        readyGlow.transform.SetParent(transform, false);
+        readyGlow.sprite = UiFx.SoftCircle;
+        readyGlow.raycastTarget = false;
+        readyGlow.color = new Color(1f, 0.85f, 0.4f, 0f);
+        readyGlow.rectTransform.sizeDelta = rectTransform.rect.size * 1.7f;
+
+        if (cooldownOverlay != null) cooldownOverlay.color = new Color(0.03f, 0.04f, 0.1f, 0.78f);
+        if (cooldownText != null)
+        {
+            cooldownText.fontSize = 34f;
+            cooldownText.color = new Color32(255, 230, 160, 255);
+            if (cooldownText.font == null)
+                cooldownText.font = cooldownMessageFont != null ? cooldownMessageFont : BattleUiSkin.Font;
+            cooldownText.transform.SetAsLastSibling();
+        }
+
+        // 왼쪽 위 키 표시
+        Sprite keycap = Resources.Load<Sprite>("UI/TowerPanel/keycap");
+        if (string.IsNullOrEmpty(hotkeyLabel) || keycap == null) return;
+        var cap = new GameObject("Keycap", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+        cap.transform.SetParent(transform, false);
+        cap.sprite = keycap;
+        cap.preserveAspect = true;
+        cap.raycastTarget = false;
+        var capRect = cap.rectTransform;
+        capRect.anchorMin = capRect.anchorMax = new Vector2(0f, 1f);
+        capRect.pivot = new Vector2(0.5f, 0.5f);
+        capRect.anchoredPosition = new Vector2(6f, -6f);
+        capRect.sizeDelta = new Vector2(33f, 30f);
+        var label = new GameObject("Key", typeof(RectTransform), typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
+        label.transform.SetParent(cap.transform, false);
+        label.font = cooldownMessageFont != null ? cooldownMessageFont : BattleUiSkin.Font;
+        label.text = hotkeyLabel;
+        label.fontSize = 19f;
+        label.color = new Color32(40, 30, 24, 255);
+        label.alignment = TextAlignmentOptions.Center;
+        label.raycastTarget = false;
+        var labelRect = label.rectTransform;
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = new Vector2(0f, 3f);
+        labelRect.offsetMax = Vector2.zero;
+        cap.transform.SetAsLastSibling();
+    }
+
+    // 업그레이드 창(Q·W·E 사용)·설치 링이 열려 있거나 바로 전 프레임에 열려 있었으면 단축키를 쓰지 않는다.
+    private bool HotkeyBlockedNow()
+    {
+        if (upgradePanel == null) upgradePanel = FindAnyObjectByType<TowerUpgradePanelUI>();
+        if (buildRing == null) buildRing = FindAnyObjectByType<TowerBuildRingUI>();
+        return (upgradePanel != null && upgradePanel.IsVisible) || (buildRing != null && buildRing.IsOpen);
+    }
+
+    private void LateUpdate()
+    {
+        if (hotkey != KeyCode.None)
+            hotkeyBlockedLastFrame = HotkeyBlockedNow();
+    }
+
+    private void HandleHotkey()
+    {
+        if (hotkey == KeyCode.None || !Input.GetKeyDown(hotkey)) return;
+        if (hotkeyBlockedLastFrame || HotkeyBlockedNow()) return;
+        if (Time.timeScale == 0f || StageDialogue.IsOpen) return;
+        if (GameManager.Instance != null && GameManager.Instance.IsGameEnded()) return;
+        if (button != null && (!button.interactable || !button.gameObject.activeInHierarchy)) return;
+        OnSkillButtonClick();
+    }
+
+    private void UpdateDecor(bool onCooldown)
+    {
+        float now = Time.unscaledTime;
+        if (readyGlow != null)
+        {
+            float k = Mathf.Clamp01((now - readyFlashAt) / 0.6f);
+            readyGlow.color = new Color(1f, 0.85f, 0.4f, 0.85f * (1f - k));
+            readyGlow.rectTransform.localScale = Vector3.one * Mathf.Lerp(0.7f, 1.3f, UiFx.EaseOut(k));
+        }
+        if (iconImage != null)
+        {
+            Color tint = onCooldown ? new Color(0.55f, 0.55f, 0.62f, 1f) : Color.white;
+            if (iconImage.color != tint) iconImage.color = tint;
+        }
+        // 3초 이하로 남으면 숫자가 1초마다 살짝 튀며 초록빛으로 곧 준비됨을 알린다.
+        if (cooldownText != null && onCooldown)
+        {
+            float pulse = Mathf.Clamp01((now - secondPulseAt) / 0.25f);
+            cooldownText.rectTransform.localScale = Vector3.one * Mathf.Lerp(1.18f, 1f, UiFx.EaseOut(pulse));
+        }
     }
 
     private void Update()
@@ -100,7 +221,10 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SkillData skill = ResolveSkillData();
         if (skill == null) return;
         if (displayedSkill != skill) ApplySkillIcon(skill);
+        HandleHotkey();
         UpdateCooldownUI(skill);
+        // 설명창이 떠 있으면 아래 줄(재사용까지 남은 시간)을 갱신한다.
+        if (pointerInside) tooltip?.RefreshStatus(this, skill);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -145,7 +269,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         if (!manager.CanUseSkill(skill.SkillId))
         {
-            feedback.ShowCooldown(parentCanvas, cooldownMessageFont);
+            feedback.ShowCooldown(parentCanvas, cooldownMessageFont, rectTransform,
+                SkillDescriptionFormatter.Name(skill), manager.GetCooldownRemaining(skill.SkillId));
             return;
         }
         if (aim.IsAiming() && aim.GetSelectedSkillName() == skill.SkillId) aim.CancelAiming();
@@ -196,11 +321,32 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (cooldownText.gameObject.activeSelf != onCooldown) cooldownText.gameObject.SetActive(onCooldown);
             if (onCooldown)
             {
+                // 비활성 TMP는 CanvasRenderer가 초기화되지 않아 외곽선 재질을 만들 수 없다.
+                // 처음 숫자를 표시할 때 활성화된 컴포넌트에 적용한다.
+                if (!cooldownOutlineInitialized && cooldownText.fontSharedMaterial != null)
+                {
+                    cooldownText.outlineWidth = 0.3f;
+                    cooldownText.outlineColor = new Color(0.05f, 0.03f, 0.02f, 1f);
+                    cooldownOutlineInitialized = true;
+                }
                 string label = remaining > 1f ? Mathf.CeilToInt(remaining).ToString() : remaining.ToString("F1");
                 if (cooldownText.text != label) cooldownText.text = label;
+                int second = Mathf.CeilToInt(remaining);
+                if (second != lastShownSecond)
+                {
+                    lastShownSecond = second;
+                    if (second <= 3) secondPulseAt = Time.unscaledTime;
+                    cooldownText.color = second <= 3 ? new Color32(150, 240, 130, 255) : new Color32(255, 230, 160, 255);
+                }
             }
         }
-        if (wasOnCooldown && !onCooldown) feedback.Ready();
+        UpdateDecor(onCooldown);
+        if (wasOnCooldown && !onCooldown)
+        {
+            feedback.Ready();
+            readyFlashAt = Time.unscaledTime;
+            lastShownSecond = -1;
+        }
         wasOnCooldown = onCooldown;
     }
 
@@ -211,7 +357,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (skill == null) return;
         if (parentCanvas == null) parentCanvas = GetComponentInParent<Canvas>();
         tooltip = SkillTooltipView.Get(parentCanvas);
-        tooltip?.Show(this, rectTransform, SkillDescriptionFormatter.Format(skill), new SkillTooltipStyle
+        tooltip?.Show(this, rectTransform, skill, new SkillTooltipStyle
         {
             Font = tooltipFont != null ? tooltipFont : cooldownMessageFont,
             Background = tooltipBackground,
@@ -219,7 +365,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             TextColor = tooltipTextColor,
             FontSize = tooltipFontSize,
             Size = tooltipSize,
-            Margin = tooltipMargin
+            Margin = tooltipMargin,
+            Hotkey = hotkeyLabel
         });
     }
 

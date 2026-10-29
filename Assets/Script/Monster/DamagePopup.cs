@@ -39,6 +39,12 @@ public class DamagePopup : MonoBehaviour
             Spawn(hitPosition, damage.ToString(), GetDamageColor(damage), 32f, 0.7f, 46f, 1.45f, false);
     }
 
+    // 화상 지속 피해: 일반 피해와 구분되게 작은 주황색 숫자
+    public static void ShowBurn(Vector3 hitPosition, int damage)
+    {
+        Spawn(hitPosition, damage.ToString(), new Color32(255, 138, 42, 255), 26f, 0.6f, 38f, 1.3f, false);
+    }
+
     // 처치 보상: 피해 숫자보다 조금 위에 금색 '+골드'를 띄운다.
     public static void ShowGold(Vector3 position, int amount)
     {

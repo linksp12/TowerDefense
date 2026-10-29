@@ -11,11 +11,12 @@ public sealed class TowerPiercingShot : MonoBehaviour
     private TowerAttackProfile profile;
     private int damage, hitCount;
     private float remainingDistance;
-    private bool detectStealth, fragment;
+    private bool detectStealth, fragment, critical;
+    private TowerAttack owner;   // 쏜 타워(타워별 피해량 기록용)
 
     public static TowerPiercingShot Fire(Vector3 position, Vector2 direction, int damage,
         TowerAttackProfile profile, float travelDistance, bool detect, bool isFragment = false,
-        MonsterHealth ignore = null)
+        MonsterHealth ignore = null, bool critical = false)
     {
         if (direction.sqrMagnitude < 0.0001f) direction = Vector2.right;
         var go = new GameObject(isFragment ? "Sniper Fragment" : "Sniper Piercing Round");
@@ -28,10 +29,15 @@ public sealed class TowerPiercingShot : MonoBehaviour
         shot.remainingDistance = Mathf.Max(0.1f, travelDistance);
         shot.detectStealth = detect;
         shot.fragment = isFragment;
+        shot.critical = critical && !isFragment;
+        shot.owner = TowerDamageSource.Current;
         if (ignore != null) shot.hit.Add(ignore);
         var visuals = TowerVfx.Settings;
-        TowerVfx.Renderer(go, visuals == null ? null : isFragment ? visuals.fragment : visuals.piercingRound,
-            isFragment ? 0.18f : 0.65f);
+        TowerVfx.Renderer(go, visuals == null ? null : isFragment ? visuals.fragment : visuals.piercingRound);
+        // 금빛 탄도선. 치명타 탄은 더 굵고 밝다.
+        TowerVfx.Trail(go, isFragment ? new Color(1f, 0.62f, 0.2f, 0.7f) :
+                critical ? new Color(1f, 0.93f, 0.55f, 1f) : new Color(1f, 0.7f, 0.22f, 0.9f),
+            isFragment ? 0.06f : critical ? 0.16f : 0.1f, isFragment ? 0.05f : 0.09f);
         return shot;
     }
 
@@ -57,7 +63,8 @@ public sealed class TowerPiercingShot : MonoBehaviour
         {
             if (!TowerTargeting.CanHit(candidate.Enemy, detectStealth)) continue;
             Vector3 point = start + direction * candidate.Along;
-            Impact(candidate.Enemy, point);
+            using (TowerDamageSource.From(owner))
+                Impact(candidate.Enemy, point);
             if (fragment || profile.fragments > 0 || hitCount >= Mathf.Max(1, profile.pierceCount))
             {
                 Destroy(gameObject);
@@ -73,18 +80,20 @@ public sealed class TowerPiercingShot : MonoBehaviour
     {
         hit.Add(enemy);
         int amount = Mathf.RoundToInt(damage * (fragment ? 1 : profile.PierceMultiplier(hitCount)));
+        amount = enemy.Resist(amount, DamageKind.Physical);   // 저격은 물리 피해
+        bool criticalHit = critical && hitCount == 0;
         hitCount++;
         if (detectStealth) enemy.GetComponent<StealthMonster>()?.Reveal();
-        enemy.TakeDamage(amount, false);
-        var visuals = TowerVfx.Settings;
-        TowerVfx.Burst(visuals != null ? visuals.energyImpact : null, point, 0.25f, 0.1f);
+        if (criticalHit) enemy.TakeCriticalDamage(amount);
+        else enemy.TakeDamage(amount, false);
+        int explosion = fragment ? 0 : Mathf.RoundToInt(amount * profile.extraHitDamage);
+        bool burns = explosion > 0 && profile.burnDamage > 0;
+        CombatFeedback.SniperHit(point, fragment, explosion > 0, burns, criticalHit);
         if (fragment) return;
-        int explosion = Mathf.RoundToInt(amount * profile.extraHitDamage);
         if (explosion > 0)
         {
             // 추가 타격은 광역 판정이 아니다. 직접 타격과 별개의 실드 1회를 소모한다.
             enemy.TakeDamage(explosion, false);
-            TowerVfx.Burst(visuals != null ? visuals.energyImpact : null, point, 0.6f, 0.16f);
             TowerBurnStack.Apply(enemy, Mathf.RoundToInt(explosion * profile.burnDamage),
                 profile.burnTicks, profile.burnInterval);
         }

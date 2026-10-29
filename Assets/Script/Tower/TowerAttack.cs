@@ -13,6 +13,31 @@ public class TowerAttack : MonoBehaviour
     [System.NonSerialized] public int damage;
     [System.NonSerialized] public TowerData.ProjectileEffectStats projectileEffects;
 
+    // 공격 대상 우선순위(설치 때 데이터 기본값, 업그레이드 창에서 바꾼다)
+    [System.NonSerialized] public TargetPriority targetPriority = TargetPriority.First;
+
+    // 맵 기믹(눈보라)이 모든 타워에 거는 사거리 배율
+    public static float EnvironmentRangeMultiplier = 1f;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetEnvironmentRange() => EnvironmentRangeMultiplier = 1f;
+
+    public float EffectiveRange => attackRange * EnvironmentRangeMultiplier;
+    public DamageKind DamageKind => towerData != null ? towerData.damageKind : DamageKind.Physical;
+
+    // 용암 분출 등으로 잠깐 공격을 멈춘 상태
+    private float overheatedUntil = -1f;
+    public bool IsOverheated => Time.time < overheatedUntil;
+
+    public void Overheat(float duration)
+    {
+        if (duration <= 0f)
+            return;
+        if (!IsOverheated)
+            specialAttack?.Reset();
+        overheatedUntil = Mathf.Max(overheatedUntil, Time.time + duration);
+    }
+
     [Header("Stealth Detection")]
     public bool canDetectStealth = false;
 
@@ -182,94 +207,49 @@ public class TowerAttack : MonoBehaviour
             towerData.baseStats.attackRange);
         projectileEffects = towerData.baseProjectileEffects;
         CurrentAttackProfile = towerData.baseAttack;
+        // 데이터에서 은신 감지를 켜면 프리팹 설정과 상관없이 적용한다(도감 표시와 같은 값).
+        if (towerData.detectsStealth)
+            canDetectStealth = true;
+        targetPriority = towerData.defaultTargetPriority;
         specialAttack?.Reset();
     }
 
     private void Update()
     {
-        attackTimer += Time.deltaTime * CurrentAttackSpeedMultiplier;
         RefreshBuffMarkers();
+        if (IsOverheated)
+            return;
+        attackTimer += Time.deltaTime * CurrentAttackSpeedMultiplier;
 
         if (CurrentAttackProfile != null && CurrentAttackProfile.mode != TowerAttackMode.Projectile)
         {
             if (specialAttack == null) specialAttack = new TowerSpecialAttack(this);
-            specialAttack.Tick(Time.deltaTime * CurrentAttackSpeedMultiplier);
+            using (TowerDamageSource.From(this))
+                specialAttack.Tick(Time.deltaTime * CurrentAttackSpeedMultiplier);
             return;
         }
 
-        GameObject target = FindNearestMonster();
+        GameObject target = FindTarget();
 
         if (target != null &&
             attackTimer >= attackCooldown)
         {
-            Attack(target);
+            using (TowerDamageSource.From(this))
+                Attack(target);
             attackTimer = 0f;
         }
     }
 
     // =========================================================
-    // 가장 가까운 살아있는 몬스터 찾기
+    // 공격 대상 찾기(타워마다 정한 우선순위: 선두·후미·강한 적·가까운 적)
     // =========================================================
-    private GameObject FindNearestMonster()
+    private GameObject FindTarget()
     {
-        GameObject[] monsters =
-            GameObject.FindGameObjectsWithTag("Monster");
-
-        GameObject nearestMonster = null;
-        float nearestDistance = Mathf.Infinity;
-
-        foreach (GameObject monster in monsters)
-        {
-            if (monster == null)
-                continue;
-
-            // MonsterHealth 가져오기
-            MonsterHealth monsterHealth =
-                monster.GetComponent<MonsterHealth>();
-
-            // MonsterHealth가 없으면 공격 대상에서 제외
-            if (monsterHealth == null)
-                continue;
-
-            // 죽은 몬스터는 공격 대상에서 제외
-            if (monsterHealth.IsDead)
-                continue;
-
-            // 은신 몬스터 처리
-            StealthMonster stealthMonster =
-                monster.GetComponent<StealthMonster>();
-
-            if (stealthMonster != null &&
-                stealthMonster.IsStealthed &&
-                !canDetectStealth)
-            {
-                continue;
-            }
-
-            // 폭발 공격(캐논)은 하늘을 나는 몬스터를 맞히지 못한다.
-            if (projectileEffects.canExplode &&
-                monster.GetComponent<FlyingMonster>() != null)
-            {
-                continue;
-            }
-
-            // 거리 계산
-            float distance =
-                Vector2.Distance(
-                    transform.position,
-                    monster.transform.position
-                );
-
-            // 사거리 내 가장 가까운 몬스터 선택
-            if (distance <= attackRange &&
-                distance < nearestDistance)
-            {
-                nearestDistance = distance;
-                nearestMonster = monster;
-            }
-        }
-
-        return nearestMonster;
+        // 폭발 공격(캐논)은 하늘을 나는 몬스터를 맞히지 못한다. 몬스터 태그가 붙은 적만 노린다.
+        bool explodes = projectileEffects.canExplode;
+        MonsterHealth target = TowerTargeting.Select(this, targetPriority, null,
+            enemy => enemy.CompareTag("Monster") && !(explodes && enemy.GetComponent<FlyingMonster>() != null));
+        return target != null ? target.gameObject : null;
     }
 
     // =========================================================
@@ -331,6 +311,7 @@ public class TowerAttack : MonoBehaviour
             projectile.ApplyEffectStats(projectileEffects);
             projectile.SetFeel(feel);
             projectile.SetElement(Element);
+            projectile.SetDamageKind(DamageKind);
         }
         else
         {
@@ -352,7 +333,7 @@ public class TowerAttack : MonoBehaviour
 
         Gizmos.DrawWireSphere(
             transform.position,
-            attackRange
+            EffectiveRange
         );
     }
 

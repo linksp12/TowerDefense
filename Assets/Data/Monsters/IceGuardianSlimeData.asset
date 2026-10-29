@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   id: ice_guardian_slime
   monsterName: Frost Guardian Slime
-  maxHp: 600
+  maxHp: 400
   moveSpeed: 1.6
   goldReward: 28
   maxShield: 0
   baseDamage: 1
+  armorTrait: 1
   isBoss: 0
   defense: 0
   magicResistance: 0
