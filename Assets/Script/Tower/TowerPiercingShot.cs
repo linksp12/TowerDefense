@@ -43,7 +43,9 @@ public sealed class TowerPiercingShot : MonoBehaviour
 
     private void Update()
     {
-        float distance = Mathf.Min(remainingDistance, Mathf.Max(1, profile.projectileSpeed) * Time.deltaTime);
+        float speed = fragment && profile.fragmentProjectileSpeed > 0f
+            ? profile.fragmentProjectileSpeed : profile.projectileSpeed;
+        float distance = Mathf.Min(remainingDistance, Mathf.Max(1, speed) * Time.deltaTime);
         Vector2 start = transform.position;
         Vector2 end = start + direction * distance;
         candidates.Clear();

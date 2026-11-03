@@ -146,10 +146,13 @@ internal sealed class TowerSpecialAttack
         }
     }
 
+    private int GrowthStep(Beam beam) => Mathf.FloorToInt(
+        beam.Step * Mathf.Max(0.01f, profile.laserRampSpeed) + 0.0001f);
+
     private void DamageBeam(Beam beam)
     {
         float[] ramp = profile.laserRamp;
-        float multiplier = ramp != null && ramp.Length > 0 ? ramp[Mathf.Min(beam.Step, ramp.Length - 1)] : 1;
+        float multiplier = ramp != null && ramp.Length > 0 ? ramp[Mathf.Min(GrowthStep(beam), ramp.Length - 1)] : 1;
         int cap = ResearchStatResolver.GetTowerDamage(tower.towerData.id, profile.laserDamageCap);
         int damage = Mathf.Min(cap, Mathf.RoundToInt(tower.damage * multiplier));
         if (beam.Target.isBoss) damage = Mathf.RoundToInt(damage * profile.bossDamage);
@@ -162,7 +165,7 @@ internal sealed class TowerSpecialAttack
     private float BeamStrength(Beam beam)
     {
         int steps = Mathf.Max(1, profile.laserRamp != null ? profile.laserRamp.Length - 1 : 1);
-        return Mathf.Clamp01(beam.Step / (float)steps);
+        return Mathf.Clamp01(GrowthStep(beam) / (float)steps);
     }
 
     private void UpdateBeamVisual(Beam beam, int index, int count)

@@ -25,8 +25,8 @@ MonoBehaviour:
   buildCost: 90
   sellRate: 0.7
   baseStats:
-    damage: 72
-    attackCooldown: 2
+    damage: 173
+    attackCooldown: 1.5384615
     attackRange: 3.5
   baseAttack:
     mode: 2
@@ -236,15 +236,15 @@ MonoBehaviour:
     dotDamage: 0
     dotDuration: 0
     dotInterval: 0
-  level2Cost: 160
-  level3Cost: 300
+  level2Cost: 170
+  level3Cost: 310
   pathALv2Stats:
-    damage: 130
-    attackCooldown: 2.8
+    damage: 312
+    attackCooldown: 2.1538462
     attackRange: 3.8
   pathALv3Stats:
-    damage: 200
-    attackCooldown: 3.5
+    damage: 480
+    attackCooldown: 2.6923077
     attackRange: 4
   pathALv2ProjectileEffects:
     canPierce: 0
@@ -273,12 +273,12 @@ MonoBehaviour:
     dotDuration: 0
     dotInterval: 0
   pathBLv2Stats:
-    damage: 86
-    attackCooldown: 2.5
+    damage: 206
+    attackCooldown: 1.9230769
     attackRange: 3.8
   pathBLv3Stats:
-    damage: 86
-    attackCooldown: 2.5
+    damage: 206
+    attackCooldown: 1.9230769
     attackRange: 4
   pathBLv2ProjectileEffects:
     canPierce: 0

@@ -51,8 +51,9 @@ MonoBehaviour:
     projectileSpeed: 22
     splashRadius: 0
     splashDamage: 0.8
-    bossDamage: 0.5
+    bossDamage: 0.1
     laserDamageCap: 2000
+    laserRampSpeed: 1.3
     laserRamp:
     - 1
     - 1.5
@@ -89,8 +90,9 @@ MonoBehaviour:
     projectileSpeed: 22
     splashRadius: 0
     splashDamage: 0.8
-    bossDamage: 0.5
+    bossDamage: 0.1
     laserDamageCap: 2000
+    laserRampSpeed: 1.3
     laserRamp:
     - 1
     - 1.5
@@ -127,8 +129,9 @@ MonoBehaviour:
     projectileSpeed: 22
     splashRadius: 0
     splashDamage: 0.8
-    bossDamage: 0.5
+    bossDamage: 0.1
     laserDamageCap: 2000
+    laserRampSpeed: 1.3
     laserRamp:
     - 1
     - 1.5
@@ -272,11 +275,11 @@ MonoBehaviour:
     dotDuration: 0
     dotInterval: 0
   pathBLv2Stats:
-    damage: 520
+    damage: 1352
     attackCooldown: 3.5
     attackRange: 7
   pathBLv3Stats:
-    damage: 760
+    damage: 1976
     attackCooldown: 2.5
     attackRange: 7.5
   pathBLv2ProjectileEffects:

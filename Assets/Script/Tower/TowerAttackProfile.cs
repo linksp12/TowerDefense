@@ -22,10 +22,14 @@ public sealed class TowerAttackProfile
     [Range(0, 1)] public float slowReduction;
     [Min(0)] public float slowDuration;
     [Min(1)] public float projectileSpeed = 22f;
+    [Tooltip("0이면 본탄 속도를 사용합니다. 산탄 파편의 속도만 따로 조정할 수 있습니다.")]
+    [Min(0)] public float fragmentProjectileSpeed;
     [Min(0)] public float splashRadius;
     [Range(0, 1)] public float splashDamage = 0.8f;
     [Range(0, 1)] public float bossDamage = 0.5f;
     [Min(1)] public int laserDamageCap = 2000;
+    [Tooltip("지속 레이저의 피해 성장 속도입니다. 공격 간격과 최대 피해는 바꾸지 않습니다.")]
+    [Min(0.01f)] public float laserRampSpeed = 1f;
     public float[] laserRamp = { 1, 1.5f, 3, 5, 8.5f, 14, 23, 38,
         62.5f, 103, 170, 280.5f, 462.5f, 500 };
 
