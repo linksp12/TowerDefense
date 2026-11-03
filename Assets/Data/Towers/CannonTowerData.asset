@@ -274,11 +274,11 @@ MonoBehaviour:
     dotDuration: 0
     dotInterval: 0
   pathBLv2Stats:
-    damage: 300
+    damage: 630
     attackCooldown: 3.5
     attackRange: 5.5
   pathBLv3Stats:
-    damage: 700
+    damage: 1750
     attackCooldown: 5
     attackRange: 7
   pathBLv2ProjectileEffects:

@@ -240,11 +240,11 @@ MonoBehaviour:
   level2Cost: 150
   level3Cost: 300
   pathALv2Stats:
-    damage: 15
+    damage: 33
     attackCooldown: 0.3
     attackRange: 5.2
   pathALv3Stats:
-    damage: 20
+    damage: 46
     attackCooldown: 0.2
     attackRange: 5.5
   pathALv2ProjectileEffects:
