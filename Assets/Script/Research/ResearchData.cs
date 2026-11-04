@@ -15,7 +15,8 @@ public enum ResearchModifierType
     AttackRangePercent,
     PeriodicDamagePercent,
     DurationFlat,
-    AttackSpeedBonusFlat
+    AttackSpeedBonusFlat,
+    AttackRatePercent
 }
 
 [Serializable]

@@ -15,7 +15,7 @@ MonoBehaviour:
   researchId: laser_tower_research
   targetType: 0
   targetId: laser_tower
-  modifierType: 2
+  modifierType: 7
   towerTarget: {fileID: 11400000, guid: e50daa5984f39b446b3a97f9af1a404d, type: 2}
   skillTarget: {fileID: 0}
   displayName: "\uB808\uC774\uC800 \uC548\uC815\uD654 \uC5F0\uAD6C"
@@ -24,12 +24,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a7fa4c15d1e409f4191973ca0c3e8a5b, type: 3}
   ranks:
   - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
+    modifierValue: 7.2
+  - skillPointCost: 2
+    modifierValue: 9.4
+  - skillPointCost: 4
+    modifierValue: 13.8
+  - skillPointCost: 7
+    modifierValue: 20.4
+  - skillPointCost: 11
+    modifierValue: 29.2

@@ -205,7 +205,7 @@ public class TowerAttack : MonoBehaviour
             towerData.baseStats.damage,
             towerData.baseStats.attackCooldown,
             towerData.baseStats.attackRange);
-        projectileEffects = towerData.baseProjectileEffects;
+        ApplyProjectileEffects(towerData.baseProjectileEffects);
         CurrentAttackProfile = towerData.baseAttack;
         // 데이터에서 은신 감지를 켜면 프리팹 설정과 상관없이 적용한다(도감 표시와 같은 값).
         if (towerData.detectsStealth)
@@ -348,7 +348,7 @@ public class TowerAttack : MonoBehaviour
         TowerData.ProjectileEffectStats newProjectileEffects)
     {
         ApplyGrowthToCombatStats(newDamage, newCooldown, newRange);
-        projectileEffects = newProjectileEffects;
+        ApplyProjectileEffects(newProjectileEffects);
         var upgrade = GetComponent<TowerUpgrade>();
         CurrentAttackProfile = towerData != null ? towerData.GetAttackProfile(
             upgrade != null ? upgrade.path : TowerUpgrade.UpgradePath.None,
@@ -368,6 +368,14 @@ public class TowerAttack : MonoBehaviour
             " / 사거리: " +
             attackRange
         );
+    }
+
+    private void ApplyProjectileEffects(TowerData.ProjectileEffectStats effects)
+    {
+        if (effects.canDot && towerData != null)
+            effects.dotDamage = ResearchStatResolver.GetTowerPeriodicDamage(towerData.id, effects.dotDamage);
+
+        projectileEffects = effects;
     }
 
     private void ApplyGrowthToCombatStats(int baseDamage, float baseCooldown, float baseRange)

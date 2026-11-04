@@ -204,7 +204,8 @@ public sealed class ResearchSceneController : MonoBehaviour
     {
         switch (research.ModifierType)
         {
-            case ResearchModifierType.AttackCooldownPercent: return "공격 간격";
+            case ResearchModifierType.AttackCooldownPercent:
+            case ResearchModifierType.AttackRatePercent: return "공격 간격";
             case ResearchModifierType.AttackRangePercent: return "사거리";
             case ResearchModifierType.PeriodicDamagePercent: return "지속 피해";
             case ResearchModifierType.DurationFlat: return "지속 시간";
@@ -220,7 +221,11 @@ public sealed class ResearchSceneController : MonoBehaviour
         {
             case ResearchModifierType.DamageFlat: return growth.TargetType == ResearchTargetType.Tower
                 ? $"공격력 +{value}" : $"피해량 +{value}";
-            case ResearchModifierType.DamagePercent: return $"피해량 +{value}%";
+            case ResearchModifierType.DamagePercent:
+                if (growth.SkillTarget != null && growth.SkillTarget.PeriodicDamage > 0)
+                    return $"피해량 및 지속 피해 +{value}%p";
+                return $"{GetStatLabel(growth)} +{value}%p";
+            case ResearchModifierType.AttackRatePercent: return $"공격 속도 +{value}%p";
             case ResearchModifierType.AttackCooldownPercent: return $"공격 간격 -{value}%";
             case ResearchModifierType.AttackRangePercent: return $"사거리 +{value}%";
             case ResearchModifierType.PeriodicDamagePercent: return $"지속 피해 +{value}%";
@@ -233,6 +238,7 @@ public sealed class ResearchSceneController : MonoBehaviour
     private static string FormatStat(ResearchData research, float value)
     {
         string unit = research.ModifierType == ResearchModifierType.AttackCooldownPercent ||
+            research.ModifierType == ResearchModifierType.AttackRatePercent ||
             research.ModifierType == ResearchModifierType.DurationFlat ? "초" : "";
         if (research.ModifierType == ResearchModifierType.AttackSpeedBonusFlat)
             return $"+{value:0.##}%";

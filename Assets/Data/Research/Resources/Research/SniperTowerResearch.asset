@@ -15,7 +15,7 @@ MonoBehaviour:
   researchId: sniper_tower_research
   targetType: 0
   targetId: sniper_tower
-  modifierType: 0
+  modifierType: 1
   towerTarget: {fileID: 11400000, guid: cb89f03e378206947bb3efe7fba5ac1e, type: 2}
   skillTarget: {fileID: 0}
   displayName: "\uC800\uACA9\uD0C4 \uAC15\uD654 \uC5F0\uAD6C"
@@ -24,12 +24,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 29ad767c10b7b754985318507af62557, type: 3}
   ranks:
   - skillPointCost: 1
-    modifierValue: 4
-  - skillPointCost: 1
-    modifierValue: 4
-  - skillPointCost: 1
-    modifierValue: 4
-  - skillPointCost: 1
-    modifierValue: 4
-  - skillPointCost: 1
-    modifierValue: 4
+    modifierValue: 7.2
+  - skillPointCost: 2
+    modifierValue: 9.4
+  - skillPointCost: 4
+    modifierValue: 13.8
+  - skillPointCost: 7
+    modifierValue: 20.4
+  - skillPointCost: 11
+    modifierValue: 29.2

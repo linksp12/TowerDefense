@@ -15,7 +15,7 @@ MonoBehaviour:
   researchId: magic_tower_damage
   targetType: 0
   targetId: magic_tower
-  modifierType: 0
+  modifierType: 1
   towerTarget: {fileID: 11400000, guid: cb05e2e1f92b409bb09227d69e1307a4, type: 2}
   skillTarget: {fileID: 0}
   displayName: "\uB9C8\uB825 \uC751\uCD95"
@@ -24,12 +24,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6535d469844f29045806a461093a417c, type: 3}
   ranks:
   - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
-  - skillPointCost: 1
-    modifierValue: 2
+    modifierValue: 7.2
+  - skillPointCost: 2
+    modifierValue: 9.4
+  - skillPointCost: 4
+    modifierValue: 13.8
+  - skillPointCost: 7
+    modifierValue: 20.4
+  - skillPointCost: 11
+    modifierValue: 29.2

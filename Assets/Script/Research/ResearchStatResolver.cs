@@ -19,11 +19,26 @@ public static class ResearchStatResolver
         return ApplyDamage(baseDamage, ResearchTargetType.Tower, towerId);
     }
 
+    public static int GetTowerPeriodicDamage(string towerId, int baseDamage)
+    {
+        return Mathf.Max(0, Mathf.RoundToInt(ApplyPercent(baseDamage, ResearchTargetType.Tower,
+            towerId, ResearchModifierType.DamagePercent)));
+    }
+
     public static float GetTowerAttackCooldown(string towerId, float baseCooldown)
     {
-        float percentage = GetTotalPercent(
-            ResearchTargetType.Tower, towerId, ResearchModifierType.AttackCooldownPercent);
-        return Mathf.Max(0.05f, baseCooldown * (1f - percentage / 100f));
+        return GetTowerAttackCooldown(towerId, baseCooldown, null, 0);
+    }
+
+    private static float GetTowerAttackCooldown(string towerId, float baseCooldown,
+        ResearchData previewResearch, int previewLevel)
+    {
+        float cooldownReduction = GetTotalValue(ResearchTargetType.Tower, towerId,
+            ResearchModifierType.AttackCooldownPercent, previewResearch, previewLevel);
+        float attackRateBonus = GetTotalValue(ResearchTargetType.Tower, towerId,
+            ResearchModifierType.AttackRatePercent, previewResearch, previewLevel);
+        float attackRateMultiplier = Mathf.Max(0.01f, 1f + attackRateBonus / 100f);
+        return Mathf.Max(0.05f, baseCooldown * (1f - cooldownReduction / 100f) / attackRateMultiplier);
     }
 
     public static float GetTowerAttackRange(string towerId, float baseRange)
@@ -42,8 +57,11 @@ public static class ResearchStatResolver
         if (skill == null)
             return 0;
 
-        return Mathf.Max(0, Mathf.RoundToInt(ApplyPercent(skill.PeriodicDamage,
-            ResearchTargetType.Skill, skill.SkillId, ResearchModifierType.PeriodicDamagePercent)));
+        float damageBonus = GetTotalPercent(ResearchTargetType.Skill, skill.SkillId,
+            ResearchModifierType.DamagePercent);
+        float periodicBonus = GetTotalPercent(ResearchTargetType.Skill, skill.SkillId,
+            ResearchModifierType.PeriodicDamagePercent);
+        return Mathf.Max(0, Mathf.RoundToInt(skill.PeriodicDamage * (1f + (damageBonus + periodicBonus) / 100f)));
     }
 
     public static float GetSkillDuration(SkillData skill)
@@ -135,18 +153,24 @@ public static class ResearchStatResolver
             return ApplyDamage(Mathf.RoundToInt(baseValue), research.TargetType, research.TargetId,
                 research, level);
 
+        if (research.ModifierType == ResearchModifierType.AttackCooldownPercent ||
+            research.ModifierType == ResearchModifierType.AttackRatePercent)
+            return GetTowerAttackCooldown(research.TargetId, baseValue, research, level);
+
         float percent = GetTotalValue(research.TargetType, research.TargetId,
             research.ModifierType, research, level);
-        if (research.ModifierType == ResearchModifierType.AttackCooldownPercent)
-            return Mathf.Max(0.05f, baseValue * (1f - percent / 100f));
         if (research.ModifierType == ResearchModifierType.DurationFlat)
             return Mathf.Max(0f, baseValue + percent);
         if (research.ModifierType == ResearchModifierType.AttackSpeedBonusFlat)
             return Mathf.Max(0f, baseValue + percent);
 
-        float value = baseValue * (1f + percent / 100f);
-        return research.ModifierType == ResearchModifierType.PeriodicDamagePercent
-            ? Mathf.Max(0, Mathf.RoundToInt(value)) : value;
+        if (research.ModifierType == ResearchModifierType.PeriodicDamagePercent)
+        {
+            float damageBonus = GetTotalValue(research.TargetType, research.TargetId,
+                ResearchModifierType.DamagePercent, research, level);
+            return Mathf.Max(0, Mathf.RoundToInt(baseValue * (1f + (percent + damageBonus) / 100f)));
+        }
+        return baseValue * (1f + percent / 100f);
     }
 
     public static float GetResearchBaseValue(ResearchData research)
@@ -158,7 +182,8 @@ public static class ResearchStatResolver
             {
                 case ResearchModifierType.DamageFlat:
                 case ResearchModifierType.DamagePercent: return stats.damage;
-                case ResearchModifierType.AttackCooldownPercent: return stats.attackCooldown;
+                case ResearchModifierType.AttackCooldownPercent:
+                case ResearchModifierType.AttackRatePercent: return stats.attackCooldown;
                 case ResearchModifierType.AttackRangePercent: return stats.attackRange;
             }
         }
